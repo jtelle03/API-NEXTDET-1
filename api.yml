@@ -531,7 +531,6 @@ paths:
               required: 
                 - nombres
                 - email
-                - contrasenia
                 - rol_id
               properties:
                 nombres:
@@ -4457,6 +4456,10 @@ paths:
                   type: string
                   description: Comentario referente a la cotizacion
                   example: 'Comentario u observacion referente a la cotizacion'
+                referencia:
+                  type: string
+                  description: Referencia de la cotizacion
+                  example: 'Referencia de la cotización'
                 empresa_cliente:
                   type: string
                   description: Empresa del cliente que solicita la cotizacion al distribuidor
@@ -4490,6 +4493,10 @@ paths:
                         type: number
                         format: double
                         example: 30.0
+                      extra_unidad:
+                        type: number
+                        format: double
+                        example: 3.0
                       unidad_medida:
                         type: string
                         example: mts

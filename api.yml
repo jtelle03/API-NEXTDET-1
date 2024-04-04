@@ -6449,6 +6449,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Estado'
+                      paises:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pais'
 
         404:
           description: "Peticion no ejecutada."
@@ -6614,6 +6618,7 @@ paths:
               required: 
                 - descripcion
                 - nota
+                - pais_id
                 - fecha_inicio
                 - fecha_fin
                 - responsables
@@ -6626,6 +6631,10 @@ paths:
                   type: string
                   description: Nota del evento
                   example: "Nota del evento 1"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el evento 
+                  example: 183
                 fecha_inicio:
                   type: string
                   description: Fecha de inicio de la tarea
@@ -6708,6 +6717,7 @@ paths:
               required: 
                 - descripcion
                 - nota
+                - pais_id
                 - fecha_inicio
                 - fecha_fin
                 - responsables
@@ -6720,6 +6730,10 @@ paths:
                   type: string
                   description: Nota del evento
                   example: "Nota del evento 1"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el evento 
+                  example: 183
                 fecha_inicio:
                   type: string
                   description: Fecha de inicio de la tarea
@@ -7973,6 +7987,15 @@ components:
         usuario_creador_nombre:
           type: string
           example: 'Alessandro Venegas'
+        pais_id:
+          type: number
+          example: 183
+        pais_nombre_espaniol:
+          type: string
+          example: "Perú"
+        pais_nombre_ingles:
+          type: string
+          example: "Peru"
         responsables:
           type: array
           items:

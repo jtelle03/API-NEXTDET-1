@@ -6854,6 +6854,491 @@ paths:
                     example: []
 
 
+  /v1/idea/init_data:
+    get:
+      tags:
+        - Idea
+      operationId: initDataIdea
+      description: Obtenemos la información inicial para el módulo de idea
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      areas:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Area'
+                      estados_tiempo:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Estado'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/idea/list:
+    get:
+      tags:
+        - Idea
+      operationId: listIdea
+      description: Obtenemos el listado de ideas
+      parameters:
+        - in: query
+          name: estado_tiempo
+          description: Filtro de estado tiempo/interes
+          schema:
+            type: number
+        - in: query
+          name: area_id
+          description: Filtro de area
+          schema:
+            type: number      
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Idea' 
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/idea/list/idea:
+    get:
+      tags:
+        - Idea
+      operationId: listOnlyIdea
+      description: Obtenemos una de las ideas
+      parameters:
+        - in: query
+          name: idea_id
+          required: true
+          description: Identificador de la idea
+          schema:
+            type: integer
+            
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: '#/components/schemas/Idea'
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/idea/save:
+    post:
+      tags:
+        - Idea
+      operationId: saveIdea
+      description: Guardamos una idea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - titulo
+                - integrantes
+                - descripcion
+                - estado_tiempo
+              properties:
+                titulo:
+                  type: string
+                  description: Titulo de la idea
+                  example: "Titulo de la idea 1"
+                integrantes:
+                  type: string
+                  description: Integrantes de la idea
+                  example: "Integrantes de la idea 1"
+                descripcion:
+                  type: string
+                  description: Descripcion de la idea
+                  example: "Descripcion de la idea 1"
+                estado_tiempo:
+                  type: number
+                  description: Identificador del estado tiempo/interes de la idea
+                  example: 16
+                areas:
+                  type: array
+                  items: 
+                    properties:
+                      area_id:
+                        type: number
+                        description: Identificador del area
+                        example: 1
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/idea/update/{idea_id}:
+    put:
+      tags:
+        - Idea
+      operationId: updateIdea
+      description: Actualizamos una idea
+      parameters:
+        - in: path
+          name: idea_id
+          required: true
+          description: Identificador de la idea
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - titulo
+                - integrantes
+                - descripcion
+                - estado_tiempo
+              properties:
+                titulo:
+                  type: string
+                  description: Titulo de la idea
+                  example: "Titulo de la idea 1"
+                integrantes:
+                  type: string
+                  description: Integrantes de la idea
+                  example: "Integrantes de la idea 1"
+                descripcion:
+                  type: string
+                  description: Descripcion de la idea
+                  example: "Descripcion de la idea 1"
+                estado_tiempo:
+                  type: number
+                  description: Identificador del estado tiempo/interes de la idea
+                  example: 16
+                areas:
+                  type: array
+                  items: 
+                    properties:
+                      area_id:
+                        type: number
+                        description: Identificador del area
+                        example: 1
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/idea/update_estado/{idea_id}:
+    put:
+      tags:
+        - Idea
+      operationId: updateEstadoIdea
+      description: Actualizamos el estado de una idea
+      parameters:
+        - in: path
+          name: idea_id
+          required: true
+          description: Identificador de la idea que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - estado
+              properties:
+                estado_tiempo:
+                  type: number
+                  description: Identificador del estado de la idea
+                  example: 18
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/idea/delete/{idea_id}:
+    put:
+      tags:
+        - Idea
+      operationId: deleteIdea
+      description: Eliminar una idea
+      parameters:
+        - in: path
+          name: idea_id
+          required: true
+          description: Identificador de la idea
+          schema:
+            type: integer
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+
   /v1/persona/init_data:
     get:
       tags:
@@ -8006,6 +8491,60 @@ components:
               usuario_nombre:
                 type: string
                 example: "Alessandro Venegas"
+
+    Idea: 
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        empresa_id:
+          type: integer
+          example: 1
+        empresa_nombre:
+          type: string
+          example: "NEXTDET"
+        codigo:
+          type: string
+          example: "1s52ds5a1sd3"
+        titulo:
+          type: string
+          example: "Titulo 1"
+        integrantes:
+          type: string
+          example: "Integrantes 1"
+        descripcion:
+          type: string
+          example: "descripcion"
+        estado_tiempo:
+          type: number
+          example: 16
+        nombre_estado_tiempo:
+          type: string
+          example: 'En espera'
+        estado:
+          type: number
+          example: 1
+        estado_nombre:
+          type: string
+          example: 'Activo'
+        usuario_creador:
+          type: number
+          example: 73
+        usuario_creador_nombre:
+          type: string
+          example: 'Alessandro Venegas'
+        areas:
+          type: array
+          items:
+            properties:
+              area_id:
+                type: number
+                example: 1
+              area_nombre:
+                type: string
+                example: "Marketing"
+
 
     TipoError: 
       description: |  

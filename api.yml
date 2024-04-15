@@ -4818,7 +4818,13 @@ paths:
           example: '06ecd178343c3dd64e59d0454cbb04cb'
           schema:
             type: string
-                 
+        - in: query
+          name: idioma
+          description: Codigo identificador del idioma a descargar -> Español (es), Ingles (en)
+          example: 'en'
+          default: 'es'
+          schema:
+            type: string         
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
         

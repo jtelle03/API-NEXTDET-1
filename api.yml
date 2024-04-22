@@ -1866,6 +1866,7 @@ paths:
               required: 
                 - usuario_id
                 - servicio_id
+                - palabra_confirmacion
               properties:
                 usuario_id:
                   type: integer

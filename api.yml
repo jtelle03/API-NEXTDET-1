@@ -711,6 +711,14 @@ paths:
                   type: string
                   description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss) 
                   example: '2023-07-01 21:53:00'
+                reset_password:
+                  type: integer
+                  description: Opcion para resetar (1) o no (0) automáticamente la contraseña del usuario.
+                  example: 1
+                envio_informacion:
+                  type: integer
+                  description: Opción para enviar (1) o no (0) por correo la información del usuario.
+                  example: 1
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
       responses:
@@ -964,6 +972,135 @@ paths:
                   mensaje:
                     type: string
                     example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/licencia/usuario/send_code:
+    get:
+      tags:
+        - Usuario
+      operationId: sendCodeUsuario
+      description: Enviar un codigo pin de verificacion al usuario para restablecer la contraseña
+      parameters:
+        - in: query
+          name: email
+          required: true
+          description: Email del usuario a enviar el codigo pin
+          schema:
+            type: string
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      fecha_fin:
+                        type: string
+                        example: "2024-04-22 09:46:59"
+                      tiempo_valido:
+                        type: string
+                        example: "5 min"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/licencia/usuario/reset_password:
+    post:
+      tags:
+        - Usuario
+      operationId: resetPasswordUsuario
+      description: Actualizar el perfil del usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - email
+                - pin
+                - contrasenia_nueva
+              properties:
+                email:
+                  type: string
+                  description: Email del usuario
+                  example: "example@gmail.com"
+                pin:
+                  type: string
+                  description: Pin enviado al usuario 
+                  example: "1234"
+                contrasenia_nueva:
+                  type: string
+                  description: Contraseña nueva del usuario 
+                  example: "Contrasenia@123"
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Contraseña resturada exitosamente.
                   tipo_error:
                     type: integer
                     example: 0
@@ -4822,7 +4959,6 @@ paths:
           name: idioma
           description: Codigo identificador del idioma a descargar -> Español (es), Ingles (en)
           example: 'en'
-          default: 'es'
           schema:
             type: string         
       security:

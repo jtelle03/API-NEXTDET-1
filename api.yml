@@ -1087,6 +1087,10 @@ paths:
                   type: string
                   description: Contraseña nueva del usuario 
                   example: "Contrasenia@123"
+                envio_informacion:
+                  type: integer
+                  description: Opción para enviar (1) o no (0) por correo la información del usuario.
+                  example: 1
       responses:
         200:
           description: Consulta exitosa.

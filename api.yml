@@ -3317,6 +3317,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/CategoriaProducto'
+                      estados:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Estado'
 
         404:
           description: "Peticion no ejecutada."
@@ -3477,6 +3481,11 @@ paths:
                   format: double
                   description: Precio Referencial del producto
                   example: 5.0
+                costo:
+                  type: number
+                  format: double
+                  description: Costo del producto
+                  example: 10.0
                 precio1:
                   type: number
                   format: double
@@ -3501,6 +3510,10 @@ paths:
                   type: string
                   description: Unidad de Medida el producto
                   example: 'mts'
+                estado:
+                  type: integer
+                  description: Estado del producto
+                  example: 1
                 file:
                   type: string
                   format: binary
@@ -3586,6 +3599,11 @@ paths:
                   format: double
                   description: Precio Referencial del producto
                   example: 5.0
+                costo:
+                  type: number
+                  format: double
+                  description: Costo del producto
+                  example: 10.0
                 precio1:
                   type: number
                   format: double
@@ -3610,6 +3628,10 @@ paths:
                   type: string
                   description: Unidad de Medida el producto
                   example: 'mts'
+                estado:
+                  type: integer
+                  description: Estado del producto
+                  example: 1
                 file:
                   type: string
                   format: binary

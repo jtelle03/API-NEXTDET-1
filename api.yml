@@ -6601,8 +6601,8 @@ paths:
           schema:
             type: number
         - in: query
-          name: estado_resolucion
-          description: Filtro de estado de resolución
+          name: visto
+          description: Filtro de estado de visualizacion
           schema:
             type: number
         - in: query
@@ -6831,9 +6831,9 @@ paths:
                   type: string
                   description: Descripcion del comentario
                   example: "Descripcion del comentario1"
-                estado_resolucion:
+                visto:
                   type: integer
-                  description: Identificador del estado de resolucion (0 o 1)
+                  description: Identificador del estado de visualizacion (0 o 1)
                   example: 0
                   
       security:
@@ -6885,7 +6885,7 @@ paths:
       tags:
         - TareaComentario
       operationId: updateEstadoComentario
-      description: Actualizamos el estado de resolución de un comentario
+      description: Actualizamos el estado de visualizacion de un comentario
       parameters:
         - in: path
           name: tareacomentario_id
@@ -6901,9 +6901,9 @@ paths:
               required: 
                 - estado
               properties:
-                estado_tiempo:
+                visto:
                   type: number
-                  description: Identificador del estado de resolución del comentario
+                  description: Identificador del estado de visualizacion del comentario
                   example: 1
                   
       security:
@@ -9025,6 +9025,9 @@ components:
         categoria_nombre:
           type: string
           example: 'Adaptadores'
+        estado:
+          type: integer
+          example: 1
         estado_nombre:
           type: string
           example: Activo
@@ -9360,6 +9363,9 @@ components:
         usuario_creador_nombre:
           type: string
           example: 'Alessandro Venegas'
+        cantidad_comentarios:
+          type: integer
+          example: 2
         encargados_revision:
           type: array
           items:
@@ -9409,7 +9415,7 @@ components:
         usuario_nombre:
           type: string
           example: 'Alessandro Venegas'
-        resuelto:
+        visto:
           type: number
           example: 0
         estado:

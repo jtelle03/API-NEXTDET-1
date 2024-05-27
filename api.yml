@@ -6740,10 +6740,6 @@ paths:
                   type: string
                   description: Descripcion del comentario
                   example: "Descripcion del comentario1"
-                estado_resolucion:
-                  type: integer
-                  description: Identificador del estado de resolucion (0 o 1)
-                  example: 0
                 estado_tarea:
                   type: integer
                   description: Identificador del estado de la tarea.
@@ -6831,10 +6827,6 @@ paths:
                   type: string
                   description: Descripcion del comentario
                   example: "Descripcion del comentario1"
-                visto:
-                  type: integer
-                  description: Identificador del estado de visualizacion (0 o 1)
-                  example: 0
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -6880,7 +6872,7 @@ paths:
                     type: object
                     example: []
   
-  /v1/comentario/update_estado/{tareacomentario_id}:
+  /v1/comentario/update_estado/{tareacomentario_ids}:
     put:
       tags:
         - TareaComentario
@@ -6888,9 +6880,9 @@ paths:
       description: Actualizamos el estado de visualizacion de un comentario
       parameters:
         - in: path
-          name: tareacomentario_id
+          name: tareacomentario_ids
           required: true
-          description: Identificador del comentario que desea actualizar
+          description: Identificadores de los comentarios que desea actualizar. Ejemplo -> '1,2,3'
           schema:
             type: integer
       requestBody:
@@ -9363,6 +9355,10 @@ components:
         usuario_creador_nombre:
           type: string
           example: 'Alessandro Venegas'
+        comentarios:
+          type: array
+          items:
+            $ref: '#/components/schemas/TareaComentario'
         cantidad_comentarios:
           type: integer
           example: 2
@@ -9416,8 +9412,13 @@ components:
           type: string
           example: 'Alessandro Venegas'
         visto:
-          type: number
-          example: 0
+          type: array
+          items: 
+            properties:
+              usuario_id: 
+                example: 77
+              visto:
+                example: 1
         estado:
           type: number
           example: 1

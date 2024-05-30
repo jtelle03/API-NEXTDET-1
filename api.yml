@@ -8289,6 +8289,410 @@ paths:
                     example: []
 
 
+  /v1/contacto/init_data:
+    get:
+      tags:
+        - Contacto
+      operationId: initDataContacto
+      description: Obtenemos la información inicial para el módulo de contacto
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      estados:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Estado'
+                      paises:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pais'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/contacto/list:
+    get:
+      tags:
+        - Contacto
+      operationId: listContacto
+      description: Obtenemos el listado de los eventos del contacto
+      parameters:
+        - in: query
+          name: pais_id
+          description: Filtro de pais
+          schema:
+            type: integer     
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contacto' 
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/contacto/list/contacto:
+    get:
+      tags:
+        - Contacto
+      operationId: listOnlyContacto
+      description: Obtenemos uno de los eventos del contacto
+      parameters:
+        - in: query
+          name: contacto_id
+          required: true
+          description: Identificador del contacto
+          schema:
+            type: integer
+            
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: '#/components/schemas/Contacto'
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/contacto/save:
+    post:
+      tags:
+        - Contacto
+      operationId: saveContacto
+      description: Guardamos un contacto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - nombres
+                - telefono
+                - pais_id
+                - email
+                - empresa
+              properties:
+                nombres:
+                  type: string
+                  description: Nombres del contacto
+                  example: "Contacto 1"
+                telefono:
+                  type: string
+                  description: Telefono del contacto
+                  example: "965874321"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el contacto 
+                  example: 183
+                email:
+                  type: string
+                  description: Email del contacto
+                  example: "contacto@gmail.com"
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: "Empresa 1"
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/contacto/update/{contacto_id}:
+    put:
+      tags:
+        - Contacto
+      operationId: updateContacto
+      description: Actualizamos un contacto
+      parameters:
+        - in: path
+          name: contacto_id
+          required: true
+          description: Identificador del contacto que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - nombres
+                - telefono
+                - pais_id
+                - email
+                - empresa
+              properties:
+                nombres:
+                  type: string
+                  description: Nombres del contacto
+                  example: "Contacto 1"
+                telefono:
+                  type: string
+                  description: Telefono del contacto
+                  example: "965874321"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el contacto 
+                  example: 183
+                email:
+                  type: string
+                  description: Email del contacto
+                  example: "contacto@gmail.com"
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: "Empresa 1"
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/contacto/delete/{contacto_id}:
+    put:
+      tags:
+        - Contacto
+      operationId: deleteContacto
+      description: Eliminar un contacto
+      parameters:
+        - in: path
+          name: contacto_id
+          required: true
+          description: Identificador del contacto que desea eliminar
+          schema:
+            type: integer
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+
   /v1/persona/init_data:
     get:
       tags:
@@ -9543,6 +9947,40 @@ components:
               area_nombre:
                 type: string
                 example: "Marketing"
+
+    Contacto: 
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombres:
+          type: string
+          example: "Contacto 1"
+        pais_id:
+          type: integer
+          example: 183
+        nombre_espaniol:
+          type: string
+          example: "Perú"
+        nombre_ingles:
+          type: string
+          example: "Peru"
+        empresa:
+          type: string
+          example: "Empresa 1"
+        telefono:
+          type: string
+          example: "+51 963598561"
+        email:
+          type: string
+          example: 'contacto@gmail.com'
+        estado:
+          type: number
+          example: 1
+        estado_nombre:
+          type: string
+          example: 'Activo'
 
 
     TipoError: 

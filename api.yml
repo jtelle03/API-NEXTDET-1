@@ -3645,6 +3645,14 @@ paths:
                   format: binary
                   description: Imagen del producto
                   example: 'image/png'
+                url_descarga_brochure_en:
+                  type: string
+                  description: Link de descarga del brochure en inglés del producto 
+                  example: 'https://drive.google.com/uc?id=1HKpyKA34WuBuq0hg4-gJCWtke5GFX6lc&export=download'
+                url_descarga_brochure_es:
+                  type: string
+                  description: Link de descarga del brochure en español del producto 
+                  example: 'https://drive.google.com/uc?id=1PkOzzlmOQ9ItpwB_Q_xcwOIQUR6wdVDN&export=download'
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad

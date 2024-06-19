@@ -3285,6 +3285,318 @@ paths:
                     example: []
 
 
+  /v1/categoria_producto/list:
+    get:
+      tags:
+        - Categoria Producto
+      operationId: listCategoriaProducto
+      description: Obtenemos el listado de categorias de producto
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CategoriaProducto' 
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/categoria_producto/list/categoria_producto:
+    get:
+      tags:
+        - Categoria Producto
+      operationId: listOnlyCategoriaProducto
+      description: Obtenemos una de las categorias de producto
+      parameters:
+        - in: query
+          name: categoriaproducto_id
+          required: true
+          description: Identificador de la categoria de producto
+          schema:
+            type: integer
+            
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: '#/components/schemas/CategoriaProducto'
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/categoria_producto/save:
+    post:
+      tags:
+        - Categoria Producto
+      operationId: saveCategoriaProducto
+      description: Guardamos una categoria de producto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - nombre
+                - nombre_ingles
+              properties:
+                nombre:
+                  type: string
+                  description: Titulo del area
+                  example: "Nombre del area"
+                nombre_ingles:
+                  type: string
+                  description: Titulo del area en inglés
+                  example: "Nombre del area en inglés"
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/categoria_producto/update/{categoriaproducto_id}:
+    put:
+      tags:
+        - Categoria Producto
+      operationId: updateCategoriaProducto
+      description: Actualizamos una categoria de producto
+      parameters:
+        - in: path
+          name: categoriaproducto_id
+          required: true
+          description: Identificador de la categoria de producto
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - nombre
+                - nombre_ingles
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del area
+                  example: "Nombre del area 1"
+                nombre_ingles:
+                  type: string
+                  description: Nombre del area en inglés
+                  example: "Nombre del area 1 en inglés"
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/categoria_producto/delete/{categoriaproducto_id}: 
+    put:
+      tags:
+        - Categoria Producto
+      operationId: deleteCategoriaProducto
+      description: Eliminar una categoria de producto
+      parameters:
+        - in: path
+          name: categoriaproducto_id
+          required: true
+          description: Identificador de la categoria de producto
+          schema:
+            type: integer
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+
+
   /v1/producto/init_data:
     get:
       tags:
@@ -9406,6 +9718,12 @@ components:
         nombre:
           type: string
           example: 'Consolas'
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: Activo
           
     Servicio: 
       type: object
@@ -9669,6 +9987,9 @@ components:
         codigopin_confirmacion:
           type: string
           example: '1111'
+        cantidad_notas:
+          type: integer
+          example: 1
         detalles:
           type: array
           items: 

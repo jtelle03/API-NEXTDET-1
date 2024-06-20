@@ -10076,6 +10076,10 @@ components:
           type: number
           format: double
           example: 30.0
+        image:
+          type: string
+          example: 'https://api.nextdet.com/images/img-no-found.jpg'
+
 
     CotizacionNota: 
       type: object

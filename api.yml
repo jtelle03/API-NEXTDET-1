@@ -1307,7 +1307,7 @@ paths:
                 pais_id:
                   type: integer
                   description: Pais del usuario
-                  example: "Juan"
+                  example: 183
                 telefono:
                   type: string
                   description: Telefono del usuario

@@ -1133,6 +1133,230 @@ paths:
                     example: []
 
 
+  /v1/licencia/usuario/register/init_data:
+    get:
+      tags:
+        - Usuario Registro
+      operationId: initDataUsuarioExterno
+      description: Obtenemos la informacion inicial para el registro de usuarios externos. 
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      paises:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pais'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/licencia/usuario/register/send_code:
+    get:
+      tags:
+        - Usuario Registro
+      operationId: sendCodeUsuarioExterno
+      description: Enviar un codigo pin de verificacion al usuario para validar su identidad
+      parameters:
+        - in: query
+          name: email
+          required: true
+          description: Email del usuario a enviar el codigo pin
+          schema:
+            type: string
+        - in: query
+          name: nombres
+          required: true
+          description: Nombre del usuario a enviar el codigo pin
+          schema:
+            type: string
+        - in: query
+          name: apellido_paterno
+          required: true
+          description: Apellido paterno del usuario a enviar el codigo pin
+          schema:
+            type: string
+        - in: query
+          name: apellido_materno
+          required: false
+          description: Apellido materno del usuario a enviar el codigo pin
+          schema:
+            type: string
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      fecha_fin:
+                        type: string
+                        example: "2024-04-22 09:46:59"
+                      tiempo_valido:
+                        type: string
+                        example: "5 min"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/licencia/usuario/register/save:
+    post:
+      tags:
+        - Usuario Registro
+      operationId: saveUsuarioExterno
+      description: Registrar un usuario externo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - email
+                - pin
+                - nombres
+                - apellido_paterno
+                - apellido_materno
+                - pais_id
+                - telefono
+              properties:
+                email:
+                  type: string
+                  description: Email del usuario
+                  example: "example@gmail.com"
+                pin:
+                  type: string
+                  description: Pin enviado al usuario 
+                  example: "1234"
+                nombres:
+                  type: string
+                  description: Nombre del usuario
+                  example: "Juan"
+                apellido_paterno:
+                  type: string
+                  description: Apellido paterno del usuario
+                  example: "Perez"
+                apellido_materno:
+                  type: string
+                  description: Apellido materno del usuario
+                  example: "Perez"
+                pais_id:
+                  type: integer
+                  description: Pais del usuario
+                  example: "Juan"
+                telefono:
+                  type: string
+                  description: Telefono del usuario
+                  example: "930562398"
+                contrasenia:
+                  type: string
+                  description: Contraseña del usuario
+                  example: "Juan123456@"
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Usuario registrado exitosamente.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+
+
   /v1/acceso_modulo/list/acceso:
     get:
       tags:
@@ -9700,6 +9924,9 @@ components:
           type: integer
           example: 12
         nombre:
+          type: string
+          example: 'Argentina'
+        nombre_ingles:
           type: string
           example: 'Argentina'
         iso3:

@@ -9053,6 +9053,14 @@ paths:
                   type: string
                   description: Empresa del contacto
                   example: "Empresa 1"
+                ocupacion:
+                  type: string
+                  description: Ocupacion del contacto
+                  example: "Ocupacion 1"
+                perfil_linkedin:
+                  type: string
+                  description: Perfil de LinkedIn del contacto
+                  example: "link/linkedin"
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -9143,6 +9151,14 @@ paths:
                   type: string
                   description: Empresa del contacto
                   example: "Empresa 1"
+                ocupacion:
+                  type: string
+                  description: Ocupacion del contacto
+                  example: "Ocupacion 1"
+                perfil_linkedin:
+                  type: string
+                  description: Perfil de LinkedIn del contacto
+                  example: "link/linkedin"
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -9288,6 +9304,81 @@ paths:
                   format: binary
                   description: Archivos adjuntos al email
                   example: 'image/png'
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  
+  /v1/contacto/importador:
+    post:
+      tags:
+        - Contacto
+      operationId: importContactos
+      description: Importamos contactos desde un archivo excel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - pais_id
+                - file
+              properties:
+                pais_id:
+                  type: integer
+                  description: Identificador del pais
+                  example: 1
+                row_init:
+                  type: integer
+                  description: Fila del archivo excel donde inician los datos de los contactos
+                  default: 8
+                  example: 8
+                file:
+                  type: string
+                  format: binary
+                  description: Archivos excel a importar
+                  example: 'plantilla.xlxs'
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -10627,6 +10718,12 @@ components:
         empresa:
           type: string
           example: "Empresa 1"
+        ocupacion:
+          type: string
+          example: "Ocupacion 1"
+        perfil_linkedin:
+          type: string
+          example: "link/linkedin"
         telefono:
           type: string
           example: "+51 963598561"

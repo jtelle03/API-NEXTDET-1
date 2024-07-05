@@ -6279,6 +6279,132 @@ paths:
                   datos:
                     type: object
                     example: []
+  
+  /v1/importador/contacto/download/plantilla:
+    get:
+      tags:
+        - Importador
+      operationId: importadorDownloadPlantillaContacto
+      description: Generamos la plantilla del importador de contacto. 
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: 'archivo/12315464987946516518498646.xlsx'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+     
+  /v1/importador/contacto/save:
+    post:
+      tags:
+        - Importador
+      operationId: importadorSaveContacto
+      description: Guardamos los contactos nuevos. 
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required: 
+                - pais_id
+                - archivo
+              properties:
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el usuario
+                  example: 'Next 1'
+                row_init:
+                  type: integer
+                  description: Fila del archivo excel donde inician los datos de los contactos
+                  default: 8
+                  example: 8
+                archivo:
+                  type: string
+                  format: binary
+                  description: Archivo excel con los datos requeridos para crear un nuevo contacto
+                  example: 'file.xlxs'
+       
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
    
     
   /v1/recursos/producto/download:
@@ -9348,82 +9474,6 @@ paths:
                   datos:
                     type: object
                     example: []
-  
-  
-  /v1/contacto/importador:
-    post:
-      tags:
-        - Contacto
-      operationId: importContactos
-      description: Importamos contactos desde un archivo excel
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required: 
-                - pais_id
-                - file
-              properties:
-                pais_id:
-                  type: integer
-                  description: Identificador del pais
-                  example: 1
-                row_init:
-                  type: integer
-                  description: Fila del archivo excel donde inician los datos de los contactos
-                  default: 8
-                  example: 8
-                file:
-                  type: string
-                  format: binary
-                  description: Archivos excel a importar
-                  example: 'plantilla.xlxs'
-                  
-      security:
-        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
-        
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-                      
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-  
 
 
   /v1/persona/init_data:

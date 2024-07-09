@@ -10528,6 +10528,9 @@ components:
         fecha_fin:
           type: string
           example: "2024-02-12"
+        fecha_aprobacion:
+          type: string
+          example: "2024-02-15"
         semana:
           type: number
           example: 2

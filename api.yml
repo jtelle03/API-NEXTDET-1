@@ -4024,7 +4024,7 @@ paths:
                   format: double
                   description: Costo del producto
                   example: 10.0
-                costo_cuerda:
+                costo_cable:
                   type: number
                   format: double
                   description: Costo de la cuerda del producto
@@ -4155,7 +4155,7 @@ paths:
                   format: double
                   description: Costo del producto
                   example: 10.0
-                costo_cuerda:
+                costo_cable:
                   type: number
                   format: double
                   description: Costo de la cuerda del producto

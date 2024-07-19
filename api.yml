@@ -7,8 +7,9 @@ servers:
   - url: https://dev-api.nextdet.com
     description: Url de desarrollo
   - url: https://api.nextdet.com
-    description: Url de produccion
-  
+    description: Url de produccioneee
+  - url: http://0.0.0.0:8000
+    description: Url de localhost
   
 tags:
   - name: Licencia
@@ -5268,6 +5269,14 @@ paths:
                         type: number
                         format: double
                         example: 30.0
+                      costo:
+                        type: number
+                        format: double
+                        example: 30.0
+                      costo_cable:
+                        type: number
+                        format: double
+                        example: 30.0                                                
                       comida:
                         type: number
                         format: double
@@ -10448,6 +10457,14 @@ components:
           type: number
           format: double
           example: 30.0
+        costo:
+          type: number
+          format: double
+          example: 30.0
+        costo_cable:
+          type: number
+          format: double
+          example: 30.0              
         comida:
           type: number
           format: double

@@ -7,7 +7,7 @@ servers:
   - url: https://dev-api.nextdet.com
     description: Url de desarrollo
   - url: https://api.nextdet.com
-    description: Url de produccioneee
+    description: Url de produccion
   - url: http://0.0.0.0:8000
     description: Url de localhost
   

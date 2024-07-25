@@ -7,8 +7,9 @@ servers:
   - url: https://dev-api.nextdet.com
     description: Url de desarrollo
   - url: https://api.nextdet.com
-    description: Url de produccion
-  
+    description: Url de produccioneee
+  - url: http://0.0.0.0:8000
+    description: Url de localhost
   
 tags:
   - name: Licencia
@@ -4024,7 +4025,7 @@ paths:
                   format: double
                   description: Costo del producto
                   example: 10.0
-                costo_cable:
+                costo_cuerda:
                   type: number
                   format: double
                   description: Costo de la cuerda del producto
@@ -4155,7 +4156,7 @@ paths:
                   format: double
                   description: Costo del producto
                   example: 10.0
-                costo_cable:
+                costo_cuerda:
                   type: number
                   format: double
                   description: Costo de la cuerda del producto
@@ -4188,6 +4189,10 @@ paths:
                   type: integer
                   description: Estado del producto
                   example: 1
+                mantener_costo:
+                  type: integer
+                  description: Mantener el costo
+                  example: 1                  
                 file:
                   type: string
                   format: binary
@@ -5264,6 +5269,10 @@ paths:
                         type: number
                         format: double
                         example: 30.0
+                      movilidad:
+                        type: number
+                        format: double
+                        example: 30.0
                       costo:
                         type: number
                         format: double
@@ -5271,11 +5280,7 @@ paths:
                       costo_cable:
                         type: number
                         format: double
-                        example: 30.0                           
-                      movilidad:
-                        type: number
-                        format: double
-                        example: 30.0
+                        example: 30.0                                                
                       comida:
                         type: number
                         format: double
@@ -6796,10 +6801,18 @@ paths:
                   type: string
                   description: Titulo de la tarea
                   example: "Tarea 1"
+                titulo_en:
+                  type: string
+                  description: Titulo de la tarea en Ingles
+                  example: "Task 1"                  
                 descripcion:
                   type: string
                   description: Descripcion de la tarea
                   example: "Descripcion de tarea 1"
+                descripcion_en:
+                  type: string
+                  description: Descripcion de la tarea en Ingles
+                  example: "Task 1 Description"                  
                 tareapadre_id:
                   type: number
                   description: Identificador de la tarea padre
@@ -10463,7 +10476,7 @@ components:
         costo_cable:
           type: number
           format: double
-          example: 30.0             
+          example: 30.0              
         comida:
           type: number
           format: double

@@ -4189,6 +4189,10 @@ paths:
                   type: integer
                   description: Estado del producto
                   example: 1
+                mantener_costo:
+                  type: integer
+                  description: Mantener el costo
+                  example: 1                  
                 file:
                   type: string
                   format: binary
@@ -6797,10 +6801,18 @@ paths:
                   type: string
                   description: Titulo de la tarea
                   example: "Tarea 1"
+                titulo_en:
+                  type: string
+                  description: Titulo de la tarea en Ingles
+                  example: "Task 1"                  
                 descripcion:
                   type: string
                   description: Descripcion de la tarea
                   example: "Descripcion de tarea 1"
+                descripcion_en:
+                  type: string
+                  description: Descripcion de la tarea en Ingles
+                  example: "Task 1 Description"                  
                 tareapadre_id:
                   type: number
                   description: Identificador de la tarea padre

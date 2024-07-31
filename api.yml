@@ -6800,19 +6800,11 @@ paths:
                 titulo:
                   type: string
                   description: Titulo de la tarea
-                  example: "Tarea 1"
-                titulo_en:
-                  type: string
-                  description: Titulo de la tarea en Ingles
-                  example: "Task 1"                  
+                  example: "Tarea 1"             
                 descripcion:
                   type: string
                   description: Descripcion de la tarea
                   example: "Descripcion de tarea 1"
-                descripcion_en:
-                  type: string
-                  description: Descripcion de la tarea en Ingles
-                  example: "Task 1 Description"   
                 lenguaje:
                   type: string
                   description: Lenguaje del titulo y descripcion de la tarea a crear ("es" o "en")
@@ -10559,9 +10551,15 @@ components:
         titulo:
           type: string
           example: "Tarea1"
+        titulo_en:
+          type: string
+          example: "Task 1"          
         descripcion:
           type: string
           example: "Descripcion 1"
+        descripcion_en:
+          type: string
+          example: "Description 1"          
         tareapadre_id:
           type: number
           example: 1

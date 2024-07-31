@@ -6812,7 +6812,11 @@ paths:
                 descripcion_en:
                   type: string
                   description: Descripcion de la tarea en Ingles
-                  example: "Task 1 Description"                  
+                  example: "Task 1 Description"   
+                lenguaje:
+                  type: string
+                  description: Lenguaje del titulo y descripcion de la tarea a crear ("es" o "en")
+                  example: "es"                                     
                 tareapadre_id:
                   type: number
                   description: Identificador de la tarea padre

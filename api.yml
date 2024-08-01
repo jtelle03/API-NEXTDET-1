@@ -5280,15 +5280,7 @@ paths:
                       movilidad:
                         type: number
                         format: double
-                        example: 30.0
-                      costo:
-                        type: number
-                        format: double
-                        example: 30.0
-                      costo_cable:
-                        type: number
-                        format: double
-                        example: 30.0                                                
+                        example: 30.0                                            
                       comida:
                         type: number
                         format: double

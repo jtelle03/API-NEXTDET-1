@@ -8,7 +8,8 @@ servers:
     description: Url de desarrollo
   - url: https://api.nextdet.com
     description: Url de produccion
-  
+  - url: http://0.0.0.0:8000
+    description: Url de localhost
   
 tags:
   - name: Licencia
@@ -4255,6 +4256,10 @@ paths:
                   type: integer
                   description: Estado del producto
                   example: 1
+                mantener_costo:
+                  type: integer
+                  description: Mantener el costo
+                  example: 1                  
                 file:
                   type: string
                   format: binary
@@ -5331,10 +5336,18 @@ paths:
                         type: number
                         format: double
                         example: 30.0
-                      movilidad:
+                      costo:
                         type: number
                         format: double
                         example: 30.0
+                      costo_cable:
+                        type: number
+                        format: double
+                        example: 30.0                           
+                      movilidad:
+                        type: number
+                        format: double
+                        example: 30.0                                            
                       comida:
                         type: number
                         format: double
@@ -6854,11 +6867,15 @@ paths:
                 titulo:
                   type: string
                   description: Titulo de la tarea
-                  example: "Tarea 1"
+                  example: "Tarea 1"             
                 descripcion:
                   type: string
                   description: Descripcion de la tarea
                   example: "Descripcion de tarea 1"
+                lenguaje:
+                  type: string
+                  description: Lenguaje del titulo y descripcion de la tarea a crear ("es" o "en")
+                  example: "es"                                     
                 tareapadre_id:
                   type: number
                   description: Identificador de la tarea padre
@@ -10518,6 +10535,14 @@ components:
           type: number
           format: double
           example: 30.0
+        costo:
+          type: number
+          format: double
+          example: 30.0
+        costo_cable:
+          type: number
+          format: double
+          example: 30.0             
         comida:
           type: number
           format: double
@@ -10596,9 +10621,15 @@ components:
         titulo:
           type: string
           example: "Tarea1"
+        titulo_en:
+          type: string
+          example: "Task 1"          
         descripcion:
           type: string
           example: "Descripcion 1"
+        descripcion_en:
+          type: string
+          example: "Description 1"          
         tareapadre_id:
           type: number
           example: 1

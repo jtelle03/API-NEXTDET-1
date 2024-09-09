@@ -6072,7 +6072,7 @@ paths:
                   datos:
                     type: object
                     example: []
- 
+
   /v1/recursos/producto/list/producto:
     get:
       tags:
@@ -6168,7 +6168,90 @@ paths:
                   datos:
                     type: object
                     example: []
- 
+
+  /v1/recursos/producto/save:
+    post:
+      tags:
+        - Recursos Producto
+      operationId: saveUpdateRecursoProducto
+      description: Guardar o actualizar el recurso de un producto
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required: 
+                - producto_id
+                - tipo_recurso
+                - titulo
+                - file
+              properties:
+                producto_id:
+                  type: integer
+                  description: Identificador de producto del recurso
+                  example: 8
+                tipo_recurso:
+                  type: integer
+                  description: Identificador del tipo de recurso
+                  example: 3
+                titulo:
+                  type: string
+                  description: Titulo del recurso
+                  example: 'Tutorial 1'
+                es_portada:
+                  type: integer
+                  description: Valor 0 o nulo si no es portada y 1 si es portada de un video
+                  example: 1
+                file:
+                  type: string
+                  format: binary
+                  description: Archivo del recurso
+                  example: 'file.mp4'
+      
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
  
   /v1/importador/init_data:
     get:

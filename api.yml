@@ -4082,6 +4082,10 @@ paths:
                   type: integer
                   description: Categoria a la que pertenece el producto
                   example: 1
+                servicio_id:
+                  type: integer
+                  description: Servicio asociado al producto
+                  example: 2
                 precio_sugerido:
                   type: number
                   format: double
@@ -6173,8 +6177,8 @@ paths:
     post:
       tags:
         - Recursos Producto
-      operationId: saveUpdateRecursoProducto
-      description: Guardar o actualizar el recurso de un producto
+      operationId: saveRecursoProducto
+      description: Guardar el recurso de un producto
       requestBody:
         content:
           application/form-data:
@@ -6198,16 +6202,171 @@ paths:
                   type: string
                   description: Titulo del recurso
                   example: 'Tutorial 1'
-                es_portada:
-                  type: integer
-                  description: Valor 0 o nulo si no es portada y 1 si es portada de un video
-                  example: 1
+                descripcion:
+                  type: string
+                  description: Descripcion del recurso
+                  example: 'Descripcion del tutorial 1'
                 file:
                   type: string
                   format: binary
                   description: Archivo del recurso
                   example: 'file.mp4'
+                file_portada:
+                  type: string
+                  format: binary
+                  description: Archivo de la portada recurso
+                  example: 'file.jpg'
       
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/recursos/producto/update:
+    post:
+      tags:
+        - Recursos Producto
+      operationId: updateRecursoProducto
+      description: Actualizar el recurso de un producto
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required:
+                - recurso_id 
+                - producto_id
+                - tipo_recurso
+                - titulo
+                - file
+              properties:
+                recurso_id:
+                  type: integer
+                  description: Identificador del recurso
+                  example: 8
+                producto_id:
+                  type: integer
+                  description: Identificador del producto del recurso
+                  example: 8
+                tipo_recurso:
+                  type: integer
+                  description: Identificador del tipo de recurso
+                  example: 3
+                titulo:
+                  type: string
+                  description: Titulo del recurso
+                  example: 'Tutorial 1'
+                descripcion:
+                  type: string
+                  description: Descripcion del recurso
+                  example: 'Descripcion del tutorial 1'
+                file:
+                  type: string
+                  format: binary
+                  description: Archivo del recurso
+                  example: 'file.mp4'
+                file_portada:
+                  type: string
+                  format: binary
+                  description: Archivo de la portada recurso
+                  example: 'file.jpg'
+      
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/recursos/producto/delete/{recurso_id}:
+    put:
+      tags:
+        - Recursos Producto
+      operationId: deleteRecursoProducto
+      description: Eliminar el recurso de un producto
+      parameters:
+        - in: path
+          name: recurso_id
+          required: true
+          description: Identificador del recurso que desea eliminar
+          schema:
+            type: integer
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
         

@@ -6173,6 +6173,102 @@ paths:
                     type: object
                     example: []
 
+  /v1/recursos/producto/list:
+    get:
+      tags:
+        - Recursos Producto
+      operationId: listDataRecursoProducto
+      description: Informacion de todos los recursos agrupados por producto y tipo de recurso
+      
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      producto_id:
+                        type: integer
+                        example: 1
+                      producto_nombre:
+                        type: string
+                        example: 'Producto 1'
+                      software:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            codigo:
+                              type: integer
+                              example: 'wc98w4c98234324'
+                            titulo: 
+                              type: string
+                              example: 'Instalador v1.5'
+                      manuales:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            codigo:
+                              type: integer
+                              example: 'wc98w4c23423498'
+                            titulo: 
+                              type: string
+                              example: 'Manual Instalacion'
+                            description: 
+                              type: string
+                              example: 'Breve resumen del manual'
+                      video_tutorial:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            titulo: 
+                              type: string
+                              example: 'Tutorial 1'
+                            url:
+                              type: string
+                              example: 'files/view/video=tutorial.mp4'
+                            img_portada:
+                              type: string
+                              example: 'files/view/image=tutorial-portada.png'
+                
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
   /v1/recursos/producto/save:
     post:
       tags:

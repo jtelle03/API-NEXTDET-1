@@ -34,6 +34,8 @@ tags:
     description: Gestión de productos de Nextdet
   - name: Producto Configuracion
     description: Configuración de productos de Nextdet por sucursal
+  - name: Producto Costo Configuracion
+    description: Configuración de productos de Nextdet por producto y pais  
   - name: Cotizacion
     description: Gestión de las cotizaciones realizadas por los distribuidores
   - name: Recursos Producto
@@ -4801,6 +4803,182 @@ paths:
           description: Identificador de la configuracion del producto que desea eliminar
           schema:
             type: integer
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/producto_costos_configuracion/init_data:
+    get:
+      tags:
+        - Producto Costo Configuracion
+      operationId: initDataProductoCostoConfiguracion
+      description: Obtenemos la información inicial para el módulo de configuración de costos de producto 
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      productos:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Producto'
+                      paises:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pais'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/producto_costos_configuracion/list:
+    get:
+      tags:
+        - Producto Costo Configuracion
+      operationId: listProductoCostoConfiguracion
+      description: Obtenemos los datos de configuracion de costos de un producto por país
+      parameters:
+        - in: query
+          name: producto_id
+          description: El producto del que se desea obtener su configuración
+          schema:
+            type: integer
+        - in: query
+          name: pais_id
+          description: El país de donde se desea obtener la configuración del producto
+          schema:
+            type: integer
+      
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProductoCostoConfiguracion'
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/producto_costos_configuracion/save:
+    post:
+      tags:
+        - Producto Costo Configuracion
+      operationId: saveProductoCostoConfiguracion
+      description: Guardamos o actualizamos una configuracion de costos de un producto por pais
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductoCostoConfiguracion'
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -11238,6 +11416,197 @@ components:
         estado_nombre:
           type: string
           example: 'Activo'
+          
+    ProductoCostoConfiguracion:
+      type: object
+      required: 
+        - producto_id
+        - pais_id
+        - unidad
+        - costo_cable
+        - royalty_total
+        - com_total
+        - precio_sugerido_porcentaje
+        - profit_nextdet_porcentaje
+        - precio_sugerido
+        - costo_distribuidor_master
+        - margen_distribuidor_master
+        - costo_distribuidor
+        - items
+        - cantidad_venta_total_año
+        - cantidad_venta_total_mes
+        - ganancia_total
+        - porcentaje_venta_master
+        - cantidad_venta_master_año
+        - cantidad_venta_master_mes
+        - ganancia_master_items
+        - porcentaje_venta_directa
+        - cantidad_venta_directa_año
+        - cantidad_venta_directa_mes
+        - ganancia_directa_items
+      properties:
+        productocostoconfiguracion_id:
+          type: integer
+          example: 1
+        producto_id:
+          type: integer
+          example: 3
+        pais_id:
+          type: integer
+          example: 183
+        unidad:
+          type: number
+          example: 1
+        costo_cable:
+          type: number
+          example: 8.4
+        costo_pcb:
+          type: number
+          example: 0
+        costo_plastic_lab:
+          type: number
+          example: 0
+        costo_fillament:
+          type: number
+          example: 0
+        costo_surface_con:
+          type: number
+          example: 0
+        costo_resin:
+          type: number
+          example: 0
+        costo_orings:
+          type: number
+          example: 0
+        costo_extras:
+          type: object
+          properties:
+              extra1:
+                type: number
+                example: 0
+              extra2:
+                type: number
+                example: 0
+              extra3:
+                type: number
+                example: 0
+        royalty_amount:
+          type: number
+          example: 0
+        royalty_porcentaje:
+          type: number
+          example: 20
+        royalty_total:
+          type: number
+          example: 1.68
+        com_total:
+          type: number
+          example: 10.08
+        precio_sugerido_porcentaje:
+          type: number
+          example: 100
+        profit_nextdet_porcentaje:
+          type: number
+          example: 50
+        tier1_unidades:
+          type: number
+          example: 0
+        tier1_descuento:
+          type: number
+          example: 0
+        tier2_unidades:
+          type: number
+          example: 0
+        tier2_descuento:
+          type: number
+          example: 0
+        tier3_unidades:
+          type: number
+          example: 0
+        tier3_descuento:
+          type: number
+          example: 0
+        precio_sugerido:
+          type: number
+          example: 20.16
+        costo_distribuidor_master:
+          type: number
+          example: 15.12
+        margen_distribuidor_master:
+          type: number
+          example: 0.1
+        costo_distribuidor:
+          type: number
+          example: 15.22
+        items:
+          type: array
+          items:
+            properties:
+              longitud_cable:
+                type: number
+                example: 1
+              cantidad:
+                type: number
+                example: 2000
+              royalty:
+                type: number
+                example: 1.68
+              total_com:
+                type: number
+                example: 10.08
+              precio_sugerido_porcentaje:
+                type: number
+                example: 50
+              profit_nextdet_porcentaje:
+                type: number
+                example: 100
+              precio_sugerido:
+                type: number
+                example: 20.16
+              precio_venta:
+                type: number
+                example: 10.08
+              costo_distribuidor_master:
+                type: number
+                example: 15.12
+              margen_distribuidor_master:
+                type: number
+                example: 0.10
+              costo_distribuidor:
+                type: number
+                example: 15.22
+        cantidad_venta_total_año:
+          type: number
+          example: 2000
+        cantidad_venta_total_mes:
+          type: number
+          example: 166.67
+        ganancia_total:
+          type: number
+          example: 6048
+        porcentaje_venta_master:
+          type: number
+          example: 60
+        cantidad_venta_master_año:
+          type: number
+          example: 1200
+        cantidad_venta_master_mes:
+          type: number
+          example: 100
+        ganancia_master_items:
+          example: [6048]
+        porcentaje_venta_directa:
+          type: number
+          example: 40
+        cantidad_venta_directa_año:
+          type: number
+          example: 800
+        cantidad_venta_directa_mes:
+          type: number
+          example: 66.67
+        ganancia_directa_items:
+          example: [0]
+          
 
 
     TipoError: 

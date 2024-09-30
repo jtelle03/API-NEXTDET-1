@@ -46,6 +46,8 @@ tags:
     description: Descargar archivos
   - name: Tarea
     description: Gestión de tareas de los usuarios por empresa
+  - name: Pagina Principal
+    description: Gestión de recursos para la página principal
     
 paths:
 
@@ -10408,6 +10410,118 @@ paths:
                     type: object
                     example: []
 
+  
+  /v1/pagina_principal/imagen/list:
+    get:
+      tags:
+        - Pagina Principal
+      operationId: listImagenesPaginaPrincipal
+      description: Obtenemos el listado de Imagenes para la pagina principal
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ImagenPaginaPrincipal' 
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/pagina_principal/imagen/save:
+    post:
+      tags:
+        - Pagina Principal
+      operationId: saveImagenPaginaPrincipal
+      description: Guardamos/actualizamos los datos de la imagenes para la pagina principal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imagenes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ImagenPaginaPrincipal'
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
 
 components:
   schemas:
@@ -11776,6 +11890,49 @@ components:
               example: 66.67
             ganancia_directa_items:
               example: [0]
+
+    ImagenPaginaPrincipal:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        src_es:
+          type: string
+          example: "image/portada_es"
+        src_en:
+          type: string
+          example: "image/portada_en"
+        alt:
+          type: string
+          example: "alt imagen"
+        type:
+          type: string
+          example: "image"
+        nav_link:
+          type: string
+          example: "image/.."
+        text_nav_link_es:
+          type: string
+          example: "Titulo español"
+        text_nav_link_en:
+          type: string
+          example: "Titulo ingles"
+        anchor_link:
+          type: string
+          example: "image/.."
+        text_anchor_link_es:
+          type: string
+          example: "Anchor español"
+        text_anchor_link_en:
+          type: string
+          example: "Anchor ingles"
+        tiempo_visualizacion:
+          type: number
+          example: 3.5
+        estado:
+          type: integer
+          example: 1
 
     TipoError: 
       description: |  

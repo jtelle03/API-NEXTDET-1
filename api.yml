@@ -9687,6 +9687,15 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Pais'
+                      usuarios_asignados:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Usuario'
+                      usuarios:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Usuario'
+                          
 
         404:
           description: "Peticion no ejecutada."
@@ -9869,6 +9878,10 @@ paths:
                   type: string
                   description: Perfil de LinkedIn del contacto
                   example: "link/linkedin"
+                usuarioasignado_id:
+                  type: integer
+                  description: Usuario que desea asignar al contacto
+                  example: 77
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -9967,6 +9980,10 @@ paths:
                   type: string
                   description: Perfil de LinkedIn del contacto
                   example: "link/linkedin"
+                usuarioasignado_id:
+                  type: integer
+                  description: Usuario que desea asignar al contacto
+                  example: 77
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -10011,6 +10028,77 @@ paths:
                   datos:
                     type: object
                     example: []
+
+  /v1/contacto/asignar/{contacto_id}:
+    put:
+      tags:
+        - Contacto
+      operationId: asignarContacto
+      description: Asignamos un contacto a un usuario
+      parameters:
+        - in: path
+          name: contacto_id
+          required: true
+          description: Identificador del contacto que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - usuarioasignado_id
+              properties:
+                usuarioasignado_id:
+                  type: integer
+                  description: Usuario que desea asignar al contacto
+                  example: 77
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
   
   /v1/contacto/delete/{contacto_id}:
     put:
@@ -11600,6 +11688,12 @@ components:
         estado_nombre:
           type: string
           example: 'Activo'
+        usuarioasignado_id:
+          type: integer
+          example: 77
+        usuarioasignado_nombre:
+          type: string
+          example: "Alessandro Venegas"
           
     ProductoCostoConfiguracion:
       type: object

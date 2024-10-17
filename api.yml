@@ -9728,7 +9728,12 @@ paths:
           name: pais_id
           description: Filtro de pais
           schema:
-            type: integer     
+            type: integer
+        - in: query
+          name: usuarioasignado_id
+          description: Filtro de usuario asignado
+          schema:
+            type: integer
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
         
@@ -10200,144 +10205,6 @@ paths:
                   format: binary
                   description: Archivos adjuntos al email
                   example: 'image/png'
-                  
-      security:
-        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
-        
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-                      
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-  /v1/contacto/historial/save:
-    post:
-      tags:
-        - Contacto
-      operationId: saveHistorialContacto
-      description: Guardamos un comentario de un contacto
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required: 
-                - contacto_id
-                - comentario
-              properties:
-                historialcontacto_id:
-                  type: integer
-                  description: Identificador del comentario del contacto (en caso de editar)
-                  example: 1
-                contacto_id:
-                  type: integer
-                  description: Identificador del contacto
-                  example: 1
-                comentario:
-                  type: string
-                  description: Comentario del contacto
-                  example: "Comentario 1"
-                tiene_reunion:
-                  type: integer
-                  description: Indicador de si tiene reunion o no (1 o 0)
-                  example: 1
-                fecha_reunion:
-                  type: string
-                  description: Fecha de la reunión
-                  example: "15-10-2024"
-                  
-      security:
-        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
-        
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-                      
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-  
-  /v1/contacto/historial/delete/{historialcontacto_id}:
-    put:
-      tags:
-        - Contacto
-      operationId: deleteHistorialContacto
-      description: Eliminar un comentario de un contacto
-      parameters:
-        - in: path
-          name: historialcontacto_id
-          required: true
-          description: Identificador del comentario del contacto que desea eliminar
-          schema:
-            type: integer
                   
       security:
         - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
@@ -11832,25 +11699,6 @@ components:
         usuarioasignado_nombre:
           type: string
           example: "Alessandro Venegas"
-        historial:
-          type: array
-          items:
-            properties:
-              historialcontacto_id:
-                type: integer
-                example: 1
-              comentario:
-                type: string
-                example: "comentario 1"
-              tiene_reunion:
-                type: integer
-                example: 1
-              fecha_reunion:
-                type: string
-                example: "15-10-2024 12:00:00"
-              fecha_edicion:
-                type: string
-                example: "15-10-2024"
           
     ProductoCostoConfiguracion:
       type: object

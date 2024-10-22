@@ -10616,6 +10616,71 @@ paths:
                     type: object
                     example: []
 
+  /v1/pagina_principal/imagen/save_image:
+    post:
+      tags:
+        - Pagina Principal
+      operationId: saveImagenToPaginaPrincipal
+      description: Guardamos una imagen para obtener su url para la pagina principal
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  example: 'Binary'
+                  
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Imagen guardada correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        description: url de la imagen subida
+                        example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
+                      
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+
 components:
   schemas:
     

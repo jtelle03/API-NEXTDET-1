@@ -9695,6 +9695,21 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Usuario'
+                      lenguajes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            nombre:
+                              type: string
+                              example : Ingles
+                            nombre_ingles:
+                              type: string
+                              example: English
+                            valor:
+                              type: string
+                              example: en
+                          
                           
 
         404:
@@ -10163,7 +10178,7 @@ paths:
                     type: object
                     example: []
 
-  /v1/contacto/difusion:
+  /v1/contacto/difusion/save:
     post:
       tags:
         - Contacto
@@ -10249,6 +10264,61 @@ paths:
                   datos:
                     type: object
                     example: []
+
+  /v1/contacto/difusion/init_data:
+    get:
+      tags:
+        - Contacto
+      operationId: initDataContactoDifusion
+      description: Obtenemos la información inicial para el módulo de contacto difusion
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      contactos:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Contacto'
+                          
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
 
   /v1/contacto/historial/save:
     post:
@@ -11883,6 +11953,9 @@ components:
         perfil_linkedin:
           type: string
           example: "link/linkedin"
+        lenguaje:
+          type: string
+          example: en
         telefono:
           type: string
           example: "+51 963598561"

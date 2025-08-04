@@ -48,6 +48,8 @@ tags:
     description: Gestión de tareas de los usuarios por empresa
   - name: Pagina Principal
     description: Gestión de recursos para la página principal
+  - name: Clasificado
+    description: Gestión de clasificados
     
 paths:
 
@@ -10887,6 +10889,376 @@ paths:
                     type: object
                     example: []
 
+  /v1/clasificado/init_data:
+    get:
+      tags:
+        - Clasificado
+      operationId: initDataClasificado
+      description: Inicializamos los datos para el clasificado
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      categoriaClasificados:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CategoriaClasificado'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/list:
+    get:
+      tags:
+        - Clasificado
+      operationId: listClasificado
+      description: Listamos los clasificados
+      parameters:
+        - name: categoria_clasificado_id
+          in: query
+          description: ID de la categoría de clasificado
+          required: false
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        sku:
+                          type: string
+                          example: 'SKU-00001'
+                        marca:
+                          type: string
+                          example: 'Marca'
+                        descripcion:
+                          type: string
+                          example: 'Grua 1000kg'
+                        categoria_id:
+                          type: integer
+                          example: 1
+                        categoria_nombre:
+                          type: string
+                          example: 'Gruas'
+                        categoria_nombre_ingles:
+                          type: string
+                          example: 'Cranes'
+                        precio:
+                          type: number
+                          example: 1000
+                        imagenes:
+                          type: array
+                          items:
+                            type: string
+                            example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
+                        porcentaje_comision:
+                          type: number
+                          example: 10
+                        monto_comision:
+                          type: number
+                          example: 100
+                        precio_final:
+                          type: number
+                          example: 1100
+                        estado_aprobado:
+                          type: integer
+                          example: 1
+                        usuario_creador:
+                          type: string
+                          example: 'Pepe'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+  
+  /v1/clasificado/list/clasificado:
+    get:
+      tags:
+        - Clasificado
+      operationId: loadDataClasificado
+      description: Cargamos los datos de un clasificado
+      parameters:
+        - name: clasificado_id
+          in: query
+          description: ID del clasificado
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json: 
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos: 
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      marca:
+                        type: string
+                        example: 'Marca'
+                      descripcion:
+                        type: string
+                        example: 'Grua 1000kg'
+                      categoria_id:
+                        type: integer
+                      precio:
+                        type: number
+                        example: 1000
+                      imagenes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            imagen_id:
+                              type: integer
+                              example: 1
+                            imagen_url:
+                              type: string
+                              example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.  
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: [] 
+
+  /v1/clasificado/save:
+    post:
+      tags:
+        - Clasificado
+      operationId: saveClasificado
+      description: Guardamos un clasificado
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                marca:
+                  type: string
+                  example: 'Marca'
+                descripcion:
+                  type: string
+                  example: 'Grua 1000kg'
+                categoria_id:
+                  type: integer
+                  example: 1
+                precio:
+                  type: number
+                  example: 1000
+                imagenes:
+                  type: binary
+                  description: Imagenes del clasificado
+                  example: 'imagen.png'
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/aprobar/{clasificado_id}:
+    put:
+      tags:
+        - Clasificado
+      operationId: aprobarClasificado
+      description: Aprobar un clasificado
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                porcentaje_comision:
+                  type: number
+                  example: 10
+                monto_comision:
+                  type: number
+                  example: 100
+                estado_aprobado:
+                  type: integer
+                  example: 1
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
 
 components:
   schemas:
@@ -12326,6 +12698,26 @@ components:
         estado:
           type: integer
           example: 1
+
+    CategoriaClasificado:
+      description: Categoría de clasificados
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: 'Adaptadores'
+        nombre_ingles:
+          type: string
+          example: 'Adapters'
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: 'Activo'
 
     TipoError: 
       description: |  

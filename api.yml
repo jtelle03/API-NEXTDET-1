@@ -10,7 +10,7 @@ servers:
     description: Url de produccion
   - url: http://0.0.0.0:8000
     description: Url de localhost
-  
+
 tags:
   - name: Licencia
     description: Administracion de cuentas de usuarios

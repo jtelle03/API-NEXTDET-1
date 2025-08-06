@@ -10940,6 +10940,170 @@ paths:
                     type: object
                     example: []
 
+  /v1/clasificado/list_all:
+    get:
+      tags:
+        - Clasificado
+      operationId: listAllClasificado
+      description: Listamos todos los clasificados
+      parameters:
+        - name: categoria_clasificado_id
+          in: query
+          description: ID de la categoría de clasificado
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
+          required: false
+          schema:
+            type: integer
+        - name: page_row
+          in: query
+          description: Cantidad de datos por página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos. Si se envía este dato, se debe enviar 'page')
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        sku:
+                          type: string
+                          example: 'SKU-00001'
+                        marca:
+                          type: string
+                          example: 'Marca'
+                        descripcion:
+                          type: string
+                          example: 'Grua 1000kg'
+                        categoria_nombre:
+                          type: string
+                          example: 'Gruas'
+                        categoria_nombre_ingles:
+                          type: string
+                          example: 'Cranes'
+                        url_portada:
+                          type: string  
+                          example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/list_all/{clasificado_id}:
+    get:
+      tags:
+        - Clasificado
+      operationId: listDetalleClasificado
+      description: Listamos el detalle de algún clasificados
+      parameters:
+        - name: clasificado_id
+          in: path
+          description: ID del clasificado
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      sku:
+                        type: string
+                        example: 'SKU-00001'
+                      marca:
+                        type: string
+                        example: 'Marca'
+                      descripcion:
+                        type: string
+                        example: 'Grua 1000kg'
+                      categoria_nombre:
+                        type: string
+                        example: 'Gruas'
+                      categoria_nombre_ingles:
+                        type: string
+                        example: 'Cranes'
+                      url_imagenes:
+                        type: array
+                        items:
+                          type: string
+                          example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
   /v1/clasificado/list:
     get:
       tags:
@@ -10950,6 +11114,18 @@ paths:
         - name: categoria_clasificado_id
           in: query
           description: ID de la categoría de clasificado
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
+          required: false
+          schema:
+            type: integer
+        - name: page_row
+          in: query
+          description: Cantidad de datos por página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos. Si se envía este dato, se debe enviar 'page')
           required: false
           schema:
             type: integer
@@ -11133,7 +11309,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/form-data:
             schema:
               type: object
               properties:
@@ -11149,8 +11325,9 @@ paths:
                 precio:
                   type: number
                   example: 1000
-                imagenes:
-                  type: binary
+                imagenes[]:
+                  type: string
+                  format: binary
                   description: Imagenes del clasificado
                   example: 'imagen.png'
       responses:
@@ -11196,6 +11373,85 @@ paths:
                     type: object
                     example: []
 
+  /v1/clasificado/update:
+    post:
+      tags:
+        - Clasificado
+      operationId: updateClasificado
+      description: Actualizamos un clasificado
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/form-data:
+            schema:
+              type: object
+              properties:
+                clasificado_id:
+                  type: integer
+                  example: 1
+                marca:
+                  type: string
+                  example: 'Marca'
+                descripcion:
+                  type: string
+                  example: 'Grua 1000kg'
+                categoria_id:
+                  type: integer
+                  example: 1
+                precio:
+                  type: number
+                  example: 1000
+                imagenes:
+                  type: string
+                  description: String en formato JSON que representa un array de objetos con los datos de las imágenes.
+                  example: '[{"imagen_id":1,"imagen_url":"https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png","estado":1}]'
+                imagenes_nuevas[]:
+                  type: string
+                  format: binary
+                  description: Imagenes del clasificado
+                  example: 'imagen.png'
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
   /v1/clasificado/aprobar/{clasificado_id}:
     put:
       tags:
@@ -11204,6 +11460,13 @@ paths:
       description: Aprobar un clasificado
       security:
         - BearerAuth: []
+      parameters:
+        - name: clasificado_id
+          in: path
+          description: ID del clasificado
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -11219,6 +11482,72 @@ paths:
                   example: 100
                 estado_aprobado:
                   type: integer
+                  example: 1
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/delete/{clasificado_id}:
+    put:
+      tags:
+        - Clasificado
+      operationId: deleteClasificado
+      description: Eliminar un clasificado
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: clasificado_id
+          in: path
+          description: ID del clasificado
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado_aprobado:
+                  type: integer
+                  description: Estado de aprobación (opcional)
                   example: 1
       responses:
         200:

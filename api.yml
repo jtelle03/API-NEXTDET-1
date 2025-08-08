@@ -10947,6 +10947,12 @@ paths:
       operationId: listAllClasificado
       description: Listamos todos los clasificados
       parameters:
+        - name: busqueda
+          in: query
+          description: Búsqueda por descripción, marca o SKU
+          required: false
+          schema:
+            type: string
         - name: categoria_clasificado_id
           in: query
           description: ID de la categoría de clasificado
@@ -11117,6 +11123,12 @@ paths:
       operationId: listClasificado
       description: Listamos los clasificados
       parameters:
+        - name: busqueda
+          in: query
+          description: Búsqueda por descripción, marca o SKU
+          required: false
+          schema:
+            type: string
         - name: categoria_clasificado_id
           in: query
           description: ID de la categoría de clasificado

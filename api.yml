@@ -10920,6 +10920,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/CategoriaClasificado'
+                      estadosSolicitudClasificado:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Estado'
         404:
           description: "Peticion no ejecutada."
           content:
@@ -11621,6 +11625,237 @@ paths:
                   datos:
                     type: object
                     example: []
+
+  /v1/clasificado/enviar_solicitud:
+    post:
+      tags:
+        - Clasificado
+      operationId: enviarSolicitudClasificado
+      description: Enviar una solicitud de clasificado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clasificado_id:
+                  type: integer
+                  example: 1
+                nombre_cliente:
+                  type: string
+                  example: 'Nombre del cliente'
+                email:
+                  description: Email del cliente (opcional)
+                  type: string
+                  example: 'example@gmail.com'
+                telefono:
+                  description: Teléfono del cliente (opcional)
+                  type: string
+                  example: '930506234'
+                mensaje:
+                  description: Mensaje del cliente (opcional)
+                  type: string
+                  example: 'Mensaje del cliente'
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos: 
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/solicitud/list:
+    get:
+      tags:
+        - Clasificado
+      operationId: getSolicitudesClasificados
+      description: Obtener las solicitudes de clasificados
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: clasificado_id
+          in: query
+          description: ID del clasificado
+          required: false
+          schema:
+            type: integer
+        - name: categoria_clasificado_id
+          in: query
+          description: ID de la categoría del clasificado
+          required: false
+          schema:
+            type: integer
+        - name: estado_solicitud
+          in: query
+          description: ID del estado de la solicitud
+          required: false
+          schema:
+            type: integer
+        - name: busqueda
+          in: query
+          description: Búsqueda
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: integer
+        - name: page_row
+          in: query
+          description: Filas por página
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        marca_clasificado:
+                          type: string
+                          example: 'Marca del clasificado'
+                        codigo:
+                          type: string
+                          example: 'COT-00001'
+                        nombre_cliente:
+                          type: string
+                          example: 'Nombre del cliente'
+                        modo_solicitud:
+                          type: string
+                          example: 'Email'
+                        email:
+                          type: string
+                          example: 'example@gmail.com'
+                        telefono:
+                          type: string
+                          example: '930506234'
+                        mensaje:
+                          type: string
+                          example: 'Mensaje del cliente'
+                        estado:
+                          type: integer
+                          example: 1
+                        estado_nombre:
+                          type: string
+                          example: 'Activo'
+                        historial_solicitud:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              comentario:
+                                type: string
+                                example: 'Comentario del historial'
+                              estado:
+                                type: integer
+                                example: 1
+                              estado_nombre:
+                                type: string
+                                example: 'Activo'
+                              fecha_creacion:
+                                type: string
+                                example: '23-01-01 00:00:00'
+                        reserva_fecha:
+                          type: string
+                          example: '23-01-01 00:00:00'
+                        reserva_monto:
+                          type: number
+                          example: 100
+                        reserva_comentario:
+                          type: string
+                          example: 'Comentario de la reserva'
+                        venta_fecha:
+                          type: string
+                          example: '23-01-01 00:00:00'
+                        venta_monto:
+                          type: number
+                          example: 100
+                        venta_comentario:
+                          type: string
+                          example: 'Comentario de la venta'
+                        fecha_creacion:
+                          type: string
+                          example: '23-01-01 00:00:00'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
 
 components:
   schemas:

@@ -7085,7 +7085,124 @@ paths:
                     type: object
                     example: []
   
-   
+  /v1/importador/clasificado/download/plantilla:
+    get:
+      tags:
+        - Importador
+      operationId: importadorDownloadPlantillaClasificado
+      description: Generamos la plantilla del importador de clasificado. 
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: 'archivo/12315464987946516518498646.xlsx'
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/importador/clasificado/save:
+    post:
+      tags:
+        - Importador
+      operationId: importadorSaveClasificado
+      description: Guardamos los clasificados nuevos. 
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required: 
+                - clasificados
+              properties:
+                clasificados:
+                  type: string
+                  format: binary
+                  description: Archivo excel con los datos requeridos para crear un nuevo clasificado
+                  example: 'file.xlxs'
+                imagenes:
+                  type: string
+                  format: binary
+                  description: Archivo zip con las imagenes del clasificado
+                  example: 'file.zip'
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
     
   /v1/recursos/producto/download:
     get:

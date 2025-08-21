@@ -11141,6 +11141,34 @@ paths:
                       total:
                         type: integer
                         example: 10
+                      clasificados_mas_destacados:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            categoria_id:
+                              type: integer
+                              example: 1
+                            categoria_nombre:
+                              type: string
+                              example: 'Gruas'
+                            categoria_nombre_ingles:
+                              type: string
+                              example: 'Cranes'
+                            clasificado_destacado:
+                              type: object
+                              properties:
+                                clasificado_id:
+                                  type: integer
+                                  example: 1
+                                clasificado_marca:
+                                  type: string
+                                  example: 'Marca'
+                                url_imagenes:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
         404:
           description: "Peticion no ejecutada."
           content:

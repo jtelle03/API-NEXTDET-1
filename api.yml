@@ -11080,6 +11080,12 @@ paths:
           required: false
           schema:
             type: integer
+        - name: es_nuevo
+          in: query
+          description: Filtro para indicar si es nuevo o usado
+          required: false
+          schema:
+            type: integer
         - name: page
           in: query
           description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
@@ -11135,6 +11141,13 @@ paths:
                             categoria_nombre_ingles:
                               type: string
                               example: 'Cranes'
+                            es_nuevo:
+                              type: integer
+                              example: 1
+                            tiempo_uso:
+                              type: string
+                              description: Tiempo de uso del clasificado (años)
+                              example: 1
                             url_portada:
                               type: string  
                               example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
@@ -11284,6 +11297,12 @@ paths:
           required: false
           schema:
             type: integer
+        - name: es_nuevo
+          in: query
+          description: Filtro para indicar si es nuevo o usado
+          required: false
+          schema:
+            type: integer
         - name: page
           in: query
           description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
@@ -11344,6 +11363,13 @@ paths:
                             categoria_nombre_ingles:
                               type: string
                               example: 'Cranes'
+                            es_nuevo:
+                              type: integer
+                              example: 1
+                            tiempo_uso:
+                              type: string
+                              description: Tiempo de uso del clasificado (años)
+                              example: 1
                             precio:
                               type: number
                               example: 1000
@@ -11507,6 +11533,14 @@ paths:
                 precio:
                   type: number
                   example: 1000
+                es_nuevo:
+                  type: integer
+                  description: "Campo para indicar si es nuevo o usado (0: usado, 1: nuevo)"
+                  example: 1
+                tiempo_uso:
+                  type: number
+                  description: Tiempo de uso del clasificado (años) (opcional)
+                  example: 1
                 imagenes[]:
                   type: string
                   format: binary
@@ -11585,6 +11619,14 @@ paths:
                 precio:
                   type: number
                   example: 1000
+                es_nuevo:
+                  type: integer
+                  description: "Campo para indicar si es nuevo o usado (0: usado, 1: nuevo)"
+                  example: 1
+                tiempo_uso:
+                  type: number
+                  description: Tiempo de uso del clasificado (años) (opcional)
+                  example: 1
                 imagenes:
                   type: string
                   description: String en formato JSON que representa un array de objetos con los datos de las imágenes.

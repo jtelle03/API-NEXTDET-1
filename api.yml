@@ -11949,6 +11949,18 @@ paths:
           required: false
           schema:
             type: string
+        - name: fecha_desde
+          in: query
+          description: Fecha desde
+          required: false
+          schema:
+            type: string
+        - name: fecha_hasta
+          in: query
+          description: Fecha hasta
+          required: false
+          schema:
+            type: string
         - name: page
           in: query
           description: Página
@@ -12053,7 +12065,7 @@ paths:
                           example: 'Comentario de la venta'
                         fecha_creacion:
                           type: string
-                          example: '23-01-01 00:00:00'
+                          example: '2021-01-01'
 
         404:
           description: "Peticion no ejecutada."

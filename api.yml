@@ -11086,6 +11086,18 @@ paths:
           required: false
           schema:
             type: integer
+        - name: fecha_desde
+          in: query
+          description: Filtro para indicar la fecha desde
+          required: false
+          schema:
+            type: string
+        - name: fecha_hasta
+          in: query
+          description: Filtro para indicar la fecha hasta
+          required: false
+          schema:
+            type: string
         - name: page
           in: query
           description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
@@ -11148,6 +11160,10 @@ paths:
                               type: string
                               description: Tiempo de uso del clasificado (años)
                               example: 1
+                            fecha_creacion:
+                              type: string
+                              description: Fecha de creación del clasificado
+                              example: '2021-01-01'
                             url_portada:
                               type: string  
                               example: 'https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png'
@@ -11303,6 +11319,18 @@ paths:
           required: false
           schema:
             type: integer
+        - name: fecha_desde
+          in: query
+          description: Filtro para indicar la fecha desde
+          required: false
+          schema:
+            type: string
+        - name: fecha_hasta
+          in: query
+          description: Filtro para indicar la fecha hasta
+          required: false
+          schema:
+            type: string
         - name: page
           in: query
           description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
@@ -11373,6 +11401,10 @@ paths:
                             precio:
                               type: number
                               example: 1000
+                            fecha_creacion:
+                              type: string
+                              description: Fecha de creación del clasificado
+                              example: '2021-01-01'
                             imagenes:
                               type: array
                               items:

@@ -11041,6 +11041,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/Estado'
+                      paises:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pais'
         404:
           description: "Peticion no ejecutada."
           content:
@@ -11098,6 +11102,12 @@ paths:
           required: false
           schema:
             type: string
+        - name: pais_id
+          in: query
+          description: Filtro para indicar el país
+          required: false
+          schema:
+            type: integer
         - name: page
           in: query
           description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
@@ -11144,6 +11154,9 @@ paths:
                             marca:
                               type: string
                               example: 'Marca'
+                            anio:
+                              type: integer
+                              example: 2021
                             descripcion:
                               type: string
                               example: 'Grua 1000kg'
@@ -11153,6 +11166,18 @@ paths:
                             categoria_nombre_ingles:
                               type: string
                               example: 'Cranes'
+                            pais_id:
+                              type: integer
+                              example: 1
+                            pais_nombre:
+                              type: string
+                              example: 'Ecuador'
+                            pais_nombre_ingles:
+                              type: string
+                              example: 'Ecuador'
+                            ciudad:
+                              type: string
+                              example: 'Quito'
                             es_nuevo:
                               type: integer
                               example: 1
@@ -11260,6 +11285,9 @@ paths:
                       marca:
                         type: string
                         example: 'Marca'
+                      anio:
+                        type: integer
+                        example: 2021
                       descripcion:
                         type: string
                         example: 'Grua 1000kg'
@@ -11269,6 +11297,18 @@ paths:
                       categoria_nombre_ingles:
                         type: string
                         example: 'Cranes'
+                      pais_id:
+                        type: integer
+                        example: 1
+                      pais_nombre:
+                        type: string
+                        example: 'Ecuador'
+                      pais_nombre_ingles:
+                        type: string
+                        example: 'Ecuador'
+                      ciudad:
+                        type: string
+                        example: 'Quito'
                       url_imagenes:
                         type: array
                         items:
@@ -11331,6 +11371,12 @@ paths:
           required: false
           schema:
             type: string
+        - name: pais_id
+          in: query
+          description: Filtro para indicar el país
+          required: false
+          schema:
+            type: integer
         - name: page
           in: query
           description: Página (si se envía, 0, nulo o no se envía, se mostrarán todos los datos)
@@ -11379,6 +11425,9 @@ paths:
                             marca:
                               type: string
                               example: 'Marca'
+                            anio:
+                              type: integer
+                              example: 2021
                             descripcion:
                               type: string
                               example: 'Grua 1000kg'
@@ -11391,6 +11440,18 @@ paths:
                             categoria_nombre_ingles:
                               type: string
                               example: 'Cranes'
+                            pais_id:
+                              type: integer
+                              example: 1
+                            pais_nombre:
+                              type: string
+                              example: 'Ecuador'
+                            pais_nombre_ingles:
+                              type: string
+                              example: 'Ecuador'
+                            ciudad:
+                              type: string
+                              example: 'Quito'
                             es_nuevo:
                               type: integer
                               example: 1
@@ -11499,11 +11560,26 @@ paths:
                       marca:
                         type: string
                         example: 'Marca'
+                      anio:
+                        type: integer
+                        example: 2021
                       descripcion:
                         type: string
                         example: 'Grua 1000kg'
                       categoria_id:
                         type: integer
+                      pais_id:
+                        type: integer
+                        example: 1
+                      pais_nombre:
+                        type: string
+                        example: 'Ecuador'
+                      pais_nombre_ingles:
+                        type: string
+                        example: 'Ecuador'
+                      ciudad:
+                        type: string
+                        example: 'Quito'
                       precio:
                         type: number
                         example: 1000
@@ -11556,12 +11632,21 @@ paths:
                 marca:
                   type: string
                   example: 'Marca'
+                anio:
+                  type: integer
+                  example: 2021
                 descripcion:
                   type: string
                   example: 'Grua 1000kg'
                 categoria_id:
                   type: integer
                   example: 1
+                pais_id:
+                  type: integer
+                  example: 1
+                ciudad:
+                  type: string
+                  example: 'Quito'
                 precio:
                   type: number
                   example: 1000
@@ -11642,12 +11727,21 @@ paths:
                 marca:
                   type: string
                   example: 'Marca'
+                anio:
+                  type: integer
+                  example: 2021
                 descripcion:
                   type: string
                   example: 'Grua 1000kg'
                 categoria_id:
                   type: integer
                   example: 1
+                pais_id:
+                  type: integer
+                  example: 1
+                ciudad:
+                  type: string
+                  example: 'Quito'
                 precio:
                   type: number
                   example: 1000

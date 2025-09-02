@@ -12441,6 +12441,405 @@ paths:
                     type: object
                     example: []
 
+  /v1/clasificado/contacto/list:
+    get:
+      tags:
+        - Clasificado
+      operationId: listContactoClasificado
+      description: Listamos los contactos
+      parameters:
+        - name: pais_id
+          in: query
+          description: ID del país
+          required: false
+          schema:
+            type: integer
+        - name: busqueda
+          in: query
+          description: Búsqueda
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: integer
+        - name: page_row
+          in: query
+          description: Filas por página
+          required: false
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        example: 1
+                      contactos:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: 'Nombre del contacto'
+                            email:
+                              type: string
+                              example: 'example@gmail.com'
+                            telefono:
+                              type: string
+                              example: '930506234'
+                            pais_id:
+                              type: integer
+                              example: 183
+                            pais_nombre:
+                              type: string
+                              example: 'Perú'
+                            pais_nombre_ingles:
+                              type: string
+                              example: 'Peru'
+                            estado:
+                              type: integer
+                              example: 1
+                            estado_nombre:
+                              type: string
+                              example: 'Activo'
+                        
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/contacto/list/contacto:
+    get:
+      tags:
+        - Clasificado
+      operationId: listOnlyContactoClasificado
+      description: Listamos un contacto
+      parameters:
+        - name: contacto_clasificado_id
+          in: query
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      nombre:
+                        type: string
+                        example: 'Nombre del contacto'
+                      email:
+                        type: string
+                        example: 'example@gmail.com'
+                      telefono:
+                        type: string
+                        example: '930506234'
+                      pais_id:
+                        type: integer
+                        example: 183
+                      pais_nombre:
+                        type: string
+                        example: 'Perú'
+                      pais_nombre_ingles:
+                        type: string
+                        example: 'Peru'
+                      estado:
+                        type: integer
+                        example: 1
+                      estado_nombre:
+                        type: string
+                        example: 'Activo'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/contacto/save:
+    post:
+      tags:
+        - Clasificado
+      operationId: saveContactoClasificado
+      description: Guardamos un contacto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - email
+                - telefono
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del contacto
+                  example: 'Nombre del contacto'
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: 'Empresa del contacto'
+                email:
+                  type: string
+                  description: Email del contacto
+                  example: 'example@gmail.com'
+                telefono:
+                  type: string
+                  description: Teléfono del contacto
+                  example: '930506234'
+                pais_id:
+                  type: integer
+                  description: ID del país
+                  example: 183
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/contacto/update:
+    put:
+      tags:
+        - Clasificado
+      operationId: updateContactoClasificado
+      description: Actualizamos un contacto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - email
+                - telefono
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del contacto
+                  example: 'Nombre del contacto'
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: 'Empresa del contacto'
+                email:
+                  type: string
+                  description: Email del contacto
+                  example: 'example@gmail.com'
+                telefono:
+                  type: string
+                  description: Teléfono del contacto
+                  example: '930506234'
+                pais_id:
+                  type: integer
+                  description: ID del país
+                  example: 183
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/contacto/delete/{contacto_clasificado_id}:
+    put:
+      tags:
+        - Clasificado
+      operationId: deleteContactoClasificado
+      description: Eliminamos un contacto
+      parameters:
+        - name: contacto_clasificado_id
+          in: path
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
 
 components:
   schemas:

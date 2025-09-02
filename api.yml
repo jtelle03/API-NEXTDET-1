@@ -12709,12 +12709,19 @@ paths:
                     type: object
                     example: []
 
-  /v1/clasificado/contacto/update:
+  /v1/clasificado/contacto/update/{contacto_clasificado_id}:
     put:
       tags:
         - Clasificado
       operationId: updateContactoClasificado
       description: Actualizamos un contacto
+      parameters:
+        - name: contacto_clasificado_id
+          in: path
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
       requestBody:
         content:
           application/json:

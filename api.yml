@@ -12847,6 +12847,321 @@ paths:
                     type: object
                     example: []
 
+  /v1/clasificado/init_reservacion:
+    post:
+      tags:
+        - Clasificado
+      operationId: initReservacionClasificado
+      description: Iniciamos una reservación
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - solicitudclasificado_id
+                - monto
+                - moneda
+              properties:
+                solicitudclasificado_id:
+                  type: integer
+                  example: 1
+                monto:
+                  type: number
+                  example: 100
+                moneda:
+                  type: string
+                  example: USD
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      transaccion_id:
+                        type: integer
+                        example: 1
+                      buy_order:
+                        type: string
+                        example: 'NEXTDET_123_123_1640995200_1234'
+                      session_id:
+                        type: string
+                        example: 'SESS_123_1640995200_1234'
+                      amount:
+                        type: number
+                        example: 100
+                      token:
+                        type: string
+                        example: '01ab234c567d890e123f456g789h012i345j678k901l234m567n890o123p456q789r012s345t678u901v234w567x890y123z456'
+                      url:
+                        type: string
+                        example: 'https://webpay3gint.transbank.cl/webpayserver/initTransaction'
+                      url_pago:
+                        type: string
+                        example: 'https://webpay3gint.transbank.cl/webpayserver/initTransaction?token_ws=01abace2bfdbf554e24b492334695d755055d6a140e8f7f4aacd9cc659bd8137'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/confirmar_reservacion:
+    post:
+      tags:
+        - Clasificado
+      operationId: confirmarReservacionClasificado
+      description: Confirmamos una reservación
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - buy_order
+                - session_id
+              properties:
+                buy_order:
+                  type: string
+                  example: NEXTDET_123_123_1640995200_1234
+                session_id:
+                  type: string
+                  example: SESS_123_1640995200_1234
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: 'Transacción confirmada exitosamente.'
+                      transaccion:
+                        type: object
+                        properties:
+                          success:
+                            type: boolean
+                            example: true
+                          status:
+                            type: string
+                            example: 'AUTHORIZED'
+                          is_approved:
+                            type: boolean
+                            example: true
+                          vci:
+                            type: string
+                            example: 'TSY'
+                          amount:
+                            type: number
+                            example: 100
+                          buy_order:
+                            type: string
+                            example: 'NEXTDET_123_123_1640995200_1234'
+                          session_id:
+                            type: string
+                            example: 'SESS_123_1640995200_1234'
+                          card_number:
+                            type: string
+                            example: '3456'
+                          authorization_code:
+                            type: string
+                            example: '123456'
+                          payment_type_code:
+                            type: string
+                            example: 'VN'
+                          response_code:
+                            type: integer
+                            example: 0
+                          transaction_date:
+                            type: string
+                            example: '2023-12-31T23:59:59.000Z'
+                          accounting_date:
+                            type: string
+                            example: '2023-12-31'
+                          installments_number:
+                            type: integer
+                            example: 0
+                          installments_amount:
+                            type: number
+                            example: 0
+                          balance:
+                            type: number
+                            example: 0
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/status_transaccion:
+    get:
+      tags:
+        - Clasificado
+      operationId: statusTransaccionClasificado
+      description: Obtenemos el estado de una transacción
+      parameters:
+        - name: buy_order
+          in: query
+          description: Buy Order de la transacción
+          required: true
+          schema:
+            type: string
+        - name: session_id
+          in: query
+          description: Session ID de la transacción
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: 'Transacción confirmada exitosamente.'
+                      transaccion:
+                        type: object
+                        properties:
+                          success:
+                            type: boolean
+                            example: true
+                          status:
+                            type: string
+                            example: 'AUTHORIZED'
+                          is_approved:
+                            type: boolean
+                            example: true
+                          vci:
+                            type: string
+                            example: 'TSY'
+                          amount:
+                            type: number
+                            example: 100
+                          buy_order:
+                            type: string
+                            example: 'NEXTDET_123_123_1640995200_1234'
+                          session_id:
+                            type: string
+                            example: 'SESS_123_1640995200_1234'
+                          card_number:
+                            type: string
+                            example: '3456'
+                          authorization_code:
+                            type: string
+                            example: '123456'
+                          payment_type_code:
+                            type: string
+                            example: 'VN'
+                          response_code:
+                            type: integer
+                            example: 0
+                          transaction_date:
+                            type: string
+                            example: '2023-12-31T23:59:59.000Z'
+                          accounting_date:
+                            type: string
+                            example: '2023-12-31'
+                          installments_number:
+                            type: integer
+                            example: 0
+                          installments_amount:
+                            type: number
+                            example: 0
+                          balance:
+                            type: number
+                            example: 0
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
 
 components:
   schemas:

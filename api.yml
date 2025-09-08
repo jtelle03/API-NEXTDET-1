@@ -12859,11 +12859,11 @@ paths:
             schema:
               type: object
               required:
-                - solicitudclasificado_id
+                - solicitud_clasificado_id
                 - monto
                 - moneda
               properties:
-                solicitudclasificado_id:
+                solicitud_clasificado_id:
                   type: integer
                   example: 1
                 monto:

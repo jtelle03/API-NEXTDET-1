@@ -50,6 +50,8 @@ tags:
     description: Gestión de recursos para la página principal
   - name: Clasificado
     description: Gestión de clasificados
+  - name: Categoria Clasificado
+    description: Gestión de categorías de clasificados
     
 paths:
 
@@ -11006,6 +11008,323 @@ paths:
                     type: object
                     example: []
 
+  
+  /v1/clasificado/categoria/list:
+    get:
+      tags:
+        - Categoria Clasificado
+      operationId: listCategoriaClasificado
+      description: Listamos todas las categorías de clasificados
+      
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      categoriaClasificados:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CategoriaClasificado'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/categoria/list/categoria:
+    get:
+      tags:
+        - Categoria Clasificado
+      operationId: listOnlyCategoriaClasificado
+      description: Obtenemos una de las categorías de clasificado
+      parameters:
+        - name: categoria_clasificado_id
+          in: query
+          description: Identificador de la categoría de clasificado
+          required: true
+          schema:
+            type: integer
+            
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: '#/components/schemas/CategoriaClasificado'
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/categoria/save:
+    post:
+      tags:
+        - Categoria Clasificado
+      operationId: saveCategoriaClasificado
+      description: Guardamos una categoría de clasificado
+
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre de la categoría
+                  example: 'Gruas'
+                nombre_ingles:
+                  type: string
+                  description: Nombre de la categoría en inglés
+                  example: 'Cranes'
+                imagen:
+                  type: string
+                  format: binary
+                  description: Imagen de la categoría
+                  example: 'imagen.png'
+              required:
+                - nombre
+                - nombre_ingles
+
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/categoria/update:
+    post:
+      tags:
+        - Categoria Clasificado
+      operationId: updateCategoriaClasificado
+      description: Actualizamos una categoría de clasificado
+      
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              properties:
+                categoria_clasificado_id:
+                  type: integer
+                  description: Identificador de la categoría de clasificado
+                  example: 1
+                nombre:
+                  type: string
+                  description: Nombre de la categoría
+                  example: 'Gruas'
+                nombre_ingles:
+                  type: string
+                  description: Nombre de la categoría en inglés
+                  example: 'Cranes'
+                imagen:
+                  type: string
+                  format: binary
+                  description: Imagen de la categoría
+                  example: 'imagen.png'
+              required:
+                - categoria_clasificado_id
+                - nombre
+                - nombre_ingles
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/categoria/delete/{categoria_clasificado_id}:
+    put:
+      tags:
+        - Categoria Clasificado
+      operationId: deleteCategoriaClasificado
+      description: Eliminamos una categoría de clasificado
+      
+      parameters:
+        - name: categoria_clasificado_id
+          in: path
+          description: Identificador de la categoría de clasificado
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []  # Aquí se especifica el nombre del esquema de seguridad
+        
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
   /v1/clasificado/init_data:
     get:
       tags:
@@ -14619,6 +14938,9 @@ components:
         estado_nombre:
           type: string
           example: 'Activo'
+        url_imagen:
+          type: string
+          example: 'https://api.nextdet.com/images/img-no-found.jpg'
 
     TipoError: 
       description: |  

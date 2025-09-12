@@ -12465,6 +12465,18 @@ paths:
           required: false
           schema:
             type: integer
+        - name: page_servicio_reparacion
+          in: query
+          description: Página de servicio de reparación
+          required: false
+          schema:
+            type: integer
+        - name: page_row_servicio_reparacion
+          in: query
+          description: Filas por página de servicio de reparación
+          required: false
+          schema:
+            type: integer
       responses:
         200:
           description: Consulta exitosa.
@@ -12483,81 +12495,177 @@ paths:
                     type: integer
                     example: 0
                   datos:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                          example: 1
-                        marca_clasificado:
-                          type: string
-                          example: "Marca del clasificado"
-                        codigo:
-                          type: string
-                          example: "COT-00001"
-                        nombre_cliente:
-                          type: string
-                          example: "Nombre del cliente"
-                        modo_solicitud:
-                          type: string
-                          example: "Email"
-                        email:
-                          type: string
-                          example: "example@gmail.com"
-                        telefono:
-                          type: string
-                          example: "930506234"
-                        mensaje:
-                          type: string
-                          example: "Mensaje del cliente"
-                        estado:
-                          type: integer
-                          example: 1
-                        estado_nombre:
-                          type: string
-                          example: "Activo"
-                        historial_solicitud:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                                example: 1
-                              comentario:
-                                type: string
-                                example: "Comentario del historial"
-                              estado:
-                                type: integer
-                                example: 1
-                              estado_nombre:
-                                type: string
-                                example: "Activo"
-                              fecha_creacion:
-                                type: string
-                                example: "23-01-01 00:00:00"
-                        reserva_fecha:
-                          type: string
-                          example: "23-01-01 00:00:00"
-                        reserva_monto:
-                          type: number
-                          example: 100
-                        reserva_comentario:
-                          type: string
-                          example: "Comentario de la reserva"
-                        venta_fecha:
-                          type: string
-                          example: "23-01-01 00:00:00"
-                        venta_monto:
-                          type: number
-                          example: 100
-                        venta_comentario:
-                          type: string
-                          example: "Comentario de la venta"
-                        fecha_creacion:
-                          type: string
-                          example: "2021-01-01"
+                    type: object
+                    properties:
+                      solicitud:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            example: 1
+                          solicitudes_clasificados:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 1
+                                marca_clasificado:
+                                  type: string
+                                  example: "Marca del clasificado"
+                                codigo:
+                                  type: string
+                                  example: "COT-00001"
+                                nombre_cliente:
+                                  type: string
+                                  example: "Nombre del cliente"
+                                modo_solicitud:
+                                  type: string
+                                  example: "Email"
+                                email:
+                                  type: string
+                                  example: "example@gmail.com"
+                                telefono:
+                                  type: string
+                                  example: "930506234"
+                                mensaje:
+                                  type: string
+                                  example: "Mensaje del cliente"
+                                estado:
+                                  type: integer
+                                  example: 1
+                                estado_nombre:
+                                  type: string
+                                  example: "Activo"
+                                historial_solicitud:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: integer
+                                        example: 1
+                                      comentario:
+                                        type: string
+                                        example: "Comentario del historial"
+                                      estado:
+                                        type: integer
+                                        example: 1
+                                      estado_nombre:
+                                        type: string
+                                        example: "Activo"
+                                      fecha_creacion:
+                                        type: string
+                                        example: "23-01-01 00:00:00"
+                                  reserva_fecha:
+                                    type: string
+                                    example: "23-01-01 00:00:00"
+                                  reserva_monto:
+                                    type: number
+                                    example: 100
+                                  reserva_comentario:
+                                    type: string
+                                    example: "Comentario de la reserva"
+                                  venta_fecha:
+                                    type: string
+                                    example: "23-01-01 00:00:00"
+                                  venta_monto:
+                                    type: number
+                                    example: 100
+                                  venta_comentario:
+                                    type: string
+                                    example: "Comentario de la venta"
+                                  arriendo_fecha:
+                                    type: string
+                                    example: "23-01-01 00:00:00"
+                                  arriendo_monto:
+                                    type: number
+                                    example: 100
+                                  arriendo_comentario:
+                                    type: string
+                                    example: "Comentario de la arriendo"
+                                  arriendo_cantidad_dias:
+                                    type: number
+                                    example: 1
+                                  fecha_creacion:
+                                    type: string
+                                    example: "23-01-01 00:00:00"
+                      servicio_reparacion:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            example: 1
+                          servicios_reparacion:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  example: 1
+                                codigo:
+                                  type: string
+                                  example: "COT-00001"
+                                correlativo:
+                                  type: string
+                                  example: "00001"
+                                nombre:
+                                  type: string
+                                  example: "Nombre del servicio de reparación"
+                                email:
+                                  type: string
+                                  example: "example@gmail.com"
+                                telefono:
+                                  type: string
+                                  example: "930506234"
+                                empresa:
+                                  type: string
+                                  example: "Empresa del cliente"
+                                mensaje:
+                                  type: string
+                                  example: "Mensaje del cliente"
+                                estado:
+                                  type: integer
+                                  example: 1
+                                estado_nombre:
+                                  type: string
+                                  example: "Activo"
+                                historial:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      historial_id:
+                                        type: integer
+                                        example: 1
+                                      historial_comentario:
+                                        type: string
+                                        example: "Comentario del historial"
+                                      historial_estado:
+                                        type: integer
+                                        example: 1
+                                      historial_estado_nombre:
+                                        type: string
+                                        example: "Activo"
+                                      historial_fecha_creacion:
+                                        type: string
+                                        example: "23-01-01 00:00:00"
+                                archivos:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      archivo_id:
+                                        type: integer
+                                        example: 1
+                                      archivo_url:
+                                        type: string
+                                        example: "https://dev.nextdet.com/images?image=a2701254a1de85a36b787e2dc4956905.jpg"
+                                fecha_creacion:
+                                  type: string
+                                  example: "23-01-01 00:00:00"
 
         404:
           description: "Peticion no ejecutada."
@@ -13539,6 +13647,81 @@ paths:
                           balance:
                             type: number
                             example: 0
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/enviar_solicitud_servicio_reparacion:
+    post:
+      tags:
+        - Clasificado
+      operationId: enviarSolicitudServicioReparacion
+      description: Enviar una solicitud de servicio de reparación
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - email
+                - mensaje
+              properties:
+                nombre:
+                  type: string
+                  example: "Nombre del cliente"
+                email:
+                  type: string
+                  example: "example@gmail.com"
+                telefono:
+                  type: string
+                  example: "930506234"
+                empresa:
+                  type: string
+                  example: "Empresa del cliente"
+                mensaje:
+                  type: string
+                  example: "Mensaje del cliente"
+                $archivos[]:
+                  type: string
+                  format: binary
+                  description: Archivos del cliente
+      responses:
+        200:
+          description: Solicitud de servicio de reparación enviada exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
         404:
           description: "Peticion no ejecutada."
           content:

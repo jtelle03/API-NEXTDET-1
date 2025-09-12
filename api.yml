@@ -12023,6 +12023,10 @@ paths:
                   type: number
                   description: Tiempo de uso del clasificado (años) (opcional)
                   example: 1
+                unidad_tiempo:
+                  type: integer
+                  description: 'Unidad de tiempo del clasificado (1: horas, 2: días, 3: meses, 4: años)'
+                  example: 1
                 arriendo:
                   type: integer
                   description: "Campo para indicar si es arriendo (0: no, 1: si)"
@@ -12129,6 +12133,10 @@ paths:
                 tiempo_uso:
                   type: number
                   description: Tiempo de uso del clasificado (años) (opcional)
+                  example: 1
+                unidad_tiempo:
+                  type: integer
+                  description: 'Unidad de tiempo del clasificado (1: horas, 2: días, 3: meses, 4: años)'
                   example: 1
                 arriendo:
                   type: integer
@@ -13698,9 +13706,10 @@ paths:
                 mensaje:
                   type: string
                   example: "Mensaje del cliente"
-                $archivos[]:
+                archivos[]:
                   type: string
                   format: binary
+                  example: "archivo.pdf"
                   description: Archivos del cliente
       responses:
         200:

@@ -12656,11 +12656,13 @@ paths:
       operationId: enviarSolicitudClasificado
       description: Enviar una solicitud de clasificado
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - clasificado_id
+                - nombre_cliente
               properties:
                 clasificado_id:
                   type: integer
@@ -12668,6 +12670,9 @@ paths:
                 nombre_cliente:
                   type: string
                   example: "Nombre del cliente"
+                empresa_cliente:
+                  type: string
+                  example: "Empresa del cliente"
                 email:
                   description: Email del cliente (opcional)
                   type: string

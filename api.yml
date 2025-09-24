@@ -7072,6 +7072,14 @@ paths:
         - Importador
       operationId: importadorDownloadPlantillaClasificado
       description: Generamos la plantilla del importador de clasificado.
+      parameters:
+        - in: query
+          name: idioma
+          required: true
+          description: Idioma del clasificado
+          example: "es"
+          schema:
+            type: string
       security:
         - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
       responses:

@@ -11089,7 +11089,7 @@ paths:
         - Unidad Tiempo
       operationId: saveUnidadTiempo
       description: Guardamos una unidad de tiempo
-      
+
       requestBody:
         content:
           application/json:
@@ -12883,39 +12883,39 @@ paths:
                                       fecha_creacion:
                                         type: string
                                         example: "23-01-01 00:00:00"
-                                  reserva_fecha:
-                                    type: string
-                                    example: "23-01-01 00:00:00"
-                                  reserva_monto:
-                                    type: number
-                                    example: 100
-                                  reserva_comentario:
-                                    type: string
-                                    example: "Comentario de la reserva"
-                                  venta_fecha:
-                                    type: string
-                                    example: "23-01-01 00:00:00"
-                                  venta_monto:
-                                    type: number
-                                    example: 100
-                                  venta_comentario:
-                                    type: string
-                                    example: "Comentario de la venta"
-                                  arriendo_fecha:
-                                    type: string
-                                    example: "23-01-01 00:00:00"
-                                  arriendo_monto:
-                                    type: number
-                                    example: 100
-                                  arriendo_comentario:
-                                    type: string
-                                    example: "Comentario de la arriendo"
-                                  arriendo_cantidad_dias:
-                                    type: number
-                                    example: 1
-                                  fecha_creacion:
-                                    type: string
-                                    example: "23-01-01 00:00:00"
+                                reserva_fecha:
+                                  type: string
+                                  example: "23-01-01 00:00:00"
+                                reserva_monto:
+                                  type: number
+                                  example: 100
+                                reserva_comentario:
+                                  type: string
+                                  example: "Comentario de la reserva"
+                                venta_fecha:
+                                  type: string
+                                  example: "23-01-01 00:00:00"
+                                venta_monto:
+                                  type: number
+                                  example: 100
+                                venta_comentario:
+                                  type: string
+                                  example: "Comentario de la venta"
+                                arriendo_fecha:
+                                  type: string
+                                  example: "23-01-01 00:00:00"
+                                arriendo_monto:
+                                  type: number
+                                  example: 100
+                                arriendo_comentario:
+                                  type: string
+                                  example: "Comentario de la arriendo"
+                                arriendo_cantidad_dias:
+                                  type: number
+                                  example: 1
+                                fecha_creacion:
+                                  type: string
+                                  example: "23-01-01 00:00:00"
                       servicio_reparacion:
                         type: object
                         properties:
@@ -13252,6 +13252,71 @@ paths:
                       url_file:
                         type: string
                         example: "files/download/pdf/?module=ad27a6d5-c638-4f2e-b101-2d558c1f82c9&code=0&download=50a67724bed2ec8179606037bbe6f982&file_name=a2701254a1de85a36b787e2dc4956905.pdf&name=Cotizacion_SOL-00001.pdf"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/clasificado/solicitud/arriendo:
+    post:
+      tags:
+        - Clasificado
+      operationId: postSolicitudArriendoClasificado
+      description: Enviar una solicitud de arriendo
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - solicitud_clasificado_id
+                - email
+              properties:
+                solicitud_clasificado_id:
+                  type: integer
+                  description: ID de la solicitud de clasificado
+                  example: 1
+                email:
+                  type: string
+                  description: Email de la solicitud de arriendo
+                  example: "example@gmail.com"
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
         404:
           description: "Peticion no ejecutada."
           content:

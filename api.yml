@@ -11828,6 +11828,12 @@ paths:
                                 clasificado_marca:
                                   type: string
                                   example: "Marca"
+                                arriendo:
+                                  type: integer
+                                  example: 1
+                                estado_solicitud:
+                                  type: integer
+                                  example: 1
                                 url_imagenes:
                                   type: array
                                   items:

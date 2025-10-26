@@ -56,6 +56,10 @@ tags:
     description: Gestión de clasificados
   - name: Propiedad
     description: Gestión de propiedades
+  - name: Categoria Propiedad
+    description: Gestión de categorías de propiedades
+  - name: Condicion Propiedad
+    description: Gestión de condiciones de propiedades
 
 paths:
   /v1/licencia/login:
@@ -14585,6 +14589,8 @@ paths:
         - Propiedad
       operationId: listPropiedad
       description: Obtiene todos los datos de las propiedades con filtro de página
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
       parameters:
         - name: page
           in: query
@@ -14791,6 +14797,8 @@ paths:
         - Propiedad
       operationId: getPropiedadById
       description: Obtiene el detalle de una propiedad por su propiedad_id.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
       parameters:
         - name: propiedad_id
           in: query
@@ -14922,6 +14930,8 @@ paths:
         - Propiedad
       operationId: savePropiedad
       description: Guarda una nueva propiedad
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
       requestBody:
         required: true
         content:
@@ -15029,6 +15039,8 @@ paths:
         - Propiedad
       operationId: updatePropiedad
       description: Actualiza los datos de una propiedad existente. Recibe la información principal de la propiedad y las imágenes asociadas, diferenciando entre imágenes ya existentes y nuevas imágenes
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
       requestBody:
         required: true
         content:
@@ -15156,6 +15168,8 @@ paths:
           schema:
             type: integer
             example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
       requestBody:
         required: true
         content:
@@ -15228,6 +15242,8 @@ paths:
           required: true
           schema:
             type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
       requestBody:
         required: false
         content:
@@ -15257,6 +15273,669 @@ paths:
                     example: []
         404:
           description: "Petición no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/categoria/list:
+    get:
+      tags:
+        - "Categoria Propiedad"
+      operationId: listCategoriasPropiedad
+      description: Obtiene el listado de categorias de propiedad
+      parameters:
+        - name: busqueda
+          in: query
+          description: Busqueda de categorias de propiedad
+          required: false
+          schema:
+            type: string
+            example: "Propiedad"
+        - name: page
+          in: query
+          description: Numero de pagina
+          required: false
+          schema:
+            type: integer
+            example: 1
+        - name: page_row
+          in: query
+          description: Numero de filas por pagina
+          required: false
+          schema:
+            type: integer
+            example: 10
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CategoriaPropiedad"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/categoria/list/categoria:
+    get:
+      tags:
+        - "Categoria Propiedad"
+      operationId: listOnlyCategoriaPropiedad
+      description: Obtiene una de las categorias de propiedad
+      parameters:
+        - name: categoria_propiedad_id
+          in: query
+          description: ID de la categoria de propiedad
+          required: true
+          schema:
+            type: integer
+            example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: "#/components/schemas/CategoriaPropiedad"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/categoria/save:
+    post:
+      tags:
+        - "Categoria Propiedad"
+      operationId: saveCategoriaPropiedad
+      description: Guarda una categoria de propiedad
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - nombre_ingles
+                - imagen
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre de la categoria de propiedad
+                  example: "Propiedad"
+                nombre_ingles:
+                  type: string
+                  description: Nombre de la categoria de propiedad en ingles
+                  example: "Property"
+                imagen:
+                  type: string
+                  format: binary
+                  description: Imagen de la categoria de propiedad
+                  example: "imagen.jpg"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/categoria/update:
+    post:
+      tags:
+        - "Categoria Propiedad"
+      operationId: updateCategoriaPropiedad
+      description: Actualiza una categoria de propiedad
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - categoria_propiedad_id
+                - nombre
+                - nombre_ingles
+                - imagen
+              properties:
+                categoria_propiedad_id:
+                  type: integer
+                  description: ID de la categoria de propiedad
+                  example: 1
+                nombre:
+                  type: string
+                  description: Nombre de la categoria de propiedad
+                  example: "Propiedad"
+                nombre_ingles:
+                  type: string
+                  description: Nombre de la categoria de propiedad en ingles
+                  example: "Property"
+                imagen:
+                  type: string
+                  format: binary
+                  description: Imagen de la categoria de propiedad
+                  example: "imagen.jpg"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/categoria/delete/{categoria_propiedad_id}:
+    put:
+      tags:
+        - "Categoria Propiedad"
+      operationId: deleteCategoriaPropiedad
+      description: Elimina una categoria de propiedad
+      parameters:
+        - name: categoria_propiedad_id
+          in: path
+          description: ID de la categoria de propiedad
+          required: true
+          schema:
+            type: integer
+            example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/condicion/list:
+    get:
+      tags:
+        - "Condicion Propiedad"
+      operationId: getCondicionesPropiedad
+      description: Obtiene todas las condiciones de propiedad
+      parameters:
+        - name: busqueda
+          in: query
+          description: Busqueda de condiciones de propiedad
+          required: false
+          schema:
+            type: string
+            example: "Condicion"
+        - name: page
+          in: query
+          description: Numero de pagina
+          required: false
+          schema:
+            type: integer
+            example: 1
+        - name: page_row
+          in: query
+          description: Numero de filas por pagina
+          required: false
+          schema:
+            type: integer
+            example: 10
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: "#/components/schemas/CondicionPropiedad"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/condicion/list/condicion:
+    get:
+      tags:
+        - "Condicion Propiedad"
+      operationId: getCondicionPropiedad
+      description: Obtiene una de las condiciones de propiedad
+      parameters:
+        - name: condicion_propiedad_id
+          in: query
+          description: ID de la condicion de propiedad
+          required: true
+          schema:
+            type: integer
+            example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: "#/components/schemas/CondicionPropiedad"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/condicion/save:
+    post:
+      tags:
+        - "Condicion Propiedad"
+      operationId: saveCondicionPropiedad
+      description: Guarda una condicion de propiedad
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - nombre_ingles
+                - imagen
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre de la condicion de propiedad
+                  example: "Condicion"
+                nombre_ingles:
+                  type: string
+                  description: Nombre de la condicion de propiedad en ingles
+                  example: "Condition"
+                imagen:
+                  type: string
+                  format: binary
+                  description: Imagen de la condicion de propiedad
+                  example: "imagen.jpg"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/condicion/update:
+    post:
+      tags:
+        - "Condicion Propiedad"
+      operationId: updateCondicionPropiedad
+      description: Actualiza una condicion de propiedad
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - condicion_propiedad_id
+                - nombre
+                - nombre_ingles
+                - imagen
+              properties:
+                condicion_propiedad_id:
+                  type: integer
+                  description: ID de la condicion de propiedad
+                  example: 1
+                nombre:
+                  type: string
+                  description: Nombre de la condicion de propiedad
+                  example: "Condicion"
+                nombre_ingles:
+                  type: string
+                  description: Nombre de la condicion de propiedad en ingles
+                  example: "Condition"
+                imagen:
+                  type: string
+                  format: binary
+                  description: Imagen de la condicion de propiedad
+                  example: "imagen.jpg"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+  /v1/propiedad/condicion/delete/{condicion_propiedad_id}:
+    put:
+      tags:
+        - "Condicion Propiedad"
+      operationId: deleteCondicionPropiedad
+      description: Elimina una condicion de propiedad
+      parameters:
+        - name: condicion_propiedad_id
+          in: path
+          description: ID de la condicion de propiedad
+          required: true
+          schema:
+            type: integer
+            example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
           content:
             application/json:
               schema:
@@ -16724,6 +17403,52 @@ components:
         nombre_ingles:
           type: string
           example: "Adapters"
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        url_imagen:
+          type: string
+          example: "https://api.nextdet.com/images/img-no-found.jpg"
+
+    CategoriaPropiedad:
+      description: Categoria de propiedad
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: "Casa"
+        nombre_ingles:
+          type: string
+          example: "House"
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        url_imagen:
+          type: string
+          example: "https://api.nextdet.com/images/img-no-found.jpg"
+
+    CondicionPropiedad:
+      description: Condicion de propiedad
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: "Nuevo"
+        nombre_ingles:
+          type: string
+          example: "New"
         estado:
           type: integer
           example: 1

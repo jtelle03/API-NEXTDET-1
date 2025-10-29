@@ -1,0 +1,56 @@
+ ProductoConfiguracion:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        producto_id:
+          type: integer
+          example: 1
+        producto_nombre:
+          type: string
+          example: Next1
+        empresa_id:
+          type: integer
+          example: 1
+        empresa_nombre:
+          type: string
+          example: "Nextdet"
+        sucursal_id:
+          type: integer
+          example: 1
+        sucursal_nombre:
+          type: string
+          example: "Sucursal 1"
+        precio_sugerido:
+          type: number
+          format: double
+          example: 5.0
+        precio:
+          type: number
+          format: double
+          example: 5.0
+        porcentaje1:
+          type: number
+          format: double
+          example: 5.0
+        porcentaje2:
+          type: number
+          format: double
+          example: 5.0
+        porcentaje3:
+          type: number
+          format: double
+          example: 5.0
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        fecha_creacion:
+          type: string
+          example: "2024-01-24 08:34:25"
+        usuariocreador_nombre:
+          type: string
+          example: "Usuario 1"

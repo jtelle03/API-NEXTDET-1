@@ -1,0 +1,67 @@
+ Contacto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombres:
+          type: string
+          example: "Contacto 1"
+        pais_id:
+          type: integer
+          example: 183
+        nombre_espaniol:
+          type: string
+          example: "Perú"
+        nombre_ingles:
+          type: string
+          example: "Peru"
+        empresa:
+          type: string
+          example: "Empresa 1"
+        ocupacion:
+          type: string
+          example: "Ocupacion 1"
+        perfil_linkedin:
+          type: string
+          example: "link/linkedin"
+        lenguaje:
+          type: string
+          example: en
+        telefono:
+          type: string
+          example: "+51 963598561"
+        email:
+          type: string
+          example: "contacto@gmail.com"
+        estado:
+          type: number
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        usuarioasignado_id:
+          type: integer
+          example: 77
+        usuarioasignado_nombre:
+          type: string
+          example: "Alessandro Venegas"
+        historial:
+          type: array
+          items:
+            properties:
+              historialcontacto_id:
+                type: integer
+                example: 1
+              comentario:
+                type: string
+                example: "comentario 1"
+              tiene_reunion:
+                type: integer
+                example: 1
+              fecha_reunion:
+                type: string
+                example: "15-10-2024 12:00:00"
+              fecha_edicion:
+                type: string
+                example: "15-10-2024"

@@ -1,0 +1,158 @@
+acceso:
+    get:
+      tags:
+        - Acceso Modulo
+      operationId: listOnlyAccesoModulo
+      description: Obtenemos la configuracion de accesos a los diferentes modulos que tiene un usuario.
+      parameters:
+        - in: query
+          name: usuario_id
+          required: true
+          description: Identificador del usuario que se desea obtener sus accesos
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        modulo_id:
+                          type: integer
+                          example: 1
+                        modulo:
+                          type: string
+                          example: Usuario
+                        clave_modulo:
+                          type: string
+                          example: "ClaveUsuario"
+                        tipo_modulo:
+                          type: integer
+                          example: 1
+                        acceso_id:
+                          type: integer
+                          example: 1
+                        tiene_acceso:
+                          type: integer
+                          example: 1
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Acceso Modulo
+      operationId: saveAccesoModulo
+      description: Configurar los accesos a los modulos de la plataforma.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usuario_id
+                - accesos
+                - modulo_id
+                - tiene_acceso
+              properties:
+                usuario_id:
+                  type: integer
+                  description: Identificador del usuario
+                  example: 1
+                accesos:
+                  type: array
+                  description: Listado de modulos con su configuracion respectiva para indicar el estado del acceso
+                  items:
+                    type: object
+                    properties:
+                      modulo_id:
+                        type: integer
+                        description: Identificador del modulo al que se le va ha configurar su acceso
+                        example: 1
+                      tiene_acceso:
+                        type: integer
+                        description: |
+                          Indicador para determinar si el usuario tendra acceso o no al modulo correspondiente
+
+                          0 => NO TIENE ACCESO
+
+                          1 => TIENE ACCESO
+                        example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

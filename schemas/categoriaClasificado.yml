@@ -1,0 +1,22 @@
+  CategoriaClasificado:
+      description: Categoría de clasificados
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: "Adaptadores"
+        nombre_ingles:
+          type: string
+          example: "Adapters"
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        url_imagen:
+          type: string
+          example: "https://api.nextdet.com/images/img-no-found.jpg"

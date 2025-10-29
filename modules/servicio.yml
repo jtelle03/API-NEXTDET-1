@@ -1,0 +1,294 @@
+list:
+    get:
+      tags:
+        - Servicio
+      operationId: listServicio
+      description: Obtener listado de servicios.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "../schemas/servicio.yml#/Servicio"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+servicio:
+    get:
+      tags:
+        - Servicio
+      operationId: listOnlyServicio
+      description: Obtener la informacion de un servicio en especifico.
+      parameters:
+        - in: query
+          name: servicio_id
+          required: true
+          description: Identificador del servicio
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/servicio.yml#/Servicio"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Servicio
+      operationId: saveServicio
+      description: Agregar un servicio nuevo.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del servicio
+                  example: "Servicio 1"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Servicio
+      operationId: updateServicio
+      description: Actualizar la informacion de un servicio en especifico.
+      parameters:
+        - in: path
+          name: servicio_id
+          required: true
+          description: Identificador del servicio que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del servicio
+                  example: "Servicio 1"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Servicio
+      operationId: deleteServicio
+      description: Eliminar un servicio en especifico
+      parameters:
+        - in: path
+          name: servicio_id
+          required: true
+          description: Identificador del servicio que desea eliminar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

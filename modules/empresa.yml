@@ -1,0 +1,343 @@
+list:
+    get:
+      tags:
+        - Empresa
+      operationId: listEmpresa
+      description: Obtener listado de empresas.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "../schemas/empresa.yml#/Empresa"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+empresa:
+    get:
+      tags:
+        - Empresa
+      operationId: listOnlyEmpresa
+      description: Obtener la informacion de una empresa en especifico.
+      parameters:
+        - in: query
+          name: empresa_id
+          required: true
+          description: Identificador de la empresa
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/empresa.yml#/Empresa"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Empresa
+      operationId: saveEmpresa
+      description: Agregar una empresa nueva.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre de la empresa
+                  example: "Empresa 1"
+                abrv_cotizacion:
+                  type: string
+                  description: Abreviatura del nombre de la empresa para la cotizacion
+                  example: "EMP1"
+                ruc:
+                  type: string
+                  description: Codigo Identificador de la Empresa
+                  example: "1010101010"
+                pais_id:
+                  type: number
+                  description: Identificador del país al que pertenece la empresa
+                  example: 183
+                email_contacto:
+                  type: string
+                  description: Email de contacto de la empresa
+                  example: "example@gmail.com"
+                telefono_contacto:
+                  type: string
+                  description: Telefono de contacto de la empresa
+                  example: "930506234"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Empresa
+      operationId: updateEmpresa
+      description: Actualizar la informacion de una empresa en especifica.
+      parameters:
+        - in: path
+          name: empresa_id
+          required: true
+          description: Identificador de la empresa que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre de la empresa
+                  example: "Empresa 1"
+                abrv_cotizacion:
+                  type: string
+                  description: Abreviatura del nombre de la empresa para la cotizacion
+                  example: "EMP1"
+                ruc:
+                  type: string
+                  description: Codigo Identificador de la Empresa
+                  example: "1010101010"
+                pais_id:
+                  type: number
+                  description: Identificador del país al que pertenece la empresa
+                  example: 183
+                email_contacto:
+                  type: string
+                  description: Email de contacto de la empresa
+                  example: "example@gmail.com"
+                telefono_contacto:
+                  type: string
+                  description: Telefono de contacto de la empresa
+                  example: "930506234"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Empresa
+      operationId: deleteEmpresa
+      description: Eliminar una empresa en especifico
+      parameters:
+        - in: path
+          name: empresa_id
+          required: true
+          description: Identificador de la empresa que desea eliminar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+                palabra_confirmacion:
+                  type: string
+                  description: Palabra de confirmación para poder eliminar la empresa (nombre de la empresa)
+                  example: "EMP1"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

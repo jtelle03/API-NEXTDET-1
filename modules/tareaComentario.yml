@@ -1,0 +1,412 @@
+list:
+    get:
+      tags:
+        - TareaComentario
+      operationId: listComentarios
+      description: Obtenemos el listado de comentarios de una tarea
+      parameters:
+        - in: query
+          name: tarea_id
+          description: Filtro de tarea
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: visto
+          description: Filtro de estado de visualizacion
+          schema:
+            type: number
+        - in: query
+          name: usuario_id
+          description: Filtro de usuario creador del comentario.
+          schema:
+            type: number
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "../schemas/tareaComentario.yml#/TareaComentario"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_comentario:
+    get:
+      tags:
+        - TareaComentario
+      operationId: listOnlyComentario
+      description: Obtenemos uno de los comentarios
+      parameters:
+        - in: query
+          name: tareacomentario_id
+          required: true
+          description: Identificador del comentario
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: "../schemas/tareaComentario.yml#/TareaComentario"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - TareaComentario
+      operationId: saveTareaComentario
+      description: Guardamos un comentario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tarea_id
+                - comentario
+              properties:
+                tarea_id:
+                  type: integer
+                  description: Identificador de la tarea
+                  example: 2
+                comentariopadre_id:
+                  type: integer
+                  description: Identificador del comentario padre
+                  example: 1
+                comentario:
+                  type: string
+                  description: Descripcion del comentario
+                  example: "Descripcion del comentario1"
+                estado_tarea:
+                  type: integer
+                  description: Identificador del estado de la tarea.
+                  example: 7
+                fecha_entrega:
+                  type: string
+                  description: Fecha de entrega de la tarea
+                  example: "2024-05-22"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - TareaComentario
+      operationId: updateComentario
+      description: Actualizamos un comentario
+      parameters:
+        - in: path
+          name: tareacomentario_id
+          required: true
+          description: Identificador del comentario
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tarea_id
+                - comentario
+              properties:
+                tarea_id:
+                  type: integer
+                  description: Identificador de la tarea
+                  example: 2
+                comentariopadre_id:
+                  type: integer
+                  description: Identificador del comentario padre
+                  example: 1
+                comentario:
+                  type: string
+                  description: Descripcion del comentario
+                  example: "Descripcion del comentario1"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update_estado:
+    put:
+      tags:
+        - TareaComentario
+      operationId: updateEstadoComentario
+      description: Actualizamos el estado de visualizacion de un comentario
+      parameters:
+        - in: path
+          name: tareacomentario_ids
+          required: true
+          description: Identificadores de los comentarios que desea actualizar. Ejemplo -> '1,2,3'
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - estado
+              properties:
+                visto:
+                  type: number
+                  description: Identificador del estado de visualizacion del comentario
+                  example: 1
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - TareaComentario
+      operationId: deleteComentario
+      description: Eliminar un comentario
+      parameters:
+        - in: path
+          name: tareacomentario_id
+          required: true
+          description: Identificador del comentario
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

@@ -1,0 +1,449 @@
+init_data:
+    get:
+      tags:
+        - Producto Configuracion
+      operationId: initDataProductoConfiguracion
+      description: Obtenemos la información inicial para el módulo de configuración de producto
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      productos:
+                        type: array
+                        items:
+                          $ref: "../schemas/producto.yml#/Producto"
+                      empresas:
+                        type: array
+                        items:
+                          allOf:
+                            - $ref: "../schemas/empresa.yml#/Empresa"
+                            - type: object
+                              properties:
+                                sucursales:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: integer
+                                        example: 1
+                                      nombre:
+                                        type: string
+                                        example: "Sucursal 1"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Producto Configuracion
+      operationId: listProductoConfiguracion
+      description: Obtenemos el listado de las configuraciones de producto
+      parameters:
+        - in: query
+          name: empresa_id
+          description: La empresa a la que pertenecen las configuraciones de producto
+          schema:
+            type: integer
+        - in: query
+          name: sucursal_id
+          description: La sucursal a la que pertenecen las configuraciones de producto
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "../schemas/productoConfiguracion.yml#/ProductoConfiguracion"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+producto_configuracion:
+    get:
+      tags:
+        - Producto Configuracion
+      operationId: listOnlyProductoConfiguracion
+      description: Obtenemos una de las configuraciones de producto
+      parameters:
+        - in: query
+          name: productoconfiguracion_id
+          required: true
+          description: Identificador del Producto
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/productoConfiguracion.yml#/ProductoConfiguracion"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Producto Configuracion
+      operationId: saveProductoConfiguracion
+      description: Guardamos una configuracion de producto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - producto_id
+                - empresa_id
+                - sucursal_id
+                - precio
+                - porcentaje1
+                - porcentaje2
+                - porcentaje3
+              properties:
+                producto_id:
+                  type: integer
+                  description: Identificador del producto al que se le esta asignando una configuracion
+                  example: 1
+                empresa_id:
+                  type: integer
+                  description: Empresa a la que se le asigna la configuracion del producto
+                  example: 1
+                sucursal_id:
+                  type: integer
+                  description: Sucursal a la que se le asigna la configuracion del producto
+                  example: 1
+                precio:
+                  type: number
+                  format: double
+                  description: Precio Referencial del producto
+                  example: 5.0
+                porcentaje1:
+                  type: number
+                  format: double
+                  description: Porcentaje 1 del producto
+                  example: 5.0
+                porcentaje2:
+                  type: number
+                  format: double
+                  description: Porcentaje 2 del producto
+                  example: 5.0
+                porcentaje3:
+                  type: number
+                  format: double
+                  description: Porcentaje 3 del producto
+                  example: 5.0
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Producto Configuracion
+      operationId: updateProductoConfiguracion
+      description: Editamos una configuración de producto
+      parameters:
+        - in: path
+          name: productoconfiguracion_id
+          required: true
+          description: Identificador de la configuracion del producto que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - producto_id
+                - empresa_id
+                - sucursal_id
+                - precio
+                - porcentaje1
+                - porcentaje2
+                - porcentaje3
+              properties:
+                producto_id:
+                  type: integer
+                  description: Identificador del producto al que se le esta asignando una configuracion
+                  example: 1
+                empresa_id:
+                  type: integer
+                  description: Empresa a la que se le asigna la configuracion del producto
+                  example: 1
+                sucursal_id:
+                  type: integer
+                  description: Sucursal a la que se le asigna la configuracion del producto
+                  example: 1
+                precio:
+                  type: number
+                  format: double
+                  description: Precio Referencial del producto
+                  example: 5.0
+                porcentaje1:
+                  type: number
+                  format: double
+                  description: Porcentaje 1 del producto
+                  example: 5.0
+                porcentaje2:
+                  type: number
+                  format: double
+                  description: Porcentaje 2 del producto
+                  example: 5.0
+                porcentaje3:
+                  type: number
+                  format: double
+                  description: Porcentaje 3 del producto
+                  example: 5.0
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Producto Configuracion
+      operationId: deleteProductoConfiguracion
+      description: Eliminar una configuracion de producto de Nextdet
+      parameters:
+        - in: path
+          name: productoconfiguracion_id
+          required: true
+          description: Identificador de la configuracion del producto que desea eliminar
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

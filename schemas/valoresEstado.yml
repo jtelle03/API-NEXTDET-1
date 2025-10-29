@@ -1,0 +1,17 @@
+ ValoresEstado:
+      description: |
+        Listado de estados que pueden tomar los datos que llegan por medio del API: 
+
+        -1 -> Custom     -> es un estado que no se encuentra en la BBDD, se utiliza para indicar un estado que no ha sido incluido en la BBDD del listado de estados. Por ejemplo en el caso de Cotizacion indica que toda cotizacion con este estado esta "Sin Vigencia" 
+
+        0  -> Eliminado
+
+        1  -> Activo
+
+        2  -> Bloqueado
+          
+        3  -> Historico
+
+        4  -> Finalizado
+
+        5  -> Inactivo

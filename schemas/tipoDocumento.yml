@@ -1,0 +1,24 @@
+ TipoDocumento:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: DNI
+        nombre_abr:
+          type: string
+          example: DNI
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: Activo
+        fecha_creacion:
+          type: string
+          example: "23-01-01 00:00:00"
+        fecha_edicion:
+          type: string
+          example: "23-01-01 00:00:00"

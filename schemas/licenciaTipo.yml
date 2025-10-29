@@ -1,0 +1,46 @@
+    LicenciaTipo:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: Demo
+        intervalo:
+          type: integer
+          example: 1
+        intervalo_unidad:
+          type: integer
+          description: |
+            Unidad del intervalo de tiempo 
+
+            1 -> dia 
+
+            2 -> mes 
+
+            3 -> año
+          example: 1
+        intervalo_nombre:
+          type: string
+          example: "1 d"
+          description: |
+            Dato del tiempo abreviado, el valor que mostrara sera de acuerdo al intervalo_unidad 
+
+            1 -> dia -> ejm -> 1 d
+
+            2 -> mes -> ejm -> 3 m
+
+            3 -> año -> ejm -> 1 a
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: Activo
+        fecha_creacion:
+          type: string
+          example: "23-01-01 00:00:00"
+        fecha_edicion:
+          type: string
+          example: "23-01-01 00:00:00"

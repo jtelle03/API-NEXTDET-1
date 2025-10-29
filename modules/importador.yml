@@ -1,0 +1,451 @@
+init_data:
+    get:
+      tags:
+        - Importador
+      operationId: initDataImportador
+      description: Obtenemos la informacion inicial para el modulo de importadores.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      paises:
+                        type: array
+                        items:
+                          $ref: "../schemas/pais.yml#/Pais"
+                      empresas:
+                        type: array
+                        items:
+                          allOf:
+                            - $ref: "../schemas/empresa.yml#/Empresa"
+                            - type: object
+                              properties:
+                                sucursales:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: integer
+                                        example: 1
+                                      nombre:
+                                        type: string
+                                        example: "Sucursal 1"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+usuario_download_plantilla:
+    get:
+      tags:
+        - Importador
+      operationId: importadorDownloadPlanillaUsuario
+      description: Generamos la plantilla del importador de usuario.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "archivo/12315464987946516518498646.xlsx"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+usuario_save:
+    post:
+      tags:
+        - Importador
+      operationId: importadorSaveUsuario
+      description: Guardamos los usuarios nuevos.
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required:
+                - pais_id
+                - empresa_id
+                - archivo
+              properties:
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el usuario
+                  example: "Next 1"
+                empresa_id:
+                  type: integer
+                  description: Empresa a la que pertenece el usuario
+                  example: 1
+                sucursal_id:
+                  type: integer
+                  description: Sucursal a la que pertenece el usuario (no es obligatorio)
+                  example: 1
+                archivo:
+                  type: string
+                  format: binary
+                  description: Archivo excel con los datos requeridos para crear una cuenta de usuario
+                  example: "file.xlxs"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_download_plantilla:
+    get:
+      tags:
+        - Importador
+      operationId: importadorDownloadPlantillaContacto
+      description: Generamos la plantilla del importador de contacto.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "archivo/12315464987946516518498646.xlsx"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_save:
+    post:
+      tags:
+        - Importador
+      operationId: importadorSaveContacto
+      description: Guardamos los contactos nuevos.
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required:
+                - pais_id
+                - archivo
+              properties:
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el usuario
+                  example: "Next 1"
+                row_init:
+                  type: integer
+                  description: Fila del archivo excel donde inician los datos de los contactos
+                  default: 8
+                  example: 8
+                archivo:
+                  type: string
+                  format: binary
+                  description: Archivo excel con los datos requeridos para crear un nuevo contacto
+                  example: "file.xlxs"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+clasificado_download_plantilla:
+    get:
+      tags:
+        - Importador
+      operationId: importadorDownloadPlantillaClasificado
+      description: Generamos la plantilla del importador de clasificado.
+      parameters:
+        - in: query
+          name: idioma
+          required: true
+          description: Idioma del clasificado
+          example: "es"
+          schema:
+            type: string
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "archivo/12315464987946516518498646.xlsx"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+clasificado_save:
+    post:
+      tags:
+        - Importador
+      operationId: importadorSaveClasificado
+      description: Guardamos los clasificados nuevos.
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required:
+                - clasificados
+              properties:
+                clasificados:
+                  type: string
+                  format: binary
+                  description: Archivo excel con los datos requeridos para crear un nuevo clasificado
+                  example: "file.xlxs"
+                imagenes:
+                  type: string
+                  format: binary
+                  description: Archivo zip con las imagenes del clasificado
+                  example: "file.zip"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

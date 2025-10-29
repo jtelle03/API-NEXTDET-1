@@ -1,0 +1,21 @@
+ CotizacionNota:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nota:
+          type: string
+          example: "Nota 1"
+        estado:
+          type: integer
+          example: 1
+        fecha_creacion:
+          type: string
+          example: "2024-03-28"
+        usuario_creador_id:
+          type: number
+          example: 77
+        usuario_creador_nombre:
+          type: string
+          example: "Alessandro Venegas"

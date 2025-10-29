@@ -1,0 +1,327 @@
+list:
+    get:
+      tags:
+        - Tipo de Licencia
+      operationId: listTipoLicencia
+      description: Obtener listado de tipos de licencia.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "../schemas/licenciaTipo.yml#/LicenciaTipo"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+licencia:
+    get:
+      tags:
+        - Tipo de Licencia
+      operationId: listOnlyTipoLicencia
+      description: Obtener la informacion de un tipo de licencia en especifica.
+      parameters:
+        - in: query
+          name: licencia_tipo_id
+          required: true
+          description: Identificador del Tipo de Licencia
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/licenciaTipo.yml#/LicenciaTipo"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Tipo de Licencia
+      operationId: saveTipoLicencia
+      description: Agregar un tipo de licencia nueva.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - intervalo
+                - intervalo_unidad
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del Tipo de Licencia
+                  example: Tipo Licencia Ejemplo
+                intervalo:
+                  type: integer
+                  description: Cantidad de tiempo del intervalo
+                  example: 1
+                intervalo_unidad:
+                  type: integer
+                  description: |
+                    Unidad del intervalo de tiempo | 
+                    1 -> dia | 2 -> mes | 3 -> año
+                  example: 1
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Tipo de Licencia
+      operationId: updateTipoLicencia
+      description: Actualizar la informacion de un tipo de licencia en especifica.
+      parameters:
+        - in: path
+          name: licencia_tipo_id
+          required: true
+          description: Identificador del tipo de licencia que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del Tipo de Licencia
+                  example: Tipo Licencia Ejemplo
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+                intervalo:
+                  type: integer
+                  description: Cantidad de tiempo del intervalo
+                  example: 1
+                intervalo_unidad:
+                  type: integer
+                  description: |
+                    Unidad del intervalo de tiempo | 
+                    1 -> dia | 2 -> mes | 3 -> año
+                  example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Tipo de Licencia
+      operationId: deleteTipoLicencia
+      description: Eliminar un Tipo de Licencia en especifica
+      parameters:
+        - in: path
+          name: licencia_tipo_id
+          required: true
+          description: Identificador del tipo de licencia que desea eliminar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

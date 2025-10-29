@@ -1,0 +1,112 @@
+  ProductoCostoConfiguracion:
+      type: object
+      required:
+        - producto_id
+        - pais_id
+        - com_base
+        - royalty_total
+        - com_total
+        - precio_sugerido_porcentaje
+        - profit_nextdet_porcentaje
+        - precio_sugerido
+        - costo_distribuidor_master
+        - margen_distribuidor_master
+        - costo_distribuidor
+      properties:
+        productocostoconfiguracion_id:
+          type: integer
+          example: 1
+        producto_id:
+          type: integer
+          example: 3
+        pais_id:
+          type: integer
+          description: En caso sea configuracion de Nextdet, el valor a mandarse debe ser 0
+          example: 183
+        com_base:
+          type: object
+          properties:
+            unidad:
+              type: number
+              example: 1
+            costo_cable:
+              type: number
+              example: 8.4
+            costo_pcb:
+              type: number
+              example: 0
+            costo_plastic_lab:
+              type: number
+              example: 0
+            costo_fillament:
+              type: number
+              example: 0
+            costo_surface_con:
+              type: number
+              example: 0
+            costo_resin:
+              type: number
+              example: 0
+            costo_orings:
+              type: number
+              example: 0
+            costo_extras:
+              type: object
+              properties:
+                extra1:
+                  type: number
+                  example: 0
+                extra2:
+                  type: number
+                  example: 0
+                extra3:
+                  type: number
+                  example: 0
+        royalty_amount:
+          type: number
+          example: 0
+        royalty_porcentaje:
+          type: number
+          example: 20
+        royalty_total:
+          type: number
+          example: 1.68
+        com_total:
+          type: number
+          example: 10.08
+        precio_sugerido_porcentaje:
+          type: number
+          example: 100
+        profit_nextdet_porcentaje:
+          type: number
+          example: 50
+        tier1_unidades:
+          type: number
+          example: 0
+        tier1_descuento:
+          type: number
+          example: 0
+        tier2_unidades:
+          type: number
+          example: 0
+        tier2_descuento:
+          type: number
+          example: 0
+        tier3_unidades:
+          type: number
+          example: 0
+        tier3_descuento:
+          type: number
+          example: 0
+        precio_sugerido:
+          type: number
+          example: 20.16
+        costo_distribuidor_master:
+          type: number
+          example: 15.12
+        margen_distribuidor_master:
+          type: number
+          example: 0.1
+        costo_distribuidor:
+          type: number
+          example: 15.22

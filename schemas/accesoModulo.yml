@@ -1,0 +1,11 @@
+ AccesoModulo:
+      type: object
+      properties:
+        modulo:
+          type: string
+          description: Nombre del modulo
+          example: "Usuarios"
+        clave_modulo:
+          type: string
+          description: Identificador del Modulo
+          example: "ClaveUsuario"

@@ -1,0 +1,1154 @@
+init_data:
+    get:
+      tags:
+        - Cotizacion
+      operationId: initDataCotizacion
+      description: Obtenemos la informacion inicial para el modulo de cotizaciones.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      categoria_producto:
+                        type: array
+                        items:
+                          $ref: "../schemas/categoriaProducto.yml#/CategoriaProducto"
+                      productos:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            categoriaproducto_id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Next 1"
+                            precio_sugerido:
+                              type: number
+                              format: double
+                              example: 5.0
+                            precio:
+                              type: number
+                              format: double
+                              example: 5.0
+                            porcentaje1:
+                              type: number
+                              format: double
+                              example: 5.0
+                            porcentaje2:
+                              type: number
+                              format: double
+                              example: 5.0
+                            porcentaje3:
+                              type: number
+                              format: double
+                              example: 5.0
+                            unidad:
+                              type: number
+                              format: double
+                              example: 30.0
+                            unidad_medida:
+                              type: string
+                              example: mts
+                            categoria_nombre:
+                              type: string
+                              example: "Adaptadores"
+                            estado_nombre:
+                              type: string
+                              example: Activo
+                            image:
+                              type: string
+                              example: "https://api.nextdet.com/images/img-no-found.jpg"
+                        #type: array
+                        #items:
+                        #  $ref: '#/components/schemas/Producto'
+                      paises:
+                        type: array
+                        items:
+                          $ref: "../schemas/pais.yml#/Pais"
+                      empresas:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Empresa 1"
+
+                      sucursales:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Sucursal 1"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Cotizacion
+      operationId: listCotizacion
+      description: Obtener listado de las cotizaciones
+      parameters:
+        # - in: query
+        #   name: empresa_id
+        #   description: La empresa a la que pertenecen las cotizaciones (debe ser solo visible para el usuario con rol diferente al administrador)
+        #   schema:
+        #     type: integer
+        - in: query
+          name: sucursal_id
+          description: La sucursal a la que pertenecen las cotizaciones
+          schema:
+            type: integer
+        - in: query
+          name: categoriaproducto_id
+          description: La categoria del producto perteneciente a la cotización
+          schema:
+            type: integer
+        - in: query
+          name: estado_confirmacion
+          description: El estado de confirmación en la que se encuentra una cotizacion
+          schema:
+            type: integer
+        - in: query
+          name: estado
+          description: El estado de la cotizacion
+          schema:
+            type: integer
+        - in: query
+          name: page
+          description: El numero de la paginacion que desea ver
+          schema:
+            type: integer
+        - in: query
+          name: page_row
+          description: Cantidad de datos que desea ver por pagina (por defualt son 6)
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      rows:
+                        type: array
+                        items:
+                          $ref: "../schemas/cotizacion.yml#/Cotizacion"
+                      total:
+                        type: integer
+                        example: 10
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_user:
+    get:
+      tags:
+        - Cotizacion
+      operationId: listCotizacionByUser
+      description: Obtener listado de las cotizaciones del usuario
+      parameters:
+        # - in: query
+        #   name: empresa_id
+        #   description: La empresa a la que pertenecen las cotizaciones (debe ser solo visible para el usuario con rol diferente al administrador)
+        #   schema:
+        #     type: integer
+        - in: query
+          name: sucursal_id
+          description: La sucursal a la que pertenecen las cotizaciones
+          schema:
+            type: integer
+        - in: query
+          name: categoriaproducto_id
+          description: La categoria del producto perteneciente a la cotización
+          schema:
+            type: integer
+        - in: query
+          name: estado_confirmacion
+          description: El estado de confirmación en la que se encuentra una cotizacion
+          schema:
+            type: integer
+        - in: query
+          name: estado
+          description: El estado de la cotizacion
+          schema:
+            type: integer
+        - in: query
+          name: page
+          description: El numero de la paginacion que desea ver
+          schema:
+            type: integer
+        - in: query
+          name: page_row
+          description: Cantidad de datos que desea ver por pagina (por defualt son 6)
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      rows:
+                        type: array
+                        items:
+                          $ref: "../schemas/cotizacion.yml#/Cotizacion"
+                      total:
+                        type: integer
+                        example: 10
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+user_informacion:
+    get:
+      tags:
+        - Cotizacion
+      operationId: listOnlyCotizacion
+      description: Obtener listado de las cotizaciones del usuario
+      parameters:
+        - in: query
+          name: cotizacion_id
+          required: true
+          description: Identificador de la cotizacion
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/cotizacion.yml#/Cotizacion"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Cotizacion
+      operationId: saveCotizacion
+      description: Guardar las cotizaciones que realiza un distribuidor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - subtotal
+                - total
+                - fecha
+                - detalle
+              properties:
+                subtotal:
+                  type: number
+                  format: double
+                  description: Subtotal de la cotizacion general
+                  example: 30.0
+                total:
+                  type: number
+                  format: double
+                  description: Total de la cotizacion general
+                  example: 1
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la cotización en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+                comentario:
+                  type: string
+                  description: Comentario referente a la cotizacion
+                  example: "Comentario u observacion referente a la cotizacion"
+                referencia:
+                  type: string
+                  description: Referencia de la cotizacion
+                  example: "Referencia de la cotización"
+                empresa_cliente:
+                  type: string
+                  description: Empresa del cliente que solicita la cotizacion al distribuidor
+                  example: "Empresa 1"
+                nombre_cliente:
+                  type: string
+                  description: Nombre del cliente que solicita la cotizacion al distribuidor
+                  example: "Cliente 1"
+                paiscliente_id:
+                  type: integer
+                  description: Identificador del pais al que pertenece el cliente del distribuidor
+                  example: 1
+                telefono_cliente:
+                  type: string
+                  description: Numero de contacto del cliente que solicita la cotizacion al distribuidor
+                  example: "111111"
+                email_cliente:
+                  type: string
+                  description: Correo del cliente que solicita la cotizacion al distribuidor
+                  example: "correo@gmail.com"
+                detalle:
+                  type: array
+                  description: Listado de los productos solicitados en la cotización
+                  items:
+                    type: object
+                    properties:
+                      producto_id:
+                        type: integer
+                        example: 1
+                      unidad:
+                        type: number
+                        format: double
+                        example: 30.0
+                      extra_unidad:
+                        type: number
+                        format: double
+                        example: 3.0
+                      unidad_medida:
+                        type: string
+                        example: mts
+                      cantidad:
+                        type: number
+                        format: double
+                        example: 30.0
+                      extra:
+                        type: number
+                        format: double
+                        example: 0.0
+                      precio:
+                        type: number
+                        format: double
+                        example: 0.0
+                      subtotal:
+                        type: number
+                        format: double
+                        example: 30.0
+                      profesionales:
+                        type: number
+                        format: double
+                        example: 1.0
+                      dias:
+                        type: number
+                        format: double
+                        example: 1.0
+                      costo_rrhh:
+                        type: number
+                        format: double
+                        example: 30.0
+                      vuelo:
+                        type: number
+                        format: double
+                        example: 30.0
+                      hospedaje:
+                        type: number
+                        format: double
+                        example: 30.0
+                      costo:
+                        type: number
+                        format: double
+                        example: 30.0
+                      costo_cable:
+                        type: number
+                        format: double
+                        example: 30.0
+                      movilidad:
+                        type: number
+                        format: double
+                        example: 30.0
+                      comida:
+                        type: number
+                        format: double
+                        example: 30.0
+                      utilidad:
+                        type: number
+                        format: double
+                        example: 30.0
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+send_code:
+    get:
+      tags:
+        - Cotizacion
+      operationId: senCodeCotizacion
+      description: Enviar un codigo PIN para validar el envio de una cotizacion a fabrica
+      parameters:
+        - in: query
+          name: codigo
+          required: true
+          description: Codigo identificador de la Cotizacion
+          example: "06ecd178343c3dd64e59d0454cbb04cb"
+          schema:
+            type: string
+        - in: query
+          name: fecha_confirmacion
+          required: true
+          description: Fecha en la que se realiza en envio de codigo PIN en formato (yyyy-MM-dd HH:mm:ss)
+          example: "2023-07-01 21:53:00"
+          schema:
+            type: string
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      fecha_fin:
+                        type: string
+                        example: "2023-11-01 17:25:00"
+                      tiempo_valido:
+                        type: string
+                        example: "15 min"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+confirmacion:
+    post:
+      tags:
+        - Cotizacion
+      operationId: confirmacionCotizacion
+      description: Confirmar una cotizacion que realizo un distribuidor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - codigo
+                - pin
+                - fecha_confirmacion
+              properties:
+                codigo:
+                  type: string
+                  description: Codigo identificador de la Cotizacion
+                  example: "06ecd178343c3dd64e59d0454cbb04cb"
+                pin:
+                  type: string
+                  description: Codigo de verificacion, de 4 digitos,de la Cotizacion
+                  example: "1111"
+                fecha_confirmacion:
+                  type: string
+                  description: Fecha en la que se realiza la confirmacion de la cotización en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+anular:
+    put:
+      tags:
+        - Cotizacion
+      operationId: anularCotizacion
+      description: Anular una Cotizacion en especifica
+      parameters:
+        - in: path
+          name: cotizacion_id
+          required: true
+          description: Identificador de la cotizacion que desea anular
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+download:
+    get:
+      tags:
+        - Cotizacion
+      operationId: downloadCotizacion
+      description: Generamos el pdf de la cotizacion que realizo un distribuidor
+      parameters:
+        - in: query
+          name: codigo
+          required: true
+          description: Codigo identificador de la Cotizacion
+          example: "06ecd178343c3dd64e59d0454cbb04cb"
+          schema:
+            type: string
+        - in: query
+          name: idioma
+          description: Codigo identificador del idioma a descargar -> Español (es), Ingles (en)
+          example: "en"
+          schema:
+            type: string
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "archivo/12315464987946516518498646.pdf"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+nota_list:
+    get:
+      tags:
+        - Cotizacion
+      operationId: listCotizacionNotas
+      description: Obtener listado de las notas de las cotizaciones
+      parameters:
+        # - in: query
+        #   name: empresa_id
+        #   description: La empresa a la que pertenecen las cotizaciones (debe ser solo visible para el usuario con rol diferente al administrador)
+        #   schema:
+        #     type: integer
+        - in: query
+          name: cotizacion_id
+          description: La cotización a la que pertenece la nota
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "../schemas/cotizacionNota.yml#/CotizacionNota"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_nota:
+    get:
+      tags:
+        - Cotizacion
+      operationId: listCotizacionNota
+      description: Obtener una de las notas de las cotizaciones
+      parameters:
+        - in: query
+          name: cotizacion_nota_id
+          description: La nota de la cotización
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/cotizacionNota.yml#/CotizacionNota"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+nota_save:
+    post:
+      tags:
+        - Cotizacion
+      operationId: saveNotaCotizacion
+      description: Guardar las notas de las cotizaciones que realiza un distribuidor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cotizacion_id
+                - nota
+              properties:
+                cotizacion_id:
+                  type: number
+                  description: Identificador de la cotización
+                  example: 1
+                nota:
+                  type: string
+                  description: Descripción de la nota
+                  example: "Nota"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+nota_update:
+    put:
+      tags:
+        - Cotizacion
+      operationId: updateNotaCotizacion
+      description: Editar las notas de las cotizaciones que realiza un distribuidor
+      parameters:
+        - in: path
+          name: cotizacion_nota_id
+          required: true
+          description: Identificador de la nota de la cotizacion que desea editar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cotizacion_id
+                - nota
+              properties:
+                cotizacion_id:
+                  type: number
+                  description: Identificador de la cotización
+                  example: 1
+                nota:
+                  type: string
+                  description: Descripción de la nota
+                  example: "Nota"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+nota_delete:
+    put:
+      tags:
+        - Cotizacion
+      operationId: deleteNotaCotizacion
+      description: Eliminar las notas de las cotizaciones que realiza un distribuidor
+      parameters:
+        - in: path
+          name: cotizacion_nota_id
+          required: true
+          description: Identificador de la nota de la cotizacion que desea eliminar
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

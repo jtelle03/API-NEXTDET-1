@@ -1,0 +1,702 @@
+list:
+    get:
+      tags:
+        - Vigencia
+      operationId: listLicencias
+      description: Obtener el listado general de licencias.
+      parameters:
+        - in: query
+          name: empresa_id
+          required: false
+          description: Identificador de la empresa
+          schema:
+            type: integer
+        - in: query
+          name: usuario_id
+          required: false
+          description: Identificador del usuario
+          schema:
+            type: integer
+        - in: query
+          name: estado
+          required: false
+          description: Identificador del estado
+          schema:
+            type: integer
+        - in: query
+          name: servicio_id
+          required: false
+          description: Identificador del servicio
+          schema:
+            type: integer
+        - in: query
+          name: tipo_licencia_id
+          required: false
+          description: Identificador del tipo de licencia
+          schema:
+            type: integer
+        - in: query
+          name: fecha_desde
+          required: false
+          description: Fecha desde
+          schema:
+            type: string
+        - in: query
+          name: fecha_hasta
+          required: false
+          description: Fecha hasta
+          schema:
+            type: string
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        servicio_id:
+                          type: integer
+                          example: 3
+                        servicio_nombre:
+                          type: string
+                          example: "Quamtum 360"
+                        servicio_sistema:
+                          type: integer
+                          example: 0
+                        estado:
+                          type: integer
+                          example: 1
+                        estado_nombre:
+                          type: string
+                          example: "Activo"
+                        tipo_id:
+                          type: integer
+                          example: 3
+                        tipo_nombre:
+                          type: string
+                          example: "Empresarial"
+                        vigencia_inicio:
+                          type: string
+                          example: "2023-01-01"
+                        vigencia_fin:
+                          type: string
+                          example: "2023-12-31"
+                        empresa_id:
+                          type: number
+                          example: 1
+                        empresa_nombre:
+                          type: string
+                          example: "NEXTDET"
+                        usuario_id:
+                          type: number
+                          example: 52
+                        usuario_nombre:
+                          type: string
+                          example: "Victor Paredes Canto"
+                        usuario_email:
+                          type: string
+                          example: "vparedes@nextdet.com"
+                        usuario_pais_id:
+                          type: number
+                          example: 183
+                        pais_nombre_espaniol:
+                          type: string
+                          example: "Perú"
+                        pais_nombre_ingles:
+                          type: string
+                          example: "Peru"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+user:
+    get:
+      tags:
+        - Vigencia
+      operationId: listVigenciasUserVigencia
+      description: Obtener la informacion de las vigencia de los servicios para un usuario en especifico.
+      parameters:
+        - in: query
+          name: usuario_id
+          required: true
+          description: Identificador del usuario
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        servicio_id:
+                          type: integer
+                          example: 1
+                        servicio_nombre:
+                          type: string
+                          example: Nextlion
+                        vigencias:
+                          type: array
+                          items:
+                            $ref: "../schemas/vigencia.yml#/Vigencia"
+                        servicios_asociado:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              servicio_id:
+                                type: integer
+                                example: 1
+                              servicio_nombre:
+                                type: string
+                                example: Nextlion
+                              vigencias:
+                                type: array
+                                items:
+                                  $ref: "../schemas/vigencia.yml#/Vigencia"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+servicio:
+    get:
+      tags:
+        - Vigencia
+      operationId: listVigenciasServicioVigencia
+      description: Obtener la informacion de las vigencia de un servicio para un usuario en especifico.
+      parameters:
+        - in: query
+          name: usuario_id
+          required: true
+          description: Identificador del usuario
+          schema:
+            type: integer
+        - in: query
+          name: servicio_id
+          required: true
+          description: Identificador del servicio que se desea obtener sus vigencias
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      servicio_id:
+                        type: integer
+                        example: 1
+                      servicio_nombre:
+                        type: string
+                        example: Nextlion
+                      vigencias:
+                        type: array
+                        items:
+                          $ref: "../schemas/vigencia.yml#/Vigencia"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+vigencia:
+    get:
+      tags:
+        - Vigencia
+      operationId: listVigenciaVigencia
+      description: Obtener la informacion de la vigencia de un servicio para un usuario en especifico.
+      parameters:
+        - in: query
+          name: usuario_id
+          required: true
+          description: Identificador del usuario
+          schema:
+            type: integer
+        - in: query
+          name: servicio_id
+          required: true
+          description: Identificador del servicio
+          schema:
+            type: integer
+        - in: query
+          name: licencia_id
+          required: true
+          description: Identificador de la vigencia de licencia de la que se desea obtener su informacion
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/vigencia.yml#/Vigencia"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Vigencia
+      operationId: saveVigencia
+      description: Agregar una vigencia nueva.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usuario_id
+                - servicio_id
+                - licencia_tipo_id
+                - fecha_inicio
+                - estado
+              properties:
+                usuario_id:
+                  type: integer
+                  description: Identificador del usuario
+                  example: 1
+                servicio_id:
+                  type: integer
+                  description: Identificador del servicio
+                  example: 1
+                licencia_tipo_id:
+                  type: integer
+                  description: Tipo de licencia que tendra la vigencia
+                  example: 1
+                fecha_inicio:
+                  type: string
+                  description: Fecha Inicio en la que tendra acceso el usuario al servicio en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01"
+                fecha_fin:
+                  type: string
+                  description: Fecha Fin en la que tendra acceso el usuario al servicio en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-12-31"
+                estado:
+                  type: integer
+                  description: Estado en la que se encontrara la vigencia
+                  example: 1
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save_demo:
+    post:
+      tags:
+        - Vigencia
+      operationId: saveVigenciaDemo
+      description: Agregar una vigencia demo nueva.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - servicio_id
+                - fecha_inicio
+              properties:
+                servicio_id:
+                  type: integer
+                  description: Identificador del servicio
+                  example: 1
+                fecha_inicio:
+                  type: string
+                  description: Fecha Inicio en la que tendra acceso el usuario al servicio en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Vigencia
+      operationId: updateVigencia
+      description: Actualizar la informacion de una vigencia en especifica.
+      parameters:
+        - in: path
+          name: licencia_id
+          required: true
+          description: Identificador de la vigencia al que le desea editar su informacion
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usuario_id
+                - servicio_id
+                - licencia_tipo_id
+                - fecha_inicio
+                - estado
+              properties:
+                usuario_id:
+                  type: integer
+                  description: Identificador del usuario
+                  example: 1
+                servicio_id:
+                  type: integer
+                  description: Identificador del servicio
+                  example: 1
+                licencia_tipo_id:
+                  type: integer
+                  description: Tipo de licencia que tendra la vigencia
+                  example: 1
+                fecha_inicio:
+                  type: string
+                  description: Fecha Inicio en la que tendra acceso el usuario al servicio en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01"
+                fecha_fin:
+                  type: string
+                  description: Fecha Fin en la que tendra acceso el usuario al servicio en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-12-31"
+                estado:
+                  type: integer
+                  description: Estado en la que se encontrara la vigencia
+                  example: 1
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Vigencia
+      operationId: deleteVigencia
+      description: Eliminar una vigencia para un usuario con un servicio en especifico
+      parameters:
+        - in: path
+          name: licencia_id
+          required: true
+          description: Identificador de la vigencia de licencia a la que desea eliminar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usuario_id
+                - servicio_id
+                - palabra_confirmacion
+              properties:
+                usuario_id:
+                  type: integer
+                  description: Identificador del usuario
+                  example: 1
+                servicio_id:
+                  type: integer
+                  description: Identificador del servicio
+                  example: 1
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+                palabra_confirmacion:
+                  type: string
+                  description: Palabra de confirmación para poder eliminar la licencia (nombre del servicio asociado)
+                  example: "Nextlion"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

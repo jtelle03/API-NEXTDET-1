@@ -1,0 +1,58 @@
+ Calendario:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        empresa_id:
+          type: integer
+          example: 1
+        empresa_nombre:
+          type: string
+          example: "NEXTDET"
+        codigo:
+          type: string
+          example: "1s52ds5a1sd3"
+        descripcion:
+          type: string
+          example: "Descripcion 1"
+        nota:
+          type: string
+          example: "Nota 1"
+        fecha_inicio:
+          type: string
+          example: "2024-02-07"
+        fecha_fin:
+          type: string
+          example: "2024-02-12"
+        estado:
+          type: number
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        usuario_creador:
+          type: number
+          example: 73
+        usuario_creador_nombre:
+          type: string
+          example: "Alessandro Venegas"
+        pais_id:
+          type: number
+          example: 183
+        pais_nombre_espaniol:
+          type: string
+          example: "Perú"
+        pais_nombre_ingles:
+          type: string
+          example: "Peru"
+        responsables:
+          type: array
+          items:
+            properties:
+              usuario_id:
+                type: number
+                example: 73
+              usuario_nombre:
+                type: string
+                example: "Alessandro Venegas"

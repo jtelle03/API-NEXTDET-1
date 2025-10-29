@@ -1,0 +1,439 @@
+init_data:
+    get:
+      tags:
+        - Calendario
+      operationId: initDataCalendario
+      description: Obtenemos la información inicial para el módulo de calendario
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      usuarios:
+                        type: array
+                        items:
+                          $ref: "../schemas/usuario.yml#/Usuario"
+                      estados:
+                        type: array
+                        items:
+                          $ref: "../schemas/estado.yml#/Estado"
+                      paises:
+                        type: array
+                        items:
+                          $ref: "../schemas/pais.yml#/Pais"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Calendario
+      operationId: listCalendario
+      description: Obtenemos el listado de los eventos del calendario
+      parameters:
+        - in: query
+          name: fecha_desde
+          description: Filtro de fecha desde
+          schema:
+            type: string
+        - in: query
+          name: fecha_hasta
+          description: Filtro de fecha hasta
+          schema:
+            type: string
+        - in: query
+          name: estado
+          description: Filtro de estado
+          schema:
+            type: number
+        - in: query
+          name: usuario_asignado
+          description: Filtro de usuario asignado
+          schema:
+            type: number
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      $ref: "../schemas/calendario.yml#/Calendario"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_calendario:
+    get:
+      tags:
+        - Calendario
+      operationId: listOnlyCalendario
+      description: Obtenemos uno de los eventos del calendario
+      parameters:
+        - in: query
+          name: calendario_id
+          required: true
+          description: Identificador del evento del calendario
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    $ref: "../schemas/calendario.yml#/Calendario"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Calendario
+      operationId: saveCalendario
+      description: Guardamos un evento
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - descripcion
+                - nota
+                - pais_id
+                - fecha_inicio
+                - fecha_fin
+                - responsables
+              properties:
+                descripcion:
+                  type: string
+                  description: Descripcion del evento
+                  example: "Descripcion del evento 1"
+                nota:
+                  type: string
+                  description: Nota del evento
+                  example: "Nota del evento 1"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el evento
+                  example: 183
+                fecha_inicio:
+                  type: string
+                  description: Fecha de inicio de la tarea
+                  example: "2024-02-07"
+                fecha_fin:
+                  type: string
+                  description: Fecha de fin de la tarea
+                  example: "2024-02-20"
+                responsables:
+                  type: array
+                  items:
+                    properties:
+                      usuario_id:
+                        type: number
+                        description: Identificador de usuario responsable
+                        example: 77
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Calendario
+      operationId: updateCalendario
+      description: Actualizamos un evento del calendario
+      parameters:
+        - in: path
+          name: calendario_id
+          required: true
+          description: Identificador del evento que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - descripcion
+                - nota
+                - pais_id
+                - fecha_inicio
+                - fecha_fin
+                - responsables
+              properties:
+                descripcion:
+                  type: string
+                  description: Descripcion del evento
+                  example: "Descripcion del evento 1"
+                nota:
+                  type: string
+                  description: Nota del evento
+                  example: "Nota del evento 1"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el evento
+                  example: 183
+                fecha_inicio:
+                  type: string
+                  description: Fecha de inicio de la tarea
+                  example: "2024-02-07"
+                fecha_fin:
+                  type: string
+                  description: Fecha de fin de la tarea
+                  example: "2024-02-20"
+                responsables:
+                  type: array
+                  items:
+                    properties:
+                      usuario_id:
+                        type: number
+                        description: Identificador de usuario responsable
+                        example: 77
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Calendario
+      operationId: deleteCalendario
+      description: Eliminar un evento del calendario
+      parameters:
+        - in: path
+          name: calendario_id
+          required: true
+          description: Identificador del evento que desea eliminar
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

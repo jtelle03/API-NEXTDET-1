@@ -1,0 +1,21 @@
+ TipoError:
+      description: |
+        Cuando se produce un error en las consultas este se reportan con los siguientes valores: 
+
+        -1 -> TRY CATCH     -> son errores controlados que se producen en la logica de negocio
+
+        0  -> SIN ERROR     -> no se produce algun error, la consulta fue exitosa
+
+        1  -> NOT USER      -> este error se produce cuando no se logra identificar al usuario que ha iniciado                      sesion en alguno de los productos y/o servicios (Nextlion, Quamtum, Quamtum 360)
+
+        2  -> DDBB          -> este error se produce cuando ocurre algun inconveniente al realizar alguna                           consulta en la base de datos
+          
+        4  -> DATA INVALIDA -> este error se produce cuando los datos no pasan por alguna validacion en la                          logica de negocio
+
+        5  -> SIN VIGENCIA  -> este error se produce cuando un usuario quiere loguearse algun producto y/o                          servicio pero no tiene una licencia vigente para dicho producto
+
+        6  -> NOT AUTH      -> este error se produce cuando no se pudo determinar la valides del JWT
+
+        7  -> TOKEN EXP     -> este error se produce cuando el JWT ha expirado su vigencia
+
+        10 -> NOT ENDPOINT  -> este error se produce cuando se realiza una consutla a una url que no existe o                       esta habilitada

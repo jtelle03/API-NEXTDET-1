@@ -1,0 +1,48 @@
+token:
+    get:
+      tags:
+        - Download File
+      operationId: downloadFilesPdf
+      description: Descargar el instalador del gestor de instalacion del software nextlion (.msi)
+      parameters:
+        - in: path
+          name: url_file
+          required: true
+          description: Url generado desde otro endpoint para ubicar el archivo en el servidor y realizar la descarga
+          schema:
+            type: string
+        - in: path
+          name: token
+          required: true
+          description: JWT que identifica al usuario que se ha logueado y esta descargando el pdf
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

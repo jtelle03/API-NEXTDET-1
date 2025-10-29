@@ -1,0 +1,160 @@
+login:
+    post:
+      tags:
+        - Licencia
+      operationId: loguinLicencia
+      description: Ingreso al sistema de administrador de cuentas de usuarios y obtenemos la informacion del administrador que ingresa al sistema.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - recaptchaValue
+              properties:
+                email:
+                  type: string
+                  description: Correo del usuario
+                  example: "correo@correo.com"
+                password:
+                  type: string
+                  description: Contraseña de la cuenta de usuario
+                  example: "123"
+                recaptchaValue:
+                  type: string
+                  description: Token de seguridad para determinar si el usuario no es un bot.
+                  example: "d290f1ee-6c54-4b01-90e6-d701748f085"
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      usuario:
+                        $ref: "../schemas/administrador.yml#/Administrador"
+                      acceso_modulo:
+                        type: array
+                        items:
+                          $ref: "../schemas/accesoModulo.yml#/AccesoModulo"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+init_data:
+    get:
+      tags:
+        - Licencia
+      operationId: initDataLicencia
+      description: Obtenemos la informacion del administrador que ingresa al sistema.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      estados:
+                        type: array
+                        items:
+                          $ref: "../schemas/estado.yml#/Estado"
+                      empresas:
+                        type: array
+                        items:
+                          $ref: "../schemas/empresa.yml#/Empresa"
+                      roles:
+                        type: array
+                        items:
+                          $ref: "../schemas/rol.yml#/Rol"
+                      licencia_tipos:
+                        type: array
+                        items:
+                          $ref: "../schemas/licenciaTipo.yml#/LicenciaTipo"
+                      tipos_documento:
+                        type: array
+                        items:
+                          $ref: "../schemas/tipoDocumento.yml#/TipoDocumento"
+                      servicios:
+                        type: array
+                        items:
+                          $ref: "../schemas/servicio.yml#/Servicio"
+                      paises:
+                        type: array
+                        items:
+                          $ref: "../schemas/pais.yml#/Pais"
+                      categoria_producto:
+                        type: array
+                        items:
+                          $ref: "../schemas/categoriaProducto.yml#/CategoriaProducto"
+                      acceso_modulo:
+                        type: array
+                        items:
+                          $ref: "../schemas/accesoModulo.yml#/AccesoModulo"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

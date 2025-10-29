@@ -1,0 +1,38 @@
+  TareaComentario:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        comentario:
+          type: string
+          example: "Comentario1"
+        comentariopadre_id:
+          type: integer
+          example: 1
+        usuario_id:
+          type: number
+          example: 73
+        usuario_nombre:
+          type: string
+          example: "Alessandro Venegas"
+        visto:
+          type: array
+          items:
+            properties:
+              usuario_id:
+                example: 77
+              visto:
+                example: 1
+        estado:
+          type: number
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        fecha_creacion:
+          type: string
+          example: "2024-04-28"
+        usuario_image:
+          type: string
+          example: "https://api.nextdet.com/images/img-no-found.jpg"

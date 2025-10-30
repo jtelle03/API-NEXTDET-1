@@ -1,0 +1,925 @@
+init_data:
+    get:
+      tags:
+        - Usuario
+      operationId: initDataUsuario
+      description: Obtenemos la informacion inicial para el modulo de usuarios.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      estados:
+                        type: array
+                        items:
+                          $ref: "../schemas/estado.yml#/Estado"
+                      empresas:
+                        type: array
+                        items:
+                          allOf:
+                            - $ref: "../schemas/empresa.yml#/Empresa"
+                            - type: object
+                              properties:
+                                sucursales:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: integer
+                                        example: 1
+                                      nombre:
+                                        type: string
+                                        example: "Sucursal 1"
+                      roles:
+                        type: array
+                        items:
+                          $ref: " ../schemas/rol.yml#/Rol"
+                      licencia_tipos:
+                        type: array
+                        items:
+                          $ref: "../schemas/licenciaTipo.yml#/LicenciaTipo"
+                      tipos_documento:
+                        type: array
+                        items:
+                          $ref: "../schemas/tipoDocumento.yml#/TipoDocumento"
+                      servicios:
+                        type: array
+                        items:
+                          $ref: "../schemas/servicio.yml#/Servicio"
+                      paises:
+                        type: array
+                        items:
+                          $ref: "../schemas/pais.yml#/Pais"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+usuario_list:
+    get:
+      tags:
+        - Usuario
+      operationId: listUsuario
+      description: Listar usuarios disponibles.
+      parameters:
+        - in: query
+          name: page
+          description: El numero de la paginacion que desea ver
+          schema:
+            type: integer
+        - in: query
+          name: page_row
+          description: Cantidad de datos que desea ver por pagina (por defualt son 6)
+          schema:
+            type: integer
+        - in: query
+          name: fecha
+          description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+          schema:
+            type: string
+        - in: query
+          name: persona
+          description: Filtro para buscar a usuarios que tengan una simimitud al texto ingresado
+          schema:
+            type: string
+        - in: query
+          name: empresa_id
+          description: Filtro para buscar usuarios de una misma empresa
+          schema:
+            type: integer
+        - in: query
+          name: estado
+          description: Filtro para buscar usuarios que tengan un mismo estado
+          schema:
+            type: string
+        - in: query
+          name: rol_id
+          description: Filtro para buscar usuarios que tengan un mismo rol
+          schema:
+            type: string
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      rows:
+                        type: array
+                        items:
+                          $ref: "../schemas/usuario.yml#/Usuario"
+                      total:
+                        type: integer
+                        example: 10
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_user:
+    get:
+      tags:
+        - Usuario
+      operationId: listUserUsuario
+      description: Obtener la informacion de un usuario en especifico.
+      parameters:
+        - in: query
+          name: usuario_id
+          required: true
+          description: Identificador del usuario que se desea obtener su informacion
+          schema:
+            type: integer
+        - in: query
+          name: fecha
+          description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+          schema:
+            type: string
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/usuario.yml#/Usuario"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+informacion:
+    get:
+      tags:
+        - Usuario
+      operationId: listUsuarioInformacion
+      description: Obtener la informacion detallada del usuario.
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      usuario:
+                        type: array
+                        items:
+                          $ref: "../schemas/usuario.yml#/Usuario"
+                      licencias:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            servicio_id:
+                              type: integer
+                              example: 1
+                            servicio_nombre:
+                              type: string
+                              example: Nextlion
+                            vigencias:
+                              type: array
+                              items:
+                                $ref: "../schemas/vigencia.yml#/Vigencia"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Usuario
+      operationId: saveUsuario
+      description: Agregar un usuario nuevo usuario.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombres
+                - email
+                - rol_id
+              properties:
+                nombres:
+                  type: string
+                  description: Nombres del usuario
+                  example: Johann
+                apellido_paterno:
+                  type: string
+                  description: Apellido Paterno del usuario
+                  example: Val
+                apellido_materno:
+                  type: string
+                  description: Apellido Materno del usuario
+                  example: Ch
+                tipo_documento_id:
+                  type: integer
+                  description: Tipo de Documento de Indentidad del usuario
+                  example: 1
+                nro_documento:
+                  type: string
+                  description: Numero de Documento de Identidad del usuario
+                  example: "99999999"
+                telefono:
+                  type: string
+                  description: Numero Telefonico del usuario
+                  example: "+5199999999"
+                email:
+                  type: string
+                  description: Correo del usuario, con el que ingresara a los diferentes servicios
+                  example: "correo@correo.com"
+                contrasenia:
+                  type: string
+                  description: Contraseña de la cuenta de usuario
+                  example: "123"
+                rol_id:
+                  type: integer
+                  description: Rol que tendra la cuenta de usuario
+                  example: 3
+                empresa_id:
+                  type: integer
+                  description: Empresa a la que pertece el usuario
+                  example: 1
+                sucursal_id:
+                  type: integer
+                  description: Sucursal de la empresa (este campo es obligatorio siempre y cuando tenga un rol de distribuidor)
+                  example: 3
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el usuario
+                  example: 3
+                estado:
+                  type: integer
+                  description: Estado en la que se encontrara la cuenta de usuario
+                  example: 1
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Usuario
+      operationId: updateUsuario
+      description: Actualizar la informacion de un usuario en especifico.
+      parameters:
+        - in: path
+          name: usuario_id
+          required: true
+          description: Identificador del usuario al que le desea editar su informacion
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombres
+                - email
+                - rol_id
+              properties:
+                nombres:
+                  type: string
+                  description: Nombres del usuario
+                  example: Johann
+                apellido_paterno:
+                  type: string
+                  description: Apellido Paterno del usuario
+                  example: Val
+                apellido_materno:
+                  type: string
+                  description: Apellido Materno del usuario
+                  example: Ch
+                tipo_documento_id:
+                  type: integer
+                  description: Tipo de Documento de Indentidad del usuario
+                  example: 1
+                nro_documento:
+                  type: string
+                  description: Numero de Documento de Identidad del usuario
+                  example: "99999999"
+                telefono:
+                  type: string
+                  description: Numero Telefonico del usuario
+                  example: "+5199999999"
+                email:
+                  type: string
+                  description: Correo del usuario, con el que ingresara a los diferentes servicios
+                  example: "correo@correo.com"
+                contrasenia:
+                  type: string
+                  description: Contraseña de la cuenta de usuario
+                  example: "123"
+                rol_id:
+                  type: integer
+                  description: Rol que tendra la cuenta de usuario
+                  example: 3
+                empresa_id:
+                  type: integer
+                  description: Empresa a la que pertece el usuario
+                  example: 1
+                sucursal_id:
+                  type: integer
+                  description: Sucursal de la empresa (este campo es obligatorio siempre y cuando tenga un rol de distribuidor)
+                  example: 3
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el usuario
+                  example: 3
+                estado:
+                  type: integer
+                  description: Estado en la que se encontrara la cuenta de usuario
+                  example: 1
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+                reset_password:
+                  type: integer
+                  description: Opcion para resetar (1) o no (0) automáticamente la contraseña del usuario.
+                  example: 1
+                envio_informacion:
+                  type: integer
+                  description: Opción para enviar (1) o no (0) por correo la información del usuario.
+                  example: 1
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Usuario
+      operationId: deleteUsuario
+      description: Eliminar una cuenta de usuario en especifico.
+      parameters:
+        - in: path
+          name: usuario_id
+          required: true
+          description: Identificador del/los usuario(s) al que le desea eliminar su cuenta de usuario (En el caso de eliminar varias cuentas de usuario enviar una cadena de texto de los identificadores del usuario separado por comas. "Ejm:'1,2,3' ")
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fecha:
+                  type: string
+                  description: Fecha en la que se realiza la eliminacion de la cuenta de usuario en formato (yyyy-MM-dd HH:mm:ss)
+                  example: "2023-07-01 21:53:00"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+change_password:
+    put:
+      tags:
+        - Usuario
+      operationId: updatePasswordUsuario
+      description: Actualizar la contraseña de un usuario en especifico.
+      parameters:
+        - in: path
+          name: usuario_id
+          required: true
+          description: Identificador del usuario al que le desea editar su contraseña
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - contrasenia_actual
+                - contrasenia_nueva
+              properties:
+                contrasenia_actual:
+                  type: string
+                  description: Contraseña actual del usuario
+                  example: "usu@riO1234"
+                contrasenia_nueva:
+                  type: string
+                  description: Contraseña nueva del usuario
+                  example: "usu@riOnuevo1234"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update_perfil:
+    post:
+      tags:
+        - Usuario
+      operationId: updatePerfilUsuario
+      description: Actualizar el perfil del usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usuario_id
+                - nombres
+                - apellido_paterno
+                - tipo_documento_id
+                - nro_documento
+              properties:
+                usuario_id:
+                  type: integer
+                  description: Identificador del usuario
+                  example: 73
+                nombres:
+                  type: string
+                  description: Nombres del usuario
+                  example: Alessandro
+                apellido_paterno:
+                  type: string
+                  description: Apellido Paterno del usuario
+                  example: Venegas
+                apellido_materno:
+                  type: string
+                  description: Apellido Materno del usuario
+                  example: Villarreal
+                tipo_documento_id:
+                  type: integer
+                  description: Tipo de Documento de Indentidad del usuario
+                  example: 1
+                nro_documento:
+                  type: string
+                  description: Numero de Documento de Identidad del usuario
+                  example: "99999999"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece el usuario
+                  example: 3
+                telefono:
+                  type: string
+                  description: Numero Telefonico del usuario
+                  example: "+5199999999"
+                imagen:
+                  type: string
+                  format: binary
+                  description: Imagen del producto
+                  example: "image/png"
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+send_code:
+    get:
+      tags:
+        - Usuario
+      operationId: sendCodeUsuario
+      description: Enviar un codigo pin de verificacion al usuario para restablecer la contraseña
+      parameters:
+        - in: query
+          name: email
+          required: true
+          description: Email del usuario a enviar el codigo pin
+          schema:
+            type: string
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      fecha_fin:
+                        type: string
+                        example: "2024-04-22 09:46:59"
+                      tiempo_valido:
+                        type: string
+                        example: "5 min"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+reset_password:
+    post:
+      tags:
+        - Usuario
+      operationId: resetPasswordUsuario
+      description: Actualizar el perfil del usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - pin
+                - contrasenia_nueva
+              properties:
+                email:
+                  type: string
+                  description: Email del usuario
+                  example: "example@gmail.com"
+                pin:
+                  type: string
+                  description: Pin enviado al usuario
+                  example: "1234"
+                contrasenia_nueva:
+                  type: string
+                  description: Contraseña nueva del usuario
+                  example: "Contrasenia@123"
+                envio_informacion:
+                  type: integer
+                  description: Opción para enviar (1) o no (0) por correo la información del usuario.
+                  example: 1
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Contraseña resturada exitosamente.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

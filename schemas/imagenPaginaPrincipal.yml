@@ -1,0 +1,42 @@
+ ImagenPaginaPrincipal:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        src_es:
+          type: string
+          example: "image/portada_es"
+        src_en:
+          type: string
+          example: "image/portada_en"
+        alt:
+          type: string
+          example: "alt imagen"
+        type:
+          type: string
+          example: "image"
+        nav_link:
+          type: string
+          example: "image/.."
+        text_nav_link_es:
+          type: string
+          example: "Titulo español"
+        text_nav_link_en:
+          type: string
+          example: "Titulo ingles"
+        anchor_link:
+          type: string
+          example: "image/.."
+        text_anchor_link_es:
+          type: string
+          example: "Anchor español"
+        text_anchor_link_en:
+          type: string
+          example: "Anchor ingles"
+        tiempo_visualizacion:
+          type: number
+          example: 3.5
+        estado:
+          type: integer
+          example: 1

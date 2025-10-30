@@ -1,0 +1,84 @@
+ Cotizacion:
+      type: object
+      properties:
+        cotizacion_id:
+          type: integer
+          example: 1
+        distribuidor:
+          type: string
+          example: "Johannes Valdiviezo"
+        empresa:
+          type: string
+          example: "NEXTDET"
+        sucursal:
+          type: string
+          example: "Sucursal 1"
+        codigo:
+          type: string
+          example: "18d2019dc03719d0f1ebd0d97474a950"
+        codigo_cotizacion:
+          type: string
+          example: "COT-0000000-NXDT"
+        subtotal:
+          type: number
+          format: double
+          example: 30.0
+        total:
+          type: number
+          format: double
+          example: 30.0
+        fecha_cotizacion:
+          type: string
+          example: "23-01-01 00:00:00"
+        fecha_vigencia_cotizacion:
+          type: string
+          example: "23-01-01 00:00:00"
+        esta_confirmada:
+          type: integer
+          example: 0
+        cot_confirmada_fecha:
+          type: string
+          example: "23-01-01 00:00:00"
+        cot_confirmada_email:
+          type: string
+          example: "jvaldiviezo@nextdet.com"
+        estado:
+          type: integer
+          example: 1
+        cotizacion_estado:
+          type: string
+          example: "Activo"
+        comentario:
+          type: string
+          example: "Comentario u Observacion"
+        referencia:
+          type: string
+          example: "Referencia de la cotización"
+        empresa_cliente:
+          type: string
+          example: "Empresa 10"
+        nombre_ciente:
+          type: string
+          example: "Cliente 1"
+        telefono_cliente:
+          type: string
+          example: "999999999"
+        email_cliente:
+          type: string
+          example: "cliente@gmail.com"
+        paiscliente_id:
+          type: integer
+          example: 1
+        paiscliente_nombre:
+          type: string
+          example: "Peru"
+        codigopin_confirmacion:
+          type: string
+          example: "1111"
+        cantidad_notas:
+          type: integer
+          example: 1
+        detalles:
+          type: array
+          items:
+            $ref: "../schemas/cotizacionDetalle.yml#/CotizacionDetalle"

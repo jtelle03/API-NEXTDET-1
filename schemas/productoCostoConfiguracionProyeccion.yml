@@ -1,0 +1,176 @@
+ ProductoCostoConfiguracionProyeccion:
+      type: object
+      required:
+        - super_admin_proyeccion
+        - master_proyeccion
+        - distribuidor_proyeccion
+      properties:
+        super_admin_proyeccion:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                properties:
+                  longitud_cable:
+                    type: number
+                    example: 1
+                  cantidad:
+                    type: number
+                    example: 2000
+                  royalty:
+                    type: number
+                    example: 1.68
+                  total_com:
+                    type: number
+                    example: 10.08
+                  precio_sugerido_porcentaje:
+                    type: number
+                    example: 50
+                  profit_nextdet_porcentaje:
+                    type: number
+                    example: 100
+                  precio_sugerido:
+                    type: number
+                    example: 20.16
+                  precio_venta:
+                    type: number
+                    example: 10.08
+                  costo_distribuidor_master:
+                    type: number
+                    example: 15.12
+                  margen_distribuidor_master:
+                    type: number
+                    example: 0.10
+                  costo_distribuidor:
+                    type: number
+                    example: 15.22
+            cantidad_venta_total_año:
+              type: number
+              example: 2000
+            cantidad_venta_total_mes:
+              type: number
+              example: 166.67
+            ganancia_total:
+              type: number
+              example: 6048
+            porcentaje_venta_master:
+              type: number
+              example: 60
+            cantidad_venta_master_año:
+              type: number
+              example: 1200
+            cantidad_venta_master_mes:
+              type: number
+              example: 100
+            ganancia_master_items:
+              example: [6048]
+            porcentaje_venta_directa:
+              type: number
+              example: 40
+            cantidad_venta_directa_año:
+              type: number
+              example: 800
+            cantidad_venta_directa_mes:
+              type: number
+              example: 66.67
+            ganancia_directa_items:
+              example: [0]
+        master_proyeccion:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                properties:
+                  longitud_cable:
+                    type: number
+                    example: 1
+                  cantidad:
+                    type: number
+                    example: 2000
+                  precio_sugerido:
+                    type: number
+                    example: 20.16
+                  precio_venta:
+                    type: number
+                    example: 10.08
+                  costo_distribuidor_master:
+                    type: number
+                    example: 15.12
+                  costo_distribuidor:
+                    type: number
+                    example: 15.22
+            cantidad_venta_total_año:
+              type: number
+              example: 2000
+            cantidad_venta_total_mes:
+              type: number
+              example: 166.67
+            ganancia_total:
+              type: number
+              example: 6048
+            porcentaje_venta_distribuidor:
+              type: number
+              example: 60
+            cantidad_venta_distribuidor_año:
+              type: number
+              example: 1200
+            cantidad_venta_distribuidor_mes:
+              type: number
+              example: 100
+            ganancia_distribuidor_items:
+              example: [6048]
+            porcentaje_venta_directa:
+              type: number
+              example: 40
+            cantidad_venta_directa_año:
+              type: number
+              example: 800
+            cantidad_venta_directa_mes:
+              type: number
+              example: 66.67
+            ganancia_directa_items:
+              example: [0]
+        distribuidor_proyeccion:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                properties:
+                  longitud_cable:
+                    type: number
+                    example: 1
+                  cantidad:
+                    type: number
+                    example: 2000
+                  precio_sugerido:
+                    type: number
+                    example: 20.16
+                  precio_venta:
+                    type: number
+                    example: 10.08
+                  costo_distribuidor:
+                    type: number
+                    example: 15.22
+            cantidad_venta_total_año:
+              type: number
+              example: 2000
+            cantidad_venta_total_mes:
+              type: number
+              example: 166.67
+            ganancia_total:
+              type: number
+              example: 6048
+            porcentaje_venta_directa:
+              type: number
+              example: 40
+            cantidad_venta_directa_año:
+              type: number
+              example: 800
+            cantidad_venta_directa_mes:
+              type: number
+              example: 66.67
+            ganancia_directa_items:
+              example: [0]

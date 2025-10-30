@@ -1,0 +1,52 @@
+  Idea:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        empresa_id:
+          type: integer
+          example: 1
+        empresa_nombre:
+          type: string
+          example: "NEXTDET"
+        codigo:
+          type: string
+          example: "1s52ds5a1sd3"
+        titulo:
+          type: string
+          example: "Titulo 1"
+        integrantes:
+          type: string
+          example: "Integrantes 1"
+        descripcion:
+          type: string
+          example: "descripcion"
+        estado_tiempo:
+          type: number
+          example: 16
+        nombre_estado_tiempo:
+          type: string
+          example: "En espera"
+        estado:
+          type: number
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        usuario_creador:
+          type: number
+          example: 73
+        usuario_creador_nombre:
+          type: string
+          example: "Alessandro Venegas"
+        areas:
+          type: array
+          items:
+            properties:
+              area_id:
+                type: number
+                example: 1
+              area_nombre:
+                type: string
+                example: "Marketing"

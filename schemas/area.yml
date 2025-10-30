@@ -1,0 +1,18 @@
+ Area:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: "Marketing"
+        empresa_id:
+          type: integer
+          example: 1
+        empresa_nombre:
+          type: string
+          example: "Nextdet"
+        estado:
+          type: integer
+          example: 1

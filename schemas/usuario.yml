@@ -1,0 +1,79 @@
+ Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombres:
+          type: string
+          example: NextDet
+        apellido_paterno:
+          type: string
+          example: NextDet
+        apellido_materno:
+          type: string
+          example: NextDet
+        tipo_documento_id:
+          type: integer
+          example: 1
+        tipo_documento_nombre:
+          type: string
+          example: DNI
+        tipo_documento_abr:
+          type: string
+          example: DNI
+        nro_documento:
+          type: string
+          example: "12345678"
+        telefono:
+          type: string
+          example: NextDet
+        email:
+          type: string
+          example: NextDet
+        rol_id:
+          type: integer
+          example: 1
+        rol_nombre:
+          type: string
+          example: usuario
+        empresa_id:
+          type: integer
+          example: 1
+        empresa_nombre:
+          type: string
+          example: NextDet
+        sucursal_id:
+          type: integer
+          example: 1
+        sucursal_nombre:
+          type: string
+          example: Sucursal Sur
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: Activo
+        fecha_creacion:
+          type: string
+          example: "23-01-01 00:00:00"
+        fecha_edicion:
+          type: string
+          example: "23-01-01 00:00:00"
+        pais_id:
+          type: integer
+          example: 183
+        pais_nombre:
+          type: string
+          example: "Peru"
+        servicios:
+          type: array
+          items:
+            properties:
+              servicio_id:
+                type: integer
+                example: 1
+              servicio_nombre:
+                type: string
+                example: "Nextlion"

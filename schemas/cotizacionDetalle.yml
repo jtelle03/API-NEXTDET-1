@@ -1,0 +1,91 @@
+ CotizacionDetalle:
+      type: object
+      required:
+        - producto_id
+        - unidad
+        - unidad_medida
+        - cantidad
+        - subtotal
+      properties:
+        categoria_id:
+          type: integer
+          example: 1
+        categoria:
+          type: string
+          example: "Adaptadores"
+        producto_id:
+          type: integer
+          example: 1
+        producto:
+          type: string
+          example: "Next1"
+        unidad:
+          type: number
+          format: double
+          example: 30.0
+        extra_unidad:
+          type: number
+          format: double
+          example: 3.0
+        unidad_medida:
+          type: string
+          example: mts
+        cantidad:
+          type: number
+          format: double
+          example: 30.0
+        extra:
+          type: number
+          format: double
+          example: 0.0
+        precio:
+          type: number
+          format: double
+          example: 0.0
+        subtotal:
+          type: number
+          format: double
+          example: 30.0
+        profesionales:
+          type: number
+          format: double
+          example: 1.0
+        dias:
+          type: number
+          format: double
+          example: 1.0
+        costo_rrhh:
+          type: number
+          format: double
+          example: 30.0
+        vuelo:
+          type: number
+          format: double
+          example: 30.0
+        hospedaje:
+          type: number
+          format: double
+          example: 30.0
+        movilidad:
+          type: number
+          format: double
+          example: 30.0
+        costo:
+          type: number
+          format: double
+          example: 30.0
+        costo_cable:
+          type: number
+          format: double
+          example: 30.0
+        comida:
+          type: number
+          format: double
+          example: 30.0
+        utilidad:
+          type: number
+          format: double
+          example: 30.0
+        image:
+          type: string
+          example: "https://api.nextdet.com/images/img-no-found.jpg"

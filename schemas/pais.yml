@@ -1,0 +1,18 @@
+ Pais:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 12
+        nombre:
+          type: string
+          example: "Argentina"
+        nombre_ingles:
+          type: string
+          example: "Argentina"
+        iso3:
+          type: string
+          example: "ARG"
+        codigo_telefono:
+          type: string
+          example: "54"

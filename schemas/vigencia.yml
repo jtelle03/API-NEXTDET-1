@@ -1,0 +1,57 @@
+ Vigencia:
+      type: object
+      properties:
+        licencia_id:
+          type: integer
+          example: 1
+        servicio_id:
+          type: integer
+          example: 1
+        servicio_nombre:
+          type: string
+          example: Nextlion
+        servicio_sistema:
+          type: integer
+          example: 1
+        lic_tipo_id:
+          type: integer
+          example: 1
+        lic_tipo_nombre:
+          type: string
+          example: Demo
+        lic_vigencia_inicio:
+          type: string
+          example: "23-01-01 00:00:00"
+        lic_vigencia_fin:
+          type: string
+          example: "23-01-01 00:00:00"
+        lic_estado:
+          type: integer
+          example: 1
+        lic_estado_nombre:
+          type: string
+          example: Activo
+        lic_empresa_id:
+          type: number
+          example: 1
+        lic_empresa_nombre:
+          type: string
+          example: "NEXTDET"
+        usuario_id:
+          type: number
+          example: 52
+        lic_usuario_nombre:
+          type: string
+          example: "Alessandro Venegas Villarreal"
+        lic_usuario_email:
+          type: string
+          example: "alessandro.venegas@gmail.com"
+        lic_usuario_pais_id:
+          type: number
+          example: 183
+        lic_pais_nombre_espaniol:
+          type: string
+          example: "Perú"
+        lic_pais_nombre_ingles:
+          type: string
+          example: "Peru"

@@ -1,0 +1,47 @@
+ Producto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        categoriaproducto_id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: Next1
+        precio_sugerido:
+          type: number
+          format: double
+          example: 5.0
+        precio1:
+          type: number
+          format: double
+          example: 5.0
+        precio2:
+          type: number
+          format: double
+          example: 5.0
+        precio3:
+          type: number
+          format: double
+          example: 5.0
+        unidad:
+          type: number
+          format: double
+          example: 30.0
+        unidad_medida:
+          type: string
+          example: mts
+        categoria_nombre:
+          type: string
+          example: "Adaptadores"
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: Activo
+        image:
+          type: string
+          example: "https://api.nextdet.com/images/img-no-found.jpg"

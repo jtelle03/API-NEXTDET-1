@@ -1,0 +1,33 @@
+ Sucursal:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        empresa_id:
+          type: integer
+          example: 1
+        empresa_nombre:
+          type: string
+          example: "Empresa 1"
+        nombre:
+          type: string
+          example: "Sucursal 1"
+        email_contacto:
+          type: string
+          example: "example@gmail.com"
+        telefono_contacto:
+          type: string
+          example: "930506234"
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"
+        fecha_creacion:
+          type: string
+          example: "2023-11-05 11:00:00"
+        usuario_creqador:
+          type: string
+          example: "Usuario 1"

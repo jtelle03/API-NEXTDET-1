@@ -1,0 +1,250 @@
+init_data:
+    get:
+      tags:
+        - Persona
+      operationId: initDataPersona
+      description: Obtenemos la información inicial para la persona
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      paises:
+                        type: array
+                        items:
+                          $ref: "../schemas/pais.yml#/Pais"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Persona
+      operationId: savePersona
+      description: Agregar una persona nueva.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombres
+                - email
+                - estado
+                - tipo_registro_workshop
+                - isFromWorkshop
+              properties:
+                nombres:
+                  type: string
+                  description: Nombres de la persona
+                  example: Alessandro
+                apellido_paterno:
+                  type: string
+                  description: Apellido Paterno de la persona
+                  example: Venegas
+                apellido_materno:
+                  type: string
+                  description: Apellido Materno de la persona
+                  example: Villarreal
+                tipo_documento_id:
+                  type: integer
+                  description: Tipo de Documento de Indentidad de la persona
+                  example: 1
+                nro_documento:
+                  type: string
+                  description: Numero de Documento de Identidad de la persona
+                  example: "99999999"
+                telefono:
+                  type: string
+                  description: Numero Telefonico de la persona
+                  example: "999999999"
+                email:
+                  type: string
+                  description: Correo de la persona, con el que ingresara a los diferentes servicios
+                  example: "correo@correo.com"
+                pais_id:
+                  type: integer
+                  description: Pais al que pertenece la persona
+                  example: 3
+                estado:
+                  type: integer
+                  description: Estado en la que se encontrara la cuenta de la persona
+                  example: 1
+                tipo_registro_workshop:
+                  type: integer
+                  description: Identificador del tipo de registro de la persona al workshop (1->Estudiante, 2->Profesional, 3->Sponsor)
+                  example: 1
+                isFromWorkshop:
+                  type: boolean
+                  description: Indicador de si el resgistro proviene del workshop o no
+                  example: false
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_workshop:
+    get:
+      tags:
+        - Persona
+      operationId: listPersonaWorkshop
+      description: Obtenemos el listado de las personas registradas en el workshop
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        nombres:
+                          type: string
+                          example: Alessandro
+                        apellido_paterno:
+                          type: string
+                          example: Venegas
+                        apellido_materno:
+                          type: string
+                          example: Villarreal
+                        telefono:
+                          type: string
+                          example: "999999999"
+                        email:
+                          type: string
+                          example: "correo@correo.com"
+                        pais_id:
+                          type: integer
+                          example: 3
+                        pais_nombre_espaniol:
+                          type: string
+                          example: Perú
+                        pais_nombre_ingles:
+                          type: string
+                          example: Peru
+                        codigo_telefono:
+                          type: string
+                          example: 51
+                        tipo_registro_workshop:
+                          type: integer
+                          example: 1
+                        nombre_tipo_registro_espaniol:
+                          type: string
+                          example: Estudiante
+                        nombre_tipo_registro_ingles:
+                          type: string
+                          example: Student
+                        isFromWorkshop:
+                          type: integer
+                          example: 1
+                        perfilLinkedin:
+                          type: string
+                          example: juan-1289418233
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

@@ -1,0 +1,571 @@
+init_data:
+    get:
+      tags:
+        - Recursos Producto
+      operationId: initDataRecursoProducto
+      description: Informacion inicial para el modulo de Recursos Producto
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      recursos:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            producto_id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Nextlion"
+                      tipo_recurso:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Software"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_producto:
+    get:
+      tags:
+        - Recursos Producto
+      operationId: listByproductoDataRecursoProducto
+      description: Informacion de los recursos para un producto determinado
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      producto_id:
+                        type: integer
+                        example: 1
+                      producto_nombre:
+                        type: string
+                        example: "Producto 1"
+                      software:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            codigo:
+                              type: integer
+                              example: "wc98w4c98234324"
+                            titulo:
+                              type: string
+                              example: "Instalador v1.5"
+                      manuales:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            codigo:
+                              type: integer
+                              example: "wc98w4c23423498"
+                            titulo:
+                              type: string
+                              example: "Manual Instalacion"
+                            description:
+                              type: string
+                              example: "Breve resumen del manual"
+                      video_tutorial:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            titulo:
+                              type: string
+                              example: "Tutorial 1"
+                            url:
+                              type: string
+                              example: "files/view/video=tutorial.mp4"
+                            img_portada:
+                              type: string
+                              example: "files/view/image=tutorial-portada.png"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Recursos Producto
+      operationId: listDataRecursoProducto
+      description: Informacion de todos los recursos agrupados por producto y tipo de recurso
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      producto_id:
+                        type: integer
+                        example: 1
+                      producto_nombre:
+                        type: string
+                        example: "Producto 1"
+                      software:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            codigo:
+                              type: integer
+                              example: "wc98w4c98234324"
+                            titulo:
+                              type: string
+                              example: "Instalador v1.5"
+                      manuales:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            codigo:
+                              type: integer
+                              example: "wc98w4c23423498"
+                            titulo:
+                              type: string
+                              example: "Manual Instalacion"
+                            description:
+                              type: string
+                              example: "Breve resumen del manual"
+                      video_tutorial:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            titulo:
+                              type: string
+                              example: "Tutorial 1"
+                            url:
+                              type: string
+                              example: "files/view/video=tutorial.mp4"
+                            img_portada:
+                              type: string
+                              example: "files/view/image=tutorial-portada.png"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Recursos Producto
+      operationId: saveRecursoProducto
+      description: Guardar el recurso de un producto
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required:
+                - producto_id
+                - tipo_recurso
+                - titulo
+                - file
+              properties:
+                producto_id:
+                  type: integer
+                  description: Identificador de producto del recurso
+                  example: 8
+                tipo_recurso:
+                  type: integer
+                  description: Identificador del tipo de recurso
+                  example: 3
+                titulo:
+                  type: string
+                  description: Titulo del recurso
+                  example: "Tutorial 1"
+                descripcion:
+                  type: string
+                  description: Descripcion del recurso
+                  example: "Descripcion del tutorial 1"
+                file:
+                  type: string
+                  format: binary
+                  description: Archivo del recurso
+                  example: "file.mp4"
+                file_portada:
+                  type: string
+                  format: binary
+                  description: Archivo de la portada recurso
+                  example: "file.jpg"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    post:
+      tags:
+        - Recursos Producto
+      operationId: updateRecursoProducto
+      description: Actualizar el recurso de un producto
+      requestBody:
+        content:
+          application/form-data:
+            schema:
+              type: object
+              required:
+                - recurso_id
+                - producto_id
+                - tipo_recurso
+                - titulo
+                - file
+              properties:
+                recurso_id:
+                  type: integer
+                  description: Identificador del recurso
+                  example: 8
+                producto_id:
+                  type: integer
+                  description: Identificador del producto del recurso
+                  example: 8
+                tipo_recurso:
+                  type: integer
+                  description: Identificador del tipo de recurso
+                  example: 3
+                titulo:
+                  type: string
+                  description: Titulo del recurso
+                  example: "Tutorial 1"
+                descripcion:
+                  type: string
+                  description: Descripcion del recurso
+                  example: "Descripcion del tutorial 1"
+                file:
+                  type: string
+                  format: binary
+                  description: Archivo del recurso
+                  example: "file.mp4"
+                file_portada:
+                  type: string
+                  format: binary
+                  description: Archivo de la portada recurso
+                  example: "file.jpg"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Recursos Producto
+      operationId: deleteRecursoProducto
+      description: Eliminar el recurso de un producto
+      parameters:
+        - in: path
+          name: recurso_id
+          required: true
+          description: Identificador del recurso que desea eliminar
+          schema:
+            type: integer
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+download:
+    get:
+      tags:
+        - Recursos Producto
+      operationId: downloadRecursoProducto
+      description: Generamos la url de descarga del recurso
+      parameters:
+        - in: query
+          name: codigo
+          required: true
+          description: Codigo identificador del recurso
+          example: "06ecd178343c3dd64e59d0454cbb04cb"
+          schema:
+            type: string
+        - in: query
+          name: producto_id
+          required: true
+          description: Identificador del producto que desea su recurso
+          example: 1
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "archivo/12315464987946516518498646.pdf"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

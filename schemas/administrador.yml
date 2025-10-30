@@ -1,0 +1,63 @@
+Administrador:
+      type: object
+      properties:
+        token:
+          type: string
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        nombres:
+          type: string
+          example: NextDet
+        apellido_paterno:
+          type: string
+          example: NextDet
+        apellido_materno:
+          type: string
+          example: NextDet
+        tipo_documento_id:
+          type: integer
+          example: 1
+        tipo_documento_nombre:
+          type: string
+          example: DNI
+        tipo_documento_abr:
+          type: string
+          example: DNI
+        nro_documento:
+          type: string
+          example: 12345678
+        telefono:
+          type: string
+          example: NextDet
+        email:
+          type: string
+          example: NextDet
+        rol_id:
+          type: integer
+          example: 1
+        rol_nombre:
+          type: string
+          example: usuario
+        empresa_id:
+          type: integer
+          example: 123
+        empresa_nombre:
+          type: string
+          example: NextDet
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: Activo
+        fecha_creacion:
+          type: string
+          example: "23-01-01 00:00:00"
+        fecha_edicion:
+          type: string
+          example: "23-01-01 00:00:00"
+        pais_id:
+          type: integer
+          example: 183
+        pais_nombre:
+          type: string
+          example: "Peru"

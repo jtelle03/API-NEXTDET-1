@@ -1,0 +1,741 @@
+init_data:
+    get:
+      tags:
+        - Tarea
+      operationId: initDataTarea
+      description: Obtenemos la información inicial para el módulo de tarea
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      areas:
+                        type: array
+                        items:
+                          $ref: "../schemas/area.yml#/Area"
+                      usuarios:
+                        type: array
+                        items:
+                          $ref: "../schemas/usuario.yml#/Usuario"
+                      estados_tarea:
+                        type: array
+                        items:
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Pendiente"
+                      estados_prioridad:
+                        type: array
+                        items:
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Alta"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Tarea
+      operationId: listTarea
+      description: Obtenemos el listado de las tareas
+      parameters:
+        - in: query
+          name: fecha_desde
+          description: Filtro de fecha desde
+          schema:
+            type: string
+        - in: query
+          name: fecha_hasta
+          description: Filtro de fecha hasta
+          schema:
+            type: string
+        - in: query
+          name: estado
+          description: Filtro de estado
+          schema:
+            type: number
+        - in: query
+          name: area
+          description: Filtro de area
+          schema:
+            type: number
+        - in: query
+          name: usuario_asignado
+          description: Filtro de usuario asignado
+          schema:
+            type: number
+        - in: query
+          name: usuario_creador
+          description: Filtro de usuario creador
+          schema:
+            type: number
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      tareas_asignadas:
+                        type: array
+                        items:
+                          $ref: "../schemas/tarea.yml#/Tarea"
+                      tareas_propias:
+                        type: array
+                        items:
+                          $ref: "../schemas/tarea.yml#/Tarea"
+                      tareas_general:
+                        type: array
+                        items:
+                          $ref: "../schemas/tarea.yml#/Tarea"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list_tarea:
+    get:
+      tags:
+        - Tarea
+      operationId: listOnlyTarea
+      description: Obtenemos una de las tareas
+      parameters:
+        - in: query
+          name: tarea_id
+          required: true
+          description: Identificador de la tarea
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/tarea.yml#/Tarea"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Tarea
+      operationId: saveTarea
+      description: Guardamos una tarea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - titulo
+                - descripcion
+                - fecha_inicio
+                - fecha_fin
+                - responsables
+                - areas
+              properties:
+                titulo:
+                  type: string
+                  description: Titulo de la tarea
+                  example: "Tarea 1"
+                descripcion:
+                  type: string
+                  description: Descripcion de la tarea
+                  example: "Descripcion de tarea 1"
+                lenguaje:
+                  type: string
+                  description: Lenguaje del titulo y descripcion de la tarea a crear ("es" o "en")
+                  example: "es"
+                tareapadre_id:
+                  type: number
+                  description: Identificador de la tarea padre
+                  example: 1
+                fecha_inicio:
+                  type: string
+                  description: Fecha de inicio de la tarea
+                  example: "2024-02-07"
+                fecha_fin:
+                  type: string
+                  description: Fecha de fin de la tarea
+                  example: "2024-02-20"
+                prioridad:
+                  type: number
+                  description: Identificador de la prioridad de la tarea
+                  example: 14
+                notificacion_email:
+                  type: number
+                  description: Confirmación del envío de la tarea por correo
+                  example: 1
+                encargados_revision:
+                  type: array
+                  items:
+                    properties:
+                      usuario_id:
+                        type: number
+                        description: Identificador de usuario asignador
+                        example: 73
+                responsables:
+                  type: array
+                  items:
+                    properties:
+                      usuario_id:
+                        type: number
+                        description: Identificador de usuario responsable
+                        example: 76
+                areas:
+                  type: array
+                  items:
+                    properties:
+                      area_id:
+                        type: number
+                        description: Identificador del area asignada
+                        example: 1
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update:
+    put:
+      tags:
+        - Tarea
+      operationId: updateTarea
+      description: Actualizamos una tarea
+      parameters:
+        - in: path
+          name: tarea_id
+          required: true
+          description: Identificador de la tarea que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - titulo
+                - descripcion
+                - fecha_inicio
+                - fecha_fin
+                - estado
+                - notificacion_email
+                - encargados_revision
+                - responsables
+                - areas
+              properties:
+                titulo:
+                  type: string
+                  description: Titulo de la tarea
+                  example: "Tarea 1"
+                descripcion:
+                  type: string
+                  description: Descripcion de la tarea
+                  example: "Descripcion de tarea 1"
+                tareapadre_id:
+                  type: number
+                  description: Identificador de la tarea padre
+                  example: 1
+                fecha_inicio:
+                  type: string
+                  description: Fecha de inicio de la tarea
+                  example: "2024-02-07"
+                fecha_fin:
+                  type: string
+                  description: Fecha de fin de la tarea
+                  example: "2024-02-20"
+                prioridad:
+                  type: number
+                  description: Identificador de la prioridad de la tarea
+                  example: 14
+                estado:
+                  type: number
+                  description: Identificador del estado de la tarea
+                  example: 6
+                notificacion_email:
+                  type: number
+                  description: Confirmación del envío de la tarea por correo
+                  example: 1
+                encargados_revision:
+                  type: array
+                  items:
+                    properties:
+                      usuario_id:
+                        type: number
+                        description: Identificador de usuario asignador
+                        example: 73
+                responsables:
+                  type: array
+                  items:
+                    properties:
+                      usuario_id:
+                        type: number
+                        description: Identificador de usuario responsable
+                        example: 76
+                areas:
+                  type: array
+                  items:
+                    properties:
+                      area_id:
+                        type: number
+                        description: Identificador del area asignada
+                        example: 1
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update_estado:
+    put:
+      tags:
+        - Tarea
+      operationId: updateEstadoTarea
+      description: Actualizamos el estado de una tarea
+      parameters:
+        - in: path
+          name: tarea_id
+          required: true
+          description: Identificador de la tarea que desea actualizar
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - estado
+              properties:
+                estado:
+                  type: number
+                  description: Identificador del estado de la tarea
+                  example: 10
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+update_visto:
+    put:
+      tags:
+        - Tarea
+      operationId: updateVistoTarea
+      description: Actualizar el estado de visualización de una Tarea
+      parameters:
+        - in: path
+          name: tarea_id
+          required: true
+          description: Identificador de la tarea que desea actualizar
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+download:
+    get:
+      tags:
+        - Tarea
+      operationId: downloadReporteTarea
+      description: Obtenemos el reporte general en pdf de tareas
+      parameters:
+        - in: query
+          name: fecha_desde
+          description: Filtro de fecha desde
+          schema:
+            type: string
+        - in: query
+          name: fecha_hasta
+          description: Filtro de fecha hasta
+          schema:
+            type: string
+        - in: query
+          name: estado
+          description: Filtro de estado
+          schema:
+            type: number
+        - in: query
+          name: area
+          description: Filtro de area
+          schema:
+            type: number
+        - in: query
+          name: usuario_asignado
+          description: Filtro de usuario asignado
+          schema:
+            type: number
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "archivo/12315464987946516518498646.pdf"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+delete:
+    put:
+      tags:
+        - Tarea
+      operationId: deleteTarea
+      description: Eliminar una Tarea
+      parameters:
+        - in: path
+          name: tarea_id
+          required: true
+          description: Identificador de la tarea que desea eliminar
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

@@ -1,0 +1,100 @@
+ Tarea:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        codigo:
+          type: string
+          example: "1s52ds5a1sd3"
+        titulo:
+          type: string
+          example: "Tarea1"
+        titulo_en:
+          type: string
+          example: "Task 1"
+        descripcion:
+          type: string
+          example: "Descripcion 1"
+        descripcion_en:
+          type: string
+          example: "Description 1"
+        tareapadre_id:
+          type: number
+          example: 1
+        fecha_inicio:
+          type: string
+          example: "2024-02-07"
+        fecha_fin:
+          type: string
+          example: "2024-02-12"
+        fecha_aprobacion:
+          type: string
+          example: "2024-02-15"
+        semana:
+          type: number
+          example: 2
+        mes:
+          type: string
+          example: "02"
+        anio:
+          type: string
+          example: "2024"
+        prioridad:
+          type: number
+          example: 14
+        prioridad_nombre:
+          type: string
+          example: "Baja"
+        visto:
+          type: number
+          example: 0
+        estado:
+          type: number
+          example: 6
+        estado_nombre:
+          type: string
+          example: "Por Hacer"
+        usuario_creador:
+          type: number
+          example: 73
+        usuario_creador_nombre:
+          type: string
+          example: "Alessandro Venegas"
+        comentarios:
+          type: array
+          items:
+            $ref: "../schemas/tareaComentario.yml#/TareaComentario"
+        cantidad_comentarios:
+          type: integer
+          example: 2
+        encargados_revision:
+          type: array
+          items:
+            properties:
+              usuario_id:
+                type: number
+                example: 73
+              usuario_nombre:
+                type: string
+                example: "Alessandro Venegas"
+        responsables:
+          type: array
+          items:
+            properties:
+              usuario_id:
+                type: number
+                example: 73
+              usuario_nombre:
+                type: string
+                example: "Alessandro Venegas"
+        areas:
+          type: array
+          items:
+            properties:
+              area_id:
+                type: number
+                example: 2
+              area_nombre:
+                type: string
+                example: "Diseño"

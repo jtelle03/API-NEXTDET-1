@@ -1,0 +1,243 @@
+init_data:
+    get:
+      tags:
+        - Producto Costo Configuracion
+      operationId: initDataProductoCostoConfiguracion
+      description: Obtenemos la información inicial para el módulo de configuración de costos de producto
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      productos:
+                        type: array
+                        items:
+                          $ref: "../schemas/producto.yml#/Producto"
+                      paises:
+                        type: array
+                        items:
+                          $ref: "../schemas/pais.yml#/Pais"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Producto Costo Configuracion
+      operationId: listProductoCostoConfiguracion
+      description: Obtenemos los datos de configuracion de costos de un producto por país
+      parameters:
+        - in: query
+          name: producto_id
+          description: El producto del que se desea obtener su configuración
+          schema:
+            type: integer
+        - in: query
+          name: pais_id
+          description: El país de donde se desea obtener la configuración del producto
+          schema:
+            type: integer
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    allOf:
+                      - $ref: "../schemas/productoCostoConfiguracion.yml#/ProductoCostoConfiguracion"
+                      - $ref: "../schemas/productoCostoConfiguracionProyeccion.yml#/ProductoCostoConfiguracionProyeccion"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Producto Costo Configuracion
+      operationId: saveProductoCostoConfiguracion
+      description: Guardamos o actualizamos una configuracion de costos de un producto por pais
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../schemas/productoCostoConfiguracion.yml#/ProductoCostoConfiguracion"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save_proyeccion:
+    post:
+      tags:
+        - Producto Costo Configuracion
+      operationId: saveProductoCostoConfiguracionProyeccion
+      description: Guardamos o actualizamos la proyeccion de un producto por pais
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  required:
+                    - producto_id
+                    - pais_id
+                  properties:
+                    producto_id:
+                      type: integer
+                      example: 2
+                    pais_id:
+                      type: integer
+                      example: 183
+                - $ref: "../schemas/productoCostoConfiguracionProyeccion.yml#/ProductoCostoConfiguracionProyeccion"
+
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

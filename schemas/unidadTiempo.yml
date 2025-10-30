@@ -1,0 +1,19 @@
+ UnidadTiempo:
+      description: Unidad de tiempo
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nombre:
+          type: string
+          example: "Horas"
+        nombre_ingles:
+          type: string
+          example: "Hours"
+        estado:
+          type: integer
+          example: 1
+        estado_nombre:
+          type: string
+          example: "Activo"

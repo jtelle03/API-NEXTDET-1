@@ -70,6 +70,10 @@ tags:
     description: Gestión de clasificados
   - name: Propiedad
     description: Gestión de propiedades
+  - name: Categoria Propiedad
+    description: Gestión de categorías de propiedades
+  - name: Condicion Propiedad
+    description: Gestión de condiciones de propiedades
 
 paths:
 

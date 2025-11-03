@@ -1,0 +1,346 @@
+init_data:
+    get:
+      tags:
+        - Energia Solicitud
+      operationId: initDataEnergiaSolicitud
+      description: Obtenemos la información inicial para el módulo de solicitud de energía
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paises:
+                    type: array
+                    items:
+                      $ref: "../schemas/pais.yml#/Pais"
+                  estados:
+                    type: array
+                    items:
+                      $ref: "../schemas/estado.yml#/Estado"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Energia Solicitud
+      operationId: saveEnergiaSolicitud
+      description: Guardamos la solicitud de energía
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - costo
+                - saving
+                - mantenimiento
+                - nombre
+                - compania
+                - telefono
+                - email
+                - necesita_financiacion
+              properties:
+                costo:
+                  type: number
+                  description: Costo de la solicitud de energía
+                  example: 100000
+                saving:
+                  type: number
+                  description: Ahorro de la solicitud de energía
+                  example: 100000
+                mantenimiento:
+                  type: number
+                  description: Mantenimiento de la solicitud de energía
+                  example: 100000
+                nombre:
+                  type: string
+                  description: Nombre de la solicitud de energía
+                  example: "Solicitud de energía 1"
+                compania:
+                  type: string
+                  description: Compañia de la solicitud de energía
+                  example: "Compañia 1"
+                telefono:
+                  type: string
+                  description: Telefono de la solicitud de energía
+                  example: "930506234"
+                email:
+                  type: string
+                  description: Email de la solicitud de energía
+                  example: "example@gmail.com"
+                necesita_financiacion:
+                  type: boolean
+                  description: Si necesita financiación de la solicitud de energía
+                  example: true
+                meses:
+                  type: number
+                  description: Meses de la solicitud de energía
+                  example: 12
+                pais_id:
+                  type: number
+                  description: Identificador del pais de la solicitud de energía
+                  example: 1
+                destino:
+                  type: string
+                  description: Destino de la solicitud de energía
+                  example: "Destino 1"
+                tiempo_estimado:
+                  type: number
+                  description: Tiempo estimado de la solicitud de energía
+                  example: 12
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      luces:
+                        type: number
+                        description: Luces de la solicitud de energía
+                        example: 1000
+                      altura:
+                        type: number
+                        description: Altura de la solicitud de energía
+                        example: 1000
+                      lux:
+                        type: number
+                        description: Lux de la solicitud de energía
+                        example: 1000
+                      watt:
+                        type: number
+                        description: Watt de la solicitud de energía
+                        example: 1000
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Energia Solicitud
+      operationId: listEnergiasSolicitud
+      description: Obtenemos la lista de solicitudes de energía
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      energia_solicitudes:
+                        type: array
+                        items:
+                          $ref: "../schemas/energiaSolicitud.yml#/EnergiaSolicitud"
+                      total:
+                        type: integer
+                        example: 10
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+list_energia_solicitud:
+    get:
+      tags:
+        - Energia Solicitud
+      operationId: listEnergiaSolicitud
+      description: Obtenemos la lista de solicitudes de energía
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/energiaSolicitud.yml#/EnergiaSolicitud"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+change_estado:
+    put:
+      tags:
+        - Energia Solicitud
+      operationId: changeEstadoEnergiaSolicitud
+      description: Cambiamos el estado de la solicitud de energía
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                energia_solicitud_id:
+                  type: integer
+                  description: Identificador de la solicitud de energía
+                  example: 1
+                estado:
+                  type: integer
+                  description: Estado de la solicitud de energía
+                  example: 1
+                comentario:
+                  type: string
+                  description: Comentario de la solicitud de energía
+                  example: "Comentario de la solicitud de energía"
+              required:
+                - energia_solicitud_id
+                - estado
+                - comentario
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

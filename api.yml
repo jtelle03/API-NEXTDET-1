@@ -74,695 +74,711 @@ tags:
     description: Gestión de categorías de propiedades
   - name: Condicion Propiedad
     description: Gestión de condiciones de propiedades
+  - name: Energia Solicitud
+    description: Gestión de solicitudes de energía
 
 paths:
-
   # Modulo Licencia
   /v1/licencia/login:
-    $ref: './modules/licencia.yml#/login'
-  
+    $ref: "./modules/licencia.yml#/login"
+
   /v1/licencia/init/data:
-    $ref: './modules/licencia.yml#/init_data'
+    $ref: "./modules/licencia.yml#/init_data"
 
   # Modulo Usuario
   /v1/licencia/usuario/init_data:
-    $ref: './modules/usuario.yml#/init_data'
+    $ref: "./modules/usuario.yml#/init_data"
 
   /v1/licencia/usuario/list:
-    $ref: './modules/usuario.yml#/usuario_list'
-  
+    $ref: "./modules/usuario.yml#/usuario_list"
+
   /v1/licencia/usuario/list/user:
-    $ref: './modules/usuario.yml#/list_user'
+    $ref: "./modules/usuario.yml#/list_user"
 
   /v1/licencia/usuario/informacion:
-    $ref: './modules/usuario.yml#/informacion'
+    $ref: "./modules/usuario.yml#/informacion"
 
   /v1/licencia/usuario/save:
-    $ref: './modules/usuario.yml#/save'
-  
+    $ref: "./modules/usuario.yml#/save"
+
   /v1/licencia/usuario/update/{usuario_id}:
-    $ref: './modules/usuario.yml#/update'
+    $ref: "./modules/usuario.yml#/update"
 
   /v1/licencia/usuario/delete/{usuario_id}:
-    $ref: './modules/usuario.yml#/delete'
+    $ref: "./modules/usuario.yml#/delete"
 
   /v1/licencia/usuario/change_password/{usuario_id}:
-    $ref: './modules/usuario.yml#/change_password'
+    $ref: "./modules/usuario.yml#/change_password"
 
   /v1/licencia/usuario/update_perfil:
-    $ref: './modules/usuario.yml#/update_perfil'
+    $ref: "./modules/usuario.yml#/update_perfil"
 
   /v1/licencia/usuario/send_code:
-    $ref: './modules/usuario.yml#/send_code'
+    $ref: "./modules/usuario.yml#/send_code"
 
   /v1/licencia/usuario/reset_password:
-    $ref: './modules/usuario.yml#/reset_password'
+    $ref: "./modules/usuario.yml#/reset_password"
 
   # Modulo Usuario Registro
 
   /v1/licencia/usuario/register/init_data:
-    $ref: './modules/usuarioRegistro.yml#/init_data'
-  
+    $ref: "./modules/usuarioRegistro.yml#/init_data"
+
   /v1/licencia/usuario/register/send_code:
-    $ref: './modules/usuarioRegistro.yml#/send_code'
+    $ref: "./modules/usuarioRegistro.yml#/send_code"
 
   /v1/licencia/usuario/register/save:
-    $ref: './modules/usuarioRegistro.yml#/save'
+    $ref: "./modules/usuarioRegistro.yml#/save"
 
   # Modulo Acceso Modulo
   /v1/acceso_modulo/list/acceso:
-    $ref: './modules/accesoModulo.yml#/acceso'
+    $ref: "./modules/accesoModulo.yml#/acceso"
 
   /v1/acceso_modulo/save:
-    $ref: './modules/accesoModulo.yml#/save'
+    $ref: "./modules/accesoModulo.yml#/save"
 
   # Modulo Vigencia
 
   /v1/licencia/vigencia/list:
-    $ref: './modules/vigencia.yml#/list'
+    $ref: "./modules/vigencia.yml#/list"
 
   /v1/licencia/vigencia/list/user:
-    $ref: './modules/vigencia.yml#/user'
+    $ref: "./modules/vigencia.yml#/user"
 
   /v1/licencia/vigencia/list/servicio:
-    $ref: './modules/vigencia.yml#/servicio'
+    $ref: "./modules/vigencia.yml#/servicio"
 
   /v1/licencia/vigencia/list/vigencia:
-    $ref: './modules/vigencia.yml#/vigencia'
+    $ref: "./modules/vigencia.yml#/vigencia"
 
   /v1/licencia/vigencia/save:
-    $ref: './modules/vigencia.yml#/save'
+    $ref: "./modules/vigencia.yml#/save"
 
   /v1/licencia/vigencia/save_demo:
-    $ref: './modules/vigencia.yml#/save_demo'
+    $ref: "./modules/vigencia.yml#/save_demo"
 
   /v1/licencia/vigencia/update/{licencia_id}:
-    $ref: './modules/vigencia.yml#/update'
+    $ref: "./modules/vigencia.yml#/update"
 
   /v1/licencia/vigencia/delete/{licencia_id}:
-    $ref: './modules/vigencia.yml#/delete'
+    $ref: "./modules/vigencia.yml#/delete"
 
-   # Modulo Empresa 
+  # Modulo Empresa
 
   /v1/licencia/empresa/list:
-    $ref: './modules/empresa.yml#/list'
+    $ref: "./modules/empresa.yml#/list"
 
   /v1/licencia/empresa/list/empresa:
-    $ref: './modules/empresa.yml#/empresa'
+    $ref: "./modules/empresa.yml#/empresa"
 
   /v1/licencia/empresa/save:
-    $ref: './modules/empresa.yml#/save'
+    $ref: "./modules/empresa.yml#/save"
 
   /v1/licencia/empresa/update/{empresa_id}:
-    $ref: './modules/empresa.yml#/update'
+    $ref: "./modules/empresa.yml#/update"
 
   /v1/licencia/empresa/delete/{empresa_id}:
-    $ref: './modules/empresa.yml#/delete'
+    $ref: "./modules/empresa.yml#/delete"
 
   # Modulo Sucursal
 
   /v1/sucursal/init_data:
-    $ref: './modules/sucursal.yml#/init_data'
+    $ref: "./modules/sucursal.yml#/init_data"
 
   /v1/sucursal/list:
-    $ref: './modules/sucursal.yml#/list'
+    $ref: "./modules/sucursal.yml#/list"
 
   /v1/sucursal/list/sucursal:
-    $ref: './modules/sucursal.yml#/sucursal'
-  
+    $ref: "./modules/sucursal.yml#/sucursal"
+
   /v1/sucursal/save:
-    $ref: './modules/sucursal.yml#/save'
+    $ref: "./modules/sucursal.yml#/save"
 
   /v1/sucursal/update/{sucursal_id}:
-    $ref: './modules/sucursal.yml#/update'
+    $ref: "./modules/sucursal.yml#/update"
 
   /v1/sucursal/delete/{sucursal_id}:
-    $ref: './modules/sucursal.yml#/delete'
+    $ref: "./modules/sucursal.yml#/delete"
 
- # Modulo Servicio
+  # Modulo Servicio
 
   /v1/licencia/servicio/list:
-    $ref: './modules/servicio.yml#/list'
+    $ref: "./modules/servicio.yml#/list"
 
   /v1/licencia/servicio/list/servicio:
-    $ref: './modules/servicio.yml#/servicio'
+    $ref: "./modules/servicio.yml#/servicio"
 
   /v1/licencia/servicio/save:
-    $ref: './modules/servicio.yml#/save'
-  
+    $ref: "./modules/servicio.yml#/save"
+
   /v1/licencia/servicio/update/{servicio_id}:
-    $ref: './modules/servicio.yml#/update'
+    $ref: "./modules/servicio.yml#/update"
 
   /v1/licencia/servicio/delete/{servicio_id}:
-    $ref: './modules/servicio.yml#/delete'
+    $ref: "./modules/servicio.yml#/delete"
 
- # Modulo Tipo de Licencia
- 
+  # Modulo Tipo de Licencia
+
   /v1/licencia/tipo_licencia/list:
-    $ref: './modules/licenciaTipo.yml#/list'
+    $ref: "./modules/licenciaTipo.yml#/list"
 
   /v1/licencia/tipo_licencia/list/licencia:
-    $ref: './modules/licenciaTipo.yml#/licencia'
- 
+    $ref: "./modules/licenciaTipo.yml#/licencia"
+
   /v1/licencia/tipo_licencia/save:
-    $ref: './modules/licenciaTipo.yml#/save'
+    $ref: "./modules/licenciaTipo.yml#/save"
 
   /v1/licencia/tipo_licencia/update/{licencia_tipo_id}:
-    $ref: './modules/licenciaTipo.yml#/update'
+    $ref: "./modules/licenciaTipo.yml#/update"
 
   /v1/licencia/tipo_licencia/delete/{licencia_tipo_id}:
-    $ref: './modules/licenciaTipo.yml#/delete'
+    $ref: "./modules/licenciaTipo.yml#/delete"
 
-# Modulo categoria producto
+  # Modulo categoria producto
   /v1/categoria_producto/list:
-    $ref: './modules/categoriaProducto.yml#/list'
+    $ref: "./modules/categoriaProducto.yml#/list"
 
   /v1/categoria_producto/list/categoria_producto:
-    $ref: './modules/categoriaProducto.yml#/categoria_producto'
+    $ref: "./modules/categoriaProducto.yml#/categoria_producto"
 
   /v1/categoria_producto/save:
-    $ref: './modules/categoriaProducto.yml#/save'
+    $ref: "./modules/categoriaProducto.yml#/save"
 
   /v1/categoria_producto/update/{categoriaproducto_id}:
-    $ref: './modules/categoriaProducto.yml#/update'
+    $ref: "./modules/categoriaProducto.yml#/update"
 
   /v1/categoria_producto/delete/{categoriaproducto_id}:
-    $ref: './modules/categoriaProducto.yml#/delete'
+    $ref: "./modules/categoriaProducto.yml#/delete"
 
-# Modulo Producto
+  # Modulo Producto
 
   /v1/producto/init_data:
-    $ref: './modules/producto.yml#/init_data'
+    $ref: "./modules/producto.yml#/init_data"
 
   /v1/producto/list:
-    $ref: './modules/producto.yml#/list'
+    $ref: "./modules/producto.yml#/list"
 
   /v1/producto/list/producto:
-    $ref: './modules/producto.yml#/producto'
+    $ref: "./modules/producto.yml#/producto"
 
   /v1/producto/save:
-    $ref: './modules/producto.yml#/save'
+    $ref: "./modules/producto.yml#/save"
 
   /v1/producto/update/{producto_id}:
-    $ref: './modules/producto.yml#/update'
+    $ref: "./modules/producto.yml#/update"
 
   /v1/producto/delete/{producto_id}:
-    $ref: './modules/producto.yml#/delete'
+    $ref: "./modules/producto.yml#/delete"
 
-# Modulo Producto Configuracion
+  # Modulo Producto Configuracion
 
   /v1/producto_configuracion/init_data:
-    $ref: './modules/productoConfiguracion.yml#/init_data'
+    $ref: "./modules/productoConfiguracion.yml#/init_data"
 
   /v1/producto_configuracion/list:
-    $ref: './modules/productoConfiguracion.yml#/list'
+    $ref: "./modules/productoConfiguracion.yml#/list"
 
   /v1/producto_configuracion/list/producto_configuracion:
-    $ref: './modules/productoConfiguracion.yml#/producto_configuracion'
+    $ref: "./modules/productoConfiguracion.yml#/producto_configuracion"
 
   /v1/producto_configuracion/save:
-    $ref: './modules/productoConfiguracion.yml#/save'
+    $ref: "./modules/productoConfiguracion.yml#/save"
 
   /v1/producto_configuracion/update/{productoconfiguracion_id}:
-    $ref: './modules/productoConfiguracion.yml#/update'
+    $ref: "./modules/productoConfiguracion.yml#/update"
 
   /v1/producto_configuracion/delete/{productoconfiguracion_id}:
-    $ref: './modules/productoConfiguracion.yml#/delete'
-  
-# Modulo Producto Costos Configuracion
+    $ref: "./modules/productoConfiguracion.yml#/delete"
+
+  # Modulo Producto Costos Configuracion
 
   /v1/producto_costos_configuracion/init_data:
-    $ref: './modules/productoCostoConfiguracion.yml#/init_data'
- 
+    $ref: "./modules/productoCostoConfiguracion.yml#/init_data"
+
   /v1/producto_costos_configuracion/list:
-    $ref: './modules/productoCostoConfiguracion.yml#/list'
+    $ref: "./modules/productoCostoConfiguracion.yml#/list"
 
   /v1/producto_costos_configuracion/save:
-    $ref: './modules/productoCostoConfiguracion.yml#/save'
+    $ref: "./modules/productoCostoConfiguracion.yml#/save"
 
   /v1/producto_costos_configuracion/save_proyeccion:
-    $ref: './modules/productoCostoConfiguracion.yml#/save_proyeccion'
+    $ref: "./modules/productoCostoConfiguracion.yml#/save_proyeccion"
 
-# Modulo Cotizacion
+  # Modulo Cotizacion
 
   /v1/distribuidor/cotizacion/init_data:
-    $ref: './modules/cotizacion.yml#/init_data'
+    $ref: "./modules/cotizacion.yml#/init_data"
 
   /v1/distribuidor/cotizacion/list:
-    $ref: './modules/cotizacion.yml#/list'
-  
+    $ref: "./modules/cotizacion.yml#/list"
+
   /v1/distribuidor/cotizacion/list/user:
-    $ref: './modules/cotizacion.yml#/list_user'
-  
+    $ref: "./modules/cotizacion.yml#/list_user"
+
   /v1/distribuidor/cotizacion/list/user/informacion:
-    $ref: './modules/cotizacion.yml#/user_informacion'
+    $ref: "./modules/cotizacion.yml#/user_informacion"
 
   /v1/distribuidor/cotizacion/save:
-    $ref: './modules/cotizacion.yml#/save'
+    $ref: "./modules/cotizacion.yml#/save"
 
   /v1/distribuidor/cotizacion/send_code:
-    $ref: './modules/cotizacion.yml#/send_code'
+    $ref: "./modules/cotizacion.yml#/send_code"
 
   /v1/distribuidor/cotizacion/confirmacion:
-    $ref: './modules/cotizacion.yml#/confirmacion'
+    $ref: "./modules/cotizacion.yml#/confirmacion"
 
   /v1/distribuidor/cotizacion/anular/{cotizacion_id}:
-    $ref: './modules/cotizacion.yml#/anular'
+    $ref: "./modules/cotizacion.yml#/anular"
 
   /v1/distribuidor/cotizacion/download:
-    $ref: './modules/cotizacion.yml#/download'
+    $ref: "./modules/cotizacion.yml#/download"
 
   /v1/distribuidor/cotizacion/nota/list:
-    $ref: './modules/cotizacion.yml#/nota_list'
+    $ref: "./modules/cotizacion.yml#/nota_list"
 
   /v1/distribuidor/cotizacion/nota/list/nota:
-    $ref: './modules/cotizacion.yml#/list_nota'
+    $ref: "./modules/cotizacion.yml#/list_nota"
 
   /v1/distribuidor/cotizacion/nota/save:
-    $ref: './modules/cotizacion.yml#/nota_save'
+    $ref: "./modules/cotizacion.yml#/nota_save"
 
   /v1/distribuidor/cotizacion/nota/update/{cotizacion_nota_id}:
-    $ref: './modules/cotizacion.yml#/nota_update'
+    $ref: "./modules/cotizacion.yml#/nota_update"
 
   /v1/distribuidor/cotizacion/nota/delete/{cotizacion_nota_id}:
-    $ref: './modules/cotizacion.yml#/nota_delete'
+    $ref: "./modules/cotizacion.yml#/nota_delete"
 
-# Recursos Producto
+  # Recursos Producto
 
   /v1/recursos/producto/init_data:
-    $ref: './modules/recursosProducto.yml#/init_data'
+    $ref: "./modules/recursosProducto.yml#/init_data"
 
   /v1/recursos/producto/list/producto:
-    $ref: './modules/recursosProducto.yml#/list_producto' 
+    $ref: "./modules/recursosProducto.yml#/list_producto"
 
   /v1/recursos/producto/list:
-    $ref: './modules/recursosProducto.yml#/list' 
+    $ref: "./modules/recursosProducto.yml#/list"
 
   /v1/recursos/producto/save:
-    $ref: './modules/recursosProducto.yml#/save' 
+    $ref: "./modules/recursosProducto.yml#/save"
 
   /v1/recursos/producto/update:
-    $ref: './modules/recursosProducto.yml#/update' 
+    $ref: "./modules/recursosProducto.yml#/update"
 
   /v1/recursos/producto/delete/{recurso_id}:
-    $ref: './modules/recursosProducto.yml#/delete' 
+    $ref: "./modules/recursosProducto.yml#/delete"
 
   /v1/recursos/producto/download:
-    $ref: './modules/recursosProducto.yml#/download' 
+    $ref: "./modules/recursosProducto.yml#/download"
 
-# Importador
+  # Importador
 
   /v1/importador/init_data:
-    $ref: './modules/importador.yml#/init_data'
+    $ref: "./modules/importador.yml#/init_data"
 
   /v1/importador/usuario/download/plantilla:
-    $ref: './modules/importador.yml#/usuario_download_plantilla'
+    $ref: "./modules/importador.yml#/usuario_download_plantilla"
 
   /v1/importador/usuario/save:
-    $ref: './modules/importador.yml#/usuario_save'
+    $ref: "./modules/importador.yml#/usuario_save"
 
   /v1/importador/contacto/download/plantilla:
-    $ref: './modules/importador.yml#/contacto_download_plantilla'
+    $ref: "./modules/importador.yml#/contacto_download_plantilla"
 
   /v1/importador/contacto/save:
-    $ref: './modules/importador.yml#/contacto_save'
-  
+    $ref: "./modules/importador.yml#/contacto_save"
+
   /v1/importador/clasificado/download/plantilla:
-    $ref: './modules/importador.yml#/clasificado_download_plantilla'
+    $ref: "./modules/importador.yml#/clasificado_download_plantilla"
 
   /v1/importador/clasificado/save:
-    $ref: './modules/importador.yml#/clasificado_save'
+    $ref: "./modules/importador.yml#/clasificado_save"
 
-# Download File
+  # Download File
   /{url_file}&token={token}:
-    $ref: './modules/downloadFile.yml#/token'
+    $ref: "./modules/downloadFile.yml#/token"
 
-# Tarea
+  # Tarea
   /v1/tarea/init_data:
-    $ref: './modules/tarea.yml#/init_data'
+    $ref: "./modules/tarea.yml#/init_data"
 
   /v1/tarea/list:
-    $ref: './modules/tarea.yml#/list'
+    $ref: "./modules/tarea.yml#/list"
 
   /v1/tarea/list/tarea:
-    $ref: './modules/tarea.yml#/list_tarea'
+    $ref: "./modules/tarea.yml#/list_tarea"
 
   /v1/tarea/save:
-    $ref: './modules/tarea.yml#/save'
+    $ref: "./modules/tarea.yml#/save"
 
   /v1/tarea/update/{tarea_id}:
-    $ref: './modules/tarea.yml#/update'
+    $ref: "./modules/tarea.yml#/update"
 
   /v1/tarea/update_estado/{tarea_id}:
-    $ref: './modules/tarea.yml#/update_estado'
+    $ref: "./modules/tarea.yml#/update_estado"
 
   /v1/tarea/update_visto/{tarea_id}:
-    $ref: './modules/tarea.yml#/update_visto'
+    $ref: "./modules/tarea.yml#/update_visto"
 
   /v1/tarea/download:
-    $ref: './modules/tarea.yml#/download'
+    $ref: "./modules/tarea.yml#/download"
 
   /v1/tarea/delete/{tarea_id}:
-    $ref: './modules/tarea.yml#/delete'
+    $ref: "./modules/tarea.yml#/delete"
 
-#  Tarea Comentario
+  #  Tarea Comentario
   /v1/comentario/list:
-    $ref: './modules/tareaComentario.yml#/list'
+    $ref: "./modules/tareaComentario.yml#/list"
 
   /v1/comentario/list/comentario:
-    $ref: './modules/tareaComentario.yml#/list_comentario'
+    $ref: "./modules/tareaComentario.yml#/list_comentario"
 
   /v1/comentario/save:
-    $ref: './modules/tareaComentario.yml#/save'
+    $ref: "./modules/tareaComentario.yml#/save"
 
   /v1/comentario/update/{tareacomentario_id}:
-    $ref: './modules/tareaComentario.yml#/update'
+    $ref: "./modules/tareaComentario.yml#/update"
 
   /v1/comentario/update_estado/{tareacomentario_ids}:
-    $ref: './modules/tareaComentario.yml#/update_estado'
+    $ref: "./modules/tareaComentario.yml#/update_estado"
 
   /v1/comentario/delete/{tareacomentario_id}:
-    $ref: './modules/tareaComentario.yml#/delete'
- 
-# Calendario
- 
+    $ref: "./modules/tareaComentario.yml#/delete"
+
+  # Calendario
+
   /v1/calendario/init_data:
-    $ref: './modules/calendario.yml#/init_data'
+    $ref: "./modules/calendario.yml#/init_data"
 
   /v1/calendario/list:
-    $ref: './modules/calendario.yml#/list'
+    $ref: "./modules/calendario.yml#/list"
 
   /v1/calendario/list/calendario:
-    $ref: './modules/calendario.yml#/list_calendario'
+    $ref: "./modules/calendario.yml#/list_calendario"
 
   /v1/calendario/save:
-    $ref: './modules/calendario.yml#/save'
+    $ref: "./modules/calendario.yml#/save"
 
   /v1/calendario/update/{calendario_id}:
-    $ref: './modules/calendario.yml#/update'
+    $ref: "./modules/calendario.yml#/update"
 
   /v1/calendario/delete/{calendario_id}:
-    $ref: './modules/calendario.yml#/delete'
+    $ref: "./modules/calendario.yml#/delete"
 
-# idea
- 
+  # idea
+
   /v1/idea/init_data:
-    $ref: './modules/idea.yml#/init_data' 
+    $ref: "./modules/idea.yml#/init_data"
 
   /v1/idea/list:
-    $ref: './modules/idea.yml#/list'
+    $ref: "./modules/idea.yml#/list"
 
   /v1/idea/list/idea:
-    $ref: './modules/idea.yml#/list_idea'
+    $ref: "./modules/idea.yml#/list_idea"
 
   /v1/idea/save:
-    $ref: './modules/idea.yml#/save'
+    $ref: "./modules/idea.yml#/save"
 
   /v1/idea/update/{idea_id}:
-    $ref: './modules/idea.yml#/update'
+    $ref: "./modules/idea.yml#/update"
 
   /v1/idea/update_estado/{idea_id}:
-    $ref: './modules/idea.yml#/update_estado'
+    $ref: "./modules/idea.yml#/update_estado"
 
   /v1/idea/delete/{idea_id}:
-    $ref: './modules/idea.yml#/delete'
+    $ref: "./modules/idea.yml#/delete"
 
-# area
+  # area
 
   /v1/area/init_data:
-    $ref: './modules/area.yml#/init_data'
+    $ref: "./modules/area.yml#/init_data"
 
   /v1/area/list:
-    $ref: './modules/area.yml#/area_list'
-  
+    $ref: "./modules/area.yml#/area_list"
+
   /v1/area/list/area:
-    $ref: './modules/area.yml#/list_area'
+    $ref: "./modules/area.yml#/list_area"
 
   /v1/area/save:
-    $ref: './modules/area.yml#/save'
+    $ref: "./modules/area.yml#/save"
 
   /v1/area/update/{area_id}:
-    $ref: './modules/area.yml#/update'
+    $ref: "./modules/area.yml#/update"
 
   /v1/area/delete/{area_id}:
-    $ref: './modules/area.yml#/delete'
+    $ref: "./modules/area.yml#/delete"
 
-# contacto
+  # contacto
 
   /v1/contacto/init_data:
-    $ref: './modules/contacto.yml#/init_data'
+    $ref: "./modules/contacto.yml#/init_data"
 
   /v1/contacto/list:
-    $ref: './modules/contacto.yml#/list'
+    $ref: "./modules/contacto.yml#/list"
 
   /v1/contacto/list/contacto:
-    $ref: './modules/contacto.yml#/list_contacto'
+    $ref: "./modules/contacto.yml#/list_contacto"
 
   /v1/contacto/save:
-    $ref: './modules/contacto.yml#/save'
+    $ref: "./modules/contacto.yml#/save"
 
   /v1/contacto/update/{contacto_id}:
-    $ref: './modules/contacto.yml#/update'
+    $ref: "./modules/contacto.yml#/update"
 
   /v1/contacto/asignar/{contacto_id}:
-    $ref: './modules/contacto.yml#/asignar'
+    $ref: "./modules/contacto.yml#/asignar"
 
   /v1/contacto/delete/{contacto_id}:
-    $ref: './modules/contacto.yml#/delete'
+    $ref: "./modules/contacto.yml#/delete"
 
   /v1/contacto/difusion/save:
-    $ref: './modules/contacto.yml#/difusion_save'
+    $ref: "./modules/contacto.yml#/difusion_save"
 
   /v1/contacto/difusion/init_data:
-    $ref: './modules/contacto.yml#/difusion_init_data'
+    $ref: "./modules/contacto.yml#/difusion_init_data"
 
   /v1/contacto/historial/save:
-    $ref: './modules/contacto.yml#/historial_save'
+    $ref: "./modules/contacto.yml#/historial_save"
 
   /v1/contacto/historial/delete/{historialcontacto_id}:
-    $ref: './modules/contacto.yml#/historial_delete'
+    $ref: "./modules/contacto.yml#/historial_delete"
 
-# persona
+  # persona
 
   /v1/persona/init_data:
-    $ref: './modules/persona.yml#/init_data'
+    $ref: "./modules/persona.yml#/init_data"
 
   /v1/persona/save:
-    $ref: './modules/persona.yml#/save'
+    $ref: "./modules/persona.yml#/save"
 
   /v1/persona/list/workshop:
-    $ref: './modules/persona.yml#/list_workshop'
+    $ref: "./modules/persona.yml#/list_workshop"
 
-# pagina principal
+  # pagina principal
   /v1/pagina_principal/imagen/list:
-    $ref: './modules/paginaPrincipal.yml#/imagen_list'
+    $ref: "./modules/paginaPrincipal.yml#/imagen_list"
 
   /v1/pagina_principal/imagen/save:
-    $ref: './modules/paginaPrincipal.yml#/imagen_save'
+    $ref: "./modules/paginaPrincipal.yml#/imagen_save"
 
   /v1/pagina_principal/imagen/save_image:
-    $ref: './modules/paginaPrincipal.yml#/save_image'
+    $ref: "./modules/paginaPrincipal.yml#/save_image"
 
-# unidad tiempo
+  # unidad tiempo
   /v1/unidad_tiempo/list:
-    $ref: './modules/unidadTiempo.yml#/list'
+    $ref: "./modules/unidadTiempo.yml#/list"
 
   /v1/unidad_tiempo/list/unidad_tiempo:
-    $ref: './modules/unidadTiempo.yml#/list_unidad_tiempo'
+    $ref: "./modules/unidadTiempo.yml#/list_unidad_tiempo"
 
   /v1/unidad_tiempo/save:
-    $ref: './modules/unidadTiempo.yml#/save'
+    $ref: "./modules/unidadTiempo.yml#/save"
 
   /v1/unidad_tiempo/update/{unidad_tiempo_id}:
-    $ref: './modules/unidadTiempo.yml#/update'
+    $ref: "./modules/unidadTiempo.yml#/update"
 
   /v1/unidad_tiempo/delete/{unidad_tiempo_id}:
-    $ref: './modules/unidadTiempo.yml#/delete'
+    $ref: "./modules/unidadTiempo.yml#/delete"
 
-#  categoria clasificado
+  #  categoria clasificado
 
   /v1/clasificado/categoria/list:
-    $ref: './modules/categoriaClasificado.yml#/list'
+    $ref: "./modules/categoriaClasificado.yml#/list"
 
   /v1/clasificado/categoria/list/categoria:
-    $ref: './modules/categoriaClasificado.yml#/list_categoria'
+    $ref: "./modules/categoriaClasificado.yml#/list_categoria"
 
   /v1/clasificado/categoria/save:
-    $ref: './modules/categoriaClasificado.yml#/save'
+    $ref: "./modules/categoriaClasificado.yml#/save"
 
   /v1/clasificado/categoria/update:
-    $ref: './modules/categoriaClasificado.yml#/update'
+    $ref: "./modules/categoriaClasificado.yml#/update"
 
   /v1/clasificado/categoria/delete/{categoria_clasificado_id}:
-    $ref: './modules/categoriaClasificado.yml#/delete'
+    $ref: "./modules/categoriaClasificado.yml#/delete"
 
-# clasificado
-  
+  # clasificado
+
   /v1/clasificado/init_data:
-    $ref: './modules/clasificado.yml#/init_data'
+    $ref: "./modules/clasificado.yml#/init_data"
 
   /v1/clasificado/list_all:
-    $ref: './modules/clasificado.yml#/list_all'
+    $ref: "./modules/clasificado.yml#/list_all"
 
   /v1/clasificado/list_all/{clasificado_id}:
-    $ref: './modules/clasificado.yml#/list_all_id'
+    $ref: "./modules/clasificado.yml#/list_all_id"
 
   /v1/clasificado/list:
-    $ref: './modules/clasificado.yml#/list'
+    $ref: "./modules/clasificado.yml#/list"
 
   /v1/clasificado/list/clasificado:
-    $ref: './modules/clasificado.yml#/list_clasificado'
+    $ref: "./modules/clasificado.yml#/list_clasificado"
 
   /v1/clasificado/save:
-    $ref: './modules/clasificado.yml#/save'
+    $ref: "./modules/clasificado.yml#/save"
 
   /v1/clasificado/update:
-    $ref: './modules/clasificado.yml#/update'
+    $ref: "./modules/clasificado.yml#/update"
 
   /v1/clasificado/aprobar/{clasificado_id}:
-    $ref: './modules/clasificado.yml#/aprobar'
+    $ref: "./modules/clasificado.yml#/aprobar"
 
   /v1/clasificado/delete/{clasificado_id}:
-   $ref: './modules/clasificado.yml#/delete'
+    $ref: "./modules/clasificado.yml#/delete"
 
   /v1/clasificado/enviar_solicitud:
-   $ref: './modules/clasificado.yml#/enviar_solicitud'
+    $ref: "./modules/clasificado.yml#/enviar_solicitud"
 
   /v1/clasificado/solicitud/list:
-    $ref: './modules/clasificado.yml#/solicitud_list'
+    $ref: "./modules/clasificado.yml#/solicitud_list"
 
   /v1/clasificado/solicitud/list/solicitud:
-    $ref: './modules/clasificado.yml#/solicitud_list_solicitud'
+    $ref: "./modules/clasificado.yml#/solicitud_list_solicitud"
 
   /v1/clasificado/solicitud/change_estado:
-    $ref: './modules/clasificado.yml#/solicitud_change_estado'
+    $ref: "./modules/clasificado.yml#/solicitud_change_estado"
 
   /v1/clasificado/solicitud/download:
-    $ref: './modules/clasificado.yml#/solicitud_download'
+    $ref: "./modules/clasificado.yml#/solicitud_download"
 
   /v1/clasificado/solicitud/arriendo:
-    $ref: './modules/clasificado.yml#/solicitud_arriendo'
+    $ref: "./modules/clasificado.yml#/solicitud_arriendo"
 
   /v1/clasificado/contacto/list:
-    $ref: './modules/clasificado.yml#/contacto_list'
+    $ref: "./modules/clasificado.yml#/contacto_list"
 
   /v1/clasificado/contacto/list/contacto:
-    $ref: './modules/clasificado.yml#/contato_list_contacto'
+    $ref: "./modules/clasificado.yml#/contato_list_contacto"
 
-  /v1/clasificado/contacto/save:    
-    $ref: './modules/clasificado.yml#/contacto_save'
+  /v1/clasificado/contacto/save:
+    $ref: "./modules/clasificado.yml#/contacto_save"
 
   /v1/clasificado/contacto/update/{contacto_clasificado_id}:
-    $ref: './modules/clasificado.yml#/contacto_update'
+    $ref: "./modules/clasificado.yml#/contacto_update"
 
   /v1/clasificado/contacto/delete/{contacto_clasificado_id}:
-    $ref: './modules/clasificado.yml#/contacto_delete'
+    $ref: "./modules/clasificado.yml#/contacto_delete"
 
   /v1/clasificado/init_reservacion:
-    $ref: './modules/clasificado.yml#/init_reservacion'
+    $ref: "./modules/clasificado.yml#/init_reservacion"
 
   /v1/clasificado/confirmar_reservacion:
-    $ref: './modules/clasificado.yml#/confirmar_reservacion'
+    $ref: "./modules/clasificado.yml#/confirmar_reservacion"
 
   /v1/clasificado/status_transaccion:
-    $ref: './modules/clasificado.yml#/status_transaccion'
+    $ref: "./modules/clasificado.yml#/status_transaccion"
 
   /v1/clasificado/enviar_solicitud_servicio_reparacion:
-    $ref: './modules/clasificado.yml#/enviar_solicitud_servicio_reparacion'
+    $ref: "./modules/clasificado.yml#/enviar_solicitud_servicio_reparacion"
 
-# propiedad
+  # propiedad
 
   /v1/propiedad/init_data:
-    $ref: './modules/propiedad.yml#/init_data'
+    $ref: "./modules/propiedad.yml#/init_data"
 
   /v1/propiedad/list_all:
-    $ref: './modules/propiedad.yml#/list_all'
+    $ref: "./modules/propiedad.yml#/list_all"
 
   /v1/propiedad/list_all/{propiedad_id}:
-    $ref: './modules/propiedad.yml#/list_all_propiedad_id'
+    $ref: "./modules/propiedad.yml#/list_all_propiedad_id"
 
   /v1/propiedad/list:
-    $ref: './modules/propiedad.yml#/list'
+    $ref: "./modules/propiedad.yml#/list"
 
   /v1/propiedad/list/propiedad:
-    $ref: './modules/propiedad.yml#/list_propiedad'
+    $ref: "./modules/propiedad.yml#/list_propiedad"
 
   /v1/propiedad/save:
-    $ref: './modules/propiedad.yml#/save'
+    $ref: "./modules/propiedad.yml#/save"
 
   /v1/propiedad/update:
-    $ref: './modules/propiedad.yml#/update'
+    $ref: "./modules/propiedad.yml#/update"
 
   /v1/propiedad/aprobar/{propiedad_id}:
-    $ref: './modules/propiedad.yml#/aprobar'
+    $ref: "./modules/propiedad.yml#/aprobar"
 
   /v1/propiedad/delete/{propiedad_id}:
-    $ref: './modules/propiedad.yml#/delete'
+    $ref: "./modules/propiedad.yml#/delete"
+
+  # energia solicitud
+  /v1/energia_solicitud/init_data:
+    $ref: "./modules/energiaSolicitud.yml#/init_data"
+
+  /v1/energia_solicitud/list:
+    $ref: "./modules/energiaSolicitud.yml#/list"
+
+  /v1/energia_solicitud/list/energia_solicitud:
+    $ref: "./modules/energiaSolicitud.yml#/list_energia_solicitud"
+
+  /v1/energia_solicitud/save:
+    $ref: "./modules/energiaSolicitud.yml#/save"
 
 components:
   schemas:
     Administrador:
-      $ref: './schemas/administrador.yml#/Administrador'
+      $ref: "./schemas/administrador.yml#/Administrador"
     Usuario:
-      $ref: './schemas/usuario.yml#/Usuario'
+      $ref: "./schemas/usuario.yml#/Usuario"
     Estado:
-      $ref: './schemas/estado.yml#/Estado'
+      $ref: "./schemas/estado.yml#/Estado"
     Empresa:
-      $ref: './schemas/empresa.yml#/Empresa'
+      $ref: "./schemas/empresa.yml#/Empresa"
     Sucursal:
-      $ref: './schemas/sucursal.yml#/Sucursal'
+      $ref: "./schemas/sucursal.yml#/Sucursal"
     Rol:
-      $ref: './schemas/rol.yml#/Rol'
+      $ref: "./schemas/rol.yml#/Rol"
     LicenciaTipo:
-      $ref: './schemas/licenciaTipo.yml#/LicenciaTipo'
+      $ref: "./schemas/licenciaTipo.yml#/LicenciaTipo"
     TipoDocumento:
-      $ref: './schemas/tipoDocumento.yml#/TipoDocumento'
+      $ref: "./schemas/tipoDocumento.yml#/TipoDocumento"
     Pais:
-      $ref: './schemas/pais.yml#/Pais'
+      $ref: "./schemas/pais.yml#/Pais"
     CategoriaProducto:
-      $ref: './schemas/categoriaProducto.yml#/CategoriaProducto'
+      $ref: "./schemas/categoriaProducto.yml#/CategoriaProducto"
     Servicio:
-      $ref: './schemas/servicio.yml#/Servicio'
+      $ref: "./schemas/servicio.yml#/Servicio"
     Vigencia:
-      $ref: './schemas/vigencia.yml#/Vigencia'
+      $ref: "./schemas/vigencia.yml#/Vigencia"
     Producto:
-      $ref: './schemas/producto.yml#/Producto'
+      $ref: "./schemas/producto.yml#/Producto"
     ProductoConfiguracion:
-      $ref: './schemas/productoConfiguracion.yml#/ProductoConfiguracion'
+      $ref: "./schemas/productoConfiguracion.yml#/ProductoConfiguracion"
     Cotizacion:
-      $ref: './schemas/cotizacion.yml#/Cotizacion'
+      $ref: "./schemas/cotizacion.yml#/Cotizacion"
     CotizacionDetalle:
-      $ref: './schemas/cotizacionDetalle.yml#/CotizacionDetalle'
+      $ref: "./schemas/cotizacionDetalle.yml#/CotizacionDetalle"
     CotizacionNota:
-      $ref: './schemas/cotizacionNota.yml#/CotizacionNota'
+      $ref: "./schemas/cotizacionNota.yml#/CotizacionNota"
     AccesoModulo:
-      $ref: './schemas/accesoModulo.yml#/AccesoModulo'
+      $ref: "./schemas/accesoModulo.yml#/AccesoModulo"
     Area:
-      $ref: './schemas/area.yml#/Area'
+      $ref: "./schemas/area.yml#/Area"
     Tarea:
-      $ref: './schemas/tarea.yml#/Tarea'
+      $ref: "./schemas/tarea.yml#/Tarea"
     TareaComentario:
-      $ref: './schemas/tareaComentario.yml#/TareaComentario'
+      $ref: "./schemas/tareaComentario.yml#/TareaComentario"
     Calendario:
-      $ref: './schemas/calendario.yml#/Calendario'
+      $ref: "./schemas/calendario.yml#/Calendario"
     Contacto:
-      $ref: './schemas/contacto.yml#/Contacto'
+      $ref: "./schemas/contacto.yml#/Contacto"
     Idea:
-      $ref: './schemas/idea.yml#/Idea'
+      $ref: "./schemas/idea.yml#/Idea"
     ProductoCostoConfiguracion:
-      $ref: './schemas/productoCostoConfiguracion.yml#/ProductoCostoConfiguracion'
+      $ref: "./schemas/productoCostoConfiguracion.yml#/ProductoCostoConfiguracion"
     ProductoCostoConfiguracionProyeccion:
-      $ref: './schemas/productoCostoConfiguracionProyeccion.yml#/ProductoCostoConfiguracionProyeccion'
+      $ref: "./schemas/productoCostoConfiguracionProyeccion.yml#/ProductoCostoConfiguracionProyeccion"
     ImagenPaginaPrincipal:
-      $ref: './schemas/imagenPaginaPrincipal.yml#/ImagenPaginaPrincipal'
+      $ref: "./schemas/imagenPaginaPrincipal.yml#/ImagenPaginaPrincipal"
     CategoriaClasificado:
-      $ref: './schemas/categoriaClasificado.yml#/CategoriaClasificado'
+      $ref: "./schemas/categoriaClasificado.yml#/CategoriaClasificado"
     UnidadTiempo:
-      $ref: './schemas/unidadTiempo.yml#/UnidadTiempo'
+      $ref: "./schemas/unidadTiempo.yml#/UnidadTiempo"
     TipoError:
-      $ref: './schemas/tipoError.yml#/TipoError'
+      $ref: "./schemas/tipoError.yml#/TipoError"
     ValoresEstado:
-      $ref: './schemas/valoresEstado.yml#/ValoresEstado'
+      $ref: "./schemas/valoresEstado.yml#/ValoresEstado"
+    EnergiaSolicitud:
+      $ref: "./schemas/energiaSolicitud.yml#/EnergiaSolicitud"
 
   securitySchemes:
     BearerAuth:

@@ -1,0 +1,71 @@
+EnergiaSolicitud:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Identificador de la solicitud de energía
+      example: 1
+    costo:
+      type: number
+      description: Costo de la solicitud de energía
+      example: 100000
+    saving:
+      type: number
+      description: Ahorro de la solicitud de energía
+      example: 100000
+    mantenimiento:
+      type: number
+      description: Mantenimiento de la solicitud de energía
+      example: 100000
+    nombre:
+      type: string
+      description: Nombre de la solicitud de energía
+      example: "Solicitud de energía 1"
+    compania:
+      type: string
+      description: Compañia de la solicitud de energía
+      example: "Compañia 1"
+    telefono:
+      type: string
+      description: Telefono de la solicitud de energía
+      example: "930506234"
+    email:
+      type: string
+      description: Email de la solicitud de energía
+      example: "example@gmail.com"
+    necesita_financiacion:
+      type: number
+      description: Si necesita financiación de la solicitud de energía
+      example: 1
+    meses:
+      type: integer
+      description: Meses de la solicitud de energía
+      example: 12
+    destino:
+      type: string
+      description: Destino de la solicitud de energía
+      example: "Destino 1"
+    tiempo_estimado:
+      type: number
+      description: Tiempo estimado de la solicitud de energía
+      example: 12
+    pais_nombre:
+      type: string
+      description: Nombre del país de la solicitud de energía
+      example: "Perú"
+    estado:
+      type: integer
+      description: Estado de la solicitud de energía
+      example: 1
+    historial_estado:
+      type: array
+      description: Historial de estados de la solicitud de energía
+      example: [{"id": 1, "estado": 1, "comentario": "Comentario 1", "fecha_creacion": "2024-01-01 12:00:00"}]
+    items:
+      type: array
+      description: Items de la solicitud de energía
+      example: [{"id": 1, "luces": 10, "altura": 10, "lux": 10, "watt": 10}]
+    fecha_creacion:
+      type: string
+      description: Fecha de creación de la solicitud de energía
+      example: "2024-01-01 "

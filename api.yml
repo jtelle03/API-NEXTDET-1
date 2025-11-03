@@ -716,6 +716,9 @@ paths:
   /v1/energia_solicitud/save:
     $ref: "./modules/energiaSolicitud.yml#/save"
 
+  /v1/energia_solicitud/change_estado/{energia_solicitud_id}:
+    $ref: "./modules/energiaSolicitud.yml#/change_estado"
+
 components:
   schemas:
     Administrador:

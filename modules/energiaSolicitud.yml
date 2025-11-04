@@ -329,6 +329,13 @@ change_estado:
       description: Cambiamos el estado de la solicitud de energía
       security:
         - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      parameters:
+        - in: path
+          name: energia_solicitud_id
+          required: true
+          description: Identificador de la solicitud de energía
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -336,10 +343,6 @@ change_estado:
             schema:
               type: object
               properties:
-                energia_solicitud_id:
-                  type: integer
-                  description: Identificador de la solicitud de energía
-                  example: 1
                 estado:
                   type: integer
                   description: Estado de la solicitud de energía
@@ -349,7 +352,6 @@ change_estado:
                   description: Comentario de la solicitud de energía
                   example: "Comentario de la solicitud de energía"
               required:
-                - energia_solicitud_id
                 - estado
                 - comentario
       responses:

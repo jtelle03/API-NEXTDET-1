@@ -276,6 +276,12 @@ list_energia_solicitud:
       description: Obtenemos la lista de solicitudes de energía
       security:
         - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      parameters:
+        - in: query
+          name: energia_solicitud_id
+          description: Identificador de la solicitud de energía
+          schema:
+            type: integer
       responses:
         200:
           description: Consulta exitosa.

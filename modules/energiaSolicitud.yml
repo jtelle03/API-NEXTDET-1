@@ -180,6 +180,47 @@ list:
       description: Obtenemos la lista de solicitudes de energía
       security:
         - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      parameters:
+        - in: query
+          name: busqueda
+          description: Busqueda de la solicitud de energía
+          schema:
+            type: string
+        - in: query
+          name: estado_solicitud
+          description: Estado de la solicitud de energía
+          schema:
+            type: integer
+        - in: query
+          name: necesita_financiacion
+          description: Si necesita financiación de la solicitud de energía
+          schema:
+            type: integer
+        - in: query
+          name: pais_id
+          description: Identificador del pais de la solicitud de energía
+          schema:
+            type: integer
+        - in: query
+          name: fecha_desde
+          description: Fecha desde de la solicitud de energía
+          schema:
+            type: string
+        - in: query
+          name: fecha_hasta
+          description: Fecha hasta de la solicitud de energía
+          schema:
+            type: string
+        - in: query
+          name: page
+          description: Página de la solicitud de energía
+          schema:
+            type: integer
+        - in: query
+          name: page_row
+          description: Filas por página de la solicitud de energía
+          schema:
+            type: integer
       responses:
         200:
           description: Consulta exitosa.

@@ -227,6 +227,18 @@ list_all:
                             metros_terreno:
                               type: number
                               example: 15000
+                            pies_construccion:
+                              type: number
+                              example: 10764
+                            pies_terreno:
+                              type: number
+                              example: 157640
+                            precio_uf:
+                              type: number
+                              example: 1000000
+                            precio_usd:
+                              type: number
+                              example: 1000000
                             aprobado:
                               type: number
                               example: 1
@@ -403,6 +415,18 @@ list_all_propiedad_id:
                       metros_terreno:
                         type: integer
                         example: 15000
+                      pies_construccion:
+                        type: number
+                        example: 10764
+                      pies_terreno:
+                        type: number
+                        example: 157640
+                      precio_uf:
+                        type: number
+                        example: 1000000
+                      precio_usd:
+                        type: number
+                        example: 1000000
                       estado_solicitud:
                         type: integer
                         example: 5
@@ -581,12 +605,21 @@ list:
                             metros_terreno:
                               type: integer
                               example: 15000
+                            pies_construccion:
+                              type: number
+                              example: 10764
+                            pies_terreno:
+                              type: number
+                              example: 157640
+                            precio_uf:
+                              type: number
+                              example: 1000000
+                            precio_usd:
+                              type: number
+                              example: 1000000
                             estado_aprobado:
                               type: integer
                               example: 0
-                            precio:
-                              type: integer
-                              example: 100000
                             estado:
                               type: integer
                               example: 1
@@ -717,9 +750,6 @@ list_propiedad:
                       ciudad:
                         type: string
                         example: "Santiago"
-                      precio:
-                        type: integer
-                        example: 100000
                       caracteristicas:
                         type: object
                         example:
@@ -732,6 +762,18 @@ list_propiedad:
                       metros_terreno:
                         type: integer
                         example: 15000
+                      pies_construccion:
+                        type: number
+                        example: 10764
+                      pies_terreno:
+                        type: number
+                        example: 157640
+                      precio_uf:
+                        type: number
+                        example: 1000000
+                      precio_usd:
+                        type: number
+                        example: 1000000
                       imagenes:
                         type: array
                         items:
@@ -828,6 +870,7 @@ save:
                   example: 120
                 precio:
                   type: number
+                  description: Precio en UF
                   example: 250000
                 imagenes:
                   type: array
@@ -939,7 +982,7 @@ update:
                   example: 150
                 precio:
                   type: integer
-                  description: Precio de la propiedad
+                  description: Precio de la propiedad en UF
                   example: 160000
                 imagenes:
                   type: array

@@ -1,22 +1,22 @@
- CategoriaPropiedad:
-      description: Categoria de propiedad
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 1
-        nombre:
-          type: string
-          example: "Casa"
-        nombre_ingles:
-          type: string
-          example: "House"
-        estado:
-          type: integer
-          example: 1
-        estado_nombre:
-          type: string
-          example: "Activo"
-        url_imagen:
-          type: string
-          example: "https://api.nextdet.com/images/img-no-found.jpg"
+CategoriaPropiedad:
+  description: Categoria de propiedad
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+    nombre:
+      type: string
+      example: "Casa"
+    nombre_ingles:
+      type: string
+      example: "House"
+    estado:
+      type: integer
+      example: 1
+    estado_nombre:
+      type: string
+      example: "Activo"
+    url_imagen:
+      type: string
+      example: "https://api.nextdet.com/images/img-no-found.jpg"

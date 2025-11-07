@@ -703,6 +703,38 @@ paths:
   /v1/propiedad/delete/{propiedad_id}:
     $ref: "./modules/propiedad.yml#/delete"
 
+  # categoria propiedad
+  /v1/propiedad/categoria/list:
+    $ref: "./modules/categoriaPropiedad.yml#/list"
+
+  /v1/propiedad/categoria/list/categoria:
+    $ref: "./modules/categoriaPropiedad.yml#/list_categoria"
+  
+  /v1/propiedad/categoria/save:
+    $ref: "./modules/categoriaPropiedad.yml#/save"
+
+  /v1/propiedad/categoria/update:
+    $ref: "./modules/categoriaPropiedad.yml#/update"
+
+  /v1/propiedad/categoria/delete/{categoria_propiedad_id}:
+    $ref: "./modules/categoriaPropiedad.yml#/delete"
+
+  # Condicion propiedad
+  /v1/propiedad/condicion/list:
+    $ref: "./modules/condicionPropiedad.yml#/list"
+
+  /v1/propiedad/condicion/list/condicion:
+    $ref: "./modules/condicionPropiedad.yml#/list_condicion"
+
+  /v1/propiedad/condicion/save:
+    $ref: "./modules/condicionPropiedad.yml#/save"
+
+  /v1/propiedad/condicion/update:
+    $ref: "./modules/condicionPropiedad.yml#/update"
+
+  /v1/propiedad/condicion/delete/{condicion_propiedad_id}:
+    $ref: "./modules/condicionPropiedad.yml#/delete"
+
   # energia solicitud
   /v1/energia_solicitud/init_data:
     $ref: "./modules/energiaSolicitud.yml#/init_data"
@@ -785,6 +817,10 @@ components:
       $ref: "./schemas/valoresEstado.yml#/ValoresEstado"
     EnergiaSolicitud:
       $ref: "./schemas/energiaSolicitud.yml#/EnergiaSolicitud"
+    CategoriaPropiedad:
+      $ref: "./schemas/categoriaPropiedad.yml#/CategoriaPropiedad"
+    CondicionPropiedad:
+      $ref: "./schemas/condicionPropiedad.yml#/CondicionPropiedad"
 
   securitySchemes:
     BearerAuth:

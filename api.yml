@@ -735,6 +735,21 @@ paths:
   /v1/propiedad/condicion/delete/{condicion_propiedad_id}:
     $ref: "./modules/condicionPropiedad.yml#/delete"
 
+  /v1/propiedad/contacto/save:
+    $ref: "./modules/propiedad.yml#/contacto_save"
+
+  /v1/propiedad/contacto/list:
+    $ref: "./modules/propiedad.yml#/contacto_list"
+
+  /v1/propiedad/contacto/list/contacto:
+    $ref: "./modules/propiedad.yml#/contacto_list_contacto"
+
+  /v1/propiedad/contacto/update/{contacto_propiedad_id}:
+    $ref: "./modules/propiedad.yml#/contacto_update"
+
+  /v1/propiedad/contacto/delete/{contacto_propiedad_id}:
+    $ref: "./modules/propiedad.yml#/contacto_delete"
+
   # energia solicitud
   /v1/energia_solicitud/init_data:
     $ref: "./modules/energiaSolicitud.yml#/init_data"
@@ -750,6 +765,21 @@ paths:
 
   /v1/energia_solicitud/change_estado/{energia_solicitud_id}:
     $ref: "./modules/energiaSolicitud.yml#/change_estado"
+
+  /v1/energia_solicitud/contacto/save:
+    $ref: "./modules/energiaSolicitud.yml#/contacto_save"
+
+  /v1/energia_solicitud/contacto/list:
+    $ref: "./modules/energiaSolicitud.yml#/contacto_list"
+
+  /v1/energia_solicitud/contacto/list/contacto:
+    $ref: "./modules/energiaSolicitud.yml#/contacto_list_contacto"
+
+  /v1/energia_solicitud/contacto/update/{contacto_energia_solicitud_id}:
+    $ref: "./modules/energiaSolicitud.yml#/contacto_update"
+  
+  /v1/energia_solicitud/contacto/delete/{contacto_energia_solicitud_id}:
+    $ref: "./modules/energiaSolicitud.yml#/contacto_delete"
 
 components:
   schemas:

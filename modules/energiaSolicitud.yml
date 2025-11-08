@@ -393,3 +393,378 @@ change_estado:
                   datos:
                     type: object
                     example: []
+
+#contacto
+contacto_list:
+    get:
+      tags:
+        - Energia Solicitud
+      operationId: listContactoEnergia
+      description: Listamos los contactos
+      parameters:
+        - name: busqueda
+          in: query
+          description: Búsqueda
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: integer
+        - name: page_row
+          in: query
+          description: Filas por página
+          required: false
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        example: 1
+                      contactos:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Nombre del contacto"
+                            email:
+                              type: string
+                              example: "example@gmail.com"
+                            telefono:
+                              type: string
+                              example: "930506234"
+                            estado:
+                              type: integer
+                              example: 1
+                            estado_nombre:
+                              type: string
+                              example: "Activo"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_list_contacto:
+    get:
+      tags:
+        - Energia Solicitud
+      operationId: listOnlyContactoEnergia
+      description: Listamos un contacto
+      parameters:
+        - name: contacto_energia_id
+          in: query
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      nombre:
+                        type: string
+                        example: "Nombre del contacto"
+                      email:
+                        type: string
+                        example: "example@gmail.com"
+                      telefono:
+                        type: string
+                        example: "930506234"
+                      estado:
+                        type: integer
+                        example: 1
+                      estado_nombre:
+                        type: string
+                        example: "Activo"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_save:
+    post:
+      tags:
+        - Energia Solicitud
+      operationId: saveContactoEnergia
+      description: Guardamos un contacto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - email
+                - telefono
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del contacto
+                  example: "Nombre del contacto"
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: "Empresa del contacto"
+                email:
+                  type: string
+                  description: Email del contacto
+                  example: "example@gmail.com"
+                telefono:
+                  type: string
+                  description: Teléfono del contacto
+                  example: "930506234"
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_update:
+    put:
+      tags:
+        - Energia Solicitud
+      operationId: updateContactoEnergia
+      description: Actualizamos un contacto
+      parameters:
+        - name: contacto_energia_id
+          in: path
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - email
+                - telefono
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del contacto
+                  example: "Nombre del contacto"
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: "Empresa del contacto"
+                email:
+                  type: string
+                  description: Email del contacto
+                  example: "example@gmail.com"
+                telefono:
+                  type: string
+                  description: Teléfono del contacto
+                  example: "930506234"
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_delete:
+    put:
+      tags:
+        - Energia Solicitud
+      operationId: deleteContactoEnergia
+      description: Eliminamos un contacto
+      parameters:
+        - name: contacto_energia_id
+          in: path
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

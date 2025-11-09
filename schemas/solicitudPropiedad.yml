@@ -1,0 +1,80 @@
+SolicitudPropiedad:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+    titulo_propiedad:
+      type: string
+      example: "Propiedad 1"
+    codigo:
+      type: string
+      example: "123456"
+    nombre_cliente:
+      type: string
+      example: "Juan Perez"
+    email:
+      type: string
+      example: "juan.perez@example.com"
+    telefono:
+      type: string
+      example: "930506234"
+    mensaje:
+      type: string
+      example: "Quiero más información sobre la propiedad"
+    estado:
+      type: integer
+      example: 1
+    estado_solicitud_nombre:
+      type: string
+      example: "Activo"
+    historial_solicitud:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          comentario:
+            type: string
+            example: "Comentario del historial"
+          estado:
+            type: integer
+            example: 1
+          estado_nombre:
+            type: string
+            example: "Activo"
+          fecha_creacion:
+            type: string
+            example: "2025-10-20"
+    reserva_fecha:
+      type: string
+      example: "2025-10-20"
+    reserva_monto:
+      type: number
+      example: 100000
+    reserva_comentario:
+      type: string
+      example: "Comentario de la reserva"
+    venta_fecha:
+      type: string
+      example: "2025-10-20"
+    venta_monto:
+      type: number
+      example: 100000
+    venta_comentario:
+      type: string
+      example: "Comentario de la venta"
+    alquiler_fecha:
+      type: string
+      example: "2025-10-20"
+    alquiler_monto:
+      type: number
+      example: 100000
+    alquiler_comentario:
+      type: string
+      example: "Comentario de la alquiler"
+    fecha_creacion:
+      type: string
+      example: "2025-10-20"

@@ -1,15 +1,15 @@
-   CategoriaProducto:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 12
-        nombre:
-          type: string
-          example: "Consolas"
-        estado:
-          type: integer
-          example: 1
-        estado_nombre:
-          type: string
-          example: Activo
+CategoriaProducto:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 12
+    nombre:
+      type: string
+      example: "Consolas"
+    estado:
+      type: integer
+      example: 1
+    estado_nombre:
+      type: string
+      example: Activo

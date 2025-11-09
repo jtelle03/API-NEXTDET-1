@@ -703,13 +703,26 @@ paths:
   /v1/propiedad/delete/{propiedad_id}:
     $ref: "./modules/propiedad.yml#/delete"
 
+  # solicitud propiedad
+  /v1/propiedad/enviar_solicitud:
+    $ref: "./modules/propiedad.yml#/send_solicitud"
+
+  /v1/propiedad/solicitud/list:
+    $ref: "./modules/propiedad.yml#/list_solicitudes"
+
+  /v1/propiedad/solicitud/list/solicitud:
+    $ref: "./modules/propiedad.yml#/solicitud_propiedad"
+
+  /v1/propiedad/solicitud/change_estado:
+    $ref: "./modules/propiedad.yml#/change_estado_solicitud"
+
   # categoria propiedad
   /v1/propiedad/categoria/list:
     $ref: "./modules/categoriaPropiedad.yml#/list"
 
   /v1/propiedad/categoria/list/categoria:
     $ref: "./modules/categoriaPropiedad.yml#/list_categoria"
-  
+
   /v1/propiedad/categoria/save:
     $ref: "./modules/categoriaPropiedad.yml#/save"
 

@@ -1,1176 +1,1500 @@
 init_data:
-    get:
-      tags:
-        - Propiedad
-      operationId: initDataPropiedad
-      description: Obtiene los datos iniciales de la propiedad
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    properties:
-                      categoriaPropiedades:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                            nombre:
-                              type: string
-                              example: "Casa"
-                            nombre_ingles:
-                              type: string
-                              example: "House"
-                            estado:
-                              type: integer
-                              example: 1
-                            estado_nombre:
-                              type: string
-                              example: "Activo"
-                            url_imagen::
-                              type: string
-                              example: "https://nextdet.com/images/categoria_propiedad/1.jpg"
-                      condicionPropiedades:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              example: 1
-                            nombre:
-                              type: string
-                              example: "Vendida"
-                            nombre_ingles:
-                              type: string
-                              example: "Sold"
-                            estado:
-                              type: integer
-                              example: 1
-                            estado_nombre:
-                              type: string
-                              example: "Activo"
-                            url_imagen:
-                              type: string
-                              example: "https://nextdet.com/images/condicion_propiedad/1.jpg"
-                      paises:
-                        type: array
-                        items:
-                          $ref: "../schemas/pais.yml#/Pais"
-                      estadosPropiedad:
-                        type: array
-                        items:
-                          $ref: "../schemas/estado.yml#/Estado"
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-list_all:
-    get:
-      tags:
-        - Propiedad
-      operationId: listAllPropiedades
-      description: Obtiene todos los datos de las propiedades
-      parameters:
-        - name: page
-          in: query
-          description: Número de página
-          required: false
-          schema:
-            type: integer
-        - name: page_row
-          in: query
-          description: Número de filas por página
-          required: false
-          schema:
-            type: integer
-        - name: condicion_id
-          in: query
-          description: ID de la condición
-          required: false
-          schema:
-            type: integer
-        - name: condicion_propiedad_id
-          in: query
-          description: ID de la condición de propiedad
-          required: false
-          schema:
-            type: integer
-        - name: fecha_desde
-          in: query
-          description: Fecha desde (formato YYYY-MM-DD)
-          required: false
-          schema:
-            type: string
-            format: date
-        - name: fecha_hasta
-          in: query
-          description: Fecha hasta (formato YYYY-MM-DD)
-          required: false
-          schema:
-            type: string
-            format: date
-        - name: pais_id
-          in: query
-          description: ID del país
-          required: false
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Consulta Exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Consulta Exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    properties:
-                      total:
-                        type: integer
-                        example: 1
-                      propiedades:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              example: 1
-                            titulo:
-                              type: string
-                              example: "Propiedad 1"
-                            sku:
-                              type: string
-                              example: "SKU-00001"
-                            descripcion:
-                              type: string
-                              example: "Propiedad 1 descripcion"
-                            anio:
-                              type: string
-                              example: "2020"
-                            categoria_nombre:
-                              type: string
-                              example: "Departamento"
-                            categoria_nombre_ingles:
-                              type: string
-                              example: "Apartment"
-                            condicion_nombre:
-                              type: string
-                              example: "Vendida"
-                            condicion_nombre_ingles:
-                              type: string
-                              example: "Sold"
-                            pais_id:
-                              type: integer
-                              example: 41
-                            pais_nombre:
-                              type: string
-                              example: "Chile"
-                            pais_nombre_ingles:
-                              type: string
-                              example: "Chile"
-                            ciudad:
-                              type: string
-                              example: "Santiago"
-                            caracteristicas:
-                              type: object
-                              example:
-                                baños: 2
-                                cuartos: 2
-                                Cochera: "Sí"
-                            metros_construccion:
-                              type: number
-                              example: 1000
-                            metros_terreno:
-                              type: number
-                              example: 15000
-                            pies_construccion:
-                              type: number
-                              example: 10764
-                            pies_terreno:
-                              type: number
-                              example: 157640
-                            precio_uf:
-                              type: number
-                              example: 1000000
-                            precio_usd:
-                              type: number
-                              example: 1000000
-                            aprobado:
-                              type: number
-                              example: 1
-                            estado_solicitud:
-                              type: integer
-                              example: 5
-                            estado_solicitud_nombre:
-                              type: string
-                              example: "Inactivo"
-                            url_portada:
-                              type: string
-                              example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-                      propiedades_mas_destacadas:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            categoria_id:
-                              type: integer
-                              example: 2
-                            categoria_nombre:
-                              type: string
-                              example: "Departamento"
-                            categoria_nombre_ingles:
-                              type: string
-                              example: "Apartment"
-                            propiedad_destacado:
-                              type: object
-                              properties:
-                                propiedad_id:
-                                  type: integer
-                                  example: 1
-                                titulo:
-                                  type: string
-                                  example: "Propiedad 1"
-                                sku:
-                                  type: string
-                                  example: "SKU-00001"
-                                descripcion:
-                                  type: string
-                                  example: "Propiedad 1 descripcion"
-                                anio:
-                                  type: string
-                                  example: "2020"
-                                pais_id:
-                                  type: integer
-                                  example: 41
-                                pais_nombre:
-                                  type: string
-                                  example: "Chile"
-                                pais_nombre_ingles:
-                                  type: string
-                                  example: "Chile"
-                                ciudad:
-                                  type: string
-                                  example: "Santiago"
-                                estado_solicitud:
-                                  type: integer
-                                  example: 5
-                                url_portada:
-                                  type: string
-                                  example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-list_all_propiedad_id:
-    get:
-      tags:
-        - Propiedad
-      operationId: listAllPropiedad
-      description: Obtiene todos los datos de la propiedad
-      parameters:
-        - name: propiedad_id
-          in: path
-          description: ID de la propiedad
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Consulta Exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        example: 1
-                      sku:
-                        type: string
-                        example: "SKU-00001"
-                      titulo:
-                        type: string
-                        example: "Propiedad 1"
-                      descripcion:
-                        type: string
-                        example: "Propiedad 1 descripcion"
-                      anio:
-                        type: string
-                        example: "2020"
-                      pais_id:
-                        type: integer
-                        example: 41
-                      pais_nombre:
-                        type: string
-                        example: "Chile"
-                      pais_nombre_ingles:
-                        type: string
-                        example: "Chile"
-                      ciudad:
-                        type: string
-                        example: "Santiago"
-                      categoria_nombre:
-                        type: string
-                        example: "Departamento"
-                      categoria_nombre_ingles:
-                        type: string
-                        example: "Apartment"
-                      condicion_id:
-                        type: integer
-                        example: 1
-                      condicion_nombre:
-                        type: string
-                        example: "Vendida"
-                      condicion_nombre_ingles:
-                        type: string
-                        example: "Sold"
-                      caracteristicas:
+  get:
+    tags:
+      - Propiedad
+    operationId: initDataPropiedad
+    description: Obtiene los datos iniciales de la propiedad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    categoriaPropiedades:
+                      type: array
+                      items:
                         type: object
                         properties:
-                          baños:
+                          id:
                             type: integer
-                            example: 2
-                          cuartos:
-                            type: integer
-                            example: 2
-                          Cochera:
+                          nombre:
                             type: string
-                            example: "Sí"
-                      metros_construccion:
-                        type: integer
-                        example: 1000
-                      metros_terreno:
-                        type: integer
-                        example: 15000
-                      pies_construccion:
-                        type: number
-                        example: 10764
-                      pies_terreno:
-                        type: number
-                        example: 157640
-                      precio_uf:
-                        type: number
-                        example: 1000000
-                      precio_usd:
-                        type: number
-                        example: 1000000
-                      estado_solicitud:
-                        type: integer
-                        example: 5
-                      estado_solicitud_nombre:
-                        type: string
-                        example: "Inactivo"
-                      url_portada:
-                        type: array
-                        items:
+                            example: "Casa"
+                          nombre_ingles:
+                            type: string
+                            example: "House"
+                          estado:
+                            type: integer
+                            example: 1
+                          estado_nombre:
+                            type: string
+                            example: "Activo"
+                          url_imagen::
+                            type: string
+                            example: "https://nextdet.com/images/categoria_propiedad/1.jpg"
+                    condicionPropiedades:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          nombre:
+                            type: string
+                            example: "Vendida"
+                          nombre_ingles:
+                            type: string
+                            example: "Sold"
+                          estado:
+                            type: integer
+                            example: 1
+                          estado_nombre:
+                            type: string
+                            example: "Activo"
+                          url_imagen:
+                            type: string
+                            example: "https://nextdet.com/images/condicion_propiedad/1.jpg"
+                    paises:
+                      type: array
+                      items:
+                        $ref: "../schemas/pais.yml#/Pais"
+                    estadosPropiedad:
+                      type: array
+                      items:
+                        $ref: "../schemas/estado.yml#/Estado"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+list_all:
+  get:
+    tags:
+      - Propiedad
+    operationId: listAllPropiedades
+    description: Obtiene todos los datos de las propiedades
+    parameters:
+      - name: page
+        in: query
+        description: Número de página
+        required: false
+        schema:
+          type: integer
+      - name: page_row
+        in: query
+        description: Número de filas por página
+        required: false
+        schema:
+          type: integer
+      - name: condicion_id
+        in: query
+        description: ID de la condición
+        required: false
+        schema:
+          type: integer
+      - name: condicion_propiedad_id
+        in: query
+        description: ID de la condición de propiedad
+        required: false
+        schema:
+          type: integer
+      - name: fecha_desde
+        in: query
+        description: Fecha desde (formato YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: fecha_hasta
+        in: query
+        description: Fecha hasta (formato YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: pais_id
+        in: query
+        description: ID del país
+        required: false
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta Exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Consulta Exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total:
+                      type: integer
+                      example: 1
+                    propiedades:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          titulo:
+                            type: string
+                            example: "Propiedad 1"
+                          sku:
+                            type: string
+                            example: "SKU-00001"
+                          descripcion:
+                            type: string
+                            example: "Propiedad 1 descripcion"
+                          anio:
+                            type: string
+                            example: "2020"
+                          categoria_nombre:
+                            type: string
+                            example: "Departamento"
+                          categoria_nombre_ingles:
+                            type: string
+                            example: "Apartment"
+                          condicion_nombre:
+                            type: string
+                            example: "Vendida"
+                          condicion_nombre_ingles:
+                            type: string
+                            example: "Sold"
+                          pais_id:
+                            type: integer
+                            example: 41
+                          pais_nombre:
+                            type: string
+                            example: "Chile"
+                          pais_nombre_ingles:
+                            type: string
+                            example: "Chile"
+                          ciudad:
+                            type: string
+                            example: "Santiago"
+                          caracteristicas:
+                            type: object
+                            example:
+                              baños: 2
+                              cuartos: 2
+                              Cochera: "Sí"
+                          metros_construccion:
+                            type: number
+                            example: 1000
+                          metros_terreno:
+                            type: number
+                            example: 15000
+                          pies_construccion:
+                            type: number
+                            example: 10764
+                          pies_terreno:
+                            type: number
+                            example: 157640
+                          precio_uf:
+                            type: number
+                            example: 1000000
+                          precio_usd:
+                            type: number
+                            example: 1000000
+                          aprobado:
+                            type: number
+                            example: 1
+                          estado_solicitud:
+                            type: integer
+                            example: 5
+                          estado_solicitud_nombre:
+                            type: string
+                            example: "Inactivo"
+                          url_portada:
+                            type: string
+                            example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                    propiedades_mas_destacadas:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          categoria_id:
+                            type: integer
+                            example: 2
+                          categoria_nombre:
+                            type: string
+                            example: "Departamento"
+                          categoria_nombre_ingles:
+                            type: string
+                            example: "Apartment"
+                          propiedad_destacado:
+                            type: object
+                            properties:
+                              propiedad_id:
+                                type: integer
+                                example: 1
+                              titulo:
+                                type: string
+                                example: "Propiedad 1"
+                              sku:
+                                type: string
+                                example: "SKU-00001"
+                              descripcion:
+                                type: string
+                                example: "Propiedad 1 descripcion"
+                              anio:
+                                type: string
+                                example: "2020"
+                              pais_id:
+                                type: integer
+                                example: 41
+                              pais_nombre:
+                                type: string
+                                example: "Chile"
+                              pais_nombre_ingles:
+                                type: string
+                                example: "Chile"
+                              ciudad:
+                                type: string
+                                example: "Santiago"
+                              estado_solicitud:
+                                type: integer
+                                example: 5
+                              url_portada:
+                                type: string
+                                example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+list_all_propiedad_id:
+  get:
+    tags:
+      - Propiedad
+    operationId: listAllPropiedad
+    description: Obtiene todos los datos de la propiedad
+    parameters:
+      - name: propiedad_id
+        in: path
+        description: ID de la propiedad
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Consulta Exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    sku:
+                      type: string
+                      example: "SKU-00001"
+                    titulo:
+                      type: string
+                      example: "Propiedad 1"
+                    descripcion:
+                      type: string
+                      example: "Propiedad 1 descripcion"
+                    anio:
+                      type: string
+                      example: "2020"
+                    pais_id:
+                      type: integer
+                      example: 41
+                    pais_nombre:
+                      type: string
+                      example: "Chile"
+                    pais_nombre_ingles:
+                      type: string
+                      example: "Chile"
+                    ciudad:
+                      type: string
+                      example: "Santiago"
+                    categoria_nombre:
+                      type: string
+                      example: "Departamento"
+                    categoria_nombre_ingles:
+                      type: string
+                      example: "Apartment"
+                    condicion_id:
+                      type: integer
+                      example: 1
+                    condicion_nombre:
+                      type: string
+                      example: "Vendida"
+                    condicion_nombre_ingles:
+                      type: string
+                      example: "Sold"
+                    caracteristicas:
+                      type: object
+                      properties:
+                        baños:
+                          type: integer
+                          example: 2
+                        cuartos:
+                          type: integer
+                          example: 2
+                        Cochera:
                           type: string
-                        example:
-                          - "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-                          - "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+                          example: "Sí"
+                    metros_construccion:
+                      type: integer
+                      example: 1000
+                    metros_terreno:
+                      type: integer
+                      example: 15000
+                    pies_construccion:
+                      type: number
+                      example: 10764
+                    pies_terreno:
+                      type: number
+                      example: 157640
+                    precio_uf:
+                      type: number
+                      example: 1000000
+                    precio_usd:
+                      type: number
+                      example: 1000000
+                    estado_solicitud:
+                      type: integer
+                      example: 5
+                    estado_solicitud_nombre:
+                      type: string
+                      example: "Inactivo"
+                    url_portada:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                        - "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                        - "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
 
 list:
-    get:
-      tags:
-        - Propiedad
-      operationId: listPropiedad
-      description: Obtiene todos los datos de las propiedades con filtro de página
-      parameters:
-        - name: page
-          in: query
-          description: Número de página
-          required: false
-          schema:
-            type: integer
-        - name: page_row
-          in: query
-          description: Número de filas por página
-          required: false
-          schema:
-            type: integer
-        - name: condicion_id
-          in: query
-          description: ID de la condición
-          required: false
-          schema:
-            type: integer
-        - name: condicion_propiedad_id
-          in: query
-          description: ID de la condición de propiedad
-          required: false
-          schema:
-            type: integer
-        - name: fecha_desde
-          in: query
-          description: Fecha desde (formato YYYY-MM-DD)
-          required: false
-          schema:
-            type: string
-            format: date
-        - name: fecha_hasta
-          in: query
-          description: Fecha hasta (formato YYYY-MM-DD)
-          required: false
-          schema:
-            type: string
-            format: date
-        - name: pais_id
-          in: query
-          description: ID del país
-          required: false
-          schema:
-            type: integer
-        - name: pagina
-          in: query
-          description: Filtro tipo string correspondiente a la página origen de la consulta
-          required: false
-          schema:
-            type: string
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Consulta Exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    properties:
-                      total:
-                        type: integer
-                        example: 1
-                      propiedades:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              example: 1
-                            titulo:
-                              type: string
-                              example: "Propiedad 1"
-                            anio:
-                              type: string
-                              example: "2020"
-                            descripcion:
-                              type: string
-                              example: "Propiedad 1 descripcion"
-                            categoria_id:
-                              type: integer
-                              example: 2
-                            categoria_nombre:
-                              type: string
-                              example: "Departamento"
-                            categoria_nombre_ingles:
-                              type: string
-                              example: "Apartment"
-                            condicion_id:
-                              type: integer
-                              example: 1
-                            condicion_nombre:
-                              type: string
-                              example: "Vendida"
-                            condicion_nombre_ingles:
-                              type: string
-                              example: "Sold"
-                            pais_id:
-                              type: integer
-                              example: 41
-                            pais_nombre:
-                              type: string
-                              example: "Chile"
-                            pais_nombre_ingles:
-                              type: string
-                              example: "Chile"
-                            ciudad:
-                              type: string
-                              example: "Santiago"
-                            caracteristicas:
-                              type: object
-                              properties:
-                                baños:
-                                  type: integer
-                                  example: 2
-                                cuartos:
-                                  type: integer
-                                  example: 2
-                                Cochera:
-                                  type: string
-                                  example: "Sí"
-                            metros_construccion:
-                              type: integer
-                              example: 1000
-                            metros_terreno:
-                              type: integer
-                              example: 15000
-                            pies_construccion:
-                              type: number
-                              example: 10764
-                            pies_terreno:
-                              type: number
-                              example: 157640
-                            precio_uf:
-                              type: number
-                              example: 1000000
-                            precio_usd:
-                              type: number
-                              example: 1000000
-                            estado_aprobado:
-                              type: integer
-                              example: 0
-                            estado:
-                              type: integer
-                              example: 1
-                            estado_nombre:
-                              type: string
-                              example: "Activo"
-                            estado_solicitud:
-                              type: integer
-                              example: 5
-                            estado_solicitud_nombre:
-                              type: string
-                              example: "Inactivo"
-                            fecha_creacion:
-                              type: string
-                              format: date
-                              example: "2025-10-20"
-                            porcentaje_comision:
-                              type: number
-                              example: 0
-                            monto_comision:
-                              type: number
-                              example: 0
-                            precio_final:
-                              type: integer
-                              example: 100000
-                            imagenes:
-                              type: array
-                              items:
+  get:
+    tags:
+      - Propiedad
+    operationId: listPropiedad
+    description: Obtiene todos los datos de las propiedades con filtro de página
+    parameters:
+      - name: page
+        in: query
+        description: Número de página
+        required: false
+        schema:
+          type: integer
+      - name: page_row
+        in: query
+        description: Número de filas por página
+        required: false
+        schema:
+          type: integer
+      - name: condicion_id
+        in: query
+        description: ID de la condición
+        required: false
+        schema:
+          type: integer
+      - name: condicion_propiedad_id
+        in: query
+        description: ID de la condición de propiedad
+        required: false
+        schema:
+          type: integer
+      - name: fecha_desde
+        in: query
+        description: Fecha desde (formato YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: fecha_hasta
+        in: query
+        description: Fecha hasta (formato YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: pais_id
+        in: query
+        description: ID del país
+        required: false
+        schema:
+          type: integer
+      - name: pagina
+        in: query
+        description: Filtro tipo string correspondiente a la página origen de la consulta
+        required: false
+        schema:
+          type: string
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Consulta Exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total:
+                      type: integer
+                      example: 1
+                    propiedades:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          titulo:
+                            type: string
+                            example: "Propiedad 1"
+                          anio:
+                            type: string
+                            example: "2020"
+                          descripcion:
+                            type: string
+                            example: "Propiedad 1 descripcion"
+                          categoria_id:
+                            type: integer
+                            example: 2
+                          categoria_nombre:
+                            type: string
+                            example: "Departamento"
+                          categoria_nombre_ingles:
+                            type: string
+                            example: "Apartment"
+                          condicion_id:
+                            type: integer
+                            example: 1
+                          condicion_nombre:
+                            type: string
+                            example: "Vendida"
+                          condicion_nombre_ingles:
+                            type: string
+                            example: "Sold"
+                          pais_id:
+                            type: integer
+                            example: 41
+                          pais_nombre:
+                            type: string
+                            example: "Chile"
+                          pais_nombre_ingles:
+                            type: string
+                            example: "Chile"
+                          ciudad:
+                            type: string
+                            example: "Santiago"
+                          caracteristicas:
+                            type: object
+                            properties:
+                              baños:
+                                type: integer
+                                example: 2
+                              cuartos:
+                                type: integer
+                                example: 2
+                              Cochera:
                                 type: string
-                              example:
-                                - "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-                                - "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
-                            usuario_creador:
+                                example: "Sí"
+                          metros_construccion:
+                            type: integer
+                            example: 1000
+                          metros_terreno:
+                            type: integer
+                            example: 15000
+                          pies_construccion:
+                            type: number
+                            example: 10764
+                          pies_terreno:
+                            type: number
+                            example: 157640
+                          precio_uf:
+                            type: number
+                            example: 1000000
+                          precio_usd:
+                            type: number
+                            example: 1000000
+                          estado_aprobado:
+                            type: integer
+                            example: 0
+                          estado:
+                            type: integer
+                            example: 1
+                          estado_nombre:
+                            type: string
+                            example: "Activo"
+                          estado_solicitud:
+                            type: integer
+                            example: 5
+                          estado_solicitud_nombre:
+                            type: string
+                            example: "Inactivo"
+                          fecha_creacion:
+                            type: string
+                            format: date
+                            example: "2025-10-20"
+                          porcentaje_comision:
+                            type: number
+                            example: 0
+                          monto_comision:
+                            type: number
+                            example: 0
+                          precio_final:
+                            type: integer
+                            example: 100000
+                          imagenes:
+                            type: array
+                            items:
                               type: string
-                              example: "Alessandro Venegas"
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+                            example:
+                              - "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                              - "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
+                          usuario_creador:
+                            type: string
+                            example: "Alessandro Venegas"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
 
 list_propiedad:
-    get:
-      tags:
-        - Propiedad
-      operationId: getPropiedadById
-      description: Obtiene el detalle de una propiedad por su propiedad_id.
-      parameters:
-        - name: propiedad_id
-          in: query
-          description: ID de la propiedad
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Consulta Exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        example: 1
-                      titulo:
-                        type: string
-                        example: "Propiedad 1"
-                      anio:
-                        type: string
-                        example: "2020"
-                      descripcion:
-                        type: string
-                        example: "Propiedad 1 descripcion"
-                      categoria_id:
-                        type: integer
-                        example: 2
-                      categoria_nombre:
-                        type: string
-                        example: "Departamento"
-                      categoria_nombre_ingles:
-                        type: string
-                        example: "Apartment"
-                      condicion_id:
-                        type: integer
-                        example: 1
-                      condicion_nombre:
-                        type: string
-                        example: "Vendida"
-                      condicion_nombre_ingles:
-                        type: string
-                        example: "Sold"
-                      pais_id:
-                        type: integer
-                        example: 41
-                      pais_nombre:
-                        type: string
-                        example: "Chile"
-                      pais_nombre_ingles:
-                        type: string
-                        example: "Chile"
-                      ciudad:
-                        type: string
-                        example: "Santiago"
-                      caracteristicas:
+  get:
+    tags:
+      - Propiedad
+    operationId: getPropiedadById
+    description: Obtiene el detalle de una propiedad por su propiedad_id.
+    parameters:
+      - name: propiedad_id
+        in: query
+        description: ID de la propiedad
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Consulta Exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    titulo:
+                      type: string
+                      example: "Propiedad 1"
+                    anio:
+                      type: string
+                      example: "2020"
+                    descripcion:
+                      type: string
+                      example: "Propiedad 1 descripcion"
+                    categoria_id:
+                      type: integer
+                      example: 2
+                    categoria_nombre:
+                      type: string
+                      example: "Departamento"
+                    categoria_nombre_ingles:
+                      type: string
+                      example: "Apartment"
+                    condicion_id:
+                      type: integer
+                      example: 1
+                    condicion_nombre:
+                      type: string
+                      example: "Vendida"
+                    condicion_nombre_ingles:
+                      type: string
+                      example: "Sold"
+                    pais_id:
+                      type: integer
+                      example: 41
+                    pais_nombre:
+                      type: string
+                      example: "Chile"
+                    pais_nombre_ingles:
+                      type: string
+                      example: "Chile"
+                    ciudad:
+                      type: string
+                      example: "Santiago"
+                    caracteristicas:
+                      type: object
+                      example:
+                        baños: 2
+                        cuartos: 2
+                        Cochera: "Sí"
+                    metros_construccion:
+                      type: integer
+                      example: 1000
+                    metros_terreno:
+                      type: integer
+                      example: 15000
+                    pies_construccion:
+                      type: number
+                      example: 10764
+                    pies_terreno:
+                      type: number
+                      example: 157640
+                    precio_uf:
+                      type: number
+                      example: 1000000
+                    precio_usd:
+                      type: number
+                      example: 1000000
+                    imagenes:
+                      type: array
+                      items:
                         type: object
-                        example:
-                          baños: 2
-                          cuartos: 2
-                          Cochera: "Sí"
-                      metros_construccion:
-                        type: integer
-                        example: 1000
-                      metros_terreno:
-                        type: integer
-                        example: 15000
-                      pies_construccion:
-                        type: number
-                        example: 10764
-                      pies_terreno:
-                        type: number
-                        example: 157640
-                      precio_uf:
-                        type: number
-                        example: 1000000
-                      precio_usd:
-                        type: number
-                        example: 1000000
-                      imagenes:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            imagen_id:
-                              type: integer
-                              example: 1
-                            imagen_url:
-                              type: string
-                              example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-                            estado:
-                              type: integer
-                              example: 1
-                        example:
-                          - imagen_id: 1
-                            imagen_url: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-                            estado: 1
-                          - imagen_id: 2
-                            imagen_url: "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
-                            estado: 1
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+                        properties:
+                          imagen_id:
+                            type: integer
+                            example: 1
+                          imagen_url:
+                            type: string
+                            example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                          estado:
+                            type: integer
+                            example: 1
+                      example:
+                        - imagen_id: 1
+                          imagen_url: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                          estado: 1
+                        - imagen_id: 2
+                          imagen_url: "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
+                          estado: 1
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
 
 save:
-    post:
-      tags:
-        - Propiedad
-      operationId: savePropiedad
-      description: Guarda una nueva propiedad
-      requestBody:
-        required: true
+  post:
+    tags:
+      - Propiedad
+    operationId: savePropiedad
+    description: Guarda una nueva propiedad
+    requestBody:
+      required: true
+      content:
+        application/form-data:
+          schema:
+            type: object
+            required:
+              - titulo
+              - descripcion
+              - pais_id
+              - categoria_id
+              - condicion_id
+              - caracteristicas
+              - metros_construccion
+              - metros_terreno
+              - precio
+            properties:
+              titulo:
+                type: string
+                example: "Casa en Miraflores"
+              anio:
+                type: integer
+                example: 2023
+              descripcion:
+                type: string
+                example: "Casa de 2 pisos, 3 dormitorios, cerca al parque."
+              pais_id:
+                type: integer
+                example: 1
+              ciudad:
+                type: string
+                example: "Lima"
+              categoria_id:
+                type: integer
+                example: 1
+              condicion_id:
+                type: integer
+                example: 1
+              caracteristicas:
+                type: string
+                example: '{"baños": 2, "cuartos": 2, "Cochera": "Sí"}'
+              metros_construccion:
+                type: number
+                example: 100
+              metros_terreno:
+                type: number
+                example: 120
+              precio:
+                type: number
+                description: Precio en UF
+                example: 250000
+              imagenes:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    imagen_id:
+                      type: integer
+                      example: 1
+                    imagen_url:
+                      type: string
+                      example: "https://nextdet.com/images/propiedad/1.jpg"
+    responses:
+      200:
+        description: Consulta exitosa.
         content:
-          application/form-data:
+          application/json:
             schema:
               type: object
-              required:
-                - titulo
-                - descripcion
-                - pais_id
-                - categoria_id
-                - condicion_id
-                - caracteristicas
-                - metros_construccion
-                - metros_terreno
-                - precio
               properties:
-                titulo:
+                estado:
                   type: string
-                  example: "Casa en Miraflores"
-                anio:
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
                   type: integer
-                  example: 2023
-                descripcion:
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
                   type: string
-                  example: "Casa de 2 pisos, 3 dormitorios, cerca al parque."
-                pais_id:
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
                   type: integer
                   example: 1
-                ciudad:
-                  type: string
-                  example: "Lima"
-                categoria_id:
-                  type: integer
-                  example: 1
-                condicion_id:
-                  type: integer
-                  example: 1
-                caracteristicas:
-                  type: string
-                  example: '{"baños": 2, "cuartos": 2, "Cochera": "Sí"}'
-                metros_construccion:
-                  type: number
-                  example: 100
-                metros_terreno:
-                  type: number
-                  example: 120
-                precio:
-                  type: number
-                  description: Precio en UF
-                  example: 250000
-                imagenes:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      imagen_id:
-                        type: integer
-                        example: 1
-                      imagen_url:
-                        type: string
-                        example: "https://nextdet.com/images/propiedad/1.jpg"
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+                datos:
+                  type: object
+                  example: []
 
 update:
-    post:
-      tags:
-        - Propiedad
-      operationId: updatePropiedad
-      description: Actualiza los datos de una propiedad existente. Recibe la información principal de la propiedad y las imágenes asociadas, diferenciando entre imágenes ya existentes y nuevas imágenes
-      requestBody:
-        required: true
+  post:
+    tags:
+      - Propiedad
+    operationId: updatePropiedad
+    description: Actualiza los datos de una propiedad existente. Recibe la información principal de la propiedad y las imágenes asociadas, diferenciando entre imágenes ya existentes y nuevas imágenes
+    requestBody:
+      required: true
+      content:
+        application/form-data:
+          schema:
+            type: object
+            properties:
+              propiedad_id:
+                type: integer
+                description: ID único de la propiedad a actualizar
+                example: 1
+              titulo:
+                type: string
+                description: Título de la propiedad
+                example: "Propiedad en Venta"
+              anio:
+                type: string
+                description: Año de la propiedad
+                example: "2021"
+              descripcion:
+                type: string
+                description: Descripción de la propiedad
+                example: "Propiedad ubicada en el centro de la ciudad"
+              categoria_id:
+                type: integer
+                description: ID de la categoría
+                example: 2
+              condicion_id:
+                type: integer
+                description: ID de la condición
+                example: 1
+              pais_id:
+                type: integer
+                description: ID del país
+                example: 41
+              ciudad:
+                type: string
+                description: Ciudad de la propiedad
+                example: "Santiago"
+              caracteristicas:
+                type: string
+                description: Características de la propiedad en formato JSON
+                example: '{"baños":2,"cuartos":3,"Cochera":"Sí"}'
+              metros_construccion:
+                type: integer
+                description: Metros construidos
+                example: 120
+              metros_terreno:
+                type: integer
+                description: Metros de terreno
+                example: 150
+              precio:
+                type: integer
+                description: Precio de la propiedad en UF
+                example: 160000
+              imagenes:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    imagen_id:
+                      type: integer
+                      example: 1
+                    imagen_url:
+                      type: string
+                      example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                description: Lista de imágenes existentes (mantener) asociadas a la propiedad
+              imagenes_nuevas:
+                type: array
+                items:
+                  type: string
+                  format: binary
+                description: Archivos de imágenes nuevas para agregar a la propiedad
+    responses:
+      200:
+        description: Propiedad actualizada exitosamente.
         content:
-          application/form-data:
+          application/json:
             schema:
               type: object
               properties:
-                propiedad_id:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Propiedad actualizada correctamente.
+                tipo_error:
                   type: integer
-                  description: ID único de la propiedad a actualizar
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
                   example: 1
-                titulo:
-                  type: string
-                  description: Título de la propiedad
-                  example: "Propiedad en Venta"
-                anio:
-                  type: string
-                  description: Año de la propiedad
-                  example: "2021"
-                descripcion:
-                  type: string
-                  description: Descripción de la propiedad
-                  example: "Propiedad ubicada en el centro de la ciudad"
-                categoria_id:
-                  type: integer
-                  description: ID de la categoría
-                  example: 2
-                condicion_id:
-                  type: integer
-                  description: ID de la condición
-                  example: 1
-                pais_id:
-                  type: integer
-                  description: ID del país
-                  example: 41
-                ciudad:
-                  type: string
-                  description: Ciudad de la propiedad
-                  example: "Santiago"
-                caracteristicas:
-                  type: string
-                  description: Características de la propiedad en formato JSON
-                  example: '{"baños":2,"cuartos":3,"Cochera":"Sí"}'
-                metros_construccion:
-                  type: integer
-                  description: Metros construidos
-                  example: 120
-                metros_terreno:
-                  type: integer
-                  description: Metros de terreno
-                  example: 150
-                precio:
-                  type: integer
-                  description: Precio de la propiedad en UF
-                  example: 160000
-                imagenes:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      imagen_id:
-                        type: integer
-                        example: 1
-                      imagen_url:
-                        type: string
-                        example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-                  description: Lista de imágenes existentes (mantener) asociadas a la propiedad
-                imagenes_nuevas:
-                  type: array
-                  items:
-                    type: string
-                    format: binary
-                  description: Archivos de imágenes nuevas para agregar a la propiedad
-      responses:
-        200:
-          description: Propiedad actualizada exitosamente.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Propiedad actualizada correctamente.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+                datos:
+                  type: object
+                  example: []
 
 aprobar:
-    put:
-      tags:
-        - Propiedad
-      operationId: aprobarPropiedadById
-      description: Aprueba una propiedad por su propiedad_id.
-      parameters:
-        - name: propiedad_id
-          in: path
-          description: ID de la propiedad a aprobar
-          required: true
-          schema:
-            type: integer
-            example: 1
-      requestBody:
+  put:
+    tags:
+      - Propiedad
+    operationId: aprobarPropiedadById
+    description: Aprueba una propiedad por su propiedad_id.
+    parameters:
+      - name: propiedad_id
+        in: path
+        description: ID de la propiedad a aprobar
         required: true
+        schema:
+          type: integer
+          example: 1
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              porcentaje_comision:
+                type: integer
+                description: Porcentaje de comisión
+                example: 10
+              monto_comision:
+                type: integer
+                description: Monto de comisión
+                example: 10000
+              estado_aprobado:
+                type: boolean
+                description: Estado de aprobación
+                example: true
+    responses:
+      200:
+        description: Propiedad aprobada correctamente.
         content:
           application/json:
             schema:
               type: object
               properties:
-                porcentaje_comision:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Propiedad aprobada correctamente.
+                tipo_error:
                   type: integer
-                  description: Porcentaje de comisión
-                  example: 10
-                monto_comision:
-                  type: integer
-                  description: Monto de comisión
-                  example: 10000
-                estado_aprobado:
-                  type: boolean
-                  description: Estado de aprobación
-                  example: true
-      responses:
-        200:
-          description: Propiedad aprobada correctamente.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Propiedad aprobada correctamente.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-delete:
-    put:
-      tags:
-        - Propiedad
-      operationId: putDeletePropiedad
-      description: Elimina (marcado lógico) una propiedad existente por su propiedad_id.
-      parameters:
-        - name: propiedad_id
-          in: path
-          description: ID único de la propiedad a eliminar
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: false
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
         content:
           application/json:
             schema:
               type: object
-              properties: {}
-      responses:
-        200:
-          description: Propiedad eliminada correctamente.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Propiedad eliminada correctamente.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-        404:
-          description: "Petición no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+delete:
+  put:
+    tags:
+      - Propiedad
+    operationId: putDeletePropiedad
+    description: Elimina (marcado lógico) una propiedad existente por su propiedad_id.
+    parameters:
+      - name: propiedad_id
+        in: path
+        description: ID único de la propiedad a eliminar
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties: {}
+    responses:
+      200:
+        description: Propiedad eliminada correctamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Propiedad eliminada correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Petición no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+send_solicitud:
+  post:
+    tags:
+      - Propiedad
+    operationId: postEnviarSolicitudPropiedad
+    description: Envía una solicitud de propiedad.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              propiedad_id:
+                type: integer
+                description: ID de la propiedad
+                example: 1
+              nombre_cliente:
+                type: string
+                description: Nombre del cliente
+                example: "Juan Perez"
+              email:
+                type: string
+                description: Email del cliente
+                example: "juan.perez@example.com"
+              telefono:
+                type: string
+                description: Teléfono del cliente
+                example: "930506234"
+              mensaje:
+                type: string
+                description: Mensaje del cliente
+                example: "Quiero más información sobre la propiedad"
+              idioma:
+                type: string
+                description: Idioma de la solicitud
+                example: "es"
+    responses:
+      200:
+        description: Propiedad enviada correctamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Propiedad enviada correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+list_solicitudes:
+  get:
+    tags:
+      - Propiedad
+    operationId: getSolicitudesPropiedades
+    description: Obtiene todas las solicitudes de propiedades.
+    parameters:
+      - name: propiedad_id
+        in: query
+        description: ID de la propiedad
+        required: false
+        schema:
+          type: integer
+      - name: categoria_propiedad_id
+        in: query
+        description: ID de la categoría de la propiedad
+        required: false
+        schema:
+          type: integer
+      - name: condicion_propiedad_id
+        in: query
+        description: ID de la condición de la propiedad
+        required: false
+        schema:
+          type: integer
+      - name: estado_solicitud
+        in: query
+        description: ID del estado de la solicitud
+        required: false
+        schema:
+          type: integer
+      - name: busqueda
+        in: query
+        description: Busqueda de solicitudes de propiedades
+        required: false
+        schema:
+          type: string
+        example: "Solicitud"
+      - name: fecha_desde
+        in: query
+        description: Fecha desde (formato YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: fecha_hasta
+        in: query
+        description: Fecha hasta (formato YYYY-MM-DD)
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        description: Número de página
+        required: false
+        schema:
+          type: integer
+      - name: page_row
+        in: query
+        description: Número de filas por página
+        required: false
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Consulta Exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total:
+                      type: integer
+                      example: 1
+                    solicitudes_propiedades:
+                      type: array
+                      items:
+                        $ref: "../schemas/solicitudPropiedad.yml#/SolicitudPropiedad"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+solicitud_propiedad:
+  get:
+    tags:
+      - Propiedad
+    operationId: getSolicitudPropiedad
+    description: Obtiene el detalle de una solicitud de propiedad por su solicitud_propiedad_id.
+    parameters:
+      - name: solicitud_propiedad_id
+        in: query
+        description: ID de la solicitud de propiedad
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Consulta Exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  $ref: "../schemas/solicitudPropiedad.yml#/SolicitudPropiedad"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+change_estado_solicitud:
+  post:
+    tags:
+      - Propiedad
+    operationId: postChangeEstadoSolicitudPropiedad
+    description: Cambia el estado de una solicitud de propiedad.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - solicitud_propiedad_id
+              - estado_solicitud
+            properties:
+              solicitud_propiedad_id:
+                type: integer
+                description: ID de la solicitud de propiedad
+                example: 1
+              estado_solicitud:
+                type: integer
+                description: ID del estado de la solicitud
+                example: 1
+              comentario:
+                type: string
+                description: Comentario de la solicitud
+                example: "Comentario de la solicitud"
+              reserva_monto:
+                type: number
+                description: Monto de la reserva
+                example: 100000
+              venta_monto:
+                type: number
+                description: Monto de la venta
+                example: 100000
+              alquiler_monto:
+                type: number
+                description: Monto de la alquiler
+                example: 100000
+              idioma:
+                type: string
+                description: Idioma de la solicitud
+                example: "es"
+    responses:
+      200:
+        description: Estado de la solicitud de propiedad cambiado correctamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Estado de la solicitud de propiedad cambiado correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []

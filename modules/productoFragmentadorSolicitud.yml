@@ -1,0 +1,720 @@
+init_data:
+    get:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: initDataProductoFragmentadorSolicitud
+      description: Obtenemos la información inicial para el módulo de solicitud de producto fragmentador
+      security:
+        - BearerAuth: [] 
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estados:
+                    type: array
+                    items:
+                      $ref: "../schemas/estado.yml#/Estado"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save:
+    post:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: saveProductoFragmentadorSolicitud
+      description: Guardamos la solicitud de producto fragmentador
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - largo
+                - profundidad
+                - ancho
+                - nombre
+                - empresa
+                - telefono
+                - correo
+              properties:
+                largo:
+                  type: number
+                  description: Largo de la solicitud de producto fragmentador
+                  example: 100000
+                profundidad:
+                  type: number
+                  description: Profundidad de la solicitud de producto fragmentador
+                  example: 100000
+                ancho:
+                  type: number
+                  description: Ancho de la solicitud de producto fragmentador
+                  example: 100000
+                nombre:
+                  type: string
+                  description: Nombre de la solicitud de producto fragmentador
+                  example: "Solicitud de producto fragmentador 1"
+                empresa:
+                  type: string
+                  description: Empresa de la solicitud de producto fragmentador
+                  example: "Empresa 1"
+                telefono:
+                  type: string
+                  description: Telefono de la solicitud de producto fragmentador
+                  example: "930506234"
+                correo:
+                  type: string
+                  description: Correo de la solicitud de producto fragmentador
+                  example: "example@gmail.com"
+            
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+list:
+    get:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: listProductoFragmentadorSolicitud
+      description: Obtenemos la lista de solicitudes de producto fragmentador
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      parameters:
+        - in: query
+          name: busqueda
+          description: Busqueda de la solicitud de producto fragmentador
+          schema:
+            type: string
+        - in: query
+          name: fecha_desde
+          description: Fecha desde de la solicitud de producto fragmentador
+          schema:
+            type: string
+        - in: query
+          name: fecha_hasta
+          description: Fecha hasta de la solicitud de producto fragmentador
+          schema:
+            type: string
+        - in: query
+          name: page
+          description: Página de la solicitud de producto fragmentador
+          schema:
+            type: integer
+        - in: query
+          name: page_row
+          description: Filas por página de la solicitud de producto fragmentador
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      producto_fragmentador_solicitudes:
+                        type: array
+                        items:
+                          $ref: "../schemas/productoFragmentadorSolicitud.yml#/ProductoFragmentadorSolicitud"
+                      total:
+                        type: integer
+                        example: 10
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+
+list_producto_fragmentador_solicitud:
+    get:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: listProductoFragmentadorSolicitud
+      description: Obtenemos la lista de solicitudes de producto fragmentador
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      parameters:
+        - in: query
+          name: producto_fragmentador_solicitud_id
+          description: Identificador de la solicitud de producto fragmentador
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    $ref: "../schemas/productoFragmentadorSolicitud.yml#/ProductoFragmentadorSolicitud"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+change_estado:
+    put:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: changeEstadoProductoFragmentadorSolicitud
+      description: Cambiamos el estado de la solicitud de producto fragmentador
+      security:
+        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      parameters:
+        - in: path
+          name: producto_fragmentador_solicitud_id
+          required: true
+          description: Identificador de la solicitud de producto fragmentador
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: integer
+                  description: Estado de la solicitud de producto fragmentador
+                  example: 1
+                comentario:
+                  type: string
+                  description: Comentario de la solicitud de producto fragmentador
+                  example: "Comentario de la solicitud de producto fragmentador"
+              required:
+                - estado
+                - comentario
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+#contacto
+contacto_list:
+    get:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: listContactoProductoFragmentador
+      description: Listamos los contactos
+      parameters:
+        - name: busqueda
+          in: query
+          description: Búsqueda
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Página
+          required: false
+          schema:
+            type: integer
+        - name: page_row
+          in: query
+          description: Filas por página
+          required: false
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        example: 1
+                      contactos:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            nombre:
+                              type: string
+                              example: "Nombre del contacto"
+                            empresa:
+                              type: string
+                              example: "Empresa del contacto"
+                            correo:
+                              type: string
+                              example: "example@gmail.com"
+                            telefono:
+                              type: string
+                              example: "930506234"
+                            estado:
+                              type: integer
+                              example: 1
+                            estado_nombre:
+                              type: string
+                              example: "Activo"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_list_contacto:
+    get:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: listOnlyContactoProductoFragmentador
+      description: Listamos un contacto
+      parameters:
+        - name: contacto_producto_fragmentador_id
+          in: query
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      nombre:
+                        type: string
+                        example: "Nombre del contacto"
+                      empresa:
+                        type: string
+                        example: "Empresa del contacto"
+                      correo:
+                        type: string
+                        example: "example@gmail.com"
+                      telefono:
+                        type: string
+                        example: "930506234"
+                      estado:
+                        type: integer
+                        example: 1
+                      estado_nombre:
+                        type: string
+                        example: "Activo"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_save:
+    post:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: saveContactoProductoFragmentador
+      description: Guardamos un contacto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - empresa
+                - correo
+                - telefono
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del contacto
+                  example: "Nombre del contacto"
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: "Empresa del contacto"
+                correo:
+                  type: string
+                  description: Correo del contacto
+                  example: "example@gmail.com"
+                telefono:
+                  type: string
+                  description: Teléfono del contacto
+                  example: "930506234"
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_update:
+    put:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: updateContactoProductoFragmentador
+      description: Actualizamos un contacto
+      parameters:
+        - name: contacto_producto_fragmentador_id
+          in: path
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nombre
+                - empresa
+                - correo
+                - telefono
+              properties:
+                nombre:
+                  type: string
+                  description: Nombre del contacto
+                  example: "Nombre del contacto"
+                empresa:
+                  type: string
+                  description: Empresa del contacto
+                  example: "Empresa del contacto"
+                correo:
+                  type: string
+                  description: Correo del contacto
+                  example: "example@gmail.com"
+                telefono:
+                  type: string
+                  description: Teléfono del contacto
+                  example: "930506234"
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+contacto_delete:
+    put:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: deleteContactoProductoFragmentador
+      description: Eliminamos un contacto
+      parameters:
+        - name: contacto_producto_fragmentador_id
+          in: path
+          description: ID del contacto
+          required: true
+          schema:
+            type: integer
+      security:
+        - BearerAuth: []
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

@@ -1,0 +1,61 @@
+ProductoFragmentadorSolicitud:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Identificador de la solicitud de producto fragmentador
+      example: 1
+    largo:
+      type: number
+      description: Largo de la solicitud de producto fragmentador
+      example: 100000
+    profundidad:
+      type: number
+      description: Profundidad de la solicitud de producto fragmentador
+      example: 100000
+    ancho:
+      type: number
+      description: Ancho de la solicitud de producto fragmentador
+      example: 100000
+    nombre:
+      type: string
+      description: Nombre de la solicitud de producto fragmentador
+      example: "Solicitud de producto fragmentador 1"
+    empresa:
+      type: string
+      description: Empresa de la solicitud de producto fragmentador
+      example: "Empresa 1"
+    telefono:
+      type: string
+      description: Telefono de la solicitud de producto fragmentador
+      example: "930506234"
+    correo:
+      type: string
+      description: Correo de la solicitud de producto fragmentador
+      example: "example@gmail.com"
+    estado:
+      type: integer
+      description: Estado de la solicitud de producto fragmentador
+      example: 1
+    historial_estado:
+      type: array
+      description: Historial de estados de la solicitud de producto fragmentador
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          estado:
+            type: integer
+            example: 1
+          comentario:
+            type: string
+            example: "Comentario 1"
+          fecha_creacion:
+            type: string
+            example: "2024-01-01 12:00:00"
+    fecha_creacion:
+      type: string
+      description: Fecha de creación de la solicitud de producto fragmentador
+      example: "2024-01-01"

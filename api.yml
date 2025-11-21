@@ -76,6 +76,8 @@ tags:
     description: Gestión de condiciones de propiedades
   - name: Energia Solicitud
     description: Gestión de solicitudes de energía
+  - name: Producto Fragmentador Solicitud
+    description: Gestión de solicitudes de fragmentadores de productos
 
 paths:
   # Modulo Licencia
@@ -794,6 +796,37 @@ paths:
   /v1/energia_solicitud/contacto/delete/{contacto_energia_solicitud_id}:
     $ref: "./modules/energiaSolicitud.yml#/contacto_delete"
 
+  # producto fragmentador solicitud
+  /v1/producto_fragmentador_solicitud/init_data:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/init_data"
+
+  /v1/producto_fragmentador_solicitud/list:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/list"
+
+  /v1/producto_fragmentador_solicitud/list/producto_fragmentador_solicitud:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/list_producto_fragmentador_solicitud"
+
+  /v1/producto_fragmentador_solicitud/save:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/save"
+
+  /v1/producto_fragmentador_solicitud/change_estado/{producto_fragmentador_solicitud_id}:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/change_estado"
+
+  /v1/producto_fragmentador_solicitud/contacto/save:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/contacto_save"
+
+  /v1/producto_fragmentador_solicitud/contacto/list:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/contacto_list"
+
+  /v1/producto_fragmentador_solicitud/contacto/list/contacto:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/contacto_list_contacto"
+
+  /v1/producto_fragmentador_solicitud/contacto/update/{contacto_producto_fragmentador_id}:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/contacto_update"
+
+  /v1/producto_fragmentador_solicitud/contacto/delete/{contacto_producto_fragmentador_id}:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/contacto_delete"
+
 components:
   schemas:
     Administrador:
@@ -864,6 +897,8 @@ components:
       $ref: "./schemas/categoriaPropiedad.yml#/CategoriaPropiedad"
     CondicionPropiedad:
       $ref: "./schemas/condicionPropiedad.yml#/CondicionPropiedad"
+    ProductoFragmentadorSolicitud:
+      $ref: "./schemas/productoFragmentadorSolicitud.yml#/ProductoFragmentadorSolicitud"
 
   securitySchemes:
     BearerAuth:

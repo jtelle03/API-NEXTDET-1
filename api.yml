@@ -78,6 +78,8 @@ tags:
     description: Gestión de solicitudes de energía
   - name: Producto Fragmentador Solicitud
     description: Gestión de solicitudes de fragmentadores de productos
+  - name: Producto Next6x Solicitud
+    description: Gestión de solicitudes de productos Next6x
 
 paths:
   # Modulo Licencia
@@ -827,6 +829,37 @@ paths:
   /v1/producto_fragmentador_solicitud/contacto/delete/{contacto_producto_fragmentador_id}:
     $ref: "./modules/productoFragmentadorSolicitud.yml#/contacto_delete"
 
+# # producto next6x solicitud
+  /v1/producto_next6x_solicitud/init_data:
+    $ref: "./modules/productoNext6xSolicitud.yml#/init_data"
+
+  /v1/producto_next6x_solicitud/list:
+    $ref: "./modules/productoNext6xSolicitud.yml#/list"
+
+  /v1/producto_next6x_solicitud/list/producto_next6x_solicitud:
+    $ref: "./modules/productoNext6xSolicitud.yml#/list_producto_next6x_solicitud"
+
+  /v1/producto_next6x_solicitud/save:
+    $ref: "./modules/productoNext6xSolicitud.yml#/save"
+
+  /v1/producto_next6x_solicitud/change_estado/{producto_next6x_solicitud_id}:
+    $ref: "./modules/productoNext6xSolicitud.yml#/change_estado"
+
+  /v1/producto_next6x_solicitud/contacto/save:
+    $ref: "./modules/productoNext6xSolicitud.yml#/contacto_save"
+
+  /v1/producto_next6x_solicitud/contacto/list:
+    $ref: "./modules/productoNext6xSolicitud.yml#/contacto_list"
+
+  /v1/producto_next6x_solicitud/contacto/list/contacto:
+    $ref: "./modules/productoNext6xSolicitud.yml#/contacto_list_contacto"
+
+  /v1/producto_next6x_solicitud/contacto/update/{contacto_producto_next6x_id}:
+    $ref: "./modules/productoNext6xSolicitud.yml#/contacto_update"
+
+  /v1/producto_next6x_solicitud/contacto/delete/{contacto_producto_next6x_id}:
+    $ref: "./modules/productoNext6xSolicitud.yml#/contacto_delete"
+
 components:
   schemas:
     Administrador:
@@ -899,6 +932,8 @@ components:
       $ref: "./schemas/condicionPropiedad.yml#/CondicionPropiedad"
     ProductoFragmentadorSolicitud:
       $ref: "./schemas/productoFragmentadorSolicitud.yml#/ProductoFragmentadorSolicitud"
+    ProductoNext6xSolicitud:
+      $ref: "./schemas/productoNext6xSolicitud.yml#/ProductoNext6xSolicitud"
 
   securitySchemes:
     BearerAuth:

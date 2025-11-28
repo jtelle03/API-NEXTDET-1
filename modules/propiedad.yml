@@ -233,6 +233,12 @@ list_all:
                           pies_terreno:
                             type: number
                             example: 157640
+                          latitud:
+                            type: number
+                            example: -33.4489
+                          longitud:
+                            type: number
+                            example: -70.6693
                           precio_uf:
                             type: number
                             example: 1000000
@@ -421,6 +427,12 @@ list_all_propiedad_id:
                     pies_terreno:
                       type: number
                       example: 157640
+                    latitud:
+                      type: number
+                      example: -33.4489
+                    longitud:
+                      type: number
+                      example: -70.6693
                     precio_uf:
                       type: number
                       example: 1000000
@@ -611,6 +623,12 @@ list:
                           pies_terreno:
                             type: number
                             example: 157640
+                          latitud:
+                            type: number
+                            example: -33.4489
+                          longitud:
+                            type: number
+                            example: -70.6693
                           precio_uf:
                             type: number
                             example: 1000000
@@ -768,6 +786,12 @@ list_propiedad:
                     pies_terreno:
                       type: number
                       example: 157640
+                    latitud:
+                      type: number
+                      example: -33.4489
+                    longitud:
+                      type: number
+                      example: -70.6693
                     precio_uf:
                       type: number
                       example: 1000000
@@ -836,6 +860,8 @@ save:
               - caracteristicas
               - metros_construccion
               - metros_terreno
+              - latitud
+              - longitud
               - precio
             properties:
               titulo:
@@ -868,6 +894,12 @@ save:
               metros_terreno:
                 type: number
                 example: 120
+              latitud:
+                type: number
+                example: -12.0464
+              longitud:
+                type: number
+                example: -77.0428
               precio:
                 type: number
                 description: Precio en UF
@@ -980,6 +1012,14 @@ update:
                 type: integer
                 description: Metros de terreno
                 example: 150
+              latitud:
+                type: number
+                description: Latitud de la propiedad
+                example: -33.4489
+              longitud:
+                type: number
+                description: Longitud de la propiedad
+                example: -70.6693
               precio:
                 type: integer
                 description: Precio de la propiedad en UF

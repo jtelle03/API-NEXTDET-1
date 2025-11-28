@@ -1,0 +1,73 @@
+ProductoNext6xSolicitud:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Identificador de la solicitud de producto Next6x
+      example: 1
+    cantidad:
+      type: number
+      description: Cantidad de producto de producto Next6x
+      example: 100000
+    largo:
+      type: number
+      description: Largo de producto Next6x
+      example: 100000
+    nombre:
+      type: string
+      description: Nombre de la solicitud de producto next6x
+      example: "Solicitud de producto next6x 1"
+    empresa:
+      type: string
+      description: Empresa de la solicitud de producto next6x
+      example: "Empresa 1"
+    telefono:
+      type: string
+      description: Telefono de la solicitud de producto fragmentador
+      example: "930506234"
+    email:
+      type: string
+      description: Correo de la solicitud de producto fragmentador
+      example: "example@gmail.com"
+    estado:
+      type: integer
+      description: Estado de la solicitud de producto Next6x
+      example: 1
+    estado_nombre:
+      type: string
+      description: Nombre del estado de la solicitud de producto Next6x
+      example: "Activo"
+    pais_id:
+      type: integer
+      description: País de la solicitud de producto Next6x
+      example: 1
+    pais_nombre_español:
+      type: string
+      description: Nombre del país en español de la solicitud de producto Next6x
+      example: "Perú"
+    pais_nombre_ingles:
+      type: string
+      description: Nombre del país en inglés de la solicitud de producto Next6x
+      example: "Peru"
+    historial_estado:
+      type: array
+      description: Historial de estados de la solicitud de producto Next6x
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+          estado:
+            type: integer
+            example: 1
+          comentario:
+            type: string
+            example: "Comentario 1"
+          fecha_creacion:
+            type: string
+            example: "2024-01-01 12:00:00"
+    fecha_creacion:
+      type: string
+      description: Fecha de creación de la solicitud de producto fragmentador
+      example: "2024-01-01"

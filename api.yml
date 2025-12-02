@@ -678,6 +678,16 @@ paths:
   /v1/clasificado/enviar_solicitud_servicio_reparacion:
     $ref: "./modules/clasificado.yml#/enviar_solicitud_servicio_reparacion"
 
+  /v1/clasificado/send_pin:
+    $ref: "./modules/clasificado.yml#/send_pin"
+
+  /v1/clasificado/validar_pin:
+    $ref: "./modules/clasificado.yml#/validar_pin"
+
+  /v1/clasificado/save_clasificado:
+    $ref: "./modules/clasificado.yml#/save_clasificado"
+  
+
   # propiedad
 
   /v1/propiedad/init_data:
@@ -706,6 +716,7 @@ paths:
 
   /v1/propiedad/delete/{propiedad_id}:
     $ref: "./modules/propiedad.yml#/delete"
+
 
   # solicitud propiedad
   /v1/propiedad/enviar_solicitud:
@@ -766,6 +777,15 @@ paths:
 
   /v1/propiedad/contacto/delete/{contacto_propiedad_id}:
     $ref: "./modules/propiedad.yml#/contacto_delete"
+
+  /v1/propiedad/send_pin:
+    $ref: "./modules/propiedad.yml#/send_pin"
+
+  /v1/propiedad/validar_pin:
+    $ref: "./modules/propiedad.yml#/validar_pin"
+
+  /v1/propiedad/save_propiedad:
+    $ref: "./modules/propiedad.yml#/save_propiedad"
 
   # energia solicitud
   /v1/energia_solicitud/init_data:

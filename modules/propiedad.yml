@@ -1945,3 +1945,260 @@ contacto_delete:
                 datos:
                   type: object
                   example: []
+
+send_pin:
+    get:
+      tags:
+        - Propiedad
+      operationId: sendPinPropiedad
+      description: Enviar un PIN al correo del usuario para verificación
+      parameters:
+        - name: email
+          in: query
+          description: Correo del usuario
+          required: true
+          schema:
+            type: string
+        - name: nombres
+          in: query
+          description: Nombre del usuario
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Codigo de verificación enviado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+validar_pin:
+    post:
+      tags:
+        - Propiedad
+      operationId: validarPinPropiedad
+      description: Validar el PIN enviado al correo del usuario
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - pin
+              properties:
+                email:
+                  type: string
+                  description: Correo del usuario
+                  example: "example@gmail.com"
+                pin:                  
+                  type: string
+                  description: Código PIN enviado al correo
+                  example: "1234"
+      responses:
+        200:
+          description: Código de verificación validado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+save_propiedad:
+    post:
+      tags:
+        - Propiedad
+      operationId: Crear usuario y propiedad
+      description: Crea un nuevo usuario y propiedad. Recibe JSON dentro de campos form-data.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                usuario:
+                  type: object
+                  description: JSON string con los datos del usuario
+                  properties:
+                    email:
+                      type: string
+                      example: "nombre@example.com"
+                    nombres:
+                      type: string
+                      example: "Nombre"
+                    apellido_paterno:
+                      type: string
+                      example: "-"
+                    apellido_materno:
+                      type: string
+                      example: ""
+                    pais_id:
+                      type: integer
+                      example: 183
+                    telefono:
+                      type: string
+                      example: "-"
+                    contrasenia:
+                      type: string
+                      example: ""
+                propiedad:
+                  type: object
+                  description: JSON string con los datos de la propiedad
+                  properties:
+                    titulo:
+                      type: string
+                      example: "Propiedad Prueba"
+                    anio:
+                      type: string
+                      example: "2025"
+                    descripcion:
+                      type: string
+                      example: "Propiedad Prueba descripción"
+                    pais_id:
+                      type: string
+                      example: "1"
+                    ciudad:
+                      type: string
+                      example: "Kabul"
+                    categoria_id:
+                      type: string
+                      example: "2"
+                    condicion_id:
+                      type: string
+                      example: "1"
+                    caracteristicas:
+                      type: string
+                      description: JSON string con las características
+                      example: '{"baños": 5, "cuartos": 7, "Cochera": "No"}'
+                    metros_construccion:
+                      type: string
+                      example: "2000"
+                    metros_terreno:
+                      type: string
+                      example: "15001"
+                    precio:
+                      type: string
+                      example: "10000"
+                    latitud:
+                      type: string
+                      example: "-12.046373159482"
+                    longitud:
+                      type: string
+                      example: "40.712776003948"
+                imagenes:
+                  type: array
+                  description: Lista de archivos (imágenes)
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              usuario:
+                contentType: application/json
+              propiedad:
+                contentType: application/json
+              imagenes:
+                contentType: image/*
+      responses:
+        200:
+          description: Usuario y propiedad creados correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []

@@ -5,6 +5,10 @@ ProductoNext6xSolicitud:
       type: integer
       description: Identificador de la solicitud de producto Next6x
       example: 1
+    id_producto:
+      type: integer
+      description: Identificador del producto Next6x
+      example: 1
     cantidad:
       type: number
       description: Cantidad de producto de producto Next6x

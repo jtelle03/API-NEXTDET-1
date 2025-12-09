@@ -18,6 +18,14 @@ init_data:
                     type: array
                     items:
                       $ref: "../schemas/estado.yml#/Estado"
+                  categoria_producto:
+                    type: array
+                    items:
+                      $ref: "../schemas/categoriaProducto.yml#/CategoriaProducto"
+                  productos:
+                    type: array
+                    items:
+                      $ref: "../schemas/producto.yml#/Producto"
 
         404:
           description: "Peticion no ejecutada."
@@ -718,3 +726,83 @@ contacto_delete:
                   datos:
                     type: object
                     example: []
+send_pdf:
+  post:
+    tags:
+      - Producto Fragmentador Solicitud
+    operationId: sendPdfProductoFragmentador
+    description: Enviamos un PDF del producto fragmentador con los productos seleccionados
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - solicitud_id
+              - productos
+            properties:
+              solicitud_id:
+                type: number
+                description: ID de la solicitud
+                example: 123
+              productos:
+                type: array
+                description: Lista de productos seleccionados
+                items:
+                  type: object
+                  required:
+                    - producto_id
+                    - cantidad
+                  properties:
+                    producto_id:
+                      type: number
+                      description: ID del producto
+                      example: 45
+                    cantidad:
+                      type: number
+                      description: Cantidad del producto
+                      example: 10
+                    largo_cable:
+                      type: number
+                      description: Largo del cable en metros (opcional)
+                      example: 5
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []

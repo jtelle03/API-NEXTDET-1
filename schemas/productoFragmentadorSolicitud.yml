@@ -5,6 +5,10 @@ ProductoFragmentadorSolicitud:
       type: integer
       description: Identificador de la solicitud de producto fragmentador
       example: 1
+    id_producto:
+      type: integer
+      description: Identificador del producto fragmentador
+      example: 1
     largo:
       type: number
       description: Largo de la solicitud de producto fragmentador
@@ -17,6 +21,10 @@ ProductoFragmentadorSolicitud:
       type: number
       description: Ancho de la solicitud de producto fragmentador
       example: 100000
+    volumen:
+      type: number
+      description: Volumen de la solicitud de producto fragmentador
+      example: 1000000000
     nombre:
       type: string
       description: Nombre de la solicitud de producto fragmentador

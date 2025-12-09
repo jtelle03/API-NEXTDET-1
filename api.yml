@@ -849,6 +849,9 @@ paths:
   /v1/producto_fragmentador_solicitud/contacto/delete/{contacto_producto_fragmentador_id}:
     $ref: "./modules/productoFragmentadorSolicitud.yml#/contacto_delete"
 
+  /v1/producto_fragmentador_solicitud/send_pdf:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/send_pdf"
+
 # # producto next6x solicitud
   /v1/producto_next6x_solicitud/init_data:
     $ref: "./modules/productoNext6xSolicitud.yml#/init_data"
@@ -879,6 +882,9 @@ paths:
 
   /v1/producto_next6x_solicitud/contacto/delete/{contacto_producto_next6x_id}:
     $ref: "./modules/productoNext6xSolicitud.yml#/contacto_delete"
+
+  /v1/producto_next6x_solicitud/send_pdf:
+    $ref: "./modules/productoNext6xSolicitud.yml#/send_pdf"
 
 components:
   schemas:

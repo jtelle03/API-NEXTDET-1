@@ -344,6 +344,83 @@ change_estado:
                     type: object
                     example: []
 
+send_pdf:
+    post:
+      tags:
+        - Producto Fragmentador Solicitud
+      operationId: sendPdfProductoFragmentadorSolicitud
+      description: Enviamos el PDF de la solicitud de producto fragmentador
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                solicitud_id:
+                  type: integer
+                  description: ID de la solicitud de producto fragmentador
+                  example: 1
+                productos:
+                  type: array
+                  description: Productos de la solicitud de producto fragmentador
+                  items:
+                    type: object
+                    properties:
+                      producto_id:
+                        type: integer
+                        description: ID del producto
+                        example: 1
+                      cantidad:
+                        type: integer
+                        description: Cantidad del producto
+                        example: 1
+                      largo_cable:
+                        type: number
+                        description: Largo del cable
+                        example: 100000
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    example: []
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
 #contacto
 contacto_list:
     get:

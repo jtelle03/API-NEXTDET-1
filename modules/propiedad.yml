@@ -2077,7 +2077,7 @@ save_propiedad:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/form-data:
             schema:
               type: object
               properties:

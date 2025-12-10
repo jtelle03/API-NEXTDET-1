@@ -2091,21 +2091,6 @@ save_propiedad:
                     nombres:
                       type: string
                       example: "Nombre"
-                    apellido_paterno:
-                      type: string
-                      example: "-"
-                    apellido_materno:
-                      type: string
-                      example: ""
-                    pais_id:
-                      type: integer
-                      example: 183
-                    telefono:
-                      type: string
-                      example: "-"
-                    contrasenia:
-                      type: string
-                      example: ""
                 propiedad:
                   type: object
                   description: JSON string con los datos de la propiedad

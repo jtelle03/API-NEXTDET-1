@@ -862,7 +862,8 @@ save:
               - metros_terreno
               - latitud
               - longitud
-              - precio
+              - precio_uf
+              - precio_usd
             properties:
               titulo:
                 type: string
@@ -900,10 +901,14 @@ save:
               longitud:
                 type: number
                 example: -77.0428
-              precio:
+              precio_uf:
                 type: number
                 description: Precio en UF
                 example: 250000
+              precio_usd:
+                type: number
+                description: Precio de la propiedad en USD
+                example: 100000
               imagenes:
                 type: array
                 items:
@@ -1020,10 +1025,14 @@ update:
                 type: number
                 description: Longitud de la propiedad
                 example: -70.6693
-              precio:
+              precio_uf:
                 type: integer
                 description: Precio de la propiedad en UF
                 example: 160000
+              precio_usd:
+                type: integer
+                description: Precio de la propiedad en USD
+                example: 100000
               imagenes:
                 type: array
                 items:
@@ -2141,7 +2150,10 @@ save_propiedad:
                     metros_terreno:
                       type: string
                       example: "15001"
-                    precio:
+                    precio_uf:
+                      type: string
+                      example: "10000"
+                    precio_usd:
                       type: string
                       example: "10000"
                     latitud:

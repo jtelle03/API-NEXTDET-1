@@ -864,6 +864,7 @@ save:
               - longitud
               - precio_uf
               - precio_usd
+              - tipo_moneda
             properties:
               titulo:
                 type: string
@@ -909,6 +910,10 @@ save:
                 type: number
                 description: Precio de la propiedad en USD
                 example: 100000
+              tipo_moneda:
+                type: string
+                description: Tipo de moneda
+                example: "UF"
               imagenes:
                 type: array
                 items:
@@ -1033,6 +1038,10 @@ update:
                 type: integer
                 description: Precio de la propiedad en USD
                 example: 100000
+              tipo_moneda:
+                type: string
+                description: Tipo de moneda
+                example: "UF"
               imagenes:
                 type: array
                 items:

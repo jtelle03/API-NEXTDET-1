@@ -848,12 +848,12 @@ contacto_delete:
                     type: object
                     example: []
 
-send_pdf:
+send_pdf_1:
   post:
     tags:
       - Producto Next6x Solicitud
-    operationId: sendPdfProductoFragmentador
-    description: Enviamos un PDF del producto fragmentador con los productos seleccionados
+    operationId: sendPdfProductoNext6x
+    description: Enviamos un PDF de la solicitud de producto Next6x con los productos seleccionados
     requestBody:
       content:
         application/json:

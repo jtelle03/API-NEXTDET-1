@@ -751,59 +751,59 @@ contacto_update:
                     example: []
 
 contacto_delete:
-    put:
-      tags:
-        - Producto Fragmentador Solicitud
-      operationId: deleteContactoProductoFragmentador
-      description: Eliminamos un contacto
-      parameters:
-        - name: contacto_producto_fragmentador_id
-          in: path
-          description: ID del contacto
-          required: true
-          schema:
-            type: integer
-      security:
-        - BearerAuth: []
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    example: []
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-send_pdf:
+  put:
+    tags:
+      - Producto Fragmentador Solicitud
+    operationId: deleteContactoProductoFragmentador
+    description: Eliminamos un contacto
+    parameters:
+      - name: contacto_producto_fragmentador_id
+        in: path
+        description: ID del contacto
+        required: true
+        schema:
+          type: integer
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+send_pdf_1:
   post:
     tags:
       - Producto Fragmentador Solicitud

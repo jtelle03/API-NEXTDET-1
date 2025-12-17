@@ -354,12 +354,12 @@ change_estado:
                     type: object
                     example: []
 
-send_pdf:
+generar_cotizacion:
     post:
       tags:
         - Producto Next6x Solicitud
-      operationId: sendPdfProductoNext6xSolicitud
-      description: Enviamos el PDF de la solicitud de producto Next6x
+      operationId: generarCotizacionProductoNext6xSolicitud
+      description: Generamos la cotizacion de la solicitud de producto Next6x
       security:
         - BearerAuth: []
       requestBody:
@@ -368,11 +368,22 @@ send_pdf:
           application/json:
             schema:
               type: object
+              required:
+                - solicitud_id
+                - productos
               properties:
                 solicitud_id:
                   type: integer
                   description: ID de la solicitud de producto Next6x
                   example: 1
+                referencia:
+                  type: string
+                  description: Referencia de la solicitud de producto Next6x
+                  example: "REF123"
+                informacion_adicional:
+                  type: string
+                  description: Informacion adicional de la solicitud de producto Next6x
+                  example: "Informacion adicional de la solicitud de producto Next6x"
                 productos:
                   type: array
                   description: Productos de la solicitud de producto Next6x
@@ -410,7 +421,126 @@ send_pdf:
                     example: 0
                   datos:
                     type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "files/download/pdf?module=52f46011-e9a5-402f-aef4-35d1a686f1d0&code=0&download=23a3d9e4e1575a87b0a438a55c7f4b85&file_name=d829f6a2410eccc2c151a03b6a8117b6.pdf&name=NEXT6X-00001.pdf"
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
                     example: []
+
+enviar_cotizacion:
+    get:
+      tags:
+        - Producto Next6x Solicitud
+      operationId: enviarCotizacionProductoNext6xSolicitud
+      description: Enviamos la cotizacion de la solicitud de producto Next6x
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: cotizacion_id
+          description: ID de la cotizacion
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "files/download/pdf?module=52f46011-e9a5-402f-aef4-35d1a686f1d0&code=0&download=23a3d9e4e1575a87b0a438a55c7f4b85&file_name=d829f6a2410eccc2c151a03b6a8117b6.pdf&name=NEXT6X-00001.pdf"
+
+        404:
+          description: "Peticion no ejecutada."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: ERR
+                  mensaje:
+                    type: string
+                    example: No se realizo la acción solicitada.
+                  tipo_error:
+                    type: integer
+                    example: 1
+                  datos:
+                    type: object
+                    example: []
+
+download_cotizacion:
+    get:
+      tags:
+        - Producto Next6x Solicitud
+      operationId: downloadCotizacionProductoNext6xSolicitud
+      description: Descargamos la cotizacion de la solicitud de producto Next6x
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: query
+          name: cotizacion_id
+          description: ID de la cotizacion
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Consulta exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: string
+                    example: OK
+                  mensaje:
+                    type: string
+                    example: Acción exitosa.
+                  tipo_error:
+                    type: integer
+                    example: 0
+                  datos:
+                    type: object
+                    properties:
+                      url_file:
+                        type: string
+                        example: "files/download/pdf?module=52f46011-e9a5-402f-aef4-35d1a686f1d0&code=0&download=23a3d9e4e1575a87b0a438a55c7f4b85&file_name=d829f6a2410eccc2c151a03b6a8117b6.pdf&name=NEXT6X-00001.pdf"
+
         404:
           description: "Peticion no ejecutada."
           content:
@@ -848,83 +978,3 @@ contacto_delete:
                     type: object
                     example: []
 
-send_pdf_1:
-  post:
-    tags:
-      - Producto Next6x Solicitud
-    operationId: sendPdfProductoNext6x
-    description: Enviamos un PDF de la solicitud de producto Next6x con los productos seleccionados
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - solicitud_id
-              - productos
-            properties:
-              solicitud_id:
-                type: number
-                description: ID de la solicitud
-                example: 123
-              productos:
-                type: array
-                description: Lista de productos seleccionados
-                items:
-                  type: object
-                  required:
-                    - producto_id
-                    - cantidad
-                  properties:
-                    producto_id:
-                      type: number
-                      description: ID del producto
-                      example: 45
-                    cantidad:
-                      type: number
-                      description: Cantidad del producto
-                      example: 10
-                    largo_cable:
-                      type: number
-                      description: Largo del cable en metros (opcional)
-                      example: 5
-    security:
-      - BearerAuth: []
-    responses:
-      200:
-        description: Consulta exitosa.
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                estado:
-                  type: string
-                  example: OK
-                mensaje:
-                  type: string
-                  example: Acción exitosa.
-                tipo_error:
-                  type: integer
-                  example: 0
-                datos:
-                  example: []
-      404:
-        description: "Peticion no ejecutada."
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                estado:
-                  type: string
-                  example: ERR
-                mensaje:
-                  type: string
-                  example: No se realizo la acción solicitada.
-                tipo_error:
-                  type: integer
-                  example: 1
-                datos:
-                  type: object
-                  example: []

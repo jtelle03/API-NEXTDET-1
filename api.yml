@@ -831,8 +831,14 @@ paths:
   /v1/producto_fragmentador_solicitud/save:
     $ref: "./modules/productoFragmentadorSolicitud.yml#/save"
 
-  /v1/producto_fragmentador_solicitud/send_pdf:
-    $ref: "./modules/productoFragmentadorSolicitud.yml#/send_pdf"
+  /v1/producto_fragmentador_solicitud/generar_cotizacion:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/generar_cotizacion"
+
+  /v1/producto_fragmentador_solicitud/enviar_cotizacion:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/enviar_cotizacion"
+
+  /v1/producto_fragmentador_solicitud/download_cotizacion:
+    $ref: "./modules/productoFragmentadorSolicitud.yml#/download_cotizacion"
 
   /v1/producto_fragmentador_solicitud/change_estado/{producto_fragmentador_solicitud_id}:
     $ref: "./modules/productoFragmentadorSolicitud.yml#/change_estado"
@@ -865,8 +871,14 @@ paths:
   /v1/producto_next6x_solicitud/save:
     $ref: "./modules/productoNext6xSolicitud.yml#/save"
 
-  /v1/producto_next6x_solicitud/send_pdf:
-    $ref: "./modules/productoNext6xSolicitud.yml#/send_pdf"
+  /v1/producto_next6x_solicitud/generar_cotizacion:
+    $ref: "./modules/productoNext6xSolicitud.yml#/generar_cotizacion"
+
+  /v1/producto_next6x_solicitud/enviar_cotizacion:
+    $ref: "./modules/productoNext6xSolicitud.yml#/enviar_cotizacion"
+
+  /v1/producto_next6x_solicitud/download_cotizacion:
+    $ref: "./modules/productoNext6xSolicitud.yml#/download_cotizacion"
 
   /v1/producto_next6x_solicitud/change_estado/{producto_next6x_solicitud_id}:
     $ref: "./modules/productoNext6xSolicitud.yml#/change_estado"

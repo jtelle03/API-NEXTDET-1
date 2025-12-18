@@ -45,6 +45,21 @@ ProductoFragmentadorSolicitud:
       type: integer
       description: Estado de la solicitud de producto fragmentador
       example: 1
+    historial_cotizacion:
+      type: array
+      description: Historial de cotizaciones de la solicitud de producto fragmentador
+      items:
+        type: object
+        properties:
+          cotizacion_id:
+            type: integer
+            example: 1
+          codigo:
+            type: string
+            example: "COD123"
+          fecha_creacion:
+            type: string
+            example: "2024-01-01 12:00:00"
     historial_estado:
       type: array
       description: Historial de estados de la solicitud de producto fragmentador

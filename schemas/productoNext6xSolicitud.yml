@@ -53,6 +53,21 @@ ProductoNext6xSolicitud:
       type: string
       description: Nombre del país en inglés de la solicitud de producto Next6x
       example: "Peru"
+    historial_cotizacion:
+      type: array
+      description: Historial de cotizaciones de la solicitud de producto Next6x
+      items:
+        type: object
+        properties:
+          cotizacion_id:
+            type: integer
+            example: 1
+          codigo:
+            type: string
+            example: "COD123"
+          fecha_creacion:
+            type: string
+            example: "2024-01-01 12:00:00"
     historial_estado:
       type: array
       description: Historial de estados de la solicitud de producto Next6x

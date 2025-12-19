@@ -463,6 +463,7 @@ enviar_cotizacion:
           description: ID de la cotizacion
           schema:
             type: 
+        - in: query
           name: idioma
           description: Idioma de la cotizacion
           schema:

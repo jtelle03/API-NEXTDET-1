@@ -374,6 +374,10 @@ generar_cotizacion:
                   type: string
                   description: Informacion adicional de la solicitud de producto fragmentador
                   example: "Informacion adicional de la solicitud de producto fragmentador"
+                idioma:
+                  type: string
+                  description: Idioma de la cotizacion de producto fragmentador
+                  example: "es"
                 productos:
                   type: array
                   description: Productos de la solicitud de producto fragmentador
@@ -449,6 +453,10 @@ enviar_cotizacion:
           description: ID de la cotizacion
           schema:
             type: integer
+          name: idioma
+          description: Idioma de la cotizacion
+          schema:
+            type: string
       responses:
         200:
           description: Consulta exitosa.

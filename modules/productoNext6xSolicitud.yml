@@ -384,6 +384,10 @@ generar_cotizacion:
                   type: string
                   description: Informacion adicional de la solicitud de producto Next6x
                   example: "Informacion adicional de la solicitud de producto Next6x"
+                idioma:
+                  type: string
+                  description: Idioma de la cotizacion de producto Next6x
+                  example: "es"
                 productos:
                   type: array
                   description: Productos de la solicitud de producto Next6x
@@ -458,7 +462,11 @@ enviar_cotizacion:
           name: cotizacion_id
           description: ID de la cotizacion
           schema:
-            type: integer
+            type: 
+          name: idioma
+          description: Idioma de la cotizacion
+          schema:
+            type: string
       responses:
         200:
           description: Consulta exitosa.

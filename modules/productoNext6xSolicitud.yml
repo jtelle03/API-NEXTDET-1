@@ -462,12 +462,7 @@ enviar_cotizacion:
           name: cotizacion_id
           description: ID de la cotizacion
           schema:
-            type: 
-        - in: query
-          name: idioma
-          description: Idioma de la cotizacion
-          schema:
-            type: string
+            type: integer
       responses:
         200:
           description: Consulta exitosa.

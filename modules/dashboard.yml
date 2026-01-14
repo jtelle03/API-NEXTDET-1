@@ -1,0 +1,957 @@
+init_data:
+  get:
+    tags:
+      - Dashboard
+    operationId: initDataDashboard
+    description: Obtenemos la informacion inicial para el modulo de dashboard.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    anios:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          valor:
+                            type: integer
+                            example: 2025
+                          etiqueta:
+                            type: string
+                            example: 2025
+                    meses:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          valor:
+                            type: integer
+                            example: 1
+                          etiqueta:
+                            type: string
+                            example: Enero
+                    periodos:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          valor:
+                            type: integer
+                            example: 1
+                          etiqueta:
+                            type: string
+                            example: Hace 1 mes
+                    anio_actual:
+                      type: integer
+                      example: 2025
+                    mes_actual:
+                      type: integer
+                      example: 1
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+inventario:
+  get:
+    tags:
+      - Dashboard
+    operationId: getInventarioDashboard
+    description: Obtenemos el inventario para el modulo de dashboard.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total_inventario:
+                      type: integer
+                      example: 100
+                    numero_unidades:
+                      type: object
+                      properties:
+                        propiedades:
+                          type: integer
+                          example: 60
+                        maquinaria:
+                          type: integer
+                          example: 40
+                    numero_cotizaciones:
+                      type: object
+                      properties:
+                        next6x:
+                          type: integer
+                          example: 20
+                        fragmentador:
+                          type: integer
+                          example: 10
+                        energia:
+                          type: integer
+                          example: 15
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+utilidad:
+  get:
+    tags:
+      - Dashboard
+    operationId: getUtilidadDashboard
+    description: Obtenemos la utilidad para el modulo de dashboard.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    porcentaje_utilidad:
+                      type: object
+                      properties:
+                        total:
+                          type: number
+                          example: 25.0
+                        propiedades:
+                          type: number
+                          example: 15.0
+                        maquinaria:
+                          type: number
+                          example: 10.0
+                    valor_en_venta:
+                      type: object
+                      properties:
+                        total:
+                          type: number
+                          example: 100000.0
+                        next6x:
+                          type: number
+                          example: 40000.0
+                        fragmentador:
+                          type: number
+                          example: 30000.0
+                        energia:
+                          type: number
+                          example: 30000.0
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+porcentaje_ventas:
+  get:
+    tags:
+      - Dashboard
+    operationId: getPorcentajeVentasDashboard
+    description: Obtenemos el porcentaje de conversión de solicitudes a ventas y su desglose por módulo para el dashboard.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total_solicitudes:
+                      type: integer
+                      example: 150
+                    total_ventas:
+                      type: integer
+                      example: 45
+                    porcentaje_conversion:
+                      type: number
+                      example: 30.0
+                    tasa_conversion:
+                      type: number
+                      example: 30.0
+                    detalle:
+                      type: object
+                      properties:
+                        propiedades:
+                          type: object
+                          properties:
+                            solicitudes:
+                              type: integer
+                              example: 60
+                            conversiones:
+                              type: integer
+                              example: 20
+                        clasificados:
+                          type: object
+                          properties:
+                            solicitudes:
+                              type: integer
+                              example: 30
+                            conversiones:
+                              type: integer
+                              example: 10
+                        next6x:
+                          type: object
+                          properties:
+                            solicitudes:
+                              type: integer
+                              example: 40
+                            conversiones:
+                              type: integer
+                              example: 10
+                        fragmentador:
+                          type: object
+                          properties:
+                            solicitudes:
+                              type: integer
+                              example: 10
+                            conversiones:
+                              type: integer
+                              example: 3
+                        energia:
+                          type: object
+                          properties:
+                            solicitudes:
+                              type: integer
+                              example: 10
+                            conversiones:
+                              type: integer
+                              example: 2
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+evolucion_solicitudes:
+  get:
+    tags:
+      - Dashboard
+    operationId: getEvolucionSolicitudesDashboard
+    description: Obtenemos la evolución de las solicitudes para el modulo de dashboard.
+    parameters:
+      - name: anio
+        in: query
+        description: Año consultado.
+        required: false
+        schema:
+          type: integer
+          example: 2024
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    labels:
+                      type: array
+                      description: Lista de nombres abreviados de los meses (Ene, Feb, ..., Dic)
+                      items:
+                        type: string
+                      example:
+                        [
+                          "Ene",
+                          "Feb",
+                          "Mar",
+                          "Abr",
+                          "May",
+                          "Jun",
+                          "Jul",
+                          "Ago",
+                          "Sep",
+                          "Oct",
+                          "Nov",
+                          "Dic",
+                        ]
+                    solicitudes_recibidas:
+                      type: array
+                      description: Total de solicitudes recibidas en cada mes
+                      items:
+                        type: integer
+                      example: [25, 40, 35, 50, 30, 20, 45, 38, 29, 33, 41, 27]
+                    ventas_concretadas:
+                      type: array
+                      description: Total de ventas concretadas en cada mes
+                      items:
+                        type: integer
+                      example: [5, 10, 7, 13, 8, 4, 11, 8, 6, 10, 9, 5]
+                    respuestas_pendientes:
+                      type: array
+                      description: Total de respuestas pendientes de cada mes
+                      items:
+                        type: integer
+                      example: [10, 18, 12, 16, 11, 8, 15, 12, 10, 14, 13, 9]
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+solicitudes:
+  get:
+    tags:
+      - Dashboard
+    operationId: getSolicitudesDashboard
+    description: Obtenemos las solicitudes para el modulo de dashboard.
+    parameters:
+      - name: periodo
+        in: query
+        description: Periodo consultado.
+        required: false
+        schema:
+          type: integer
+          example: 3
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    periodo_meses:
+                      type: integer
+                      description: Número de meses del periodo consultado.
+                      example: 3
+                    totales:
+                      type: object
+                      description: Totales generales de solicitudes en el periodo.
+                      properties:
+                        pendientes:
+                          type: integer
+                          example: 26
+                          description: Total de solicitudes pendientes sumadas de todas las categorías.
+                        enviadas:
+                          type: integer
+                          example: 34
+                          description: Total de solicitudes enviadas sumadas de todas las categorías.
+                    categorias:
+                      type: object
+                      description: Detalle por tipo de categoría.
+                      properties:
+                        clasificados:
+                          type: object
+                          properties:
+                            pendientes:
+                              type: integer
+                              example: 5
+                            enviadas:
+                              type: integer
+                              example: 10
+                        propiedades:
+                          type: object
+                          properties:
+                            pendientes:
+                              type: integer
+                              example: 8
+                            enviadas:
+                              type: integer
+                              example: 7
+                        energia:
+                          type: object
+                          properties:
+                            pendientes:
+                              type: integer
+                              example: 2
+                            enviadas:
+                              type: integer
+                              example: 5
+                        fragmentador:
+                          type: object
+                          properties:
+                            pendientes:
+                              type: integer
+                              example: 6
+                            enviadas:
+                              type: integer
+                              example: 8
+                        next6x:
+                          type: object
+                          properties:
+                            pendientes:
+                              type: integer
+                              example: 5
+                            enviadas:
+                              type: integer
+                              example: 4
+                  example:
+                    periodo_meses: 3
+                    totales:
+                      pendientes: 26
+                      enviadas: 34
+                    categorias:
+                      clasificados:
+                        pendientes: 5
+                        enviadas: 10
+                      propiedades:
+                        pendientes: 8
+                        enviadas: 7
+                      energia:
+                        pendientes: 2
+                        enviadas: 5
+                      fragmentador:
+                        pendientes: 6
+                        enviadas: 8
+                      next6x:
+                        pendientes: 5
+                        enviadas: 4
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+publicaciones_sin_aprobar:
+  get:
+    tags:
+      - Dashboard
+    operationId: getPublicacionesSinAprobarDashboard
+    description: Obtenemos las publicaciones sin aprobar para el modulo de dashboard.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    propiedades_pendientes:
+                      type: integer
+                      example: 3
+                    clasificados_pendientes:
+                      type: integer
+                      example: 2
+                  example:
+                    propiedades_pendientes: 3
+                    clasificados_pendientes: 2
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+publicaciones_usuario:
+  get:
+    tags:
+      - Dashboard
+    operationId: getPublicacionesUsuarioDashboard
+    description: Obtenemos las publicaciones por tipo de usuario (empresas y particulares), divido por tipo y con variación intermensual, para el módulo de dashboard.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    publicaciones_empresas:
+                      type: object
+                      properties:
+                        total:
+                          type: integer
+                          description: Total de publicaciones actuales (último mes) realizadas por empresas.
+                          example: 6
+                        propiedades:
+                          type: integer
+                          description: Total de propiedades publicadas por empresas en el último mes.
+                          example: 4
+                        maquinaria:
+                          type: integer
+                          description: Total de maquinaria (clasificados) publicada por empresas en el último mes.
+                          example: 2
+                        total_mes_anterior:
+                          type: integer
+                          description: Total de publicaciones de empresas en el mes anterior.
+                          example: 5
+                        variacion_porcentaje:
+                          type: number
+                          format: float
+                          description: Porcentaje de variación respecto al mes anterior.
+                          example: 20
+                    publicaciones_particulares:
+                      type: object
+                      properties:
+                        total:
+                          type: integer
+                          description: Total de publicaciones actuales (último mes) realizadas por particulares.
+                          example: 3
+                        propiedades:
+                          type: integer
+                          description: Total de propiedades publicadas por particulares en el último mes.
+                          example: 2
+                        maquinaria:
+                          type: integer
+                          description: Total de maquinaria (clasificados) publicada por particulares en el último mes.
+                          example: 1
+                        total_mes_anterior:
+                          type: integer
+                          description: Total de publicaciones de particulares en el mes anterior.
+                          example: 4
+                        variacion_porcentaje:
+                          type: number
+                          format: float
+                          description: Porcentaje de variación respecto al mes anterior.
+                          example: -25
+                    periodo:
+                      type: string
+                      description: "Periodo analizado (ejemplo: '1 mes')"
+                      example: "1 mes"
+                  example:
+                    publicaciones_empresas:
+                      total: 6
+                      propiedades: 4
+                      maquinaria: 2
+                      total_mes_anterior: 5
+                      variacion_porcentaje: 20
+                    publicaciones_particulares:
+                      total: 3
+                      propiedades: 2
+                      maquinaria: 1
+                      total_mes_anterior: 4
+                      variacion_porcentaje: -25
+                    periodo: "1 mes"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+usuarios_nuevos:
+  get:
+    tags:
+      - Dashboard
+    operationId: getUsuariosNuevosDashboard
+    description: Obtenemos los usuarios nuevos (concesionarios y propietarios), divido por tipo y con variación intermensual, para el módulo de dashboard.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    usuarios_nuevos:
+                      type: integer
+                      description: Número de usuarios nuevos creados en el último mes (incluye solo roles Concesionario y Propietario).
+                      example: 15
+                    variacion_porcentaje:
+                      type: number
+                      format: float
+                      description: Porcentaje de variación respecto al periodo anterior.
+                      example: 20.0
+                    usuarios_mes_anterior:
+                      type: integer
+                      description: Número de usuarios nuevos del periodo anterior inmediato.
+                      example: 12
+                    periodo:
+                      type: string
+                      description: Periodo considerado para el cálculo de usuarios nuevos.
+                      example: "1 mes"
+                  example:
+                    usuarios_nuevos: 15
+                    variacion_porcentaje: 20.0
+                    usuarios_mes_anterior: 12
+                    periodo: "1 mes"
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+ventas:
+  get:
+    tags:
+      - Dashboard
+    operationId: getVentasDashboard
+    description: Obtenemos las ventas ejecutadas y pendientes por cerrar para el modulo de dashboard, agrupando totales y por categoría.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    parameters:
+      - name: mes
+        in: query
+        description: Mes consultado.
+        required: false
+        schema:
+          type: integer
+          example: 6
+      - name: anio
+        in: query
+        description: Año consultado.
+        required: false
+        schema:
+          type: integer
+          example: 2024
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    ventas_ejecutadas:
+                      type: object
+                      description: Totales de ventas ejecutadas en el periodo consultado.
+                      properties:
+                        total:
+                          type: number
+                          format: float
+                          description: Total global de todas las ventas ejecutadas.
+                          example: 14000.00
+                        propiedades:
+                          type: number
+                          format: float
+                          description: Total de ventas ejecutadas de propiedades.
+                          example: 4500.00
+                        maquinaria:
+                          type: number
+                          format: float
+                          description: Total de ventas ejecutadas de maquinaria (clasificados).
+                          example: 3000.00
+                        energia:
+                          type: number
+                          format: float
+                          description: Total de ventas ejecutadas en energía.
+                          example: 2500.00
+                        next6x:
+                          type: number
+                          format: float
+                          description: Total de ventas ejecutadas de Next6X.
+                          example: 2000.00
+                        fragmentador:
+                          type: number
+                          format: float
+                          description: Total de ventas ejecutadas de fragmentador.
+                          example: 1000.00
+                    pendientes_por_cerrar:
+                      type: object
+                      description: Totales estimados de montos pendientes por cerrar.
+                      properties:
+                        total:
+                          type: number
+                          format: float
+                          description: Total global pendiente por cerrar.
+                          example: 5000.00
+                        propiedades:
+                          type: number
+                          format: float
+                          description: Total pendiente por cerrar en propiedades.
+                          example: 2000.00
+                        maquinaria:
+                          type: number
+                          format: float
+                          description: Total pendiente por cerrar en maquinaria (clasificados).
+                          example: 1200.00
+                        energia:
+                          type: number
+                          format: float
+                          description: Total pendiente por cerrar en energía.
+                          example: 800.00
+                        next6x:
+                          type: number
+                          format: float
+                          description: Total pendiente por cerrar en Next6X.
+                          example: 700.00
+                        fragmentador:
+                          type: number
+                          format: float
+                          description: Total pendiente por cerrar en fragmentador.
+                          example: 300.00
+                    mes:
+                      type: integer
+                      description: Mes consultado.
+                      example: 6
+                    anio:
+                      type: integer
+                      description: Año consultado.
+                      example: 2024
+                  example:
+                    ventas_ejecutadas:
+                      total: 14000.00
+                      propiedades: 4500.00
+                      maquinaria: 3000.00
+                      energia: 2500.00
+                      next6x: 2000.00
+                      fragmentador: 1000.00
+                    pendientes_por_cerrar:
+                      total: 5000.00
+                      propiedades: 2000.00
+                      maquinaria: 1200.00
+                      energia: 800.00
+                      next6x: 700.00
+                      fragmentador: 300.00
+                    mes: 6
+                    anio: 2024

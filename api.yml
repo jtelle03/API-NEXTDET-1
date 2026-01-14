@@ -80,6 +80,8 @@ tags:
     description: Gestión de solicitudes de fragmentadores de productos
   - name: Producto Next6x Solicitud
     description: Gestión de solicitudes de productos Next6x
+  - name: Dashboard
+    description: Gestión de dashboard
 
 paths:
   # Modulo Licencia
@@ -897,6 +899,37 @@ paths:
 
   /v1/producto_next6x_solicitud/contacto/delete/{contacto_producto_next6x_id}:
     $ref: "./modules/productoNext6xSolicitud.yml#/contacto_delete"
+
+  # dashboard
+  /v1/dashboard/general/init_data:
+    $ref: "./modules/dashboard.yml#/init_data"
+
+  /v1/dashboard/general/inventario:
+    $ref: "./modules/dashboard.yml#/inventario"
+
+  /v1/dashboard/general/utilidad:
+    $ref: "./modules/dashboard.yml#/utilidad"
+
+  /v1/dashboard/general/porcentaje_ventas:
+    $ref: "./modules/dashboard.yml#/porcentaje_ventas"
+
+  /v1/dashboard/general/evolucion_solicitudes:
+    $ref: "./modules/dashboard.yml#/evolucion_solicitudes"
+
+  /v1/dashboard/general/solicitudes:
+    $ref: "./modules/dashboard.yml#/solicitudes"
+
+  /v1/dashboard/general/publicaciones_sin_aprobar:
+    $ref: "./modules/dashboard.yml#/publicaciones_sin_aprobar"
+
+  /v1/dashboard/general/publicaciones_usuario:
+    $ref: "./modules/dashboard.yml#/publicaciones_usuario"
+
+  /v1/dashboard/general/usuarios_nuevos:
+    $ref: "./modules/dashboard.yml#/usuarios_nuevos"
+
+  /v1/dashboard/general/ventas:
+    $ref: "./modules/dashboard.yml#/ventas"
 
 components:
   schemas:

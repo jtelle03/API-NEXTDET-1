@@ -1509,14 +1509,18 @@ change_estado_solicitud:
                 type: number
                 description: Monto de la venta
                 example: 100000
-              alquiler_monto:
+              arriendo_monto:
                 type: number
-                description: Monto de la alquiler
+                description: Monto de la arriendo
                 example: 100000
-              idioma:
+              arriendo_fecha_inicio:
                 type: string
-                description: Idioma de la solicitud
-                example: "es"
+                description: Fecha de inicio de la arriendo
+                example: "2026-01-01"
+              arriendo_fecha_fin:
+                type: string
+                description: Fecha de fin de la arriendo
+                example: 100000
       responses:
         200:
           description: Estado de la solicitud de propiedad cambiado correctamente.

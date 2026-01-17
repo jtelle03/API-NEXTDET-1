@@ -77,3 +77,6 @@
               servicio_nombre:
                 type: string
                 example: "Nextlion"
+        es_empresa:
+          type: integer
+          example: 1

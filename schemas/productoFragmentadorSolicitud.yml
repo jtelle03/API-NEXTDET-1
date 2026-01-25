@@ -25,6 +25,22 @@ ProductoFragmentadorSolicitud:
       type: number
       description: Volumen de la solicitud de producto fragmentador
       example: 1000000000
+    pulgadas:
+      type: number
+      description: Pulgadas del producto fragmentador
+      example: 10
+    diametro_exterior:
+      type: number
+      description: Diametro exterior del producto fragmentador
+      example: 10
+    diametro_interior:
+      type: number
+      description: Diametro interior del producto fragmentador
+      example: 10
+    peso:
+      type: number
+      description: Peso del producto fragmentador
+      example: 10
     nombre:
       type: string
       description: Nombre de la solicitud de producto fragmentador

@@ -232,6 +232,31 @@ save:
                   type: string
                   description: Unidad de Medida el producto
                   example: "mts"
+                pulgadas:
+                  type: number
+                  format: double
+                  description: Pulgadas del producto
+                  example: 10
+                diametro_exterior:
+                  type: number
+                  format: double
+                  description: Diametro exterior del producto
+                  example: 10
+                diametro_interior:
+                  type: number
+                  format: double
+                  description: Diametro interior del producto
+                  example: 10
+                largo:
+                  type: number
+                  format: double
+                  description: Largo del producto
+                  example: 10
+                peso:
+                  type: number
+                  format: double
+                  description: Peso del producto
+                  example: 10
                 estado:
                   type: integer
                   description: Estado del producto

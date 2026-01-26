@@ -41,6 +41,18 @@ ProductoFragmentadorSolicitud:
       type: number
       description: Peso del producto fragmentador
       example: 10
+    largo_producto:
+      type: number
+      description: Largo del producto fragmentador
+      example: 10
+    cantidad_bolsas:
+      type: number
+      description: Cantidad de bolsas del producto fragmentador
+      example: 10
+    precio_final:
+      type: number
+      description: Precio final del producto fragmentador
+      example: 100000
     nombre:
       type: string
       description: Nombre de la solicitud de producto fragmentador

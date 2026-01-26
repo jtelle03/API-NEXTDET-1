@@ -1,527 +1,527 @@
 init_data:
-    get:
-      tags:
-        - Producto
-      operationId: initDataProducto
-      description: Obtenemos la informacion inicial para el modulo de productos.
-      security:
-        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    properties:
-                      categoria_producto:
-                        type: array
-                        items:
-                          $ref: "../schemas/categoriaProducto.yml#/CategoriaProducto"
-                      estados:
-                        type: array
-                        items:
-                          $ref: "../schemas/estado.yml#/Estado"
-
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-list:
-    get:
-      tags:
-        - Producto
-      operationId: listProducto
-      description: Obtener listado de los productos de Nextdet
-
-      security:
-        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
-
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: array
-                    items:
-                      $ref: "../schemas/producto.yml#/Producto"
-
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-producto:
-    get:
-      tags:
-        - Producto
-      operationId: listOnlyProducto
-      description: Obtener informacion de un producto de Nextdet
-      parameters:
-        - in: query
-          name: producto_id
-          required: true
-          description: Identificador del Producto
-          schema:
-            type: integer
-
-      security:
-        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
-
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    $ref: "../schemas/producto.yml#/Producto"
-
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-save:
-    post:
-      tags:
-        - Producto
-      operationId: saveProducto
-      description: Guardar un producto nuevo de Nextdet
-      requestBody:
-        content:
-          application/form-data:
-            schema:
-              type: object
-              required:
-                - nombre
-                - precio_sugerido
-                - unidad
-                - unidad_medida
-              properties:
-                nombre:
-                  type: string
-                  description: Nombre del Producto
-                  example: "Next 1"
-                categoriaproducto_id:
-                  type: integer
-                  description: Categoria a la que pertenece el producto
-                  example: 1
-                servicio_id:
-                  type: integer
-                  description: Servicio asociado al producto
-                  example: 2
-                precio_sugerido:
-                  type: number
-                  format: double
-                  description: Precio Referencial del producto
-                  example: 5.0
-                costo:
-                  type: number
-                  format: double
-                  description: Costo del producto
-                  example: 10.0
-                costo_cable:
-                  type: number
-                  format: double
-                  description: Costo de la cuerda del producto
-                  example: 10.0
-                precio1:
-                  type: number
-                  format: double
-                  description: Precio 1 del producto
-                  example: 5.0
-                precio2:
-                  type: number
-                  format: double
-                  description: Precio 2 del producto
-                  example: 5.0
-                precio3:
-                  type: number
-                  format: double
-                  description: Precio 3 del producto
-                  example: 5.0
-                unidad:
-                  type: number
-                  format: double
-                  description: Unidad del producto
-                  example: 5.0
-                unidad_medida:
-                  type: string
-                  description: Unidad de Medida el producto
-                  example: "mts"
-                pulgadas:
-                  type: number
-                  format: double
-                  description: Pulgadas del producto
-                  example: 10
-                diametro_exterior:
-                  type: number
-                  format: double
-                  description: Diametro exterior del producto
-                  example: 10
-                diametro_interior:
-                  type: number
-                  format: double
-                  description: Diametro interior del producto
-                  example: 10
-                largo:
-                  type: number
-                  format: double
-                  description: Largo del producto
-                  example: 10
-                peso:
-                  type: number
-                  format: double
-                  description: Peso del producto
-                  example: 10
-                estado:
-                  type: integer
-                  description: Estado del producto
-                  example: 1
-                file:
-                  type: string
-                  format: binary
-                  description: Imagen del producto
-                  example: "image/png"
-                url_descarga_brochure_en:
-                  type: string
-                  description: Link de descarga del brochure en inglés del producto
-                  example: "https://drive.google.com/uc?id=1HKpyKA34WuBuq0hg4-gJCWtke5GFX6lc&export=download"
-                url_descarga_brochure_es:
-                  type: string
-                  description: Link de descarga del brochure en español del producto
-                  example: "https://drive.google.com/uc?id=1PkOzzlmOQ9ItpwB_Q_xcwOIQUR6wdVDN&export=download"
-
-      security:
-        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
-
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-update:
-    post:
-      tags:
-        - Producto
-      operationId: updateProducto
-      description: Actualizar un producto de Nextdet (Debido a que puede enviar una imagen el ENDPOINT no puede ser un metodo PUT, ya que no logra capturar los datos enviados desde el form-data)
-      requestBody:
-        content:
-          application/form-data:
-            schema:
-              type: object
-              required:
-                - producto_id
-                - nombre
-                - precio_sugerido
-                - unidad
-                - unidad_medida
-              properties:
-                producto_id:
-                  type: integer
-                  description: El ID identificador del Producto
-                  example: 1
-                nombre:
-                  type: string
-                  description: Nombre del Producto
-                  example: "Next 1"
-                categoriaproducto_id:
-                  type: integer
-                  description: Categoria a la que pertenece el producto
-                  example: 1
-                precio_sugerido:
-                  type: number
-                  format: double
-                  description: Precio Referencial del producto
-                  example: 5.0
-                costo:
-                  type: number
-                  format: double
-                  description: Costo del producto
-                  example: 10.0
-                costo_cable:
-                  type: number
-                  format: double
-                  description: Costo de la cuerda del producto
-                  example: 10.0
-                precio1:
-                  type: number
-                  format: double
-                  description: Precio 1 del producto
-                  example: 5.0
-                precio2:
-                  type: number
-                  format: double
-                  description: Precio 2 del producto
-                  example: 5.0
-                precio3:
-                  type: number
-                  format: double
-                  description: Precio 3 del producto
-                  example: 5.0
-                unidad:
-                  type: number
-                  format: double
-                  description: Unidad del producto
-                  example: 5.0
-                unidad_medida:
-                  type: string
-                  description: Unidad de Medida el producto
-                  example: "mts"
-                estado:
-                  type: integer
-                  description: Estado del producto
-                  example: 1
-                mantener_costo:
-                  type: integer
-                  description: Mantener el costo
-                  example: 1
-                file:
-                  type: string
-                  format: binary
-                  description: Imagen del producto
-                  example: "image/png"
-                url_descarga_brochure_en:
-                  type: string
-                  description: Link de descarga del brochure en inglés del producto
-                  example: "https://drive.google.com/uc?id=1HKpyKA34WuBuq0hg4-gJCWtke5GFX6lc&export=download"
-                url_descarga_brochure_es:
-                  type: string
-                  description: Link de descarga del brochure en español del producto
-                  example: "https://drive.google.com/uc?id=1PkOzzlmOQ9ItpwB_Q_xcwOIQUR6wdVDN&export=download"
-
-      security:
-        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
-
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-delete:
-    put:
-      tags:
-        - Producto
-      operationId: deleteProducto
-      description: Eliminar un producto de Nextdet
-      parameters:
-        - in: path
-          name: producto_id
-          required: true
-          description: Identificador del producto que desea eliminar
-          schema:
-            type: integer
-      requestBody:
+  get:
+    tags:
+      - Producto
+    operationId: initDataProducto
+    description: Obtenemos la informacion inicial para el modulo de productos.
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+    responses:
+      200:
+        description: Consulta exitosa.
         content:
           application/json:
             schema:
               type: object
               properties:
-                fecha:
+                estado:
                   type: string
-                  description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
-                  example: "2023-07-01 21:53:00"
-                palabra_confirmacion:
+                  example: OK
+                mensaje:
                   type: string
-                  description: Palabra de confirmación para poder eliminar el producto (nombre del producto)
-                  example: "Next1"
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    categoria_producto:
+                      type: array
+                      items:
+                        $ref: "../schemas/categoriaProducto.yml#/CategoriaProducto"
+                    estados:
+                      type: array
+                      items:
+                        $ref: "../schemas/estado.yml#/Estado"
 
-      security:
-        - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
 
-      responses:
-        200:
-          description: Consulta exitosa.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
+list:
+  get:
+    tags:
+      - Producto
+    operationId: listProducto
+    description: Obtener listado de los productos de Nextdet
 
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: array
+                  items:
+                    $ref: "../schemas/producto.yml#/Producto"
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+producto:
+  get:
+    tags:
+      - Producto
+    operationId: listOnlyProducto
+    description: Obtener informacion de un producto de Nextdet
+    parameters:
+      - in: query
+        name: producto_id
+        required: true
+        description: Identificador del Producto
+        schema:
+          type: integer
+
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  $ref: "../schemas/producto.yml#/Producto"
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+save:
+  post:
+    tags:
+      - Producto
+    operationId: saveProducto
+    description: Guardar un producto nuevo de Nextdet
+    requestBody:
+      content:
+        application/form-data:
+          schema:
+            type: object
+            required:
+              - nombre
+              - precio_sugerido
+              - unidad
+              - unidad_medida
+            properties:
+              nombre:
+                type: string
+                description: Nombre del Producto
+                example: "Next 1"
+              categoriaproducto_id:
+                type: integer
+                description: Categoria a la que pertenece el producto
+                example: 1
+              servicio_id:
+                type: integer
+                description: Servicio asociado al producto
+                example: 2
+              precio_sugerido:
+                type: number
+                format: double
+                description: Precio Referencial del producto
+                example: 5.0
+              costo:
+                type: number
+                format: double
+                description: Costo del producto
+                example: 10.0
+              costo_cable:
+                type: number
+                format: double
+                description: Costo de la cuerda del producto
+                example: 10.0
+              precio1:
+                type: number
+                format: double
+                description: Precio 1 del producto
+                example: 5.0
+              precio2:
+                type: number
+                format: double
+                description: Precio 2 del producto
+                example: 5.0
+              precio3:
+                type: number
+                format: double
+                description: Precio 3 del producto
+                example: 5.0
+              unidad:
+                type: number
+                format: double
+                description: Unidad del producto
+                example: 5.0
+              unidad_medida:
+                type: string
+                description: Unidad de Medida el producto
+                example: "mts"
+              pulgadas:
+                type: number
+                format: double
+                description: Pulgadas del producto
+                example: 10
+              diametro_exterior:
+                type: number
+                format: double
+                description: Diametro exterior del producto
+                example: 10
+              diametro_interior:
+                type: number
+                format: double
+                description: Diametro interior del producto
+                example: 10
+              largo:
+                type: number
+                format: double
+                description: Largo del producto
+                example: 10
+              peso:
+                type: number
+                format: double
+                description: Peso del producto
+                example: 10
+              estado:
+                type: integer
+                description: Estado del producto
+                example: 1
+              file:
+                type: string
+                format: binary
+                description: Imagen del producto
+                example: "image/png"
+              url_descarga_brochure_en:
+                type: string
+                description: Link de descarga del brochure en inglés del producto
+                example: "https://drive.google.com/uc?id=1HKpyKA34WuBuq0hg4-gJCWtke5GFX6lc&export=download"
+              url_descarga_brochure_es:
+                type: string
+                description: Link de descarga del brochure en español del producto
+                example: "https://drive.google.com/uc?id=1PkOzzlmOQ9ItpwB_Q_xcwOIQUR6wdVDN&export=download"
+
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+update:
+  post:
+    tags:
+      - Producto
+    operationId: updateProducto
+    description: Actualizar un producto de Nextdet (Debido a que puede enviar una imagen el ENDPOINT no puede ser un metodo PUT, ya que no logra capturar los datos enviados desde el form-data)
+    requestBody:
+      content:
+        application/form-data:
+          schema:
+            type: object
+            required:
+              - producto_id
+              - nombre
+              - precio_sugerido
+              - unidad
+              - unidad_medida
+            properties:
+              producto_id:
+                type: integer
+                description: El ID identificador del Producto
+                example: 1
+              nombre:
+                type: string
+                description: Nombre del Producto
+                example: "Next 1"
+              categoriaproducto_id:
+                type: integer
+                description: Categoria a la que pertenece el producto
+                example: 1
+              precio_sugerido:
+                type: number
+                format: double
+                description: Precio Referencial del producto
+                example: 5.0
+              costo:
+                type: number
+                format: double
+                description: Costo del producto
+                example: 10.0
+              costo_cable:
+                type: number
+                format: double
+                description: Costo de la cuerda del producto
+                example: 10.0
+              precio1:
+                type: number
+                format: double
+                description: Precio 1 del producto
+                example: 5.0
+              precio2:
+                type: number
+                format: double
+                description: Precio 2 del producto
+                example: 5.0
+              precio3:
+                type: number
+                format: double
+                description: Precio 3 del producto
+                example: 5.0
+              unidad:
+                type: number
+                format: double
+                description: Unidad del producto
+                example: 5.0
+              unidad_medida:
+                type: string
+                description: Unidad de Medida el producto
+                example: "mts"
+              estado:
+                type: integer
+                description: Estado del producto
+                example: 1
+              mantener_costo:
+                type: integer
+                description: Mantener el costo
+                example: 1
+              file:
+                type: string
+                format: binary
+                description: Imagen del producto
+                example: "image/png"
+              url_descarga_brochure_en:
+                type: string
+                description: Link de descarga del brochure en inglés del producto
+                example: "https://drive.google.com/uc?id=1HKpyKA34WuBuq0hg4-gJCWtke5GFX6lc&export=download"
+              url_descarga_brochure_es:
+                type: string
+                description: Link de descarga del brochure en español del producto
+                example: "https://drive.google.com/uc?id=1PkOzzlmOQ9ItpwB_Q_xcwOIQUR6wdVDN&export=download"
+
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+delete:
+  put:
+    tags:
+      - Producto
+    operationId: deleteProducto
+    description: Eliminar un producto de Nextdet
+    parameters:
+      - in: path
+        name: producto_id
+        required: true
+        description: Identificador del producto que desea eliminar
+        schema:
+          type: integer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fecha:
+                type: string
+                description: Fecha en la que se realiza la consulta en formato (yyyy-MM-dd HH:mm:ss)
+                example: "2023-07-01 21:53:00"
+              palabra_confirmacion:
+                type: string
+                description: Palabra de confirmación para poder eliminar el producto (nombre del producto)
+                example: "Next1"
+
+    security:
+      - BearerAuth: [] # Aquí se especifica el nombre del esquema de seguridad
+
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []

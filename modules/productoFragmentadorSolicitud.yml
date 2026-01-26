@@ -10,30 +10,28 @@ productos_fragmentador:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    producto_id:
-                      type: integer
-                      example: 1
-                    pulgadas:
-                      type: number
-                      example: 10
-                    diametro_exterior:
-                      type: number
-                      example: 10
-                    diametro_interior:
-                      type: number
-                      example: 10
-                    largo:
-                      type: number
-                      example: 10
-                    peso:
-                      type: number
-                      example: 10
+              type: array
+              items:
+                type: object
+                properties:
+                  producto_id:
+                    type: integer
+                    example: 1
+                  pulgadas:
+                    type: number
+                    example: 10
+                  diametro_exterior:
+                    type: number
+                    example: 10
+                  diametro_interior:
+                    type: number
+                    example: 10
+                  largo:
+                    type: number
+                    example: 10
+                  peso:
+                    type: number
+                    example: 10
       404:
         description: "Peticion no ejecutada."
         content:

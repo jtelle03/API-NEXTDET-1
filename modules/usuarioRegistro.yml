@@ -185,7 +185,7 @@ save:
                   type: integer
                   description: Rol del usuario
                   example: 3
-                is_empresa:
+                es_empresa:
                   type: integer
                   description: Opcion para indicar si el usuario es una empresa (1) o un particular (0)
                   example: 1

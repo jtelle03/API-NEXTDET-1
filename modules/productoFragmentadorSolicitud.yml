@@ -420,7 +420,7 @@ generar_cotizacion:
             required:
               - solicitud_id
               - productos
-              - cantidad_bolsas_producto_fragmentador
+              - cantidad_capsulas_producto_fragmentador
               - precio_final_producto_fragmentador
             properties:
               solicitud_id:
@@ -439,9 +439,9 @@ generar_cotizacion:
                 type: string
                 description: Idioma de la cotizacion de producto fragmentador
                 example: "es"
-              cantidad_bolsas_producto_fragmentador:
+              cantidad_capsulas_producto_fragmentador:
                 type: integer
-                description: Cantidad de bolsas del producto fragmentador
+                description: Cantidad de capsulas del producto fragmentador
                 example: 1
               precio_final_producto_fragmentador:
                 type: number

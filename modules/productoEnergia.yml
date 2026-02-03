@@ -1,0 +1,1026 @@
+# Endpoints públicos
+list_all:
+  get:
+    tags:
+      - Producto Energia
+    operationId: listAllProductosEnergia
+    description: Obtiene el listado público de productos de energía aprobados
+    parameters:
+      - in: query
+        name: busqueda
+        description: Texto de búsqueda
+        schema:
+          type: string
+      - in: query
+        name: categoria_id
+        description: Filtrar por categoría
+        schema:
+          type: integer
+      - in: query
+        name: page
+        description: Página actual
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: page_row
+        description: Cantidad de registros por página
+        schema:
+          type: integer
+          example: 10
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total:
+                      type: integer
+                      example: 50
+                    productos_energia:
+                      type: array
+                      items:
+                        $ref: "../schemas/productoEnergia.yml#/ProductoEnergiaPublico"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+list_all_detalle:
+  get:
+    tags:
+      - Producto Energia
+    operationId: listAllDetalleProductoEnergia
+    description: Obtiene el detalle público de un producto de energía aprobado
+    parameters:
+      - in: path
+        name: productoenergia_id
+        required: true
+        description: Identificador del producto de energía
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  $ref: "../schemas/productoEnergia.yml#/ProductoEnergiaPublico"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: El producto de energía no existe o no está disponible.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+# Endpoints privados
+init_data:
+  get:
+    tags:
+      - Producto Energia
+    operationId: initDataProductoEnergia
+    description: Obtiene los datos iniciales para el módulo de productos de energía
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    categorias:
+                      type: array
+                      items:
+                        $ref: "../schemas/categoriaProductoEnergia.yml#/CategoriaProductoEnergia"
+                    estados:
+                      type: array
+                      items:
+                        $ref: "../schemas/estado.yml#/Estado"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+list:
+  get:
+    tags:
+      - Producto Energia
+    operationId: listProductosEnergia
+    description: Obtiene el listado de productos de energía
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: query
+        name: busqueda
+        description: Texto de búsqueda
+        schema:
+          type: string
+      - in: query
+        name: categoria_id
+        description: Filtrar por categoría
+        schema:
+          type: integer
+      - in: query
+        name: pagina
+        description: Tipo de página (mis-productos-energia, administrador-productos-energia)
+        schema:
+          type: string
+      - in: query
+        name: estado_aprobado
+        description: Filtrar por estado de aprobación
+        schema:
+          type: integer
+      - in: query
+        name: page
+        description: Página actual
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: page_row
+        description: Cantidad de registros por página
+        schema:
+          type: integer
+          example: 10
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total:
+                      type: integer
+                      example: 50
+                    productos_energia:
+                      type: array
+                      items:
+                        $ref: "../schemas/productoEnergia.yml#/ProductoEnergia"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+list_productoenergia:
+  get:
+    tags:
+      - Producto Energia
+    operationId: listProductoEnergia
+    description: Obtiene el detalle de un producto de energía
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: query
+        name: productoenergia_id
+        required: true
+        description: Identificador del producto de energía
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  $ref: "../schemas/productoEnergia.yml#/ProductoEnergia"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: El producto de energía no existe.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+save:
+  post:
+    tags:
+      - Producto Energia
+    operationId: saveProductoEnergia
+    description: Crea un nuevo producto de energía
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/form-data:
+          schema:
+            type: object
+            required:
+              - titulo
+              - categoria_id
+              - precio
+            properties:
+              titulo:
+                type: string
+                description: Título del producto
+                example: "Panel Solar 500W"
+              descripcion:
+                type: string
+                description: Descripción del producto
+                example: "Panel solar de alta eficiencia"
+              categoria_id:
+                type: integer
+                description: Identificador de la categoría
+                example: 1
+              precio:
+                type: number
+                description: Precio del producto
+                example: 1500.00
+              imagenes[]:
+                type: string
+                format: binary
+                description: Imágenes del producto
+                example: "imagen.jpg"
+    responses:
+      200:
+        description: Producto creado exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Producto de energía creado correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+update:
+  post:
+    tags:
+      - Producto Energia
+    operationId: updateProductoEnergia
+    description: Actualiza un producto de energía existente
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/form-data:
+          schema:
+            type: object
+            required:
+              - productoenergia_id
+              - titulo
+              - categoria_id
+              - precio
+            properties:
+              productoenergia_id:
+                type: integer
+                description: Identificador del producto
+                example: 1
+              titulo:
+                type: string
+                description: Título del producto
+                example: "Panel Solar 500W Actualizado"
+              descripcion:
+                type: string
+                description: Descripción del producto
+                example: "Panel solar de alta eficiencia - Versión mejorada"
+              categoria_id:
+                type: integer
+                description: Identificador de la categoría
+                example: 1
+              precio:
+                type: number
+                description: Precio del producto
+                example: 1600.00
+              imagenes:
+                type: string
+                description: String en formato JSON con el estado de las imágenes existentes
+                example: '[{"imagen_id": 1, "estado": 1}]'
+              imagenes_nuevas[]:
+                type: string
+                format: binary
+                description: Nuevas imágenes a agregar
+                example: "imagen.jpg"
+    responses:
+      200:
+        description: Producto actualizado exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Producto de energía actualizado correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+update_categoria:
+  post:
+    tags:
+      - Producto Energia
+    operationId: updateCategoriaProductoEnergia
+    description: Actualiza la categoría de un producto de energía
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - productoenergia_id
+              - categoria_id
+            properties:
+              productoenergia_id:
+                type: integer
+                description: Identificador del producto
+                example: 1
+              categoria_id:
+                type: integer
+                description: Nueva categoría del producto
+                example: 2
+    responses:
+      200:
+        description: Categoría actualizada exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Categoría actualizada correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+delete:
+  put:
+    tags:
+      - Producto Energia
+    operationId: deleteProductoEnergia
+    description: Elimina un producto de energía (soft delete)
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: path
+        name: productoenergia_id
+        required: true
+        description: Identificador del producto de energía
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Producto eliminado exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Producto de energía eliminado correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: El producto de energía no existe o ya fue eliminado.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+aprobar:
+  put:
+    tags:
+      - Producto Energia
+    operationId: aprobarProductoEnergia
+    description: Aprueba o rechaza un producto de energía
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: path
+        name: productoenergia_id
+        required: true
+        description: Identificador del producto de energía
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - estado_aprobado
+            properties:
+              estado_aprobado:
+                type: integer
+                description: Estado de aprobación (0=pendiente, 1=aprobado, 2=rechazado)
+                example: 1
+              porcentaje_comision:
+                type: number
+                description: Porcentaje de comisión
+                example: 10
+              monto_comision:
+                type: number
+                description: Monto fijo de comisión
+                example: 150
+    responses:
+      200:
+        description: Producto aprobado/rechazado exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Producto de energía aprobado correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: El producto de energía no existe.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+# Categoria Producto Energia
+categoria_list:
+  get:
+    tags:
+      - Categoria Producto Energia
+    operationId: listCategoriasProductoEnergia
+    description: Obtiene el listado de categorías de productos de energía
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: query
+        name: busqueda
+        description: Texto de búsqueda
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Página actual
+        schema:
+          type: integer
+          example: 1
+      - in: query
+        name: page_row
+        description: Cantidad de registros por página
+        schema:
+          type: integer
+          example: 10
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    total:
+                      type: integer
+                      example: 10
+                    categorias_producto_energia:
+                      type: array
+                      items:
+                        $ref: "../schemas/categoriaProductoEnergia.yml#/CategoriaProductoEnergia"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+categoria_list_categoria:
+  get:
+    tags:
+      - Categoria Producto Energia
+    operationId: listCategoriaProductoEnergia
+    description: Obtiene el detalle de una categoría de producto de energía
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: query
+        name: categoria_producto_energia_id
+        required: true
+        description: Identificador de la categoría
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  $ref: "../schemas/categoriaProductoEnergia.yml#/CategoriaProductoEnergia"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: La categoría no existe.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+categoria_save:
+  post:
+    tags:
+      - Categoria Producto Energia
+    operationId: saveCategoriaProductoEnergia
+    description: Crea una nueva categoría de producto de energía
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/form-data:
+          schema:
+            type: object
+            required:
+              - nombre
+              - nombre_ingles
+            properties:
+              nombre:
+                type: string
+                description: Nombre de la categoría
+                example: "Paneles Solares"
+              nombre_ingles:
+                type: string
+                description: Nombre de la categoría en inglés
+                example: "Solar Panels"
+              imagen:
+                type: string
+                format: binary
+                description: Imagen de la categoría
+    responses:
+      200:
+        description: Categoría creada exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+categoria_update:
+  post:
+    tags:
+      - Categoria Producto Energia
+    operationId: updateCategoriaProductoEnergiaCategoria
+    description: Actualiza una categoría de producto de energía
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/form-data:
+          schema:
+            type: object
+            required:
+              - categoria_producto_energia_id
+              - nombre
+              - nombre_ingles
+              - estado
+            properties:
+              categoria_producto_energia_id:
+                type: integer
+                description: Identificador de la categoría
+                example: 1
+              nombre:
+                type: string
+                description: Nombre de la categoría
+                example: "Paneles Solares"
+              nombre_ingles:
+                type: string
+                description: Nombre de la categoría en inglés
+                example: "Solar Panels"
+              estado:
+                type: integer
+                description: Estado de la categoría
+                example: 1
+              imagen:
+                type: string
+                format: binary
+                description: Nueva imagen de la categoría (opcional)
+    responses:
+      200:
+        description: Categoría actualizada exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+categoria_delete:
+  put:
+    tags:
+      - Categoria Producto Energia
+    operationId: deleteCategoriaProductoEnergia
+    description: Elimina una categoría de producto de energía
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: path
+        name: categoria_producto_energia_id
+        required: true
+        description: Identificador de la categoría
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Categoría eliminada exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se puede eliminar la categoría porque tiene productos asociados.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []

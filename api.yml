@@ -82,6 +82,10 @@ tags:
     description: Gestión de solicitudes de productos Next6x
   - name: Dashboard
     description: Gestión de dashboard
+  - name: Producto Energia
+    description: Gestión de productos de energía
+  - name: Categoria Producto Energia
+    description: Gestión de categorías de productos de energía
 
 paths:
   # Modulo Licencia
@@ -903,6 +907,53 @@ paths:
   /v1/producto_next6x_solicitud/contacto/delete/{contacto_producto_next6x_id}:
     $ref: "./modules/productoNext6xSolicitud.yml#/contacto_delete"
 
+  # producto energia
+  /v1/productoenergia/list_all:
+    $ref: "./modules/productoEnergia.yml#/list_all"
+
+  /v1/productoenergia/list_all/{productoenergia_id}:
+    $ref: "./modules/productoEnergia.yml#/list_all_detalle"
+
+  /v1/productoenergia/init_data:
+    $ref: "./modules/productoEnergia.yml#/init_data"
+
+  /v1/productoenergia/list:
+    $ref: "./modules/productoEnergia.yml#/list"
+
+  /v1/productoenergia/list/productoenergia:
+    $ref: "./modules/productoEnergia.yml#/list_productoenergia"
+
+  /v1/productoenergia/save:
+    $ref: "./modules/productoEnergia.yml#/save"
+
+  /v1/productoenergia/update:
+    $ref: "./modules/productoEnergia.yml#/update"
+
+  /v1/productoenergia/update_categoria:
+    $ref: "./modules/productoEnergia.yml#/update_categoria"
+
+  /v1/productoenergia/delete/{productoenergia_id}:
+    $ref: "./modules/productoEnergia.yml#/delete"
+
+  /v1/productoenergia/aprobar/{productoenergia_id}:
+    $ref: "./modules/productoEnergia.yml#/aprobar"
+
+  # categoria producto energia
+  /v1/productoenergia/categoria/list:
+    $ref: "./modules/productoEnergia.yml#/categoria_list"
+
+  /v1/productoenergia/categoria/list/categoria:
+    $ref: "./modules/productoEnergia.yml#/categoria_list_categoria"
+
+  /v1/productoenergia/categoria/save:
+    $ref: "./modules/productoEnergia.yml#/categoria_save"
+
+  /v1/productoenergia/categoria/update:
+    $ref: "./modules/productoEnergia.yml#/categoria_update"
+
+  /v1/productoenergia/categoria/delete/{categoria_producto_energia_id}:
+    $ref: "./modules/productoEnergia.yml#/categoria_delete"
+
   # dashboard
   /v1/dashboard/general/init_data:
     $ref: "./modules/dashboard.yml#/init_data"
@@ -1008,6 +1059,12 @@ components:
       $ref: "./schemas/productoFragmentadorSolicitud.yml#/ProductoFragmentadorSolicitud"
     ProductoNext6xSolicitud:
       $ref: "./schemas/productoNext6xSolicitud.yml#/ProductoNext6xSolicitud"
+    ProductoEnergia:
+      $ref: "./schemas/productoEnergia.yml#/ProductoEnergia"
+    ProductoEnergiaPublico:
+      $ref: "./schemas/productoEnergia.yml#/ProductoEnergiaPublico"
+    CategoriaProductoEnergia:
+      $ref: "./schemas/categoriaProductoEnergia.yml#/CategoriaProductoEnergia"
 
   securitySchemes:
     BearerAuth:

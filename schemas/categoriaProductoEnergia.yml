@@ -1,0 +1,27 @@
+CategoriaProductoEnergia:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Identificador de la categoría de producto de energía
+      example: 1
+    nombre:
+      type: string
+      description: Nombre de la categoría
+      example: "Paneles Solares"
+    nombre_ingles:
+      type: string
+      description: Nombre de la categoría en inglés
+      example: "Solar Panels"
+    estado:
+      type: integer
+      description: Estado de la categoría
+      example: 1
+    estado_nombre:
+      type: string
+      description: Nombre del estado de la categoría
+      example: "Activo"
+    url_imagen:
+      type: string
+      description: URL de la imagen de la categoría
+      example: "https://api.nextdet.com/images?image=categoria123.jpg"

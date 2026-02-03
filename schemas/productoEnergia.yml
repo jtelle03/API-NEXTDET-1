@@ -1,0 +1,119 @@
+ProductoEnergia:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Identificador del producto de energía
+      example: 1
+    sku:
+      type: string
+      description: SKU del producto
+      example: "PE-000001"
+    correlativo:
+      type: integer
+      description: Número correlativo del producto
+      example: 1
+    titulo:
+      type: string
+      description: Título del producto de energía
+      example: "Panel Solar 500W"
+    descripcion:
+      type: string
+      description: Descripción del producto de energía
+      example: "Panel solar de alta eficiencia con 500W de potencia"
+    categoria_id:
+      type: integer
+      description: Identificador de la categoría del producto
+      example: 1
+    categoria_nombre:
+      type: string
+      description: Nombre de la categoría del producto
+      example: "Paneles Solares"
+    precio:
+      type: number
+      description: Precio del producto
+      example: 1500.00
+    porcentaje_comision:
+      type: number
+      description: Porcentaje de comisión del producto
+      example: 10
+    monto_comision:
+      type: number
+      description: Monto fijo de comisión del producto
+      example: 150
+    aprobado:
+      type: integer
+      description: Estado de aprobación
+      example: 1
+    estado:
+      type: integer
+      description: Estado del producto
+      example: 1
+    estado_nombre:
+      type: string
+      description: Nombre del estado del producto
+      example: "Activo"
+    fecha_creacion:
+      type: string
+      description: Fecha de creación del producto
+      example: "2024-01-15 10:30:00"
+    url_imagen:
+      type: string
+      description: URL de la imagen principal del producto
+      example: "https://api.nextdet.com/images?image=abc123.jpg"
+    imagenes:
+      type: array
+      description: Lista de imágenes del producto
+      items:
+        type: object
+        properties:
+          imagen_id:
+            type: integer
+            example: 1
+          url:
+            type: string
+            example: "https://api.nextdet.com/images?image=abc123.jpg"
+          estado:
+            type: integer
+            example: 1
+
+ProductoEnergiaPublico:
+  type: object
+  description: Producto de energía para visualización pública
+  properties:
+    id:
+      type: integer
+      description: Identificador del producto de energía
+      example: 1
+    sku:
+      type: string
+      description: SKU del producto
+      example: "PE-000001"
+    titulo:
+      type: string
+      description: Título del producto de energía
+      example: "Panel Solar 500W"
+    descripcion:
+      type: string
+      description: Descripción del producto de energía
+      example: "Panel solar de alta eficiencia con 500W de potencia"
+    categoria_id:
+      type: integer
+      description: Identificador de la categoría del producto
+      example: 1
+    categoria_nombre:
+      type: string
+      description: Nombre de la categoría del producto
+      example: "Paneles Solares"
+    precio:
+      type: number
+      description: Precio del producto
+      example: 1500.00
+    fecha_creacion:
+      type: string
+      description: Fecha de creación del producto
+      example: "2024-01-15 10:30:00"
+    url_imagen:
+      type: string
+      description: URL de la imagen principal del producto
+      example: "https://api.nextdet.com/images?image=abc123.jpg"

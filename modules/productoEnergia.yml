@@ -164,6 +164,10 @@ init_data:
                       type: array
                       items:
                         $ref: "../schemas/estado.yml#/Estado"
+                    paises:
+                      type: array
+                      items:
+                        $ref: "../schemas/pais.yml#/Pais"
       404:
         description: "Peticion no ejecutada."
         content:
@@ -361,11 +365,24 @@ save:
                 type: number
                 description: Precio del producto
                 example: 1500.00
+              pais_id:
+                type: integer
+                description: Identificador del país
+                example: 1
+              ciudad:
+                type: string
+                description: Ciudad del producto
+                example: "Lima"
               imagenes[]:
                 type: string
                 format: binary
                 description: Imágenes del producto
                 example: "imagen.jpg"
+              ficha_tecnica:
+                type: string
+                format: binary
+                description: Ficha técnica del producto (PDF, DOC, DOCX o TXT)
+                example: "ficha_tecnica.pdf"
     responses:
       200:
         description: Producto creado exitosamente.
@@ -446,6 +463,14 @@ update:
                 type: number
                 description: Precio del producto
                 example: 1600.00
+              pais_id:
+                type: integer
+                description: Identificador del país
+                example: 1
+              ciudad:
+                type: string
+                description: Ciudad del producto
+                example: "Lima"
               imagenes:
                 type: string
                 description: String en formato JSON con el estado de las imágenes existentes
@@ -455,6 +480,11 @@ update:
                 format: binary
                 description: Nuevas imágenes a agregar
                 example: "imagen.jpg"
+              ficha_tecnica_nueva:
+                type: string
+                format: binary
+                description: Nueva ficha técnica del producto (PDF, DOC, DOCX o TXT)
+                example: "ficha_tecnica.pdf"
     responses:
       200:
         description: Producto actualizado exitosamente.

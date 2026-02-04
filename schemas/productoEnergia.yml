@@ -29,6 +29,18 @@ ProductoEnergia:
       type: string
       description: Nombre de la categoría del producto
       example: "Paneles Solares"
+    pais_id:
+      type: integer
+      description: Identificador del país
+      example: 1
+    pais_nombre:
+      type: string
+      description: Nombre del país
+      example: "Perú"
+    ciudad:
+      type: string
+      description: Ciudad del producto
+      example: "Lima"
     precio:
       type: number
       description: Precio del producto
@@ -76,6 +88,22 @@ ProductoEnergia:
           estado:
             type: integer
             example: 1
+    ficha_tecnica:
+      type: object
+      description: Información de la ficha técnica del producto
+      properties:
+        nombre:
+          type: string
+          description: Nombre del archivo
+          example: "ficha_panel_solar.pdf"
+        url:
+          type: string
+          description: URL de descarga del archivo
+          example: "https://api.nextdet.com/files/download/pdf?file=ficha_panel_solar.pdf"
+        extension:
+          type: string
+          description: Extensión del archivo
+          example: "pdf"
 
 ProductoEnergiaPublico:
   type: object
@@ -105,6 +133,18 @@ ProductoEnergiaPublico:
       type: string
       description: Nombre de la categoría del producto
       example: "Paneles Solares"
+    pais_id:
+      type: integer
+      description: Identificador del país
+      example: 1
+    pais_nombre:
+      type: string
+      description: Nombre del país
+      example: "Perú"
+    ciudad:
+      type: string
+      description: Ciudad del producto
+      example: "Lima"
     precio:
       type: number
       description: Precio del producto

@@ -681,6 +681,16 @@ list_clasificado:
                           imagen_url:
                             type: string
                             example: "https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png"
+                          estado:
+                            type: integer
+                            example: 1
+                          tipo_imagen:
+                            type: string
+                            description: Tipo de imagen (portada o imagen)
+                            example: "imagen"
+                          orden:
+                            type: integer
+                            example: 1
       404:
         description: "Peticion no ejecutada."
         content:
@@ -766,6 +776,11 @@ save:
                 format: binary
                 description: Imagenes del clasificado
                 example: "imagen.png"
+              portada:
+                type: string
+                format: binary
+                description: Portada del clasificado
+                example: "portada.png"
     responses:
       200:
         description: Consulta exitosa.
@@ -874,13 +889,22 @@ update:
                 example: 1
               imagenes:
                 type: string
-                description: String en formato JSON que representa un array de objetos con los datos de las imágenes.
-                example: '[{"imagen_id":1,"imagen_url":"https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png","estado":1}]'
+                description: String en formato JSON que representa un array de objetos con los datos de las imágenes. Si el campo "tipo_imagen" es portada, el campo "orden" debe ser 0 y no debe enviarse la propiedad "portada".
+                example: '[{"imagen_id":1,"imagen_url":"https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png","estado":1, "tipo_imagen": "imagen", "orden": 1}]'
               imagenes_nuevas[]:
                 type: string
                 format: binary
                 description: Imagenes del clasificado
                 example: "imagen.png"
+              imagenes_nuevas_orden:
+                type: string
+                description: String en formato JSON que representa un array de números con el orden de las imágenes nuevas. Su longitud debe ser igual a la cantidad de imágenes nuevas.
+                example: '[1,2,3]'
+              portada:
+                type: string
+                format: binary
+                description: Portada del clasificado en caso se quiera actualizar la existente
+                example: "portada.png"
     responses:
       200:
         description: Consulta exitosa.

@@ -938,6 +938,15 @@ paths:
   /v1/productoenergia/aprobar/{productoenergia_id}:
     $ref: "./modules/productoEnergia.yml#/aprobar"
 
+  /v1/productoenergia/send_pin:
+    $ref: "./modules/productoEnergia.yml#/send_pin"
+
+  /v1/productoenergia/validar_pin:
+    $ref: "./modules/productoEnergia.yml#/validar_pin"
+
+  /v1/productoenergia/save_productoenergia:
+    $ref: "./modules/productoEnergia.yml#/save_productoenergia"
+
   # categoria producto energia
   /v1/productoenergia/categoria/list:
     $ref: "./modules/productoEnergia.yml#/categoria_list"

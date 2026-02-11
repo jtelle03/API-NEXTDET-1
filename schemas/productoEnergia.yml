@@ -88,6 +88,14 @@ ProductoEnergia:
           estado:
             type: integer
             example: 1
+          tipo:
+            type: string
+            description: Tipo de imagen (portada, imagen)
+            example: "imagen"
+          orden:
+            type: integer
+            description: Orden de la imagen
+            example: 1
     ficha_tecnica:
       type: object
       description: Información de la ficha técnica del producto
@@ -157,3 +165,26 @@ ProductoEnergiaPublico:
       type: string
       description: URL de la imagen principal del producto
       example: "https://api.nextdet.com/images?image=abc123.jpg"
+    imagenes:
+      type: array
+      description: Lista de imágenes del producto
+      items:
+        type: object
+        properties:
+          imagen_id:
+            type: integer
+            example: 1
+          url:
+            type: string
+            example: "https://api.nextdet.com/images?image=abc123.jpg"
+          estado:
+            type: integer
+            example: 1
+          tipo:
+            type: string
+            description: Tipo de imagen (portada, imagen)
+            example: "imagen"
+          orden:
+            type: integer
+            description: Orden de la imagen
+            example: 1

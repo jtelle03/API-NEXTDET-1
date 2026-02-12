@@ -650,6 +650,9 @@ list:
                           estado_solicitud_nombre:
                             type: string
                             example: "Inactivo"
+                          url_portada:
+                            type: string
+                            example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
                           fecha_creacion:
                             type: string
                             format: date
@@ -812,13 +815,23 @@ list_propiedad:
                           estado:
                             type: integer
                             example: 1
+                          tipo_imagen:
+                            type: string
+                            example: "portada"
+                          orden:
+                            type: integer
+                            example: 0
                       example:
                         - imagen_id: 1
                           imagen_url: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
                           estado: 1
+                          tipo_imagen: "portada"
+                          orden: 0
                         - imagen_id: 2
                           imagen_url: "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
                           estado: 1
+                          tipo_imagen: "imagen"
+                          orden: 1
       404:
         description: "Peticion no ejecutada."
         content:
@@ -914,6 +927,10 @@ save:
                 type: string
                 description: Tipo de moneda
                 example: "UF"
+              portada:
+                type: string
+                format: binary
+                description: Imagen de portada
               imagenes:
                 type: array
                 items:
@@ -970,7 +987,7 @@ update:
     tags:
       - Propiedad
     operationId: updatePropiedad
-    description: Actualiza los datos de una propiedad existente. Recibe la información principal de la propiedad y las imágenes asociadas, diferenciando entre imágenes ya existentes y nuevas imágenes
+    description: Actualiza los datos de una propiedad existente.
     requestBody:
       required: true
       content:
@@ -1043,23 +1060,23 @@ update:
                 description: Tipo de moneda
                 example: "UF"
               imagenes:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    imagen_id:
-                      type: integer
-                      example: 1
-                    imagen_url:
-                      type: string
-                      example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
-                description: Lista de imágenes existentes (mantener) asociadas a la propiedad
-              imagenes_nuevas:
-                type: array
-                items:
-                  type: string
-                  format: binary
-                description: Archivos de imágenes nuevas para agregar a la propiedad
+                type: string
+                description: String en formato JSON que representa un array de objetos con los datos de las imágenes.
+                example: '[{"imagen_id":1,"imagen_url":"https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png","estado":1, "tipo_imagen": "imagen", "orden": 1}]'
+              imagenes_nuevas[]:
+                type: string
+                format: binary
+                description: Imagenes de la propiedad
+                example: "imagen.png"
+              imagenes_nuevas_orden:
+                type: string
+                description: String en formato JSON que representa un array de números con el orden de las imágenes nuevas.
+                example: '[1,2,3]'
+              portada:
+                type: string
+                format: binary
+                description: Portada de la propiedad en caso se quiera actualizar la existente
+                example: "portada.png"
     responses:
       200:
         description: Propiedad actualizada exitosamente.

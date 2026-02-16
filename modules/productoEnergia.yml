@@ -484,7 +484,7 @@ update:
               imagenes:
                 type: string
                 description: String en formato JSON que representa un array de objetos con los datos de las imágenes. Si el campo "tipo_imagen" es portada, el campo "orden" debe ser 0 y no debe enviarse la propiedad "portada".
-                example: '[{"imagen_id":1,"imagen_url":"https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png","estado":1, "tipo_imagen": "imagen", "orden": 1}]'
+                example: '[{"imagen_id":1,"imagen_url":"https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png","estado":1, "tipo": "imagen", "orden": 1}]'
               imagenes_nuevas[]:
                 type: string
                 format: binary

@@ -159,7 +159,7 @@ ProductoEnergiaPublico:
       example: "2024-01-15 10:30:00"
     url_portada:
       type: string
-      description: URL de la imagen principal del producto
+      description: URL de la portada del producto
       example: "https://api.nextdet.com/images?image=abc123.jpg"
     imagenes:
       type: array

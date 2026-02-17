@@ -214,9 +214,10 @@ list:
           type: string
       - in: query
         name: estado_aprobado
-        description: Filtrar por estado de aprobación
+        description: Filtrar por estado de aprobación (solo para la página administrador-productos-energia)
         schema:
           type: integer
+          example: 1
       - in: query
         name: page
         description: Página actual

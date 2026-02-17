@@ -361,6 +361,10 @@ save:
                 type: integer
                 description: Identificador de la categoría
                 example: 1
+              categoria_nombre:
+                type: string
+                description: Nombre de la categoría
+                example: "Paneles Solares"
               precio:
                 type: number
                 description: Precio del producto
@@ -464,6 +468,10 @@ update:
                 type: integer
                 description: Identificador de la categoría
                 example: 1
+              categoria_nombre:
+                type: string
+                description: Nombre de la categoría
+                example: "Paneles Solares Actualizado"
               precio:
                 type: number
                 description: Precio del producto

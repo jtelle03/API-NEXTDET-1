@@ -349,6 +349,7 @@ save:
               - titulo
               - categoria_id
               - precio
+              - stock
             properties:
               titulo:
                 type: string
@@ -370,6 +371,10 @@ save:
                 type: number
                 description: Precio del producto
                 example: 1500.00
+              stock:
+                type: integer
+                description: Stock del producto
+                example: 10
               pais_id:
                 type: integer
                 description: Identificador del país
@@ -452,6 +457,7 @@ update:
               - titulo
               - categoria_id
               - precio
+              - stock
             properties:
               productoenergia_id:
                 type: integer
@@ -477,6 +483,10 @@ update:
                 type: number
                 description: Precio del producto
                 example: 1600.00
+              stock:
+                type: integer
+                description: Stock del producto
+                example: 10
               pais_id:
                 type: integer
                 description: Identificador del país

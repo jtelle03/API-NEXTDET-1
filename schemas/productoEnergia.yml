@@ -153,6 +153,10 @@ ProductoEnergiaPublico:
       type: number
       description: Precio del producto
       example: 1500.00
+    stock:
+      type: integer
+      description: Stock del producto
+      example: 10
     fecha_creacion:
       type: string
       description: Fecha de creación del producto

@@ -963,6 +963,22 @@ paths:
   /v1/productoenergia/categoria/delete/{categoria_producto_energia_id}:
     $ref: "./modules/productoEnergia.yml#/categoria_delete"
 
+  # Solicitud producto energia
+  /v1/productoenergia/enviar_solicitud:
+    $ref: "./modules/productoEnergia.yml#/enviar_solicitud"
+
+  /v1/productoenergia/solicitud/list:
+    $ref: "./modules/productoEnergia.yml#/solicitud_list"
+
+  /v1/productoenergia/solicitud/list/solicitud:
+    $ref: "./modules/productoEnergia.yml#/solicitud_list_solicitud"
+
+  /v1/productoenergia/solicitud/change_estado:
+    $ref: "./modules/productoEnergia.yml#/solicitud_change_estado"
+
+  /v1/productoenergia/solicitud/download:
+    $ref: "./modules/productoEnergia.yml#/solicitud_download"
+
   # dashboard
   /v1/dashboard/general/init_data:
     $ref: "./modules/dashboard.yml#/init_data"
@@ -1074,6 +1090,8 @@ components:
       $ref: "./schemas/productoEnergia.yml#/ProductoEnergiaPublico"
     CategoriaProductoEnergia:
       $ref: "./schemas/categoriaProductoEnergia.yml#/CategoriaProductoEnergia"
+    ProductoEnergiaSolicitud:
+      $ref: "./schemas/productoEnergiaSolicitud.yml#/ProductoEnergiaSolicitud"
 
   securitySchemes:
     BearerAuth:

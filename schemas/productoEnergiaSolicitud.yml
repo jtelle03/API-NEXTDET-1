@@ -1,0 +1,64 @@
+ProductoEnergiaSolicitud:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+    codigo:
+      type: string
+      example: "PES-0001"
+    correlativo:
+      type: integer
+      example: 1
+    nombre_cliente:
+      type: string
+      example: "Juan Pérez"
+    email:
+      type: string
+      example: "juan.perez@example.com"
+    telefono:
+      type: string
+      example: "987654321"
+    mensaje:
+      type: string
+      example: "Me interesa una cotización para paneles solares."
+    venta_monto:
+      type: number
+      example: 1500.50
+    venta_fecha:
+      type: string
+      format: date
+      example: "2023-10-27"
+    venta_comentario:
+      type: string
+      example: "Venta cerrada exitosamente."
+    idioma:
+      type: string
+      example: "es"
+    estado:
+      type: integer
+      example: 1
+    fecha_creacion:
+      type: string
+      format: date-time
+      example: "2023-10-27 10:00:00"
+    items:
+      type: array
+      items:
+        $ref: "#/ProductoEnergiaSolicitudItem"
+
+ProductoEnergiaSolicitudItem:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+    productoenergia_id:
+      type: integer
+      example: 10
+    cantidad:
+      type: integer
+      example: 5
+    subtotal:
+      type: number
+      example: 750.25

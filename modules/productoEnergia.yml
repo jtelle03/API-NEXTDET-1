@@ -1349,11 +1349,17 @@ enviar_solicitud:
             type: object
             required:
               - nombre_cliente
+              - empresa_cliente
+              - pais_id
               - items
+              - idioma
             properties:
               nombre_cliente:
                 type: string
                 example: "Nombre del cliente"
+              empresa_cliente:
+                type: string
+                example: "Empresa del cliente"
               email:
                 type: string
                 example: "example@gmail.com"

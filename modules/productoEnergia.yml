@@ -1589,14 +1589,14 @@ solicitud_change_estado:
           schema:
             type: object
             required:
-              - producto_energia_solicitud_id
-              - estado
+              - solicitud_producto_energia_id
+              - estado_solicitud
               - comentario
             properties:
-              producto_energia_solicitud_id:
+              solicitud_producto_energia_id:
                 type: integer
                 example: 1
-              estado:
+              estado_solicitud:
                 type: integer
                 example: 1
               comentario:

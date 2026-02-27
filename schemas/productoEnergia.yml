@@ -69,10 +69,6 @@ ProductoEnergia:
       type: string
       description: Fecha de creación del producto
       example: "2024-01-15 10:30:00"
-    url_imagen:
-      type: string
-      description: URL de la imagen principal del producto
-      example: "https://api.nextdet.com/images?image=abc123.jpg"
     imagenes:
       type: array
       description: Lista de imágenes del producto
@@ -128,7 +124,7 @@ ProductoEnergia:
         url:
           type: string
           description: URL de descarga del archivo
-          example: "https://api.nextdet.com/files/download/pdf?file=ficha_panel_solar.pdf"
+          example: "https://api.nextdet.com/archivo?archivo=ficha_panel_solar.pdf"
         extension:
           type: string
           description: Extensión del archivo
@@ -178,13 +174,17 @@ ProductoEnergiaPublico:
       type: number
       description: Precio del producto
       example: 1500.00
+    stock:
+      type: integer
+      description: Stock del producto
+      example: 10
     fecha_creacion:
       type: string
       description: Fecha de creación del producto
       example: "2024-01-15 10:30:00"
-    url_imagen:
+    url_portada:
       type: string
-      description: URL de la imagen principal del producto
+      description: URL de la portada del producto
       example: "https://api.nextdet.com/images?image=abc123.jpg"
     imagenes:
       type: array
@@ -215,3 +215,15 @@ ProductoEnergiaPublico:
       items:
         type: string
       example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
+    ficha_tecnica:
+      type: object
+      description: Información de la ficha técnica del producto
+      properties:
+        nombre:
+          type: string
+          description: Nombre del archivo
+          example: "ficha_panel_solar.pdf"
+        url:
+          type: string
+          description: URL de descarga del archivo
+          example: "https://api.nextdet.com/archivo?archivo=ficha_panel_solar.pdf"

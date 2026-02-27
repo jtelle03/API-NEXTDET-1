@@ -307,6 +307,11 @@ list_all:
                               url_portada:
                                 type: string
                                 example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                              url_videos:
+                                type: array
+                                items:
+                                  type: string
+                                example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
 
       404:
         description: "Peticion no ejecutada."
@@ -452,6 +457,11 @@ list_all_propiedad_id:
                       example:
                         - "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
                         - "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
+                    url_videos:
+                      type: array
+                      items:
+                        type: string
+                      example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
       404:
         description: "Peticion no ejecutada."
         content:
@@ -673,6 +683,11 @@ list:
                             example:
                               - "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
                               - "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
+                          url_videos:
+                            type: array
+                            items:
+                              type: string
+                            example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
                           usuario_creador:
                             type: string
                             example: "Alessandro Venegas"
@@ -832,6 +847,37 @@ list_propiedad:
                           estado: 1
                           tipo_imagen: "imagen"
                           orden: 1
+                    url_videos:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          imagen_id:
+                            type: integer
+                            example: 86
+                          url_video:
+                            type: string
+                            example: "https://www.youtube.com/watch?v=video1"
+                          estado:
+                            type: integer
+                            example: 1
+                          tipo_imagen:
+                            type: string
+                            example: "video"
+                          orden:
+                            type: integer
+                            example: 1
+                      example:
+                        - imagen_id: 86
+                          url_video: "https://www.youtube.com/watch?v=video1"
+                          estado: 1
+                          tipo_imagen: "video"
+                          orden: 1
+                        - imagen_id: 87
+                          url_video: "https://vimeo.com/123456789"
+                          estado: 1
+                          tipo_imagen: "video"
+                          orden: 2
       404:
         description: "Peticion no ejecutada."
         content:
@@ -942,6 +988,12 @@ save:
                     imagen_url:
                       type: string
                       example: "https://nextdet.com/images/propiedad/1.jpg"
+              url_videos:
+                type: array
+                items:
+                  type: string
+                description: Videos de la propiedad (opcional)
+                example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
     responses:
       200:
         description: Consulta exitosa.
@@ -1077,6 +1129,10 @@ update:
                 format: binary
                 description: Portada de la propiedad en caso se quiera actualizar la existente
                 example: "portada.png"
+              url_videos:
+                type: string
+                description: String en formato JSON que representa un array de objetos con los datos de los videos, Si es un vide nuevo no se manda el campo imagen_id.
+                example: '[{"imagen_id": 78, "url_video": "https://www.youtube.com/watch?v=video1", "estado": 0, "tipo_imagen": "video", "orden": 3}, {"url_video": "https://vimeo.com/123456789_nuevo", "estado": 1, "orden": 4}]'
     responses:
       200:
         description: Propiedad actualizada exitosamente.

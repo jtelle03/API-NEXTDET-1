@@ -96,6 +96,27 @@ ProductoEnergia:
             type: integer
             description: Orden de la imagen
             example: 1
+    url_videos:
+      type: array
+      description: Lista de videos del producto
+      items:
+        type: object
+        properties:
+          imagen_id:
+            type: integer
+            example: 86
+          url_video:
+            type: string
+            example: "https://www.youtube.com/watch?v=video1"
+          estado:
+            type: integer
+            example: 1
+          tipo_imagen:
+            type: string
+            example: "video"
+          orden:
+            type: integer
+            example: 1
     ficha_tecnica:
       type: object
       description: Información de la ficha técnica del producto
@@ -188,3 +209,9 @@ ProductoEnergiaPublico:
             type: integer
             description: Orden de la imagen
             example: 1
+    url_videos:
+      type: array
+      description: Lista de URLs de videos del producto
+      items:
+        type: string
+      example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]

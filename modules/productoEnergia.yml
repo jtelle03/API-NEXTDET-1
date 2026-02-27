@@ -383,6 +383,12 @@ save:
                 format: binary
                 description: Imágenes del producto
                 example: "imagen.jpg"
+              url_videos:
+                type: array
+                items:
+                  type: string
+                description: Videos del producto (opcional)
+                example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
               ficha_tecnica:
                 type: string
                 format: binary
@@ -494,6 +500,10 @@ update:
                 type: string
                 description: String en formato JSON que representa un array de números con el orden de las imágenes nuevas. Su longitud debe ser igual a la cantidad de imágenes nuevas.
                 example: '[1,2,3]'
+              url_videos:
+                type: string
+                description: String en formato JSON que representa un array de objetos con los datos de los videos, Si es un vide nuevo no se manda el campo imagen_id.
+                example: '[{"imagen_id": 78, "url_video": "https://www.youtube.com/watch?v=video1", "estado": 0, "tipo_imagen": "video", "orden": 3}, {"url_video": "https://vimeo.com/123456789_nuevo", "estado": 1, "orden": 4}]'
               ficha_tecnica_nueva:
                 type: string
                 format: binary

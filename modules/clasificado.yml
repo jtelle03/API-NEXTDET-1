@@ -206,6 +206,11 @@ list_all:
                           url_portada:
                             type: string
                             example: "https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png"
+                          url_videos:
+                            type: array
+                            items:
+                              type: string
+                            example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
                     total:
                       type: integer
                       example: 10
@@ -243,6 +248,11 @@ list_all:
                                 items:
                                   type: string
                                   example: "https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png"
+                              url_videos:
+                                type: array
+                                items:
+                                  type: string
+                                example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
       404:
         description: "Peticion no ejecutada."
         content:
@@ -353,6 +363,11 @@ list_all_id:
                       items:
                         type: string
                         example: "https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png"
+                    url_videos:
+                      type: array
+                      items:
+                        type: string
+                        example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
       404:
         description: "Peticion no ejecutada."
         content:
@@ -522,6 +537,11 @@ list:
                             items:
                               type: string
                               example: "https://dev-api.nextdet.com/images?image=53da3d2a124b428e7aafcb7a17c9632e.png"
+                          url_videos:
+                            type: array
+                            items:
+                              type: string
+                            example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
                           porcentaje_comision:
                             type: number
                             example: 10
@@ -691,6 +711,26 @@ list_clasificado:
                           orden:
                             type: integer
                             example: 1
+                    url_videos:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          imagen_id:
+                            type: integer
+                            example: 86
+                          url_video:
+                            type: string
+                            example: "https://www.youtube.com/watch?v=video1"
+                          estado:
+                            type: integer
+                            example: 1
+                          tipo_imagen:
+                            type: string
+                            example: "video"
+                          orden:
+                            type: integer
+                            example: 1
       404:
         description: "Peticion no ejecutada."
         content:
@@ -781,6 +821,12 @@ save:
                 format: binary
                 description: Portada del clasificado
                 example: "portada.png"
+              url_videos:
+                type: array
+                items:
+                  type: string
+                description: Videos del clasificado (opcional)
+                example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
     responses:
       200:
         description: Consulta exitosa.
@@ -905,6 +951,11 @@ update:
                 format: binary
                 description: Portada del clasificado en caso se quiera actualizar la existente
                 example: "portada.png"
+              url_videos:
+                type: string
+                description: String en formato JSON que representa un array de objetos con los datos de los videos, Si es un vide nuevo no se manda el campo imagen_id.
+                example: '[{"imagen_id": 78, "url_video": "https://www.youtube.com/watch?v=video1", "estado": 0, "tipo_imagen": "video", "orden": 3}, {"url_video": "https://vimeo.com/123456789_nuevo", "estado": 1, "orden": 4}]'
+
     responses:
       200:
         description: Consulta exitosa.

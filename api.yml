@@ -737,6 +737,9 @@ paths:
   /v1/propiedad/solicitud/change_estado:
     $ref: "./modules/propiedad.yml#/change_estado_solicitud"
 
+  /v1/propiedad/solicitud/download:
+    $ref: "./modules/propiedad.yml#/solicitud_download"
+
   # categoria propiedad
   /v1/propiedad/categoria/list:
     $ref: "./modules/categoriaPropiedad.yml#/list"

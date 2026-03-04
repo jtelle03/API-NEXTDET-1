@@ -257,6 +257,14 @@ list_all:
                           url_portada:
                             type: string
                             example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                          es_nuevo:
+                            type: integer
+                            description: "Indica si la propiedad es nueva (1) o usada (0)"
+                            example: 1
+                          es_inmobiliaria:
+                            type: integer
+                            description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
+                            example: 0
                     propiedades_mas_destacadas:
                       type: array
                       items:
@@ -307,6 +315,14 @@ list_all:
                               url_portada:
                                 type: string
                                 example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                              es_nuevo:
+                                type: integer
+                                description: "Indica si la propiedad es nueva (1) o usada (0)"
+                                example: 1
+                              es_inmobiliaria:
+                                type: integer
+                                description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
+                                example: 0
                               url_videos:
                                 type: array
                                 items:
@@ -457,6 +473,14 @@ list_all_propiedad_id:
                       example:
                         - "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
                         - "http://localhost:8888/images?image=ef0ecbcd717f9caf363aa0ec703fffd8.jpg"
+                    es_nuevo:
+                      type: integer
+                      description: "Indica si la propiedad es nueva (1) o usada (0)"
+                      example: 1
+                    es_inmobiliaria:
+                      type: integer
+                      description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
+                      example: 0
                     url_videos:
                       type: array
                       items:
@@ -663,6 +687,14 @@ list:
                           url_portada:
                             type: string
                             example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
+                          es_nuevo:
+                            type: integer
+                            description: "Indica si la propiedad es nueva (1) o usada (0)"
+                            example: 1
+                          es_inmobiliaria:
+                            type: integer
+                            description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
+                            example: 0
                           fecha_creacion:
                             type: string
                             format: date
@@ -878,6 +910,14 @@ list_propiedad:
                           estado: 1
                           tipo_imagen: "video"
                           orden: 2
+                    es_nuevo:
+                      type: integer
+                      description: "Indica si la propiedad es nueva (1) o usada (0)"
+                      example: 1
+                    es_inmobiliaria:
+                      type: integer
+                      description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
+                      example: 0
       404:
         description: "Peticion no ejecutada."
         content:
@@ -994,6 +1034,14 @@ save:
                   type: string
                 description: Videos de la propiedad (opcional)
                 example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
+              es_nuevo:
+                type: integer
+                description: "Indica si la propiedad es nueva (1) o usada (0)"
+                example: 1
+              es_inmobiliaria:
+                type: integer
+                description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
+                example: 0
     responses:
       200:
         description: Consulta exitosa.
@@ -1133,6 +1181,14 @@ update:
                 type: string
                 description: String en formato JSON que representa un array de objetos con los datos de los videos, Si es un vide nuevo no se manda el campo imagen_id.
                 example: '[{"imagen_id": 78, "url_video": "https://www.youtube.com/watch?v=video1", "estado": 0, "tipo_imagen": "video", "orden": 3}, {"url_video": "https://vimeo.com/123456789_nuevo", "estado": 1, "orden": 4}]'
+              es_nuevo:
+                type: integer
+                description: "Indica si la propiedad es nueva (1) o usada (0)"
+                example: 1
+              es_inmobiliaria:
+                type: integer
+                description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
+                example: 0
     responses:
       200:
         description: Propiedad actualizada exitosamente.
@@ -1343,6 +1399,42 @@ send_solicitud:
                 type: string
                 description: Idioma de la solicitud
                 example: "es"
+              detalle_arriendo_promesa_compra:
+                type: object
+                description: "Detalle de arriendo o promesa de compra"
+                properties:
+                  arriendo:
+                    type: object
+                    properties:
+                      meses:
+                        type: integer
+                        example: 12
+                      monto:
+                        type: number
+                        example: 50.0
+                  hito1:
+                    type: object
+                    properties:
+                      meses:
+                        type: integer
+                        example: 4
+                      monto:
+                        type: number
+                        example: 100.0
+                  hito2:
+                    type: object
+                    properties:
+                      meses:
+                        type: integer
+                        example: 8
+                      monto:
+                        type: number
+                        example: 150.0
+                example: {
+                  "arriendo": { "meses": 12, "monto": 50.0 },
+                  "hito1": { "meses": 4, "monto": 100.0 },
+                  "hito2": { "meses": 8, "monto": 150.0 }
+                }
     responses:
       200:
         description: Propiedad enviada correctamente.
@@ -1527,6 +1619,71 @@ solicitud_propiedad:
                 datos:
                   type: object
                   $ref: "../schemas/solicitudPropiedad.yml#/SolicitudPropiedad"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+solicitud_download:
+  get:
+    tags:
+      - Propiedad
+    operationId: getDownloadSolicitudPropiedad
+    description: Obtiene la url de descarga de la solicitud de propiedad.
+    parameters:
+      - name: solicitud_propiedad_id
+        in: query
+        description: ID de la solicitud de propiedad
+        required: true
+        schema:
+          type: integer
+      - name: idioma
+        in: query
+        description: Idioma de la descarga (es/en)
+        required: true
+        schema:
+          type: string
+          enum: ["es", "en"]
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    url_file:
+                      type: string
+                      example: "https://dev-api.nextdet.com/download?module=PROP&code=TEMP&download=123456&file_name=Cotizacion_1.pdf&name=Cotizacion_1.pdf"
       404:
         description: "Peticion no ejecutada."
         content:

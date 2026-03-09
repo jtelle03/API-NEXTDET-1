@@ -1017,17 +1017,14 @@ save:
                 type: string
                 format: binary
                 description: Imagen de portada
-              imagenes:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    imagen_id:
-                      type: integer
-                      example: 1
-                    imagen_url:
-                      type: string
-                      example: "https://nextdet.com/images/propiedad/1.jpg"
+              imagenes[]:
+                type: string
+                format: binary
+                description: Imagenes de la propiedad
+              videos[]:
+                type: string
+                format: binary
+                description: Videos de la propiedad
               url_videos:
                 type: array
                 items:

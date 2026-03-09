@@ -75,37 +75,6 @@ SolicitudPropiedad:
     alquiler_comentario:
       type: string
       example: "Comentario de la alquiler"
-    detalle_arriendo_promesa_compra:
-      type: object
-      description: "Detalle de arriendo con promesa de compra"
-      properties:
-        arriendo:
-          type: object
-          properties:
-            meses:
-              type: integer
-              example: 12
-            monto:
-              type: number
-              example: 50.0
-        hito1:
-          type: object
-          properties:
-            meses:
-              type: integer
-              example: 4
-            monto:
-              type: number
-              example: 100.0
-        hito2:
-          type: object
-          properties:
-            meses:
-              type: integer
-              example: 8
-            monto:
-              type: number
-              example: 150.0
     fecha_creacion:
       type: string
       example: "2025-10-20"

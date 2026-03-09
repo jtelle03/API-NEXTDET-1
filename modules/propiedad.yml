@@ -695,6 +695,37 @@ list:
                             type: integer
                             description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
                             example: 0
+                          detalle_arriendo_promesa_compra:
+                            type: object
+                            description: "Detalle de arriendo con promesa de compra"
+                            properties:
+                              arriendo:
+                                type: object
+                                properties:
+                                  meses:
+                                    type: integer
+                                    example: 12
+                                  monto:
+                                    type: number
+                                    example: 50.0
+                              hito1:
+                                type: object
+                                properties:
+                                  meses:
+                                    type: integer
+                                    example: 4
+                                  monto:
+                                    type: number
+                                    example: 100.0
+                              hito2:
+                                type: object
+                                properties:
+                                  meses:
+                                    type: integer
+                                    example: 8
+                                  monto:
+                                    type: number
+                                    example: 150.0
                           fecha_creacion:
                             type: string
                             format: date
@@ -918,6 +949,37 @@ list_propiedad:
                       type: integer
                       description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
                       example: 0
+                    detalle_arriendo_promesa_compra:
+                      type: object
+                      description: "Detalle de arriendo con promesa de compra"
+                      properties:
+                        arriendo:
+                          type: object
+                          properties:
+                            meses:
+                              type: integer
+                              example: 12
+                            monto:
+                              type: number
+                              example: 50.0
+                        hito1:
+                          type: object
+                          properties:
+                            meses:
+                              type: integer
+                              example: 4
+                            monto:
+                              type: number
+                              example: 100.0
+                        hito2:
+                          type: object
+                          properties:
+                            meses:
+                              type: integer
+                              example: 8
+                            monto:
+                              type: number
+                              example: 150.0
       404:
         description: "Peticion no ejecutada."
         content:
@@ -1039,6 +1101,10 @@ save:
                 type: integer
                 description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
                 example: 0
+              detalle_arriendo_promesa_compra:
+                type: string
+                description: "Detalle de arriendo con promesa de compra (JSON string)"
+                example: '{"arriendo":{"meses":12,"monto":50.0},"hito1":{"meses":4,"monto":100.0},"hito2":{"meses":8,"monto":150.0}}'
     responses:
       200:
         description: Consulta exitosa.
@@ -1186,6 +1252,10 @@ update:
                 type: integer
                 description: "Indica si la propiedad es de una inmobiliaria (1) o no (0)"
                 example: 0
+              detalle_arriendo_promesa_compra:
+                type: string
+                description: "Detalle de arriendo con promesa de compra (JSON string)"
+                example: '{"arriendo":{"meses":12,"monto":50.0},"hito1":{"meses":4,"monto":100.0},"hito2":{"meses":8,"monto":150.0}}'
     responses:
       200:
         description: Propiedad actualizada exitosamente.
@@ -1396,42 +1466,6 @@ send_solicitud:
                 type: string
                 description: Idioma de la solicitud
                 example: "es"
-              detalle_arriendo_promesa_compra:
-                type: object
-                description: "Detalle de arriendo o promesa de compra"
-                properties:
-                  arriendo:
-                    type: object
-                    properties:
-                      meses:
-                        type: integer
-                        example: 12
-                      monto:
-                        type: number
-                        example: 50.0
-                  hito1:
-                    type: object
-                    properties:
-                      meses:
-                        type: integer
-                        example: 4
-                      monto:
-                        type: number
-                        example: 100.0
-                  hito2:
-                    type: object
-                    properties:
-                      meses:
-                        type: integer
-                        example: 8
-                      monto:
-                        type: number
-                        example: 150.0
-                example: {
-                  "arriendo": { "meses": 12, "monto": 50.0 },
-                  "hito1": { "meses": 4, "monto": 100.0 },
-                  "hito2": { "meses": 8, "monto": 150.0 }
-                }
     responses:
       200:
         description: Propiedad enviada correctamente.

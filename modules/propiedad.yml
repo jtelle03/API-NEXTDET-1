@@ -1269,7 +1269,7 @@ update:
               url_videos:
                 type: string
                 description: String en formato JSON que representa un array de objetos con los datos de los videos, Si es un vide nuevo no se manda el campo imagen_id.
-                example: '[{"imagen_id": 45, "url_video": "https://dev-video.nextdet.com", "s3_key": "propiedad/1234534234.mp4", "estado": 1, "tipo_imagen": "video", "orden": 5},{"imagen_id": 78, "url_video": "https://www.youtube.com/watch?v=video1", "s3_key": "78.mp4", "estado": 0, "tipo_imagen": "video", "orden": 3}, {"url_video": "https://vimeo.com/123456789_nuevo", "s3_key": "123456789_nuevo.mp4", "estado": 1, "orden": 4}]'
+                example: '[{"imagen_id": 45, "url_video": "https://dev-video.nextdet.com", "s3_key": "propiedad/1234534234.mp4", "estado": 1, "tipo_imagen": "video", "orden": 5},{"imagen_id": 78, "url_video": "https://www.youtube.com/watch?v=video1", "s3_key": null, "estado": 0, "tipo_imagen": "video", "orden": 3}, {"url_video": "https://vimeo.com/123456789_nuevo", "s3_key": null, "estado": 1, "orden": 4}]'
               es_nuevo:
                 type: integer
                 description: "Indica si la propiedad es nueva (1) o usada (0)"

@@ -104,6 +104,9 @@ ProductoEnergia:
           url_video:
             type: string
             example: "https://www.youtube.com/watch?v=video1"
+          s3_key:
+            type: string
+            example: "1234567890.mp4"
           estado:
             type: integer
             example: 1
@@ -214,7 +217,7 @@ ProductoEnergiaPublico:
       description: Lista de URLs de videos del producto
       items:
         type: string
-      example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
+      example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789", "https://video.nextdet.com/productoenergia/1234567890.mp4"]
     ficha_tecnica:
       type: object
       description: Información de la ficha técnica del producto

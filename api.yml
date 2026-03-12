@@ -692,6 +692,9 @@ paths:
 
   /v1/clasificado/save_clasificado:
     $ref: "./modules/clasificado.yml#/save_clasificado"
+
+  /v1/clasificado/marcar_vendido:
+    $ref: "./modules/clasificado.yml#/marcar_vendido"
   
 
   # propiedad
@@ -795,6 +798,9 @@ paths:
 
   /v1/propiedad/save_propiedad:
     $ref: "./modules/propiedad.yml#/save_propiedad"
+
+  /v1/propiedad/marcar_vendido:
+    $ref: "./modules/propiedad.yml#/marcar_vendido"
 
   # energia solicitud
   /v1/energia_solicitud/init_data:

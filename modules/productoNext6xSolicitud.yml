@@ -106,10 +106,6 @@ save:
                   items:
                     type: object
                     properties:
-                      producto_id:
-                        type: integer
-                        description: ID del producto adicional
-                        example: 1
                       cantidad:
                         type: integer
                         description: Cantidad solicitada
@@ -118,14 +114,6 @@ save:
                         type: number
                         description: Largo del producto
                         example: 5
-                      precio_unitario:
-                        type: number
-                        description: Precio unitario del producto
-                        example: 15
-                      subtotal:
-                        type: number
-                        description: Subtotal calculado
-                        example: 120.50
             
       responses:
         200:

@@ -1931,6 +1931,9 @@ contacto_list:
                           telefono:
                             type: string
                             example: "930506234"
+                          empresa:
+                            type: string
+                            example: "Empresa 1"
                           pais_id:
                             type: integer
                             example: 183
@@ -1946,6 +1949,9 @@ contacto_list:
                           estado_nombre:
                             type: string
                             example: "Activo"
+                          es_usuario:
+                            type: integer
+                            example: 1
 
       404:
         description: "Peticion no ejecutada."
@@ -1977,6 +1983,12 @@ contato_list_contacto:
       - name: contacto_clasificado_id
         in: query
         description: ID del contacto
+        required: true
+        schema:
+          type: integer
+      - name: es_usuario
+        in: query
+        description: Indica si el contacto es de un usuario
         required: true
         schema:
           type: integer
@@ -2014,6 +2026,9 @@ contato_list_contacto:
                     telefono:
                       type: string
                       example: "930506234"
+                    empresa:
+                      type: string
+                      example: "Empresa 1"
                     pais_id:
                       type: integer
                       example: 183
@@ -2029,6 +2044,9 @@ contato_list_contacto:
                     estado_nombre:
                       type: string
                       example: "Activo"
+                    es_usuario:
+                      type: integer
+                      example: 1
       404:
         description: "Peticion no ejecutada."
         content:

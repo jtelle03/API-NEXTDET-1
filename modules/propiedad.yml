@@ -2575,3 +2575,98 @@ marcar_vendido:
                 datos:
                   type: object
                   example: []
+
+gestor_contenido_list:
+  get:
+    tags:
+      - Propiedad
+    operationId: getLoadDataPropiedadGestorContenido
+    description: "Obtiene todos los archivos multimedia del gestor de contenido."
+    responses:
+      200:
+        description: "Consulta Exitosa."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: "OK"
+                mensaje:
+                  type: string
+                  example: "Consulta Exitosa."
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    archivos:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 8
+                          url:
+                            type: string
+                            example: "dev-video.nextdet.com/contenidopropiedad/97ce493f25fbc55af92bb656f76deddf.mp4"
+                          s3_key:
+                            type: string
+                            example: "contenidopropiedad/97ce493f25fbc55af92bb656f76deddf.mp4"
+                          estado:
+                            type: integer
+                            example: 1
+                          orden:
+                            type: integer
+                            example: 1
+
+gestor_contenido_save:
+  post:
+    tags:
+      - Propiedad
+    operationId: postSaveUpdatePropiedadGestorContenido
+    description: "Sube o actualiza archivos multimedia en el gestor de contenido."
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              archivos:
+                type: string
+                description: "JSON array de los archivos existentes a mantener"
+                example: '[{"id": 2, "url": "dev-video.nextdet.com/contenidopropiedad/41de...", "s3_key": "contenidopropiedad/41de...", "estado": 0, "orden": 1}, {"id": 3, "url": "dev-video.nextdet.com/contenidopropiedad/ee67...", "s3_key": "contenidopropiedad/ee67...", "estado": 1, "orden": 2}]'
+              orden_archivos_nuevos:
+                type: string
+                description: "JSON array con los índices de orden para los nuevos archivos a subir"
+                example: "[1]"
+              archivos_nuevos[]:
+                type: array
+                items:
+                  type: string
+                  format: binary
+                description: "Nuevos archivos multimedia a subir"
+    responses:
+      200:
+        description: "Acción Exitosa."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: "OK"
+                mensaje:
+                  type: string
+                  example: "Acción exitosa."
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []

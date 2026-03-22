@@ -802,6 +802,12 @@ paths:
   /v1/propiedad/marcar_vendido:
     $ref: "./modules/propiedad.yml#/marcar_vendido"
 
+  /v1/propiedad/gestor_contenido/list:
+    $ref: "./modules/propiedad.yml#/gestor_contenido_list"
+
+  /v1/propiedad/gestor_contenido/save:
+    $ref: "./modules/propiedad.yml#/gestor_contenido_save"
+
   # energia solicitud
   /v1/energia_solicitud/init_data:
     $ref: "./modules/energiaSolicitud.yml#/init_data"

@@ -779,9 +779,12 @@ save:
               anio:
                 type: integer
                 example: 2021
-              descripcion:
+              descripcion_es:
                 type: string
                 example: "Grua 1000kg"
+              descripcion_en:
+                type: string
+                example: "Crane 1000kg"
               categoria_id:
                 type: integer
                 example: 1
@@ -839,6 +842,10 @@ save:
                   type: string
                 description: Videos del clasificado (opcional)
                 example: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
+              idioma:
+                type: string
+                description: "Idioma del clasificado (es: español, en: inglés)"
+                example: "es"
     responses:
       200:
         description: Consulta exitosa.
@@ -906,9 +913,12 @@ update:
               anio:
                 type: integer
                 example: 2021
-              descripcion:
+              descripcion_es:
                 type: string
                 example: "Grua 1000kg"
+              descripcion_en:
+                type: string
+                example: "Crane 1000kg"
               categoria_id:
                 type: integer
                 example: 1
@@ -976,7 +986,10 @@ update:
                 type: string
                 description: String en formato JSON que representa un array de objetos con los datos de los videos, Si es un vide nuevo no se manda el campo imagen_id.
                 example: '[{"imagen_id": 78, "url_video": "https://www.youtube.com/watch?v=video1", "s3_key": null, "estado": 0, "tipo_imagen": "video", "orden": 3}, {"url_video": "https://vimeo.com/123456789_nuevo", "s3_key": null, "estado": 1, "orden": 4}, {"url_video": "https://dev-video.nextdet.com/clasificado/1234534234.mp4", "s3_key": "clasificado/1234534234.mp4", "estado": 1, "orden": 5}]'
-
+              idioma:
+                type: string
+                description: "Idioma del clasificado (es: español, en: inglés)"
+                example: "es"
     responses:
       200:
         description: Consulta exitosa.
@@ -2842,9 +2855,12 @@ save_clasificado:
                   anio:
                     type: integer
                     example: 2019
-                  descripcion:
+                  descripcion_es:
                     type: string
                     example: "Retroexcavadora en excelente estado, mantenimiento constante."
+                  descripcion_en:
+                    type: string
+                    example: "Excavator in excellent condition, constant maintenance."
                   categoria_id:
                     type: integer
                     example: 3
@@ -2875,6 +2891,10 @@ save_clasificado:
                   unidad_tiempo:
                     type: integer
                     example: 1
+                  idioma:
+                    type: string
+                    description: "Idioma del clasificado (es: español, en: inglés)"
+                    example: "es"
               imagenes:
                 type: array
                 description: Lista de archivos (imágenes)

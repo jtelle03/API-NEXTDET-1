@@ -259,10 +259,19 @@ list_all:
                             example: "http://localhost:8888/images?image=abb255e1fe98ed8331a6d0b0521ee828.jpg"
                           imagenes:
                             type: array
-                            example: ["https://nextdet.com/images/propiedad/1.jpg", "https://nextdet.com/images/propiedad/2.jpg"]
+                            example:
+                              [
+                                "https://nextdet.com/images/propiedad/1.jpg",
+                                "https://nextdet.com/images/propiedad/2.jpg",
+                              ]
                           url_videos:
                             type: array
-                            example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789", "https://dev-video.nextdet.com/propiedad/1234534234.mp4"]
+                            example:
+                              [
+                                "https://www.youtube.com/watch?v=video1",
+                                "https://vimeo.com/123456789",
+                                "https://dev-video.nextdet.com/propiedad/1234534234.mp4",
+                              ]
                           es_nuevo:
                             type: integer
                             description: "Indica si la propiedad es nueva (1) o usada (0)"
@@ -333,7 +342,11 @@ list_all:
                                 type: array
                                 items:
                                   type: string
-                                example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789"]
+                                example:
+                                  [
+                                    "https://www.youtube.com/watch?v=video1",
+                                    "https://vimeo.com/123456789",
+                                  ]
 
       404:
         description: "Peticion no ejecutada."
@@ -491,7 +504,12 @@ list_all_propiedad_id:
                       type: array
                       items:
                         type: string
-                      example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789", "https://dev-video.nextdet.com/propiedad/1234534234.mp4"]
+                      example:
+                        [
+                          "https://www.youtube.com/watch?v=video1",
+                          "https://vimeo.com/123456789",
+                          "https://dev-video.nextdet.com/propiedad/1234534234.mp4",
+                        ]
       404:
         description: "Peticion no ejecutada."
         content:
@@ -756,7 +774,12 @@ list:
                             type: array
                             items:
                               type: string
-                            example: ["https://www.youtube.com/watch?v=video1", "https://vimeo.com/123456789", "https://dev-video.nextdet.com/propiedad/1234534234.mp4"]
+                            example:
+                              [
+                                "https://www.youtube.com/watch?v=video1",
+                                "https://vimeo.com/123456789",
+                                "https://dev-video.nextdet.com/propiedad/1234534234.mp4",
+                              ]
                           usuario_creador:
                             type: string
                             example: "Alessandro Venegas"
@@ -1031,7 +1054,8 @@ save:
             type: object
             required:
               - titulo
-              - descripcion
+              - descripcion_es
+              - descripcion_en
               - pais_id
               - categoria_id
               - condicion_id
@@ -1050,9 +1074,12 @@ save:
               anio:
                 type: integer
                 example: 2023
-              descripcion:
+              descripcion_es:
                 type: string
                 example: "Casa de 2 pisos, 3 dormitorios, cerca al parque."
+              descripcion_en:
+                type: string
+                example: "House in Miraflores, 2 floors, 3 bedrooms, near the park."
               pais_id:
                 type: integer
                 example: 1
@@ -1122,6 +1149,10 @@ save:
                 type: string
                 description: "Detalle de arriendo con promesa de compra (JSON string)"
                 example: '{"arriendo":{"meses":12,"monto":50.0},"hito1":{"meses":4,"monto":100.0},"hito2":{"meses":8,"monto":150.0}}'
+              idioma:
+                type: string
+                description: "Idioma de la propiedad (es: español, en: inglés)"
+                example: "es"
     responses:
       200:
         description: Consulta exitosa.
@@ -1187,10 +1218,14 @@ update:
                 type: string
                 description: Año de la propiedad
                 example: "2021"
-              descripcion:
+              descripcion_es:
                 type: string
                 description: Descripción de la propiedad
                 example: "Propiedad ubicada en el centro de la ciudad"
+              descripcion_en:
+                type: string
+                description: Descripción de la propiedad en inglés
+                example: "Property located in the center of the city"
               categoria_id:
                 type: integer
                 description: ID de la categoría
@@ -1251,7 +1286,7 @@ update:
               imagenes_nuevas_orden:
                 type: string
                 description: String en formato JSON que representa un array de números con el orden de las imágenes nuevas.
-                example: '[1,2,3]'
+                example: "[1,2,3]"
               videos_nuevos[]:
                 type: string
                 format: binary
@@ -1260,7 +1295,7 @@ update:
               videos_nuevos_orden:
                 type: string
                 description: String en formato JSON que representa un array de números con el orden de los videos nuevos.
-                example: '[1,2,3]'
+                example: "[1,2,3]"
               portada:
                 type: string
                 format: binary
@@ -1282,6 +1317,10 @@ update:
                 type: string
                 description: "Detalle de arriendo con promesa de compra (JSON string)"
                 example: '{"arriendo":{"meses":12,"monto":50.0},"hito1":{"meses":4,"monto":100.0},"hito2":{"meses":8,"monto":150.0}}'
+              idioma:
+                type: string
+                description: "Idioma de la propiedad (es: español, en: inglés)"
+                example: "es"
     responses:
       200:
         description: Propiedad actualizada exitosamente.
@@ -2274,249 +2313,256 @@ contacto_delete:
                   example: []
 
 send_pin:
-    get:
-      tags:
-        - Propiedad
-      operationId: sendPinPropiedad
-      description: Enviar un PIN al correo del usuario para verificación
-      parameters:
-        - name: email
-          in: query
-          description: Correo del usuario
-          required: true
-          schema:
-            type: string
-        - name: nombres
-          in: query
-          description: Nombre del usuario
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: Codigo de verificación enviado correctamente.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-validar_pin:
-    post:
-      tags:
-        - Propiedad
-      operationId: validarPinPropiedad
-      description: Validar el PIN enviado al correo del usuario
-      requestBody:
+  get:
+    tags:
+      - Propiedad
+    operationId: sendPinPropiedad
+    description: Enviar un PIN al correo del usuario para verificación
+    parameters:
+      - name: email
+        in: query
+        description: Correo del usuario
+        required: true
+        schema:
+          type: string
+      - name: nombres
+        in: query
+        description: Nombre del usuario
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: Codigo de verificación enviado correctamente.
         content:
           application/json:
             schema:
               type: object
-              required:
-                - email
-                - pin
               properties:
-                email:
+                estado:
                   type: string
-                  description: Correo del usuario
-                  example: "example@gmail.com"
-                pin:                  
+                  example: OK
+                mensaje:
                   type: string
-                  description: Código PIN enviado al correo
-                  example: "1234"
-      responses:
-        200:
-          description: Código de verificación validado correctamente.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
-
-save_propiedad:
-    post:
-      tags:
-        - Propiedad
-      operationId: Crear usuario y propiedad
-      description: Crea un nuevo usuario y propiedad. Recibe JSON dentro de campos form-data.
-      requestBody:
-        required: true
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
         content:
-          application/form-data:
+          application/json:
             schema:
               type: object
               properties:
-                usuario:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
                   type: object
-                  description: JSON string con los datos del usuario
-                  properties:
-                    email:
-                      type: string
-                      example: "nombre@example.com"
-                    nombres:
-                      type: string
-                      example: "Nombre"
-                propiedad:
+                  example: []
+
+validar_pin:
+  post:
+    tags:
+      - Propiedad
+    operationId: validarPinPropiedad
+    description: Validar el PIN enviado al correo del usuario
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - email
+              - pin
+            properties:
+              email:
+                type: string
+                description: Correo del usuario
+                example: "example@gmail.com"
+              pin:
+                type: string
+                description: Código PIN enviado al correo
+                example: "1234"
+    responses:
+      200:
+        description: Código de verificación validado correctamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
                   type: object
-                  description: JSON string con los datos de la propiedad
-                  properties:
-                    titulo:
-                      type: string
-                      example: "Propiedad Prueba"
-                    anio:
-                      type: string
-                      example: "2025"
-                    descripcion:
-                      type: string
-                      example: "Propiedad Prueba descripción"
-                    pais_id:
-                      type: string
-                      example: "1"
-                    ciudad:
-                      type: string
-                      example: "Kabul"
-                    categoria_id:
-                      type: string
-                      example: "2"
-                    condicion_id:
-                      type: string
-                      example: "1"
-                    caracteristicas:
-                      type: string
-                      description: JSON string con las características
-                      example: '{"baños": 5, "cuartos": 7, "Cochera": "No"}'
-                    metros_construccion:
-                      type: string
-                      example: "2000"
-                    metros_terreno:
-                      type: string
-                      example: "15001"
-                    precio_uf:
-                      type: string
-                      example: "10000"
-                    precio_usd:
-                      type: string
-                      example: "10000"
-                    latitud:
-                      type: string
-                      example: "-12.046373159482"
-                    longitud:
-                      type: string
-                      example: "40.712776003948"
-                imagenes:
-                  type: array
-                  description: Lista de archivos (imágenes)
-                  items:
-                    type: string
-                    format: binary
-            encoding:
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+save_propiedad:
+  post:
+    tags:
+      - Propiedad
+    operationId: Crear usuario y propiedad
+    description: Crea un nuevo usuario y propiedad. Recibe JSON dentro de campos form-data.
+    requestBody:
+      required: true
+      content:
+        application/form-data:
+          schema:
+            type: object
+            properties:
               usuario:
-                contentType: application/json
+                type: object
+                description: JSON string con los datos del usuario
+                properties:
+                  email:
+                    type: string
+                    example: "nombre@example.com"
+                  nombres:
+                    type: string
+                    example: "Nombre"
               propiedad:
-                contentType: application/json
+                type: object
+                description: JSON string con los datos de la propiedad
+                properties:
+                  titulo:
+                    type: string
+                    example: "Propiedad Prueba"
+                  anio:
+                    type: string
+                    example: "2025"
+                  descripcion_es:
+                    type: string
+                    example: "Propiedad Prueba descripción"
+                  descripcion_en:
+                    type: string
+                    example: "Property test description"
+                  pais_id:
+                    type: string
+                    example: "1"
+                  ciudad:
+                    type: string
+                    example: "Kabul"
+                  categoria_id:
+                    type: string
+                    example: "2"
+                  condicion_id:
+                    type: string
+                    example: "1"
+                  caracteristicas:
+                    type: string
+                    description: JSON string con las características
+                    example: '{"baños": 5, "cuartos": 7, "Cochera": "No"}'
+                  metros_construccion:
+                    type: string
+                    example: "2000"
+                  metros_terreno:
+                    type: string
+                    example: "15001"
+                  precio_uf:
+                    type: string
+                    example: "10000"
+                  precio_usd:
+                    type: string
+                    example: "10000"
+                  latitud:
+                    type: string
+                    example: "-12.046373159482"
+                  longitud:
+                    type: string
+                    example: "40.712776003948"
+                  idioma:
+                    type: string
+                    description: "Idioma de la propiedad (es: español, en: inglés)"
+                    example: "es"
               imagenes:
-                contentType: image/*
-      responses:
-        200:
-          description: Usuario y propiedad creados correctamente
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: OK
-                  mensaje:
-                    type: string
-                    example: Acción exitosa.
-                  tipo_error:
-                    type: integer
-                    example: 0
-                  datos:
-                    type: object
-                    example: []
-        404:
-          description: "Peticion no ejecutada."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  estado:
-                    type: string
-                    example: ERR
-                  mensaje:
-                    type: string
-                    example: No se realizo la acción solicitada.
-                  tipo_error:
-                    type: integer
-                    example: 1
-                  datos:
-                    type: object
-                    example: []
+                type: array
+                description: Lista de archivos (imágenes)
+                items:
+                  type: string
+                  format: binary
+          encoding:
+            usuario:
+              contentType: application/json
+            propiedad:
+              contentType: application/json
+            imagenes:
+              contentType: image/*
+    responses:
+      200:
+        description: Usuario y propiedad creados correctamente
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  example: []
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
 
 marcar_vendido:
   put:

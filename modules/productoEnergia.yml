@@ -355,10 +355,14 @@ save:
                 type: string
                 description: Título del producto
                 example: "Panel Solar 500W"
-              descripcion:
+              descripcion_es:
                 type: string
                 description: Descripción del producto
                 example: "Panel solar de alta eficiencia"
+              descripcion_en:
+                type: string
+                description: Descripción del producto en inglés
+                example: "High efficiency solar panel"
               categoria_id:
                 type: integer
                 description: Identificador de la categoría
@@ -409,6 +413,10 @@ save:
                 format: binary
                 description: Ficha técnica del producto (PDF, DOC, DOCX o TXT)
                 example: "ficha_tecnica.pdf"
+              idioma:
+                type: string
+                description: "Idioma del producto (es: español, en: inglés)"
+                example: "es"
     responses:
       200:
         description: Producto creado exitosamente.
@@ -478,10 +486,14 @@ update:
                 type: string
                 description: Título del producto
                 example: "Panel Solar 500W Actualizado"
-              descripcion:
+              descripcion_es:
                 type: string
                 description: Descripción del producto
                 example: "Panel solar de alta eficiencia - Versión mejorada"
+              descripcion_en:
+                type: string
+                description: Descripción del producto en inglés
+                example: "High efficiency solar panel - Improved version"
               categoria_id:
                 type: integer
                 description: Identificador de la categoría
@@ -542,6 +554,10 @@ update:
                 format: binary
                 description: Nueva ficha técnica del producto (PDF, DOC, DOCX o TXT)
                 example: "ficha_tecnica.pdf"
+              idioma:
+                type: string
+                description: "Idioma del producto (es: español, en: inglés)"
+                example: "es"
     responses:
       200:
         description: Producto actualizado exitosamente.
@@ -1279,9 +1295,12 @@ save_productoenergia:
                   titulo:
                     type: string
                     example: "Panel Solar 500W"
-                  descripcion:
+                  descripcion_es:
                     type: string
                     example: "Panel solar de alta eficiencia con 500W de potencia"
+                  descripcion_en:
+                    type: string
+                    example: "High efficiency solar panel with 500W power"
                   categoria_id:
                     type: integer
                     example: 1
@@ -1294,6 +1313,10 @@ save_productoenergia:
                   precio:
                     type: number
                     example: 1500.00
+                  idioma:
+                    type: string
+                    description: "Idioma del producto (es: español, en: inglés)"
+                    example: "es"
               portada:
                 type: string
                 format: binary

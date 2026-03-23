@@ -7,6 +7,9 @@ SolicitudPropiedad:
     titulo_propiedad:
       type: string
       example: "Propiedad 1"
+    titulo_propiedad_en:
+      type: string
+      example: "Property 1"
     codigo:
       type: string
       example: "123456"

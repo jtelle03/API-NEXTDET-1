@@ -1385,6 +1385,9 @@ solicitud_list:
                               marca_clasificado:
                                 type: string
                                 example: "Marca del clasificado"
+                              marca_clasificado_en:
+                                type: string
+                                example: "Brand of the classified"
                               codigo:
                                 type: string
                                 example: "COT-00001"
@@ -1599,6 +1602,9 @@ solicitud_list_solicitud:
                     marca_clasificado:
                       type: string
                       example: "Marca del clasificado"
+                    marca_clasificado_en:
+                      type: string
+                      example: "Brand of the classified"
                     codigo:
                       type: string
                       example: "COT-00001"

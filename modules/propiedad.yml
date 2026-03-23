@@ -179,15 +179,21 @@ list_all:
                           id:
                             type: integer
                             example: 1
-                          titulo:
+                          titulo_es:
                             type: string
                             example: "Propiedad 1"
+                          titulo_en:
+                            type: string
+                            example: "Property 1"
                           sku:
                             type: string
                             example: "SKU-00001"
-                          descripcion:
+                          descripcion_es:
                             type: string
                             example: "Propiedad 1 descripcion"
+                          descripcion_en:
+                            type: string
+                            example: "Property 1 description"
                           anio:
                             type: string
                             example: "2020"
@@ -300,15 +306,21 @@ list_all:
                               propiedad_id:
                                 type: integer
                                 example: 1
-                              titulo:
+                              titulo_es:
                                 type: string
                                 example: "Propiedad 1"
+                              titulo_en:
+                                type: string
+                                example: "Property 1"
                               sku:
                                 type: string
                                 example: "SKU-00001"
-                              descripcion:
+                              descripcion_es:
                                 type: string
                                 example: "Propiedad 1 descripcion"
+                              descripcion_en:
+                                type: string
+                                example: "Property 1 description"
                               anio:
                                 type: string
                                 example: "2020"
@@ -407,12 +419,18 @@ list_all_propiedad_id:
                     sku:
                       type: string
                       example: "SKU-00001"
-                    titulo:
+                    titulo_es:
                       type: string
                       example: "Propiedad 1"
-                    descripcion:
+                    titulo_en:
+                      type: string
+                      example: "Property 1"
+                    descripcion_es:
                       type: string
                       example: "Propiedad 1 descripcion"
+                    descripcion_en:
+                      type: string
+                      example: "Property 1 description"
                     anio:
                       type: string
                       example: "2020"
@@ -618,15 +636,21 @@ list:
                           id:
                             type: integer
                             example: 1
-                          titulo:
+                          titulo_es:
                             type: string
                             example: "Propiedad 1"
+                          titulo_en:
+                            type: string
+                            example: "Property 1"
                           anio:
                             type: string
                             example: "2020"
-                          descripcion:
+                          descripcion_es:
                             type: string
                             example: "Propiedad 1 descripcion"
+                          descripcion_en:
+                            type: string
+                            example: "Property 1 description"
                           categoria_id:
                             type: integer
                             example: 2
@@ -839,15 +863,21 @@ list_propiedad:
                     id:
                       type: integer
                       example: 1
-                    titulo:
+                    titulo_es:
                       type: string
                       example: "Propiedad 1"
+                    titulo_en:
+                      type: string
+                      example: "Property 1"
                     anio:
                       type: string
                       example: "2020"
-                    descripcion:
+                    descripcion_es:
                       type: string
                       example: "Propiedad 1 descripcion"
+                    descripcion_en:
+                      type: string
+                      example: "Property 1 description"
                     categoria_id:
                       type: integer
                       example: 2

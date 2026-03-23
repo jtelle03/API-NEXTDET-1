@@ -159,16 +159,22 @@ list_all:
                           sku:
                             type: string
                             example: "SKU-00001"
-                          marca:
+                          marca_es:
                             type: string
                             example: "Marca"
+                          marca_en:
+                            type: string
+                            example: "Brand"
                           anio:
                             type: integer
                             example: 2021
-                          descripcion:
+                          descripcion_es:
                             type: string
                             example: "Grua 1000kg"
-                          categoria_nombre:
+                          descripcion_en:
+                            type: string
+                            example: "Crane 1000kg"
+                          categoria_nombre_es:
                             type: string
                             example: "Gruas"
                           categoria_nombre_ingles:
@@ -239,9 +245,12 @@ list_all:
                               clasificado_id:
                                 type: integer
                                 example: 1
-                              clasificado_marca:
+                              clasificado_marca_es:
                                 type: string
                                 example: "Marca"
+                              clasificado_marca_en:
+                                type: string
+                                example: "Brand"
                               arriendo:
                                 type: integer
                                 example: 1
@@ -317,16 +326,22 @@ list_all_id:
                     sku:
                       type: string
                       example: "SKU-00001"
-                    marca:
+                    marca_es:
                       type: string
                       example: "Marca"
+                    marca_en:
+                      type: string
+                      example: "Brand"
                     anio:
                       type: integer
                       example: 2021
-                    descripcion:
+                    descripcion_es:
                       type: string
                       example: "Grua 1000kg"
-                    categoria_nombre:
+                    descripcion_en:
+                      type: string
+                      example: "Crane 1000kg"
+                    categoria_nombre_es:
                       type: string
                       example: "Gruas"
                     categoria_nombre_ingles:
@@ -492,15 +507,21 @@ list:
                           sku:
                             type: string
                             example: "SKU-00001"
-                          marca:
+                          marca_es:
                             type: string
                             example: "Marca"
+                          marca_en:
+                            type: string
+                            example: "Brand"
                           anio:
                             type: integer
                             example: 2021
-                          descripcion:
+                          descripcion_es:
                             type: string
                             example: "Grua 1000kg"
+                          descripcion_en:
+                            type: string
+                            example: "Crane 1000kg"
                           categoria_id:
                             type: integer
                             example: 1
@@ -653,15 +674,21 @@ list_clasificado:
                     id:
                       type: integer
                       example: 1
-                    marca:
+                    marca_es:
                       type: string
                       example: "Marca"
+                    marca_en:
+                      type: string
+                      example: "Brand"
                     anio:
                       type: integer
                       example: 2021
-                    descripcion:
+                    descripcion_es:
                       type: string
                       example: "Grua 1000kg"
+                    descripcion_en:
+                      type: string
+                      example: "Crane 1000kg"
                     categoria_id:
                       type: integer
                     pais_id:

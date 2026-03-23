@@ -13,11 +13,19 @@ ProductoEnergia:
       type: integer
       description: Número correlativo del producto
       example: 1
-    titulo:
+    titulo_es:
       type: string
       description: Título del producto de energía
       example: "Panel Solar 500W"
-    descripcion:
+    titulo_en:
+      type: string
+      description: Título del producto de energía
+      example: "Panel Solar 500W"
+    descripcion_es:
+      type: string
+      description: Descripción del producto de energía
+      example: "Panel solar de alta eficiencia con 500W de potencia"
+    descripcion_en:
       type: string
       description: Descripción del producto de energía
       example: "Panel solar de alta eficiencia con 500W de potencia"
@@ -145,11 +153,19 @@ ProductoEnergiaPublico:
       type: string
       description: SKU del producto
       example: "PE-000001"
-    titulo:
+    titulo_es:
       type: string
       description: Título del producto de energía
       example: "Panel Solar 500W"
-    descripcion:
+    titulo_en:
+      type: string
+      description: Título del producto de energía
+      example: "Panel Solar 500W"
+    descripcion_es:
+      type: string
+      description: Descripción del producto de energía
+      example: "Panel solar de alta eficiencia con 500W de potencia"
+    descripcion_en:
       type: string
       description: Descripción del producto de energía
       example: "Panel solar de alta eficiencia con 500W de potencia"

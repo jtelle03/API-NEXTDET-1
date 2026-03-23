@@ -7,12 +7,12 @@ ProductoEnergiaSolicitud:
     codigo:
       type: string
       example: "PES-0001"
-    correlativo:
-      type: integer
-      example: 1
     nombre_cliente:
       type: string
       example: "Juan Pérez"
+    modo_solicitud:
+      type: string
+      example: "Email"
     email:
       type: string
       example: "juan.perez@example.com"
@@ -38,10 +38,17 @@ ProductoEnergiaSolicitud:
     estado:
       type: integer
       example: 1
+    estado_nombre:
+      type: string
+      example: "Pendiente"
     fecha_creacion:
       type: string
       format: date-time
       example: "2023-10-27 10:00:00"
+    historial_solicitud:
+      type: array
+      items:
+        $ref: "#/ProductoEnergiaSolicitudHistorial"
     items:
       type: array
       items:
@@ -50,15 +57,38 @@ ProductoEnergiaSolicitud:
 ProductoEnergiaSolicitudItem:
   type: object
   properties:
-    id:
+    producto_energia_id:
       type: integer
       example: 1
-    productoenergia_id:
-      type: integer
-      example: 10
+    titulo:
+      type: string
+      example: "Panel Solar 100W"
+    titulo_en:
+      type: string
+      example: "Solar Panel 100W"
     cantidad:
       type: integer
       example: 5
     subtotal:
       type: number
       example: 750.25
+
+ProductoEnergiaSolicitudHistorial:
+  type: object
+  properties:
+    id:
+      type: integer
+      example: 1
+    estado:
+      type: integer
+      example: 1
+    estado_nombre:
+      type: string
+      example: "Pendiente"
+    comentario:
+      type: string
+      example: "Comentario del historial"
+    fecha_creacion:
+      type: string
+      format: date-time
+      example: "2023-10-27 10:00:00"

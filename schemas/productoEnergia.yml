@@ -73,6 +73,10 @@ ProductoEnergia:
       type: string
       description: Nombre del estado del producto
       example: "Activo"
+    linkedin_post_id:
+      type: string
+      description: ID del post en LinkedIn
+      example: "1234567890"
     fecha_creacion:
       type: string
       description: Fecha de creación del producto

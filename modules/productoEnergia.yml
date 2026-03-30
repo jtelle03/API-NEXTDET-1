@@ -1741,3 +1741,109 @@ solicitud_download:
                     url_file:
                       type: string
                       example: "files/download/pdf?module=MPE01&code=0&download=d30c737c96ff852d0490e7b7949dae54&file_name=61904dce12a05a80d9743b70a4aa7131.pdf&name=Solicitud_COT-00006.pdf"
+
+renueva_token_linkedin:
+  post:
+    tags:
+      - Producto Energia
+    operationId: renuevaTokenLinkedinProductoEnergia
+    description: Renueva el token de LinkedIn para el módulo de energía
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Acción exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                acces_token:
+                  type: string
+                  example: "eyJhbGciOiJIUzI1"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+precio_cobre:
+  get:
+    tags:
+      - Producto Energia
+    operationId: getPrecioCobre
+    description: Obtiene el precio actual del cobre
+    responses:
+      200:
+        description: Consulta exitosa.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Consulta Exitosa.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    success:
+                      type: boolean
+                      example: true
+                    price_lb:
+                      type: number
+                      example: 5.4745
+                    price_ton:
+                      type: number
+                      example: 12069.19
+                    fetched_at:
+                      type: string
+                      example: "2026-03-26 15:57:01"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []

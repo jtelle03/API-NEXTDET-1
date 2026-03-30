@@ -994,6 +994,12 @@ paths:
   /v1/productoenergia/solicitud/download:
     $ref: "./modules/productoEnergia.yml#/solicitud_download"
 
+  /v1/productoenergia/renuevaTokenLinkedin:
+    $ref: "./modules/productoEnergia.yml#/renueva_token_linkedin"
+
+  /v1/productoenergia/precio_cobre:
+    $ref: "./modules/productoEnergia.yml#/precio_cobre"
+
   # dashboard
   /v1/dashboard/general/init_data:
     $ref: "./modules/dashboard.yml#/init_data"

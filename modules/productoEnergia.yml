@@ -1847,3 +1847,343 @@ precio_cobre:
                 datos:
                   type: object
                   example: []
+
+iniciar_pago:
+  post:
+    tags:
+      - Producto Energia
+    operationId: iniciarPagoProductoEnergia
+    description: Inicia el proceso de pago para una solicitud de producto de energía
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - solicitud_id
+              - return_url
+            properties:
+              solicitud_id:
+                type: integer
+                description: ID de la solicitud de producto energía
+                example: 20
+              return_url:
+                type: string
+                description: URL de retorno después del pago
+                example: "https://dev-api.nextdet.com/v1/productoenergia/confirmar_pago"
+    responses:
+      200:
+        description: Pago iniciado correctamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Pago iniciado correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      example: "01abc8c7604a8727e346ef6c685e95d64e1924b951864f308563c238c957ed46"
+                    url:
+                      type: string
+                      example: "https://webpay3gint.transbank.cl/webpayserver/initTransaction"
+                    url_pago:
+                      type: string
+                      example: "https://webpay3gint.transbank.cl/webpayserver/initTransaction?token_ws=01abc8c7604a8727e346ef6c685e95d64e1924b951864f308563c238c957ed46"
+                    buy_order:
+                      type: string
+                      example: "NO_1_20_008583_496"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+confirmar_pago:
+  post:
+    tags:
+      - Producto Energia
+    operationId: confirmarPagoProductoEnergia
+    description: Confirma el estado de un pago de producto de energía
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                type: string
+                description: Token de la transacción de Transbank
+                example: "01ab291272dcef2f0c4aae3ba58004e6eb1e366a1ee9a924b3e5cd153bebc25b"
+    responses:
+      200:
+        description: Pago confirmado exitosamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Pago de prueba autorizado exitosamente
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    success:
+                      type: boolean
+                      example: true
+                    is_approved:
+                      type: boolean
+                      example: true
+                    message:
+                      type: string
+                      example: "Pago de prueba autorizado exitosamente"
+                    buy_order:
+                      type: string
+                      example: "TEST_1775011427"
+                    amount:
+                      type: string
+                      example: "1000.00"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+solicitar_pago:
+  post:
+    tags:
+      - Producto Energia
+    operationId: solicitarPagoProductoEnergia
+    description: Crea una solicitud de productos y genera el flujo de pago inicial
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - nombre_cliente
+              - email
+              - telefono
+              - return_url
+              - items
+            properties:
+              nombre_cliente:
+                type: string
+                example: "Juan Perez"
+              email:
+                type: string
+                example: "juan.perez@example.com"
+              telefono:
+                type: string
+                example: "985460214"
+              mensaje:
+                type: string
+                example: "Necesito cotización urgente"
+              idioma:
+                type: string
+                example: "en"
+              pais_id:
+                type: integer
+                example: 41
+              return_url:
+                type: string
+                example: "https://dev-api.nextdet.com/v1/productoenergia/confirmar_pago"
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    producto_energia_id:
+                      type: integer
+                    cantidad:
+                      type: integer
+                example: [{"producto_energia_id": 26, "cantidad": 2}, {"producto_energia_id": 27, "cantidad": 2}]
+    responses:
+      200:
+        description: Solicitud de pago iniciada correctamente.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Solicitud de pago iniciada correctamente.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    success:
+                      type: boolean
+                      example: true
+                    solicitud_id:
+                      type: integer
+                      example: 24
+                    token:
+                      type: string
+                      example: "01abfc4f970d745b4d9553b737f2c942c58515f5adf242596c4d2921c4bda0f6"
+                    url:
+                      type: string
+                      example: "https://webpay3gint.transbank.cl/webpayserver/initTransaction"
+                    url_pago:
+                      type: string
+                      example: "https://webpay3gint.transbank.cl/webpayserver/initTransaction?token_ws=01abfc4f970d745b4d9553b737f2c942c58515f5adf242596c4d2921c4bda0f6"
+                    buy_order:
+                      type: string
+                      example: "NO_1_24_009186_148"
+                    amount:
+                      type: number
+                      example: 4899.23
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []
+
+generar_pago_prueba:
+  post:
+    tags:
+      - Producto Energia
+    operationId: generarPagoPruebaProductoEnergia
+    description: Genera un pago de prueba para certificación de Transbank
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - return_url
+            properties:
+              return_url:
+                type: string
+                description: URL de retorno después del pago de prueba
+                example: "https://dev.nextdet.com/energy"
+    responses:
+      200:
+        description: Pago de prueba generado.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: OK
+                mensaje:
+                  type: string
+                  example: Pago de prueba generado.
+                tipo_error:
+                  type: integer
+                  example: 0
+                datos:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      example: "01ab291272dcef2f0c4aae3ba58004e6eb1e366a1ee9a924b3e5cd153bebc25b"
+                    url:
+                      type: string
+                      example: "https://webpay3gint.transbank.cl/webpayserver/initTransaction"
+                    url_pago:
+                      type: string
+                      example: "https://webpay3gint.transbank.cl/webpayserver/initTransaction?token_ws=01ab291272dcef2f0c4aae3ba58004e6eb1e366a1ee9a924b3e5cd153bebc25b"
+                    buy_order:
+                      type: string
+                      example: "TEST_1775011427"
+      404:
+        description: "Peticion no ejecutada."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado:
+                  type: string
+                  example: ERR
+                mensaje:
+                  type: string
+                  example: No se realizo la acción solicitada.
+                tipo_error:
+                  type: integer
+                  example: 1
+                datos:
+                  type: object
+                  example: []

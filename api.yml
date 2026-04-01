@@ -1000,6 +1000,18 @@ paths:
   /v1/productoenergia/precio_cobre:
     $ref: "./modules/productoEnergia.yml#/precio_cobre"
 
+  /v1/productoenergia/iniciar_pago:
+    $ref: "./modules/productoEnergia.yml#/iniciar_pago"
+
+  /v1/productoenergia/confirmar_pago:
+    $ref: "./modules/productoEnergia.yml#/confirmar_pago"
+
+  /v1/productoenergia/solicitar_pago:
+    $ref: "./modules/productoEnergia.yml#/solicitar_pago"
+
+  /v1/productoenergia/generar_pago_prueba:
+    $ref: "./modules/productoEnergia.yml#/generar_pago_prueba"
+
   # dashboard
   /v1/dashboard/general/init_data:
     $ref: "./modules/dashboard.yml#/init_data"

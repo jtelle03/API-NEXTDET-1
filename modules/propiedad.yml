@@ -2714,7 +2714,7 @@ gestor_contenido_save:
             properties:
               archivos:
                 type: string
-                description: "JSON array de los archivos existentes a mantener"
+                description: "JSON array de los archivos existentes a mantener."
                 example: '[{"id": 2, "url": "dev-video.nextdet.com/contenidopropiedad/41de...", "s3_key": "contenidopropiedad/41de...", "estado": 0, "orden": 1}, {"id": 3, "url": "dev-video.nextdet.com/contenidopropiedad/ee67...", "s3_key": "contenidopropiedad/ee67...", "estado": 1, "orden": 2}]'
               orden_archivos_nuevos:
                 type: string
